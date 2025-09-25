@@ -1,0 +1,196 @@
+using Capnp;
+using Capnp.Rpc;
+using System;
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace CapnpGen
+{
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xc5a759844f8cdc1bUL)]
+    public enum BookSideKind : ushort
+    {
+        invalid,
+        unknown,
+        bid,
+        ask
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0x88d097b744c25f1eUL)]
+    public enum BookSideOrdersKind : ushort
+    {
+        invalid,
+        direct,
+        implied,
+        combined,
+        both
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xbe0a2bc8930e8badUL)]
+    public enum AggressorSideKind : ushort
+    {
+        invalid,
+        none,
+        buy,
+        sell
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xfbd60e3625142ab6UL)]
+    public enum TradingStatus : ushort
+    {
+        preOpen,
+        halted,
+        paused,
+        regular,
+        closed,
+        fast,
+        quotationOnly,
+        openingDelay,
+        marketOnCloseImbalanceSell,
+        noMarketImbalance,
+        noMarketOnCloseImbalance,
+        noOpenNoResume,
+        iTSPreOpening,
+        newPriceIndication,
+        tradeDisseminationTime,
+        notTradedOnThisMarket,
+        priceIndication,
+        tradingRangeIndication,
+        marketImbalanceBuy,
+        marketImbalanceSell,
+        marketOnCloseImbalanceBuy,
+        invalid,
+        preCross,
+        cross,
+        noCancel,
+        closing,
+        postClose,
+        openingAuction,
+        openingRotation,
+        openingAuctionFreeze,
+        intradayAuction,
+        intradayAuctionFreeze,
+        circuitBreakerAuction,
+        circuitBreakerAuctionFreeze,
+        closingAuction,
+        closingAuctionFreeze,
+        expired,
+        preClose,
+        suspended,
+        shortSaleRestriction,
+        limitUpLimitDown,
+        implicationDisabled,
+        closingPriceCrossing,
+        endOfPostClose,
+        notAvailableForTrading,
+        noChange,
+        outOfSession,
+        acceptingOrderInput,
+        notAcceptingOrderInput,
+        tradingHaltAcceptingOrderInput,
+        tradingHaltNotAcceptingOrderInput,
+        releaseOfTradingHalt,
+        releaseOfItayose,
+        releaseOfTradingSuspension,
+        nonFirmQuote,
+        shortSaleRestrictionContinued,
+        shortSaleRestrictionDeactivated,
+        bidSideTradingSuspended,
+        askSideTradingSuspended,
+        startOfAuction,
+        endOfAuction,
+        iPOAuction,
+        iPOAuctionFreeze,
+        offBookReporting,
+        noReferencePrice,
+        volatilityInterruption,
+        marketOrderImbalanceExtension,
+        priceMonitoringExtension,
+        tradingAtLast,
+        orderCancel,
+        availableOnTradingPlatform,
+        tradeAtClose,
+        frozen,
+        opaAuction,
+        tradingStop,
+        frozenForContinuousAuction,
+        endOfRegularTrading,
+        nonOpening,
+        liquidityProviderBidOnly,
+        unreliable,
+        recovered,
+        unknown
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0x9fb9c34365614e55UL)]
+    public enum HaltReason : ushort
+    {
+        suspendedBySurveillance,
+        trading,
+        instrumentAuthorization,
+        returnToNormalState,
+        newsDissemination,
+        orderImbalance,
+        limitUpLimitDown,
+        newsPending,
+        equipmentChangeOver,
+        subPennyTrading,
+        marketWideCircuitBreakerLevel1,
+        marketWideCircuitBreakerLevel2,
+        marketWideCircuitBreakerLevel3,
+        groupSchedule,
+        marketEvent,
+        instrumentActivation,
+        instrumentExpiration,
+        recoveryInProcess,
+        noOpenNoResume,
+        operationalHalt,
+        reasonNotAvailable,
+        iPONotYetTrading,
+        iPODeferred,
+        iPOOrderAcceptancePeriod,
+        iPOPreLaunchPeriod,
+        notApplicable,
+        additionalInformationRequested,
+        regulatoryConcern,
+        mergerEffective,
+        etfComponentPricesNotAvailable,
+        corporateAction,
+        newSecurityOffering,
+        intradayIndicativeValueNotAvailable,
+        unknown
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xe053cdcdb7e54f4cUL)]
+    public enum TradingEvent : ushort
+    {
+        tradingHalt,
+        tradingResumption,
+        quotationResumption,
+        resumeOpen,
+        endOfTradingSession,
+        pauseInTrading,
+        symbolClear,
+        volatilityTradingPause,
+        noEvent,
+        noCancel,
+        changeOfTradingSessionResetStatistics,
+        impliedMatchingOn,
+        impliedMatchingOff,
+        lULDPriceBand,
+        startOfAuction,
+        endOfAuction,
+        unknown
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0x8771cebb42ab5a54UL)]
+    public enum BookStatus : ushort
+    {
+        complete,
+        incomplete,
+        recovery,
+        replay,
+        unknown
+    }
+}
