@@ -7,13 +7,12 @@ namespace SchemaX_CodeGen.CodeGen
         public static void EmitTemplates(List<StructMeta> structs, string outputDir)
         {
             var sb = new StringBuilder();
-            var projectName = EmitterRunner.GetProjectName();
             sb.AppendLine("using System;");
             sb.AppendLine("using System.Net.Sockets;");
             sb.AppendLine("using System.Runtime.InteropServices;");
             sb.AppendLine("using System.Runtime.CompilerServices;");
             sb.AppendLine();
-            sb.AppendLine($"namespace {projectName}.Generated;");
+            sb.AppendLine($"namespace SchemaX_CodeGen.Generated.{EmitterRunner.ProjectName};");
             sb.AppendLine();
             
             foreach (var meta in structs)

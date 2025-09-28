@@ -1,6 +1,5 @@
 ﻿using System.Text;
 using SchemaX_CodeGen.CodeGen;
-using SchemaX_CodeGen.Tests;
 
 namespace SchemaX_CodeGen
 {
@@ -40,7 +39,7 @@ namespace SchemaX_CodeGen
             }
 
             Printer.Print(structs);
-            if (emitStructs) EmitterRunner.Run(structs, outputDir);
+            if (emitStructs) EmitterRunner.Run(structs, enums, outputDir);
             if (emitTemplates) TemplateEmitter.EmitTemplates(structs, outputDir);
             Console.WriteLine("✅ Emitted RequestTemplates.cs");
 

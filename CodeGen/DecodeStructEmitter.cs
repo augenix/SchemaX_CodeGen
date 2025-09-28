@@ -249,6 +249,16 @@ public static class DecodeStructEmitter
             sb.AppendLine($"            var elementCursor = DecodeHelpers.GetListElementCursor(frame, meta, cursor.segmentIndex, cursor.structIndex, index);");
             sb.AppendLine($"            return new {child}Decoder(frame, meta, elementCursor.segmentIndex, elementCursor.elementIndex);");
             sb.AppendLine("        }");
+            sb.AppendLine();
+            sb.AppendLine("        public int Count");
+            sb.AppendLine("        {");
+            sb.AppendLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
+            sb.AppendLine("            get");
+            sb.AppendLine("            {");
+            sb.AppendLine("                var cursor = DecodeHelpers.GetStructCursor(frame, meta, segmentIndex, pointerIndex);");
+            sb.AppendLine("                return DecodeHelpers.GetListLength(frame, meta, cursor.segmentIndex, cursor.structIndex);");
+            sb.AppendLine("            }");
+            sb.AppendLine("        }");
             sb.AppendLine("    }");
         }
 

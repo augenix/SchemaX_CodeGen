@@ -18,6 +18,17 @@ public static class DecodeHelpers
     }
     
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
+    public static int GetListLength(Span<ulong> frame, SegmentMeta meta, int segmentIndex, int pointerIndex)
+    {
+        var pointer = segmentIndex > 0 ? frame[meta.GetWordCount(segmentIndex - 1) + pointerIndex] : frame[pointerIndex];
+        
+        frame.DereferencePointer(meta, segmentIndex, pointerIndex, pointer, out int targetSegment, out var resolvedPointer,
+            out var resolvedPointerIndex);
+        
+        return (int)((resolvedPointer >> 35) & 0x1FFFFFFFUL);;
+    }
+    
+    [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
     public static (int segmentIndex, int elementIndex) GetListElementCursor(
         Span<ulong> frame,  
         SegmentMeta meta,
@@ -32,6 +43,7 @@ public static class DecodeHelpers
         int elementIndex = 1 + tagIndex + index * stride;
         return (segmentIndex, elementIndex);
     }
+    
     
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
     public static string ReadText(Span<ulong> frame, SegmentMeta meta, int segmentIndex, int pointerIndex)

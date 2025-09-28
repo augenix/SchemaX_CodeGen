@@ -8,7 +8,6 @@ namespace SchemaX_CodeGen.CodeGen
         public static (List<StructMeta> Structs, List<EnumMeta> Enums) ParseRoot(CompilationUnitSyntax root)
         {
             var structResults = new List<StructMeta>();
-            var structMap = new Dictionary<string, StructMeta>();
             var enumResults = new List<EnumMeta>();
 
             // Extract enums
@@ -62,7 +61,6 @@ namespace SchemaX_CodeGen.CodeGen
                                            .Select(f => f.Type));
                             meta.UsedEnums = usedEnums;
                             structResults.Add(meta);
-                            structMap[meta.Name] = meta;
                         }
                     }
                 }
@@ -157,7 +155,7 @@ namespace SchemaX_CodeGen.CodeGen
 
             return false;
         }
-        public static (List<StructMeta> Structs, List<EnumMeta> Enums) ParseText(string text)
+        public static (List<StructMeta> Structs,  List<EnumMeta> Enums) ParseText(string text)
         {
             var tree = CSharpSyntaxTree.ParseText(text);
             var root = tree.GetCompilationUnitRoot();

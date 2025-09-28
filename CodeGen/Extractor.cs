@@ -13,19 +13,21 @@ namespace SchemaX_CodeGen.CodeGen
         public static StructMeta FromWriterClass(ClassDeclarationSyntax writerClass)
         {
             var parentClass = writerClass.Parent as ClassDeclarationSyntax;
-
-            if (IsUnionWriter(writerClass))
+            
+            if (ShouldSkipAsEnvelopeUnion(writerClass))
             {
-                Console.WriteLine($"[Extractor] Skipping union: {parentClass?.Identifier.Text ?? "unknown"}");
+                var name = (writerClass.Parent as ClassDeclarationSyntax)?.Identifier.Text ?? "unknown";
+                Console.WriteLine($"[Extractor] Skipping envelope union: {name}");
                 return null;
             }
-
+            
             var meta = new StructMeta
             {
                 Name = parentClass?.Identifier.Text ?? "Unknown",
                 DataWords = 0,
                 PointerWords = 0,
-                Fields = new List<FieldMeta>()
+                Fields = new List<FieldMeta>(),
+                IsUnion = false,
             };
 
             // Parse SetStruct(x, y) from constructor to get layout info
@@ -129,37 +131,29 @@ namespace SchemaX_CodeGen.CodeGen
                 ApplyForced(meta, forced);
                 return;
             }
-            
+
             var n = meta.Name.TrimEnd(';');
             if (n == "CmeFuturesDefinitionRequest") Console.WriteLine($"[Extractor] found {n}");
 
             if ((n.StartsWith("CmeFeedClient") && !n.EndsWith("Response"))
-                || (n.StartsWith("CmeFutures") && n.EndsWith("Request"))
-                || (n.StartsWith("CmeFeedRequest") && !n.EndsWith("Response"))
+                || (n.Contains("Request") && !n.EndsWith("Response"))
                 || (n.StartsWith("FeedApi") && !n.EndsWith("Response") && !n.EndsWith("Reject"))
-                || n.EndsWith("Request"))
+                || n.EndsWith("Request") || n.Contains("Command"))
             {
                 meta.IsRequest = true;
                 return;
             }
-            
-            if (n.EndsWith("Response") || n.EndsWith("Resp") || n.EndsWith("Reject"))
-                meta.IsResponse = true;
-            
-            else if (n.StartsWith("CmeFeedUpdate") || n.Contains("Update"))
-                meta.IsStream = true;
+            meta.IsResponse = true;
         }
+
         private static void ApplyForced(StructMeta meta, string kind)
         {
-            meta.IsRequest = meta.IsResponse = meta.IsStream = meta.IsControl = meta.IsMisc = false;
+            meta.IsRequest = meta.IsResponse; 
 
             switch (kind)
             {
                 case "Request": meta.IsRequest = true; break;
                 case "Response": meta.IsResponse = true; break;
-                case "Stream": meta.IsStream = true; break;
-                case "Control": meta.IsControl = true; break;
-                default: meta.IsMisc = true; break;
             }
         }
 
@@ -215,7 +209,7 @@ namespace SchemaX_CodeGen.CodeGen
             return type;
         }
 
-        private static bool IsUnionWriter(ClassDeclarationSyntax writerClass)
+        /*private static bool IsUnionWriter(ClassDeclarationSyntax writerClass)
         {
             if (writerClass.Parent is not ClassDeclarationSyntax parentClass)
                 return false;
@@ -224,7 +218,67 @@ namespace SchemaX_CodeGen.CodeGen
             return parentClass.Identifier.Text.EndsWith("Update")
                    && parentClass.Members.OfType<EnumDeclarationSyntax>()
                        .Any(e => e.Identifier.Text == "WHICH");
+        }*/
+        
+        private static bool IsUnionWriter(ClassDeclarationSyntax writerClass)
+        {
+            if (writerClass.Parent is not ClassDeclarationSyntax parentClass)
+                return false;
+
+            // union indicator: parent has a WHICH/Which enum
+            bool hasWhichEnum =
+                parentClass.Members
+                    .OfType<EnumDeclarationSyntax>()
+                    .Any(e => e.Identifier.Text.Equals("WHICH", StringComparison.OrdinalIgnoreCase) ||
+                              e.Identifier.Text.Equals("Which", StringComparison.OrdinalIgnoreCase));
+
+            // union indicator: WRITER has a property named Which (Cap’n Proto C# generator pattern)
+            bool hasWhichProperty =
+                writerClass.Members
+                    .OfType<PropertyDeclarationSyntax>()
+                    .Any(p => p.Identifier.Text.Equals("Which", StringComparison.OrdinalIgnoreCase));
+
+            return hasWhichEnum || hasWhichProperty;
         }
+
+        private static bool ShouldSkipAsEnvelopeUnion(ClassDeclarationSyntax writerClass)
+        {
+            if (writerClass.Parent is not ClassDeclarationSyntax parentClass)
+                return false;
+
+            // must have Which discriminant
+            bool hasWhichEnum =
+                parentClass.Members.OfType<EnumDeclarationSyntax>()
+                    .Any(e => e.Identifier.Text.Equals("WHICH", StringComparison.OrdinalIgnoreCase));
+            if (!hasWhichEnum) return false;
+
+            // collect properties other than the discriminant
+            var props = writerClass.Members.OfType<PropertyDeclarationSyntax>()
+                .Where(p => !p.Identifier.Text.Equals("Which", StringComparison.OrdinalIgnoreCase))
+                .ToArray();
+
+            // if there are no props we treat as non-envelope
+            if (props.Length == 0) return false;
+
+            // classify property types
+            bool allWriterProps = props.All(p => GetUnqualifiedTypeName(p.Type).EndsWith("WRITER", StringComparison.Ordinal));
+
+            // skip if everything is a writer (envelope union)
+            return allWriterProps;
+        }
+
+        private static string GetUnqualifiedTypeName(TypeSyntax t)
+        {
+            return t switch
+            {
+                QualifiedNameSyntax q => q.Right.Identifier.Text,
+                IdentifierNameSyntax i => i.Identifier.Text,
+                GenericNameSyntax g    => g.Identifier.Text,
+                PredefinedTypeSyntax p => p.Keyword.Text,
+                _                      => t.ToString()
+            };
+        }
+
 
     }
 }

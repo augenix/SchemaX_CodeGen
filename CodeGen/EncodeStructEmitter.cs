@@ -124,7 +124,7 @@ public static class EncodeStructEmitter
                     sb.AppendLine("        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]");
                     sb.AppendLine($"        get => (byte)((buffer[{word}] >> {bit}) & 0xFF);");
                     sb.AppendLine("        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]");
-                    sb.AppendLine($"        set => buffer[{word}] = (buffer[{word}] & ~(0xFF << {bit})) | ((ulong)value << {bit});");
+                    sb.AppendLine($"        set => buffer[{word}] = (buffer[{word}] & ~(0xFFUL << {bit})) | ((ulong)value << {bit});");
                     sb.AppendLine("    }");
                 }
 

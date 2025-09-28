@@ -14,8 +14,7 @@ public class StructMeta
     public bool IsChildStruct { get; set; }
     public bool IsRequest { get; set; }
     public bool IsResponse { get; set; }
-    public bool IsStream { get; set; }
-    public bool IsControl  { get; set; }
-    public bool IsMisc { get; set; }
+
+    public bool IsUnion { get; set; }
     
 }

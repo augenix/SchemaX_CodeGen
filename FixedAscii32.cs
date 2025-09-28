@@ -1,7 +1,7 @@
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace SchemaX_CodeGen.CodeGen;
+namespace SchemaX_CodeGen;
 
 [StructLayout(LayoutKind.Sequential, Pack = 1)]
 public unsafe struct FixedAscii32
