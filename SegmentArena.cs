@@ -25,6 +25,18 @@ public sealed class SegmentArena : IDisposable
     public int GetOffset(int segmentIndex) => meta.GetOffset(segmentIndex);
     public int TargetSegmentSize => 128;
 
+    public bool Prepopulate
+    {
+        get => meta.Prepopulate; 
+        set => meta.Prepopulate = value;
+    }
+
+    public void ResetWordCount()
+    {
+        meta.SetWordCount(0, meta.PrepopulateWords);
+    }
+    public int PrepopulateWords => meta.PrepopulateWords;
+
     public int SegmentCount
     {
         get => meta.SegmentCount;

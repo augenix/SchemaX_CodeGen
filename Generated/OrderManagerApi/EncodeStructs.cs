@@ -21,9 +21,9 @@ public ref struct OrderRequestNewOrderEncoder
     public OrderKind OrdType
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (OrderKind)(ushort)((buffer[0] >> 0) & 0xFFFF);
+        get => (OrderKind)(ushort)(buffer[0] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[0] = (buffer[0] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[0] = (buffer[0] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
     public OrderTimeInForce TimeInForce
@@ -61,9 +61,9 @@ public ref struct OrderRequestNewOrderEncoder
     public uint MinQty
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (uint)((buffer[3] >> 0) & 0xFFFFFFFFUL);
+        get => (uint)(buffer[3] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[3] = (buffer[3] & ~(0xFFFFFFFFUL << 0)) | ((ulong)value << 0);
+        set => buffer[3] = (buffer[3] & ~0xFFFFFFFFUL) | (ulong)value;
     }
 
     public uint DisplayQty
@@ -95,9 +95,9 @@ public ref struct OrderRequestNewOrderEncoder
     public int SecurityId
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (int)(buffer[6] >> 0) & 0xFFFF;
+        get => (int)(buffer[6] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[6] = (buffer[6] & ~(0xFFFFFFFFUL << 0)) | ((ulong)(uint)value << 0);
+        set => buffer[6] = (buffer[6] & ~0xFFFFFFFFUL) | (ulong)(uint)value;
     }
 
     public OrderSide Side
@@ -201,9 +201,9 @@ public ref struct OrderRequestCancelReplaceEncoder
     public OrderKind OrdType
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (OrderKind)(ushort)((buffer[1] >> 0) & 0xFFFF);
+        get => (OrderKind)(ushort)(buffer[1] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[1] = (buffer[1] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[1] = (buffer[1] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
     public OrderTimeInForce TimeInForce
@@ -241,9 +241,9 @@ public ref struct OrderRequestCancelReplaceEncoder
     public uint MinQty
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (uint)((buffer[4] >> 0) & 0xFFFFFFFFUL);
+        get => (uint)(buffer[4] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[4] = (buffer[4] & ~(0xFFFFFFFFUL << 0)) | ((ulong)value << 0);
+        set => buffer[4] = (buffer[4] & ~0xFFFFFFFFUL) | (ulong)value;
     }
 
     public uint DisplayQty
@@ -275,9 +275,9 @@ public ref struct OrderRequestCancelReplaceEncoder
     public int SecurityId
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (int)(buffer[7] >> 0) & 0xFFFF;
+        get => (int)(buffer[7] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[7] = (buffer[7] & ~(0xFFFFFFFFUL << 0)) | ((ulong)(uint)value << 0);
+        set => buffer[7] = (buffer[7] & ~0xFFFFFFFFUL) | (ulong)(uint)value;
     }
 
     public OrderSide Side
@@ -397,9 +397,9 @@ public ref struct OrderRequestCancelEncoder
     public int SecurityId
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (int)(buffer[3] >> 0) & 0xFFFF;
+        get => (int)(buffer[3] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[3] = (buffer[3] & ~(0xFFFFFFFFUL << 0)) | ((ulong)(uint)value << 0);
+        set => buffer[3] = (buffer[3] & ~0xFFFFFFFFUL) | (ulong)(uint)value;
     }
 
     public OrderSide Side
@@ -535,9 +535,9 @@ public ref struct OrderRequestStatusEncoder
     public bool ManualOrderInd
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => ((buffer[3] >> 0) & 1UL) != 0;
+        get => (buffer[3] & 1UL) != 0;
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[3] = (buffer[3] & ~(1UL << 0)) | (value ? 1UL << 0 : 0UL);
+        set => buffer[3] = (buffer[3] & ~1UL ) | (value ? 1UL : 0UL);
     }
 
     public UtcTimeStructAccessor ExtractTimestamp => new UtcTimeStructAccessor(arena, segmentIndex, offset + 2);
@@ -601,9 +601,9 @@ public ref struct OrderRequestMassStatusEncoder
     public int SecurityId
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (int)(buffer[1] >> 0) & 0xFFFF;
+        get => (int)(buffer[1] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[1] = (buffer[1] & ~(0xFFFFFFFFUL << 0)) | ((ulong)(uint)value << 0);
+        set => buffer[1] = (buffer[1] & ~0xFFFFFFFFUL) | (ulong)(uint)value;
     }
 
     public MassActionScopeKind MassStatusType
@@ -633,9 +633,9 @@ public ref struct OrderRequestMassStatusEncoder
     public byte MarketSegmentId
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (byte)((buffer[2] >> 0) & 0xFF);
+        get => (byte)(buffer[2] & 0xFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[2] = (buffer[2] & ~(0xFFUL << 0)) | ((ulong)value << 0);
+        set => buffer[2] = (buffer[2] & ~0xFFUL) | (ulong)value;
     }
 
     public OrderTimeInForce TimeInForce
@@ -731,9 +731,9 @@ public ref struct OrderRequestMassActionEncoder
     public MassActionScopeKind MassActionScope
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (MassActionScopeKind)(ushort)((buffer[0] >> 0) & 0xFFFF);
+        get => (MassActionScopeKind)(ushort)(buffer[0] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[0] = (buffer[0] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[0] = (buffer[0] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
     public string SecurityGroup
@@ -771,9 +771,9 @@ public ref struct OrderRequestMassActionEncoder
     public OrderTimeInForce TimeInForce
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (OrderTimeInForce)(ushort)((buffer[1] >> 0) & 0xFFFF);
+        get => (OrderTimeInForce)(ushort)(buffer[1] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[1] = (buffer[1] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[1] = (buffer[1] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
     public ulong RequestId
@@ -795,7 +795,7 @@ public ref struct OrderRequestMassActionEncoder
     public int SecurityId
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (int)(buffer[1] >> 32) & 0xFFFF;
+        get => (int)((buffer[1] >> 32) & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
         set => buffer[1] = (buffer[1] & ~(0xFFFFFFFFUL << 32)) | ((ulong)(uint)value << 32);
     }
@@ -909,9 +909,9 @@ public ref struct OrderRequestPartyDetailsDefinitionEncoder
     public OrderSelfMatchInst SelfMatchPreventionInst
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (OrderSelfMatchInst)(ushort)((buffer[2] >> 0) & 0xFFFF);
+        get => (OrderSelfMatchInst)(ushort)(buffer[2] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[2] = (buffer[2] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[2] = (buffer[2] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
     public byte NumPartyDetails
@@ -968,9 +968,9 @@ public ref struct OrderRequestPartyDetailsListEncoder
     public bool IsReqAllIds
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => ((buffer[1] >> 0) & 1UL) != 0;
+        get => (buffer[1] & 1UL) != 0;
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[1] = (buffer[1] & ~(1UL << 0)) | (value ? 1UL << 0 : 0UL);
+        set => buffer[1] = (buffer[1] & ~1UL ) | (value ? 1UL : 0UL);
     }
 
     public string ReqPartyId
@@ -1019,9 +1019,9 @@ public ref struct OrderManagerCommandEncoder
     public CmdKind Cmd
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (CmdKind)(ushort)((buffer[0] >> 0) & 0xFFFF);
+        get => (CmdKind)(ushort)(buffer[0] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[0] = (buffer[0] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[0] = (buffer[0] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
 }
@@ -1190,9 +1190,9 @@ public ref struct OrderManagerCommandLoginEncoder
     public int ServerPingIntervalMs
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (int)(buffer[0] >> 0) & 0xFFFF;
+        get => (int)(buffer[0] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[0] = (buffer[0] & ~(0xFFFFFFFFUL << 0)) | ((ulong)(uint)value << 0);
+        set => buffer[0] = (buffer[0] & ~0xFFFFFFFFUL) | (ulong)(uint)value;
     }
 
 }
@@ -1244,9 +1244,9 @@ public ref struct OrderReportBusinessRejectEncoder
     public ushort RejectReason
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (ushort)((buffer[0] >> 0) & 0xFFFF);
+        get => (ushort)(buffer[0] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[0] = (buffer[0] & ~(0xFFFFFFFFUL << 0)) | ((ulong)value << 0);
+        set => buffer[0] = (buffer[0] & ~0xFFFFUL) | (ulong)value;
     }
 
     public ushort RefTagId
@@ -1254,7 +1254,7 @@ public ref struct OrderReportBusinessRejectEncoder
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
         get => (ushort)((buffer[0] >> 16) & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[0] = (buffer[0] & ~(0xFFFFFFFFUL << 16)) | ((ulong)value << 16);
+        set => buffer[0] = (buffer[0] & ~(0xFFFFUL << 16)) | ((ulong)value << 16);
     }
 
     public OrderMsgTypeKind RefMsgType
@@ -1396,9 +1396,9 @@ public ref struct OrderReportExecRptNewOrderEncoder
     public uint OrderQty
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (uint)((buffer[2] >> 0) & 0xFFFFFFFFUL);
+        get => (uint)(buffer[2] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[2] = (buffer[2] & ~(0xFFFFFFFFUL << 0)) | ((ulong)value << 0);
+        set => buffer[2] = (buffer[2] & ~0xFFFFFFFFUL) | (ulong)value;
     }
 
     public double StopPx
@@ -1420,9 +1420,9 @@ public ref struct OrderReportExecRptNewOrderEncoder
     public uint CumQty
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (uint)((buffer[4] >> 0) & 0xFFFFFFFFUL);
+        get => (uint)(buffer[4] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[4] = (buffer[4] & ~(0xFFFFFFFFUL << 0)) | ((ulong)value << 0);
+        set => buffer[4] = (buffer[4] & ~0xFFFFFFFFUL) | (ulong)value;
     }
 
     public uint DisplayQty
@@ -1438,15 +1438,15 @@ public ref struct OrderReportExecRptNewOrderEncoder
     public OrderTimeInForce TimeInForce
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (OrderTimeInForce)(ushort)((buffer[5] >> 0) & 0xFFFF);
+        get => (OrderTimeInForce)(ushort)(buffer[5] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[5] = (buffer[5] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[5] = (buffer[5] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
     public int SecurityId
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (int)(buffer[5] >> 32) & 0xFFFF;
+        get => (int)((buffer[5] >> 32) & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
         set => buffer[5] = (buffer[5] & ~(0xFFFFFFFFUL << 32)) | ((ulong)(uint)value << 32);
     }
@@ -1462,9 +1462,9 @@ public ref struct OrderReportExecRptNewOrderEncoder
     public OrderKind OrdType
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (OrderKind)(ushort)((buffer[6] >> 0) & 0xFFFF);
+        get => (OrderKind)(ushort)(buffer[6] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[6] = (buffer[6] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[6] = (buffer[6] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
     public string ExecReportId
@@ -1590,9 +1590,9 @@ public ref struct OrderReportExecRptModifyEncoder
     public uint LeavesQty
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (uint)((buffer[0] >> 0) & 0xFFFFFFFFUL);
+        get => (uint)(buffer[0] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[0] = (buffer[0] & ~(0xFFFFFFFFUL << 0)) | ((ulong)value << 0);
+        set => buffer[0] = (buffer[0] & ~0xFFFFFFFFUL) | (ulong)value;
     }
 
     public ulong RequestId
@@ -1630,9 +1630,9 @@ public ref struct OrderReportExecRptModifyEncoder
     public uint MinQty
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (uint)((buffer[4] >> 0) & 0xFFFFFFFFUL);
+        get => (uint)(buffer[4] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[4] = (buffer[4] & ~(0xFFFFFFFFUL << 0)) | ((ulong)value << 0);
+        set => buffer[4] = (buffer[4] & ~0xFFFFFFFFUL) | (ulong)value;
     }
 
     public uint CumQty
@@ -1646,9 +1646,9 @@ public ref struct OrderReportExecRptModifyEncoder
     public uint DisplayQty
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (uint)((buffer[5] >> 0) & 0xFFFFFFFFUL);
+        get => (uint)(buffer[5] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[5] = (buffer[5] & ~(0xFFFFFFFFUL << 0)) | ((ulong)value << 0);
+        set => buffer[5] = (buffer[5] & ~0xFFFFFFFFUL) | (ulong)value;
     }
 
     public UtcTimeStructAccessor ExpireDate => new UtcTimeStructAccessor(arena, segmentIndex, offset + 0);
@@ -1664,9 +1664,9 @@ public ref struct OrderReportExecRptModifyEncoder
     public int SecurityId
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (int)(buffer[6] >> 0) & 0xFFFF;
+        get => (int)(buffer[6] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[6] = (buffer[6] & ~(0xFFFFFFFFUL << 0)) | ((ulong)(uint)value << 0);
+        set => buffer[6] = (buffer[6] & ~0xFFFFFFFFUL) | (ulong)(uint)value;
     }
 
     public OrderSide Side
@@ -1808,9 +1808,9 @@ public ref struct OrderReportExecRptCancelEncoder
     public CancelReason CancelReason
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (CancelReason)(ushort)((buffer[0] >> 0) & 0xFFFF);
+        get => (CancelReason)(ushort)(buffer[0] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[0] = (buffer[0] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[0] = (buffer[0] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
     public ulong RequestId
@@ -1848,9 +1848,9 @@ public ref struct OrderReportExecRptCancelEncoder
     public uint MinQty
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (uint)((buffer[4] >> 0) & 0xFFFFFFFFUL);
+        get => (uint)(buffer[4] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[4] = (buffer[4] & ~(0xFFFFFFFFUL << 0)) | ((ulong)value << 0);
+        set => buffer[4] = (buffer[4] & ~0xFFFFFFFFUL) | (ulong)value;
     }
 
     public uint CumQty
@@ -1864,9 +1864,9 @@ public ref struct OrderReportExecRptCancelEncoder
     public uint DisplayQty
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (uint)((buffer[5] >> 0) & 0xFFFFFFFFUL);
+        get => (uint)(buffer[5] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[5] = (buffer[5] & ~(0xFFFFFFFFUL << 0)) | ((ulong)value << 0);
+        set => buffer[5] = (buffer[5] & ~0xFFFFFFFFUL) | (ulong)value;
     }
 
     public UtcTimeStructAccessor ExpireDate => new UtcTimeStructAccessor(arena, segmentIndex, offset + 0);
@@ -1882,7 +1882,7 @@ public ref struct OrderReportExecRptCancelEncoder
     public int SecurityId
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (int)(buffer[5] >> 32) & 0xFFFF;
+        get => (int)((buffer[5] >> 32) & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
         set => buffer[5] = (buffer[5] & ~(0xFFFFFFFFUL << 32)) | ((ulong)(uint)value << 32);
     }
@@ -1890,9 +1890,9 @@ public ref struct OrderReportExecRptCancelEncoder
     public OrderSide Side
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (OrderSide)(ushort)((buffer[6] >> 0) & 0xFFFF);
+        get => (OrderSide)(ushort)(buffer[6] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[6] = (buffer[6] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[6] = (buffer[6] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
     public OrderKind OrdType
@@ -2026,9 +2026,9 @@ public ref struct OrderReportExecRptStatusEncoder
     public ExecRptStatus OrdStatus
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (ExecRptStatus)(ushort)((buffer[0] >> 0) & 0xFFFF);
+        get => (ExecRptStatus)(ushort)(buffer[0] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[0] = (buffer[0] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[0] = (buffer[0] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
     public uint LeavesQty
@@ -2082,9 +2082,9 @@ public ref struct OrderReportExecRptStatusEncoder
     public uint OrderQty
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (uint)((buffer[4] >> 0) & 0xFFFFFFFFUL);
+        get => (uint)(buffer[4] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[4] = (buffer[4] & ~(0xFFFFFFFFUL << 0)) | ((ulong)value << 0);
+        set => buffer[4] = (buffer[4] & ~0xFFFFFFFFUL) | (ulong)value;
     }
 
     public double StopPx
@@ -2106,9 +2106,9 @@ public ref struct OrderReportExecRptStatusEncoder
     public uint CumQty
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (uint)((buffer[6] >> 0) & 0xFFFFFFFFUL);
+        get => (uint)(buffer[6] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[6] = (buffer[6] & ~(0xFFFFFFFFUL << 0)) | ((ulong)value << 0);
+        set => buffer[6] = (buffer[6] & ~0xFFFFFFFFUL) | (ulong)value;
     }
 
     public uint DisplayQty
@@ -2124,15 +2124,15 @@ public ref struct OrderReportExecRptStatusEncoder
     public OrderTimeInForce TimeInForce
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (OrderTimeInForce)(ushort)((buffer[7] >> 0) & 0xFFFF);
+        get => (OrderTimeInForce)(ushort)(buffer[7] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[7] = (buffer[7] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[7] = (buffer[7] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
     public int SecurityId
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (int)(buffer[7] >> 32) & 0xFFFF;
+        get => (int)((buffer[7] >> 32) & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
         set => buffer[7] = (buffer[7] & ~(0xFFFFFFFFUL << 32)) | ((ulong)(uint)value << 32);
     }
@@ -2148,9 +2148,9 @@ public ref struct OrderReportExecRptStatusEncoder
     public OrderKind OrdType
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (OrderKind)(ushort)((buffer[8] >> 0) & 0xFFFF);
+        get => (OrderKind)(ushort)(buffer[8] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[8] = (buffer[8] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[8] = (buffer[8] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
     public string ExecReportId
@@ -2276,9 +2276,9 @@ public ref struct OrderReportExecRptTradeOutrightEncoder
     public OrderFillStatus FillStatus
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (OrderFillStatus)(ushort)((buffer[0] >> 0) & 0xFFFF);
+        get => (OrderFillStatus)(ushort)(buffer[0] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[0] = (buffer[0] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[0] = (buffer[0] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
     public bool IsAggressor
@@ -2316,9 +2316,9 @@ public ref struct OrderReportExecRptTradeOutrightEncoder
     public uint OrderQty
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (uint)((buffer[3] >> 0) & 0xFFFFFFFFUL);
+        get => (uint)(buffer[3] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[3] = (buffer[3] & ~(0xFFFFFFFFUL << 0)) | ((ulong)value << 0);
+        set => buffer[3] = (buffer[3] & ~0xFFFFFFFFUL) | (ulong)value;
     }
 
     public uint CumQty
@@ -2340,9 +2340,9 @@ public ref struct OrderReportExecRptTradeOutrightEncoder
     public uint FillQty
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (uint)((buffer[5] >> 0) & 0xFFFFFFFFUL);
+        get => (uint)(buffer[5] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[5] = (buffer[5] & ~(0xFFFFFFFFUL << 0)) | ((ulong)value << 0);
+        set => buffer[5] = (buffer[5] & ~0xFFFFFFFFUL) | (ulong)value;
     }
 
     public ulong SecurityExecId
@@ -2358,7 +2358,7 @@ public ref struct OrderReportExecRptTradeOutrightEncoder
     public int SecurityId
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (int)(buffer[5] >> 32) & 0xFFFF;
+        get => (int)((buffer[5] >> 32) & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
         set => buffer[5] = (buffer[5] & ~(0xFFFFFFFFUL << 32)) | ((ulong)(uint)value << 32);
     }
@@ -2366,9 +2366,9 @@ public ref struct OrderReportExecRptTradeOutrightEncoder
     public OrderSide Side
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (OrderSide)(ushort)((buffer[7] >> 0) & 0xFFFF);
+        get => (OrderSide)(ushort)(buffer[7] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[7] = (buffer[7] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[7] = (buffer[7] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
     public OrderKind OrdType
@@ -2502,9 +2502,9 @@ public ref struct OrderReportExecRptTradeSpreadEncoder
     public byte NumLegFills
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (byte)((buffer[0] >> 0) & 0xFF);
+        get => (byte)(buffer[0] & 0xFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[0] = (buffer[0] & ~(0xFFUL << 0)) | ((ulong)value << 0);
+        set => buffer[0] = (buffer[0] & ~0xFFUL) | (ulong)value;
     }
 
     public OrderFillStatus FillStatus
@@ -2550,9 +2550,9 @@ public ref struct OrderReportExecRptTradeSpreadEncoder
     public uint OrderQty
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (uint)((buffer[3] >> 0) & 0xFFFFFFFFUL);
+        get => (uint)(buffer[3] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[3] = (buffer[3] & ~(0xFFFFFFFFUL << 0)) | ((ulong)value << 0);
+        set => buffer[3] = (buffer[3] & ~0xFFFFFFFFUL) | (ulong)value;
     }
 
     public uint CumQty
@@ -2574,9 +2574,9 @@ public ref struct OrderReportExecRptTradeSpreadEncoder
     public uint FillQty
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (uint)((buffer[5] >> 0) & 0xFFFFFFFFUL);
+        get => (uint)(buffer[5] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[5] = (buffer[5] & ~(0xFFFFFFFFUL << 0)) | ((ulong)value << 0);
+        set => buffer[5] = (buffer[5] & ~0xFFFFFFFFUL) | (ulong)value;
     }
 
     public ulong SecurityExecId
@@ -2592,7 +2592,7 @@ public ref struct OrderReportExecRptTradeSpreadEncoder
     public int SecurityId
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (int)(buffer[5] >> 32) & 0xFFFF;
+        get => (int)((buffer[5] >> 32) & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
         set => buffer[5] = (buffer[5] & ~(0xFFFFFFFFUL << 32)) | ((ulong)(uint)value << 32);
     }
@@ -2600,9 +2600,9 @@ public ref struct OrderReportExecRptTradeSpreadEncoder
     public OrderSide Side
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (OrderSide)(ushort)((buffer[7] >> 0) & 0xFFFF);
+        get => (OrderSide)(ushort)(buffer[7] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[7] = (buffer[7] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[7] = (buffer[7] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
     public OrderKind OrdType
@@ -2736,9 +2736,9 @@ public ref struct OrderReportExecRptTradeSpreadLegEncoder
     public uint CumQty
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (uint)((buffer[0] >> 0) & 0xFFFFFFFFUL);
+        get => (uint)(buffer[0] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[0] = (buffer[0] & ~(0xFFFFFFFFUL << 0)) | ((ulong)value << 0);
+        set => buffer[0] = (buffer[0] & ~0xFFFFFFFFUL) | (ulong)value;
     }
 
     public OrderFillStatus FillStatus
@@ -2760,9 +2760,9 @@ public ref struct OrderReportExecRptTradeSpreadLegEncoder
     public uint FillQty
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (uint)((buffer[2] >> 0) & 0xFFFFFFFFUL);
+        get => (uint)(buffer[2] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[2] = (buffer[2] & ~(0xFFFFFFFFUL << 0)) | ((ulong)value << 0);
+        set => buffer[2] = (buffer[2] & ~0xFFFFFFFFUL) | (ulong)value;
     }
 
     public ulong SecurityExecId
@@ -2778,7 +2778,7 @@ public ref struct OrderReportExecRptTradeSpreadLegEncoder
     public int SecurityId
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (int)(buffer[2] >> 32) & 0xFFFF;
+        get => (int)((buffer[2] >> 32) & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
         set => buffer[2] = (buffer[2] & ~(0xFFFFFFFFUL << 32)) | ((ulong)(uint)value << 32);
     }
@@ -2794,9 +2794,9 @@ public ref struct OrderReportExecRptTradeSpreadLegEncoder
     public OrderKind OrdType
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (OrderKind)(ushort)((buffer[4] >> 0) & 0xFFFF);
+        get => (OrderKind)(ushort)(buffer[4] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[4] = (buffer[4] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[4] = (buffer[4] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
     public string ExecReportId
@@ -2938,9 +2938,9 @@ public ref struct OrderReportExecRptEliminationEncoder
     public uint OrderQty
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (uint)((buffer[2] >> 0) & 0xFFFFFFFFUL);
+        get => (uint)(buffer[2] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[2] = (buffer[2] & ~(0xFFFFFFFFUL << 0)) | ((ulong)value << 0);
+        set => buffer[2] = (buffer[2] & ~0xFFFFFFFFUL) | (ulong)value;
     }
 
     public double StopPx
@@ -2962,9 +2962,9 @@ public ref struct OrderReportExecRptEliminationEncoder
     public uint CumQty
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (uint)((buffer[4] >> 0) & 0xFFFFFFFFUL);
+        get => (uint)(buffer[4] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[4] = (buffer[4] & ~(0xFFFFFFFFUL << 0)) | ((ulong)value << 0);
+        set => buffer[4] = (buffer[4] & ~0xFFFFFFFFUL) | (ulong)value;
     }
 
     public uint DisplayQty
@@ -2980,15 +2980,15 @@ public ref struct OrderReportExecRptEliminationEncoder
     public OrderTimeInForce TimeInForce
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (OrderTimeInForce)(ushort)((buffer[5] >> 0) & 0xFFFF);
+        get => (OrderTimeInForce)(ushort)(buffer[5] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[5] = (buffer[5] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[5] = (buffer[5] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
     public int SecurityId
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (int)(buffer[5] >> 32) & 0xFFFF;
+        get => (int)((buffer[5] >> 32) & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
         set => buffer[5] = (buffer[5] & ~(0xFFFFFFFFUL << 32)) | ((ulong)(uint)value << 32);
     }
@@ -3004,9 +3004,9 @@ public ref struct OrderReportExecRptEliminationEncoder
     public OrderKind OrdType
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (OrderKind)(ushort)((buffer[6] >> 0) & 0xFFFF);
+        get => (OrderKind)(ushort)(buffer[6] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[6] = (buffer[6] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[6] = (buffer[6] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
     public string ExecReportId
@@ -3132,9 +3132,9 @@ public ref struct OrderReportExecRptRejectEncoder
     public OrderRejectionKind RejectKind
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (OrderRejectionKind)(ushort)((buffer[0] >> 0) & 0xFFFF);
+        get => (OrderRejectionKind)(ushort)(buffer[0] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[0] = (buffer[0] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[0] = (buffer[0] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
     public ushort RejectCode
@@ -3142,7 +3142,7 @@ public ref struct OrderReportExecRptRejectEncoder
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
         get => (ushort)((buffer[0] >> 16) & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[0] = (buffer[0] & ~(0xFFFFFFFFUL << 16)) | ((ulong)value << 16);
+        set => buffer[0] = (buffer[0] & ~(0xFFFFUL << 16)) | ((ulong)value << 16);
     }
 
     public string RejectDescription
@@ -3196,9 +3196,9 @@ public ref struct OrderReportExecRptRejectEncoder
     public uint MinQty
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (uint)((buffer[5] >> 0) & 0xFFFFFFFFUL);
+        get => (uint)(buffer[5] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[5] = (buffer[5] & ~(0xFFFFFFFFUL << 0)) | ((ulong)value << 0);
+        set => buffer[5] = (buffer[5] & ~0xFFFFFFFFUL) | (ulong)value;
     }
 
     public uint CumQty
@@ -3212,9 +3212,9 @@ public ref struct OrderReportExecRptRejectEncoder
     public uint DisplayQty
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (uint)((buffer[6] >> 0) & 0xFFFFFFFFUL);
+        get => (uint)(buffer[6] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[6] = (buffer[6] & ~(0xFFFFFFFFUL << 0)) | ((ulong)value << 0);
+        set => buffer[6] = (buffer[6] & ~0xFFFFFFFFUL) | (ulong)value;
     }
 
     public UtcTimeStructAccessor ExpireDate => new UtcTimeStructAccessor(arena, segmentIndex, offset + 1);
@@ -3230,9 +3230,9 @@ public ref struct OrderReportExecRptRejectEncoder
     public int SecurityId
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (int)(buffer[7] >> 0) & 0xFFFF;
+        get => (int)(buffer[7] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[7] = (buffer[7] & ~(0xFFFFFFFFUL << 0)) | ((ulong)(uint)value << 0);
+        set => buffer[7] = (buffer[7] & ~0xFFFFFFFFUL) | (ulong)(uint)value;
     }
 
     public OrderSide Side
@@ -3374,9 +3374,9 @@ public ref struct OrderReportExecRptTradeAddendumOutrightEncoder
     public AddendumKind AddendumKind
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (AddendumKind)(ushort)((buffer[0] >> 0) & 0xFFFF);
+        get => (AddendumKind)(ushort)(buffer[0] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[0] = (buffer[0] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[0] = (buffer[0] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
     public double FillPrice
@@ -3408,9 +3408,9 @@ public ref struct OrderReportExecRptTradeAddendumOutrightEncoder
     public int SecurityId
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (int)(buffer[3] >> 0) & 0xFFFF;
+        get => (int)(buffer[3] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[3] = (buffer[3] & ~(0xFFFFFFFFUL << 0)) | ((ulong)(uint)value << 0);
+        set => buffer[3] = (buffer[3] & ~0xFFFFFFFFUL) | (ulong)(uint)value;
     }
 
     public OrderSide Side
@@ -3552,9 +3552,9 @@ public ref struct OrderReportExecRptTradeAddendumSpreadEncoder
     public byte NumLegFills
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (byte)((buffer[0] >> 0) & 0xFF);
+        get => (byte)(buffer[0] & 0xFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[0] = (buffer[0] & ~(0xFFUL << 0)) | ((ulong)value << 0);
+        set => buffer[0] = (buffer[0] & ~0xFFUL) | (ulong)value;
     }
 
     public AddendumKind AddendumKind
@@ -3594,9 +3594,9 @@ public ref struct OrderReportExecRptTradeAddendumSpreadEncoder
     public int SecurityId
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (int)(buffer[3] >> 0) & 0xFFFF;
+        get => (int)(buffer[3] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[3] = (buffer[3] & ~(0xFFFFFFFFUL << 0)) | ((ulong)(uint)value << 0);
+        set => buffer[3] = (buffer[3] & ~0xFFFFFFFFUL) | (ulong)(uint)value;
     }
 
     public OrderSide Side
@@ -3674,9 +3674,9 @@ public ref struct OrderReportExecRptTradeAddendumSpreadEncoder
     public byte IsAResend
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (byte)((buffer[7] >> 0) & 0xFF);
+        get => (byte)(buffer[7] & 0xFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[7] = (buffer[7] & ~(0xFFUL << 0)) | ((ulong)value << 0);
+        set => buffer[7] = (buffer[7] & ~0xFFUL) | (ulong)value;
     }
 
     public UtcTimeStructAccessor ExchangeTimestamp => new UtcTimeStructAccessor(arena, segmentIndex, offset + 4);
@@ -3738,9 +3738,9 @@ public ref struct OrderReportExecRptTradeAddendumSpreadLegEncoder
     public AddendumKind AddendumKind
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (AddendumKind)(ushort)((buffer[0] >> 0) & 0xFFFF);
+        get => (AddendumKind)(ushort)(buffer[0] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[0] = (buffer[0] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[0] = (buffer[0] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
     public double FillPrice
@@ -3772,9 +3772,9 @@ public ref struct OrderReportExecRptTradeAddendumSpreadLegEncoder
     public int SecurityId
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (int)(buffer[3] >> 0) & 0xFFFF;
+        get => (int)(buffer[3] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[3] = (buffer[3] & ~(0xFFFFFFFFUL << 0)) | ((ulong)(uint)value << 0);
+        set => buffer[3] = (buffer[3] & ~0xFFFFFFFFUL) | (ulong)(uint)value;
     }
 
     public OrderSide Side
@@ -3924,9 +3924,9 @@ public ref struct OrderReportOrderCancelRejectEncoder
     public OrderRejectionKind RejectKind
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (OrderRejectionKind)(ushort)((buffer[1] >> 0) & 0xFFFF);
+        get => (OrderRejectionKind)(ushort)(buffer[1] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[1] = (buffer[1] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[1] = (buffer[1] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
     public ushort RejectCode
@@ -3934,7 +3934,7 @@ public ref struct OrderReportOrderCancelRejectEncoder
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
         get => (ushort)((buffer[1] >> 16) & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[1] = (buffer[1] & ~(0xFFFFFFFFUL << 16)) | ((ulong)value << 16);
+        set => buffer[1] = (buffer[1] & ~(0xFFFFUL << 16)) | ((ulong)value << 16);
     }
 
     public string RejectDescription
@@ -4084,9 +4084,9 @@ public ref struct OrderReportOrderCancelModifyRejectEncoder
     public OrderRejectionKind RejectKind
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (OrderRejectionKind)(ushort)((buffer[2] >> 0) & 0xFFFF);
+        get => (OrderRejectionKind)(ushort)(buffer[2] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[2] = (buffer[2] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[2] = (buffer[2] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
     public ushort RejectCode
@@ -4094,7 +4094,7 @@ public ref struct OrderReportOrderCancelModifyRejectEncoder
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
         get => (ushort)((buffer[2] >> 16) & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[2] = (buffer[2] & ~(0xFFFFFFFFUL << 16)) | ((ulong)value << 16);
+        set => buffer[2] = (buffer[2] & ~(0xFFFFUL << 16)) | ((ulong)value << 16);
     }
 
     public string RejectDescription
@@ -4252,9 +4252,9 @@ public ref struct OrderReportMassActionEncoder
     public int SecurityId
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (int)(buffer[2] >> 0) & 0xFFFF;
+        get => (int)(buffer[2] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[2] = (buffer[2] & ~(0xFFFFFFFFUL << 0)) | ((ulong)(uint)value << 0);
+        set => buffer[2] = (buffer[2] & ~0xFFFFFFFFUL) | (ulong)(uint)value;
     }
 
     public MassActionResponse Response
@@ -4276,9 +4276,9 @@ public ref struct OrderReportMassActionEncoder
     public byte TotalAffectedOrders
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (byte)((buffer[3] >> 0) & 0xFF);
+        get => (byte)(buffer[3] & 0xFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[3] = (buffer[3] & ~(0xFFUL << 0)) | ((ulong)value << 0);
+        set => buffer[3] = (buffer[3] & ~0xFFUL) | (ulong)value;
     }
 
     public bool IsLastFragment
@@ -4316,9 +4316,9 @@ public ref struct OrderReportMassActionEncoder
     public OrderKind OrdType
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (OrderKind)(ushort)((buffer[4] >> 0) & 0xFFFF);
+        get => (OrderKind)(ushort)(buffer[4] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[4] = (buffer[4] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[4] = (buffer[4] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
     public OrderTimeInForce TimeInForce
@@ -4468,9 +4468,9 @@ public ref struct OrderReportPartyDetailsDefinitionEncoder
     public OrderSelfMatchInst SelfMatchPreventionInst
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (OrderSelfMatchInst)(ushort)((buffer[1] >> 0) & 0xFFFF);
+        get => (OrderSelfMatchInst)(ushort)(buffer[1] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[1] = (buffer[1] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[1] = (buffer[1] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
     public byte NumPartyDetails
@@ -4572,9 +4572,9 @@ public ref struct OrderReportPartyDetailsListEncoder
     public RequestResult RequestResult
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (RequestResult)(ushort)((buffer[0] >> 0) & 0xFFFF);
+        get => (RequestResult)(ushort)(buffer[0] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[0] = (buffer[0] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[0] = (buffer[0] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
     public ulong RequestId
@@ -4606,7 +4606,7 @@ public ref struct OrderReportPartyDetailsListEncoder
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
         get => (ushort)((buffer[0] >> 32) & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[0] = (buffer[0] & ~(0xFFFFFFFFUL << 32)) | ((ulong)value << 32);
+        set => buffer[0] = (buffer[0] & ~(0xFFFFUL << 32)) | ((ulong)value << 32);
     }
 
     public byte NumPartyDetails
@@ -4652,9 +4652,9 @@ public ref struct OrderReportPartyDetailsListEncoder
     public byte IsAResend
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (byte)((buffer[4] >> 0) & 0xFF);
+        get => (byte)(buffer[4] & 0xFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[4] = (buffer[4] & ~(0xFFUL << 0)) | ((ulong)value << 0);
+        set => buffer[4] = (buffer[4] & ~0xFFUL) | (ulong)value;
     }
 
     public UtcTimeStructAccessor ExchangeTimestamp => new UtcTimeStructAccessor(arena, segmentIndex, offset + 2);
@@ -4724,9 +4724,9 @@ public ref struct OrderManagerResponseStatusEncoder
     public CmeOrderManagerState LatestState
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (CmeOrderManagerState)(ushort)((buffer[1] >> 0) & 0xFFFF);
+        get => (CmeOrderManagerState)(ushort)(buffer[1] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[1] = (buffer[1] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[1] = (buffer[1] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
     public ulong NumEvents
@@ -4909,9 +4909,9 @@ public ref struct WorkingOrderEncoder
     public int SecurityId
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (int)(buffer[3] >> 0) & 0xFFFF;
+        get => (int)(buffer[3] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[3] = (buffer[3] & ~(0xFFFFFFFFUL << 0)) | ((ulong)(uint)value << 0);
+        set => buffer[3] = (buffer[3] & ~0xFFFFFFFFUL) | (ulong)(uint)value;
     }
 
     public OrderSide Side
@@ -4976,9 +4976,9 @@ public ref struct OutrightPositionEncoder
     public int SecurityId
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (int)(buffer[0] >> 0) & 0xFFFF;
+        get => (int)(buffer[0] & 0xFFFFFFFFUL);
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[0] = (buffer[0] & ~(0xFFFFFFFFUL << 0)) | ((ulong)(uint)value << 0);
+        set => buffer[0] = (buffer[0] & ~0xFFFFFFFFUL) | (ulong)(uint)value;
     }
 
     public OrderSide Side
@@ -5035,9 +5035,9 @@ public ref struct OrderManagerResponseRejectEncoder
     public CmeOrderManagerState CurrentState
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (CmeOrderManagerState)(ushort)((buffer[1] >> 0) & 0xFFFF);
+        get => (CmeOrderManagerState)(ushort)(buffer[1] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[1] = (buffer[1] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[1] = (buffer[1] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
     public ulong RequestId
@@ -5080,9 +5080,9 @@ public ref struct OrderManagerResponseSetRiskLimitEncoder
     public bool Success
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => ((buffer[0] >> 0) & 1UL) != 0;
+        get => (buffer[0] & 1UL) != 0;
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[0] = (buffer[0] & ~(1UL << 0)) | (value ? 1UL << 0 : 0UL);
+        set => buffer[0] = (buffer[0] & ~1UL ) | (value ? 1UL : 0UL);
     }
 
 
@@ -5136,9 +5136,9 @@ public ref struct OrderManagerResponseLoginEncoder
     public LoginResponse Response
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (LoginResponse)(ushort)((buffer[0] >> 0) & 0xFFFF);
+        get => (LoginResponse)(ushort)(buffer[0] & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => buffer[0] = (buffer[0] & ~(0xFFFFUL << 0)) | ((ulong)(ushort)value << 0);
+        set => buffer[0] = (buffer[0] & ~0xFFFFUL) | (ulong)(ushort)value;
     }
 
     public byte NumMsgwIds
@@ -5249,9 +5249,9 @@ public ref struct UtcTimeEncoder
     public long TimeNs
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        get => (long)buffer[0];
+        get => (long)buffer[0] ^ -9223372036854775808;
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        set => buffer[0] = (ulong)value;
+        set => buffer[0] = (ulong)(value ^ -9223372036854775808);
     }
 
 }

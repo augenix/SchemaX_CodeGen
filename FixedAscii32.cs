@@ -24,6 +24,14 @@ public unsafe struct FixedAscii32
             p[len] = 0;
         }
     }
+    public bool IsEmpty
+    {
+        get
+        {
+            fixed (byte* p = Buffer)
+                return p[0] == 0; // first byte zero means no data set
+        }
+    }
 
     public override string ToString()
     {

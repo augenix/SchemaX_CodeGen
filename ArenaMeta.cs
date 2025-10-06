@@ -23,6 +23,8 @@ public unsafe struct ArenaMeta
     public int SegmentCountLimit {get; }
     public int TotalWords { get; set; }
     public int SegmentCount { get; set; }
+    public int PrepopulateWords { get; set; }
+    public bool Prepopulate { get; set; }
     
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
     public int GetOffset(int segmentIndex)
@@ -46,6 +48,7 @@ public unsafe struct ArenaMeta
     public void SetWordCount(int segmentIndex, int value)
     {
         wordCounts[segmentIndex] = value + HeaderWords;
+        if (Prepopulate) TotalWords = value + HeaderWords;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
@@ -53,6 +56,7 @@ public unsafe struct ArenaMeta
     {
         wordCounts[segmentIndex] += delta;
         TotalWords += delta;
+        if (Prepopulate) PrepopulateWords += delta;
         if (TotalWords >= ArenaSize + HeaderWords)
             throw new InvalidOperationException("Segment word count exceeds arena size");
         return wordCounts[segmentIndex];

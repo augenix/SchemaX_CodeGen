@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace SchemaX_CodeGen.CodeGen;
 
 public static class DecodeStructEmitter
@@ -50,9 +52,13 @@ public static class DecodeStructEmitter
             var name = field.Name;
             var type = field.Type;
             var isEnum = meta.UsedEnums.Contains(type);
+            bool isZeroDefault =
+                field.DefaultValue == null ||
+                (field.DefaultValue is IConvertible c && c.ToDouble(CultureInfo.InvariantCulture) == 0.0);
+
 
             // ---- Pointer fields ----
-            if (field.PointerIndex is int slot)
+            if (field.PointerIndex is { } slot)
             {
                 if (type == "string")
                 {
@@ -98,7 +104,7 @@ public static class DecodeStructEmitter
             }
 
             // ---- Data fields ----
-            if (field.BitOffset is int bitOffset)
+            if (field.BitOffset is { } bitOffset)
             {
                 int word = bitOffset / 64;
                 int bit = bitOffset % 64;
@@ -108,7 +114,10 @@ public static class DecodeStructEmitter
                     sb.AppendLine($"    public bool {name}");
                     sb.AppendLine("    {");
                     sb.AppendLine("        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]");
-                    sb.AppendLine($"        get => ((buffer[{word}] >> {bit}) & 1UL) != 0;");
+                    sb.AppendLine(bit == 0
+                        ? $"        get => (buffer[{word}] & 1UL) != 0;"
+                        : $"        get => ((buffer[{word}] >> {bit}) & 1UL) != 0;");
+
                     sb.AppendLine("    }");
                 }
                 else if (type == "byte")
@@ -116,7 +125,9 @@ public static class DecodeStructEmitter
                     sb.AppendLine($"    public byte {name}");
                     sb.AppendLine("    {");
                     sb.AppendLine("        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]");
-                    sb.AppendLine($"        get => (byte)((buffer[{word}] >> {bit}) & 0xFF);");
+                    sb.AppendLine(bit == 0
+                        ? $"        get => (byte)(buffer[{word}] & 0xFF);"
+                        : $"        get => (byte)((buffer[{word}] >> {bit}) & 0xFF);");
                     sb.AppendLine("    }");
                 }
 
@@ -133,7 +144,9 @@ public static class DecodeStructEmitter
                     sb.AppendLine($"    public uint {name}");
                     sb.AppendLine("    {");
                     sb.AppendLine("        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]");
-                    sb.AppendLine($"        get => (uint)((buffer[{word}] >> {bit}) & 0xFFFF);");
+                    sb.AppendLine(bit == 0
+                        ? $"        get => (uint)(buffer[{word}] & 0xFFFFFFFFUL);"
+                        : $"        get => (uint)((buffer[{word}] >> {bit}) & 0xFFFFFFFFUL);");
                     sb.AppendLine("    }");
                 }
                 else if (type == "int")
@@ -141,7 +154,9 @@ public static class DecodeStructEmitter
                     sb.AppendLine($"    public int {name}");
                     sb.AppendLine("    {");
                     sb.AppendLine("        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]");
-                    sb.AppendLine($"        get => (int)(buffer[{word}] >> {bit}) & 0xFFFF;");
+                    sb.AppendLine(bit == 0
+                        ? $"        get => (int)(buffer[{word}] & 0xFFFFFFFFUL);"
+                        : $"        get => (int)((buffer[{word}] >> {bit}) & 0xFFFFFFFFUL);");
                     sb.AppendLine("    }");
                 }
                 else if (type == "ulong")
@@ -149,7 +164,9 @@ public static class DecodeStructEmitter
                     sb.AppendLine($"    public ulong {name}");
                     sb.AppendLine("    {");
                     sb.AppendLine("        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]");
-                    sb.AppendLine($"        get => buffer[{word}];");
+                    sb.AppendLine(isZeroDefault
+                        ? $"        get => buffer[{word}];"
+                        : $"        get => buffer[{word}] ^ {field.DefaultValue};");
                     sb.AppendLine("    }");
                 }
                 else if (type == "long")
@@ -157,7 +174,9 @@ public static class DecodeStructEmitter
                     sb.AppendLine($"    public long {name}");
                     sb.AppendLine("    {");
                     sb.AppendLine("        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]");
-                    sb.AppendLine($"        get => (long)buffer[{word}];");
+                    sb.AppendLine(isZeroDefault
+                       ? $"        get => (long)buffer[{word}];"
+                       : $"        get => (long)buffer[{word}] ^ {field.DefaultValue};");
                     sb.AppendLine("    }");
                 }
                 else if (type == "double")
@@ -173,7 +192,9 @@ public static class DecodeStructEmitter
                     sb.AppendLine($"    public {type} {name}");
                     sb.AppendLine("    {");
                     sb.AppendLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
-                    sb.AppendLine($"        get => ({type})(ushort)((buffer[{word}] >> {bit}) & 0xFFFF);");
+                    sb.AppendLine(bit == 0
+                        ? $"        get => ({type})(ushort)(buffer[{word}] & 0xFFFF);"
+                        : $"        get => ({type})(ushort)((buffer[{word}] >> {bit}) & 0xFFFF);");
                     sb.AppendLine("    }");
                 }
                 else
