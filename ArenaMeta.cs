@@ -47,8 +47,8 @@ public unsafe struct ArenaMeta
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
     public void SetWordCount(int segmentIndex, int value)
     {
-        wordCounts[segmentIndex] = value + HeaderWords;
-        if (Prepopulate) TotalWords = value + HeaderWords;
+        wordCounts[segmentIndex] = value ;
+        if (Prepopulate) TotalWords = value ;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]

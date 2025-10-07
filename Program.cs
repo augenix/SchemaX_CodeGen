@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using SchemaX_CodeGen.CodeGen;
+using SchemaX_CodeGen.Tests;
 
 namespace SchemaX_CodeGen
 {
@@ -11,7 +12,7 @@ namespace SchemaX_CodeGen
             var inputDir = $"/home/jbroiles/RiderProjects/SchemaX_CodeGen/Schemas/{EmitterRunner.ProjectName}/";
             var outputDir = $"/home/jbroiles/RiderProjects/SchemaX_CodeGen/Generated/{EmitterRunner.ProjectName}/";
             var emitEnumsAndPointers = false;
-            var emitStructs = true;
+            var emitStructs = false;
             var emitTemplates = true;
             var runTests = false;
 
@@ -64,12 +65,13 @@ namespace SchemaX_CodeGen
 
             if (runTests)
             {
-                Console.WriteLine("Running manual testing programs");
+                Console.WriteLine("Running manual testing programs"); 
                 //var tests = new TestEncodeHelpers();
-                //var tests = new TestDecodeHelpers();
+                var tests = new TestDecodeHelpers();
                 //var tests = new TestRequestTemplates();
 
-                //tests.Run();
+                
+                tests.Run();
             }
             Console.WriteLine("🏁 Done.");
         }

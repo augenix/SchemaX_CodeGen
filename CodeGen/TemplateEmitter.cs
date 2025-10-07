@@ -39,6 +39,7 @@ namespace SchemaX_CodeGen.CodeGen
                     sb.AppendLine("    {");
                     sb.AppendLine("        arena = new SegmentArena();"); 
                     sb.AppendLine("        arena.IncrementWordCount(0, 1);");
+                    sb.AppendLine("        arena.PrepopulateWords = DataWords + PointerWords + 1;");
                     sb.AppendLine("        EncodeHelpers.AllocateStruct(arena, BaseSegment, 0, DataWords, PointerWords);");
                     sb.AppendLine("    }");
                     sb.AppendLine();
@@ -57,7 +58,7 @@ namespace SchemaX_CodeGen.CodeGen
                     sb.AppendLine($"    public {name}Encoder Populate()");
                     sb.AppendLine("    {");
                     sb.AppendLine("        arena.Prepopulate = false;");
-                    sb.AppendLine("        if(arena.PrepopulateWords > 0) arena.ResetWordCount();");
+                    sb.AppendLine("        if (arena.GetWordCount(0) > arena.PrepopulateWords) arena.ResetWordCount();");
                     sb.AppendLine($"        return new {name}Encoder(arena, BaseSegment, BaseIndex);");
                     sb.AppendLine("    }");
                     sb.AppendLine();

@@ -35,7 +35,11 @@ public sealed class SegmentArena : IDisposable
     {
         meta.SetWordCount(0, meta.PrepopulateWords);
     }
-    public int PrepopulateWords => meta.PrepopulateWords;
+    public int PrepopulateWords
+    {
+        get => meta.PrepopulateWords;
+        set => meta.PrepopulateWords += value;
+    }
 
     public int SegmentCount
     {

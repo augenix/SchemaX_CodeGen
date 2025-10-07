@@ -10,7 +10,7 @@ public static class DecodeHelpers
     public static (int segmentIndex, int structIndex) GetStructCursor(Span<ulong> frame, SegmentMeta meta, int segmentIndex,
         int pointerIndex)
     {
-        var pointer = segmentIndex > 0 ? frame[meta.GetWordCount(segmentIndex - 1) + pointerIndex] : frame[pointerIndex];
+        var pointer = segmentIndex > 0 ? frame[BaseOfSegment(meta, segmentIndex) + pointerIndex] : frame[pointerIndex];
         frame.DereferencePointer(meta, segmentIndex, pointerIndex, pointer, out int targetSegment, out var resolvedPointer,
             out var resolvedPointerIndex);
         int structIndex = UnpackPointerOffset(resolvedPointer) + resolvedPointerIndex + 1;
@@ -20,12 +20,21 @@ public static class DecodeHelpers
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
     public static int GetListLength(Span<ulong> frame, SegmentMeta meta, int segmentIndex, int pointerIndex)
     {
-        var pointer = segmentIndex > 0 ? frame[meta.GetWordCount(segmentIndex - 1) + pointerIndex] : frame[pointerIndex];
-        
-        frame.DereferencePointer(meta, segmentIndex, pointerIndex, pointer, out int targetSegment, out var resolvedPointer,
-            out var resolvedPointerIndex);
-        
-        return (int)((resolvedPointer >> 35) & 0x1FFFFFFFUL);;
+        int srcBase = BaseOfSegment(meta, segmentIndex);
+        ulong pointer = frame[srcBase + pointerIndex];
+
+        frame.DereferencePointer(
+            meta, segmentIndex, pointerIndex, pointer,
+            out int targetSegment,
+            out ulong resolvedPtr,
+            out int resolvedPtrIndex);
+
+        int offset = UnpackPointerOffset(resolvedPtr);
+        int payloadIndex = resolvedPtrIndex + 1 + offset; // spec-compliant
+
+        int absIndex = BaseOfSegment(meta, targetSegment) + payloadIndex;
+        ulong tagWord = frame[absIndex];
+        return (int)((tagWord >> 2) & 0x3FFFFFFFUL);
     }
     
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
@@ -36,7 +45,7 @@ public static class DecodeHelpers
         int tagIndex,
         int index)
     {
-        var tagWord = segmentIndex > 0 ? frame[meta.GetWordCount(segmentIndex - 1) + tagIndex] : frame[tagIndex];
+        var tagWord = segmentIndex > 0 ? frame[BaseOfSegment(meta, segmentIndex) + tagIndex] : frame[tagIndex];
         int dataWords = (int)(tagWord >> 32 & 0xFFFFUL);
         int pointerWords = (int)(tagWord >> 48 & 0xFFFFUL);
         int stride = dataWords + pointerWords;
@@ -48,14 +57,13 @@ public static class DecodeHelpers
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
     public static string ReadText(Span<ulong> frame, SegmentMeta meta, int segmentIndex, int pointerIndex)
     {
-        var pointer = segmentIndex > 0 ? frame[meta.GetWordCount(segmentIndex - 1) + pointerIndex] : frame[pointerIndex];
+        var pointer = segmentIndex > 0 ? frame[BaseOfSegment(meta, segmentIndex) + pointerIndex] : frame[pointerIndex];
         frame.DereferencePointer(meta, segmentIndex, pointerIndex, pointer, out int targetSegment, out var resolvedPointer,
             out var resolvedPointerIndex);
-        var start = targetSegment > 0 ? meta.GetWordCount(targetSegment - 1) : 0;
-        var length = targetSegment > 0 ? meta.GetWordCount(targetSegment)  : meta.GetWordCount(0);
-        var segT = frame.Slice(start, length);
-        
         if (resolvedPointer == 0) return string.Empty;
+        var start = BaseOfSegment(meta, targetSegment);
+        var length = meta.GetWordCount(targetSegment);
+        var segT = frame.Slice(start, length);
         int offset = UnpackPointerOffset(resolvedPointer) + 1;
         int byteLength = (int)((resolvedPointer >> 35) & 0x1FFFFFFFUL);
         var structIndex = resolvedPointerIndex + offset;
@@ -67,11 +75,11 @@ public static class DecodeHelpers
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
     public static ReadOnlySpan<string> ReadList_Text(Span<ulong> frame, SegmentMeta meta, int segmentIndex, int pointerIndex)
     {
-        var pointer = segmentIndex > 0 ? frame[meta.GetWordCount(segmentIndex - 1) + pointerIndex] : frame[pointerIndex];
+        var pointer = segmentIndex > 0 ? frame[BaseOfSegment(meta, segmentIndex) + pointerIndex] : frame[pointerIndex];
         frame.DereferencePointer(meta, segmentIndex, pointerIndex, pointer, out int targetSegment, out var resolvedPointer,
             out var resolvedPointerIndex);
-        var start = targetSegment > 0 ? meta.GetWordCount(targetSegment - 1) : 0;
-        var length = targetSegment > 0 ? meta.GetWordCount(targetSegment) : meta.GetWordCount(0);
+        var start = BaseOfSegment(meta, targetSegment);
+        var length = meta.GetWordCount(targetSegment);
         var segT = frame.Slice(start, length);
         
         if (resolvedPointer == 0) return ReadOnlySpan<string>.Empty;
@@ -127,11 +135,11 @@ public static class DecodeHelpers
     public static ReadOnlySpan<T> ReadList_Primitive<T>(Span<ulong> frame, SegmentMeta meta, int segmentIndex, int pointerIndex)
         where T : unmanaged
     {
-        var pointer = segmentIndex > 0 ? frame[meta.GetWordCount(segmentIndex - 1) + pointerIndex] : frame[pointerIndex];
+        var pointer = segmentIndex > 0 ? frame[BaseOfSegment(meta, segmentIndex) + pointerIndex] : frame[pointerIndex];
         frame.DereferencePointer(meta, segmentIndex, pointerIndex, pointer, out int targetSegment, out var resolvedPointer,
             out var resolvedPointerIndex);
-        var start = targetSegment > 0 ? meta.GetWordCount(targetSegment - 1) : 0;
-        var length = targetSegment > 0 ? meta.GetWordCount(targetSegment) : meta.GetWordCount(0);
+        var start = BaseOfSegment(meta, targetSegment);
+        var length = meta.GetWordCount(targetSegment);
         var segT = frame.Slice(start, length);
 
         if (resolvedPointer == 0)
@@ -198,14 +206,12 @@ public static class DecodeHelpers
             resolvedPointerIndex = pointerIndex;
             return;
         }
-
         int landingPadIndex = (int)((pointer >> 3) & 0x1FFFFFFF);
-        targetSegmentIndex = (int)(pointer >> 32);
-        var start = meta.GetWordCount(targetSegmentIndex - 1);
-        var length = meta.GetWordCount(targetSegmentIndex);
-        Span<ulong> target = frame.Slice(start, length); ;
+        int landingPadSeg   = (int)(pointer >> 32);
+        int baseOfLandingPadSeg = BaseOfSegment(meta, landingPadSeg);
+        targetSegmentIndex   = landingPadSeg;
         resolvedPointerIndex = landingPadIndex;
-        resolvedPointer = target[landingPadIndex];
+        resolvedPointer      = frame[baseOfLandingPadSeg + landingPadIndex];
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -215,10 +221,12 @@ public static class DecodeHelpers
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static int WriteUtf8StringWithNull(string value, Span<byte> destination)
+    static int BaseOfSegment(SegmentMeta meta, int segIndex)
     {
-        int byteCount = Encoding.UTF8.GetBytes(value, destination);
-        destination[byteCount] = 0;
-        return byteCount + 1;
+        int baseIndex = 0;
+        for (int i = 0; i < segIndex; i++)
+            baseIndex += meta.GetWordCount(i);
+        return baseIndex;
     }
+    
 }

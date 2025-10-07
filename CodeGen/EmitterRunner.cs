@@ -67,13 +67,15 @@ public static class EmitterRunner
         Console.WriteLine($"✅ Wrote {structs.Count} DTS structs to {filePath}");
         
         sb = new IndentedStringBuilder();
-        sb.AppendLine("using System;");
+        
         sb.AppendLine("using System.Runtime.CompilerServices;");
         sb.AppendLine();
         sb.AppendLine($"namespace SchemaX_CodeGen.Generated.{EmitterRunner.ProjectName};");
         sb.AppendLine();
         sb.AppendLine("public static class DtsFactory");
         sb.AppendLine("{");
+        sb.AppendLine("    private static int count;");
+        sb.AppendLine();
 
         foreach (var meta in structs.Where(m => m.IsResponse))
         {

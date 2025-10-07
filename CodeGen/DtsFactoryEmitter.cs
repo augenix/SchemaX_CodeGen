@@ -18,7 +18,8 @@ namespace SchemaX_CodeGen.CodeGen;
                 if (field.IsStructList)
                 {
                     sb.AppendLine($"        var {field.Name}Accessor = reader.{field.Name};");
-                    sb.AppendLine($"        switch ({field.Name}Accessor.Count)");
+                    sb.AppendLine($"        count = {field.Name}Accessor.Count > {DefaultListSize} ? {DefaultListSize} : {field.Name}Accessor.Count;");
+                    sb.AppendLine("        switch (count)");
                     sb.AppendLine("        {");
                     for (int i = DefaultListSize; i >= 1; i--)
                     {
@@ -34,7 +35,8 @@ namespace SchemaX_CodeGen.CodeGen;
                 {
                     var inner = field.InnerPrimitiveName;
                     sb.AppendLine($"        var {field.Name}List = reader.{field.Name};");
-                    sb.AppendLine($"        switch ({field.Name}List.Length)");
+                    sb.AppendLine($"        count = {field.Name}List.Length > {DefaultListSize} ? {DefaultListSize} : {field.Name}List.Length;");
+                    sb.AppendLine("        switch (count)");
                     sb.AppendLine("        {");
                     for (int i = DefaultListSize; i >= 1; i--)
                     {
@@ -46,7 +48,8 @@ namespace SchemaX_CodeGen.CodeGen;
                 else if (field.IsTextList)
                 {
                     sb.AppendLine($"        var {field.Name}List = reader.{field.Name};");
-                    sb.AppendLine($"        switch ({field.Name}List.Length)");
+                    sb.AppendLine($"        count = {field.Name}List.Length > {DefaultListSize} ? {DefaultListSize} : {field.Name}List.Length;");
+                    sb.AppendLine("        switch (count)");
                     sb.AppendLine("        {");
                     for (int i = DefaultListSize; i >= 1; i--)
                     {
@@ -79,5 +82,4 @@ namespace SchemaX_CodeGen.CodeGen;
             // With the new extractor, structs contains only real structs (no unions)
             return structs.FirstOrDefault(s => s.Name == field.Type) != null;
         }
-    
 }
