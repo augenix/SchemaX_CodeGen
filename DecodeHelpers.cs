@@ -22,19 +22,7 @@ public static class DecodeHelpers
     {
         int srcBase = BaseOfSegment(meta, segmentIndex);
         ulong pointer = frame[srcBase + pointerIndex];
-
-        frame.DereferencePointer(
-            meta, segmentIndex, pointerIndex, pointer,
-            out int targetSegment,
-            out ulong resolvedPtr,
-            out int resolvedPtrIndex);
-
-        int offset = UnpackPointerOffset(resolvedPtr);
-        int payloadIndex = resolvedPtrIndex + 1 + offset; // spec-compliant
-
-        int absIndex = BaseOfSegment(meta, targetSegment) + payloadIndex;
-        ulong tagWord = frame[absIndex];
-        return (int)((tagWord >> 2) & 0x3FFFFFFFUL);
+        return (int)((pointer >> 2) & 0x3FFFFFFFUL);
     }
     
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]

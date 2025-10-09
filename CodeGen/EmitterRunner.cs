@@ -1,12 +1,16 @@
 
 
+using System.Text.RegularExpressions;
+
 namespace SchemaX_CodeGen.CodeGen;
 
 public static class EmitterRunner
 {
-    public static string ProjectName { get; set; } 
+    public static string ProjectName { get; set; }
+    
     public static void Run(List<StructMeta> structs, List<EnumMeta> enums, string outputDir)
     {
+        string code;
         Directory.CreateDirectory(outputDir);
         var knownEnums = new HashSet<string>(enums.Select(e => e.Name));
 
@@ -23,9 +27,20 @@ public static class EmitterRunner
             sb.AppendLine();
             
         }
+        code = sb.ToString();
+        // 🔹 Cleanup pass before writing to file
+        // code = Regex.Replace(code, @"\(\s*ushort\s*\)\s*\(\s*ushort\s*\)", "(ushort)");
+        // code = Regex.Replace(code, @"\(\s*ulong\s*\)\s*\(\s*ulong\s*\)", "(ulong)");
+        // code = Regex.Replace(code, @"\(\s*uint\s*\)\s*\(\s*uint\s*\)", "(uint)");
+        // code = Regex.Replace(code, @"\(\s*long\s*\)\s*\(\s*long\s*\)", "(long)");
+        // code = Regex.Replace(code, @"\(\s*int\s*\)\s*\(\s*int\s*\)", "(int)");
+        // code = Regex.Replace(code, @"\s{2,}", " ");   // collapse extra spaces
+        // code = Regex.Replace(code, @"\(\s+", "(");    // trim inside parens
+        // code = Regex.Replace(code, @"\s+\)", ")");    // trim before ')'
+        // code = Regex.Replace(code, @"\(\(([^()]+)\)\)", "($1)"); // flatten ((...))
 
         var filePath = Path.Combine(outputDir, "EncodeStructs.cs");
-        File.WriteAllText(filePath, sb.ToString());
+        File.WriteAllText(filePath, code);
 
         Console.WriteLine($"✅ Emitted encode structs to: {filePath}");
 
@@ -41,9 +56,19 @@ public static class EmitterRunner
             sb.AppendLine();
             
         }
-
+        code = sb.ToString();
+        // 🔹 Cleanup pass before writing to file
+        // code = Regex.Replace(code, @"\(\s*ushort\s*\)\s*\(\s*ushort\s*\)", "(ushort)");
+        // code = Regex.Replace(code, @"\(\s*ulong\s*\)\s*\(\s*ulong\s*\)", "(ulong)");
+        // code = Regex.Replace(code, @"\(\s*uint\s*\)\s*\(\s*uint\s*\)", "(uint)");
+        // code = Regex.Replace(code, @"\(\s*long\s*\)\s*\(\s*long\s*\)", "(long)");
+        // code = Regex.Replace(code, @"\(\s*int\s*\)\s*\(\s*int\s*\)", "(int)");
+        // code = Regex.Replace(code, @"\s{2,}", " ");   // collapse extra spaces
+        // code = Regex.Replace(code, @"\(\s+", "(");    // trim inside parens
+        // code = Regex.Replace(code, @"\s+\)", ")");    // trim before ')'
+        // code = Regex.Replace(code, @"\(\(([^()]+)\)\)", "($1)"); // flatten ((...))
         filePath = Path.Combine(outputDir, "DecodeStructs.cs");
-        File.WriteAllText(filePath, sb.ToString());
+        File.WriteAllText(filePath, code);
 
         Console.WriteLine($"✅ Emitted decode structs to: {filePath}");
         
@@ -61,9 +86,9 @@ public static class EmitterRunner
             DtsEmitter.EmitDts(sb, meta, structs);
             sb.AppendLine();
         }
-
+        code = sb.ToString();
         filePath = Path.Combine(outputDir, "Dts.cs");
-        File.WriteAllText(filePath, sb.ToString());
+        File.WriteAllText(filePath, code);
         Console.WriteLine($"✅ Wrote {structs.Count} DTS structs to {filePath}");
         
         sb = new IndentedStringBuilder();
@@ -81,11 +106,11 @@ public static class EmitterRunner
         {
             DtsFactoryEmitter.EmitFromDecoder(sb, meta, structs);
         }
-
+        
         sb.AppendLine("}");
-
+        code = sb.ToString();
         filePath = Path.Combine(outputDir, "DtsFactory.cs");
-        File.WriteAllText(filePath, sb.ToString());
+        File.WriteAllText(filePath, code);
         Console.WriteLine($"✅ Wrote MessageFactory.cs with {structs.Count} FromDecoder methods");
         
     }

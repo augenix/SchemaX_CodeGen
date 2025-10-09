@@ -1,4 +1,5 @@
 using System.Globalization;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
@@ -100,29 +101,98 @@ namespace SchemaX_CodeGen.CodeGen
                     }
                 }
 
-                // 🔹 NEW: capture default literal from getter for XOR logic
-                var getter =
-                    prop.AccessorList?.Accessors.FirstOrDefault(a => a.Kind() == SyntaxKind.GetAccessorDeclaration);
-                if (getter != null)
-                {
-                    var readCall = getter.DescendantNodes()
-                        .OfType<InvocationExpressionSyntax>()
-                        .FirstOrDefault(inv =>
-                        {
-                            if (inv.Expression is MemberAccessExpressionSyntax ma)
-                                return ma.Name.Identifier.Text.StartsWith("ReadData", StringComparison.Ordinal);
-                            return false;
-                        });
-
-                    if (readCall != null)
+                // Find a ReadData*/WriteData* invocation anywhere in the property
+                var inv = prop
+                    .DescendantNodes()
+                    .OfType<InvocationExpressionSyntax>()
+                    .FirstOrDefault(i =>
                     {
-                        var args = readCall.ArgumentList.Arguments;
-                        if (args.Count >= 2 && TryParseDefaultLiteral(args[^1].Expression, f.Type, out var def))
-                            f.DefaultValue = def;
-                        else
-                            f.DefaultValue = 0;
+                        if (i.Expression is MemberAccessExpressionSyntax ma)
+                        {
+                            var n = ma.Name.Identifier.Text;
+                            return n.StartsWith("ReadData", StringComparison.Ordinal) ||
+                                   n.StartsWith("WriteData", StringComparison.Ordinal);
+                        }
+                        return false;
+                    });
+
+                if (inv != null)
+                {
+                    var name = ((MemberAccessExpressionSyntax)inv.Expression).Name.Identifier.Text;
+                    var args = inv.ArgumentList.Arguments;
+
+                    ExpressionSyntax? defaultExpr = null;
+                    if (name.StartsWith("ReadData", StringComparison.Ordinal))
+                    {
+                        // default is 2nd arg
+                        if (args.Count >= 2) defaultExpr = args[1].Expression;
                     }
+                    else
+                    {
+                        // WriteData: default is 3rd arg
+                        if (args.Count >= 3) defaultExpr = args[2].Expression;
+                    }
+
+                    if (defaultExpr != null)
+                        f.DefaultValue = ExtractDefaultLiteral(defaultExpr);
+                    else
+                        f.DefaultValue = null;
                 }
+                else
+                {
+                    f.DefaultValue = null;
+                }
+
+                // ---------- helpers ----------
+                static object? ExtractDefaultLiteral(ExpressionSyntax expr)
+                {
+                    expr = Unwrap(expr);
+
+                    // (ushort)2, (uint)7, (ulong)123
+                    if (expr is CastExpressionSyntax cast)
+                        return ExtractDefaultLiteral(cast.Expression); // recurse into inner
+
+                    // -1, -0.5 (PrefixUnary over a literal)
+                    if (expr is PrefixUnaryExpressionSyntax p &&
+                        p.OperatorToken.IsKind(SyntaxKind.MinusToken) &&
+                        p.Operand is LiteralExpressionSyntax negLit)
+                        return NegateLiteral(negLit.Token.Value);
+
+                    // Plain literal: 2, 42U, 0.5
+                    if (expr is LiteralExpressionSyntax lit)
+                        return lit.Token.Value;
+
+                    // Identifiers / MemberAccess: keep the text (rare in capnp output)
+                    return expr.ToString();
+                }
+
+                static ExpressionSyntax Unwrap(ExpressionSyntax e)
+                {
+                    while (e is ParenthesizedExpressionSyntax p) e = p.Expression;
+                    return e;
+                }
+
+                static object NegateLiteral(object? v) => v switch
+                {
+                    sbyte sb => (sbyte)(-sb),
+                    short s  => (short)(-s),
+                    int i    => -i,
+                    long l   => -l,
+                    float f  => -f,
+                    double d => -d,
+                    decimal m=> -m,
+                    // unsigneds shouldn't show up negated here, but fallback:
+                    byte b   => unchecked((int)-b),
+                    ushort us=> unchecked((int)-us),
+                    uint ui  => unchecked((long)-(long)ui),
+                    ulong ul => unchecked((long)-(long)ul),
+                    _        => v is null ? 0 : "-" + v.ToString()
+                };
+
+
+                Console.WriteLine($"Default value: {f.DefaultValue}");
+
+
 
                 if (f.PointerIndex.HasValue &&
                     !f.Type.StartsWith("PrimitiveList<") &&

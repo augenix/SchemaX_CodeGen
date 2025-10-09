@@ -8,12 +8,12 @@ public class TestDecodeHelpers
 {
     public void Run()
     {
-        TestOrderRequestNewOrder();
+        //TestOrderRequestNewOrder();
         //Test_ReadText();
         //Test_ReadStruct();
         //Test_ReadList_Text();
         //Test_ReadList_Primitive();
-        //Test_ReadList_Struct();
+        Test_ReadList_Struct();
 
     }
     
@@ -322,14 +322,15 @@ public class TestDecodeHelpers
             for (var j = 0; j < wCount; j++)
             {
                 var cursor = DecodeHelpers.GetStructCursor(frame, meta, segmentIndex, offset + i);
-                var length = DecodeHelpers.GetListLength(frame, meta, segmentIndex, offset + i);
+                Console.WriteLine($"struct cursor segment index {cursor.segmentIndex} struct index {cursor.structIndex}");
+                var length = DecodeHelpers.GetListLength(frame, meta, cursor.segmentIndex, cursor.structIndex);
                 var elementCursor = DecodeHelpers.GetListElementCursor(frame, meta, cursor.segmentIndex, cursor.structIndex, j);
                 var w = new WorkingOrderEncoder(arena, elementCursor.segmentIndex, elementCursor.elementIndex);
                 Console.WriteLine($"List Length {length}");
-                Console.WriteLine(
-                    $"Get Target price: {w.LimitPrice} qty {w.Quantity} side {w.Side} order {w.OrdId} " +
-                    $"clord {w.ClOrdId} request {w.RequestId} sec {w.SecurityId} time {w.TimeInForce} " +
-                    $"unit-contract {w.UnitContractCnt} symbol {w.Symbol}");
+                // Console.WriteLine(
+                //     $"Get Target price: {w.LimitPrice} qty {w.Quantity} side {w.Side} order {w.OrdId} " +
+                //     $"clord {w.ClOrdId} request {w.RequestId} sec {w.SecurityId} time {w.TimeInForce} " +
+                //     $"unit-contract {w.UnitContractCnt} symbol {w.Symbol}");
             }
         }
     }
@@ -350,95 +351,95 @@ public class TestDecodeHelpers
     }
 
     
-    private void TestOrderRequestNewOrder()
-    {
-        var buyLimit = new OrderRequestNewOrderTemplate();
-        var msg = buyLimit.Prepopulate();
-        msg.RequestId = 12345;
-        msg.ClOrdId = 12345;
-        msg.SenderId = "Augenix";
-        msg.PartyListId = 12152016;
-        msg.Location = "USA";
-        msg.SecurityId = 12345;
-        msg.DisplayQty = 1;
-        msg.MinQty = 1;
-        msg.Side = OrderSide.buy;
-        msg.OrdType = OrderKind.limit;
-        msg.TimeInForce = OrderTimeInForce.day;
-        var w = msg.ExpireDate.Writer();
-        w.TimeNs = 1111;
-        var msg2 = buyLimit.Populate();
-        msg2.OrderQty = 1;
-        msg2.Price = 1000.00;
-        w  = msg2.ExtractTimestamp.Writer();
-        w.TimeNs = 2222;
+    // private void TestOrderRequestNewOrder()
+    // {
+    //     var buyLimit = new OrderRequestNewOrderTemplate();
+    //     var msg = buyLimit.Prepopulate();
+    //     msg.RequestId = 12345;
+    //     msg.ClOrdId = 12345;
+    //     msg.SenderId = "Augenix";
+    //     msg.PartyListId = 12152016;
+    //     msg.Location = "USA";
+    //     msg.SecurityId = 12345;
+    //     msg.DisplayQty = 1;
+    //     msg.MinQty = 1;
+    //     msg.Side = OrderSide.buy;
+    //     msg.OrdType = OrderKind.limit;
+    //     msg.TimeInForce = OrderTimeInForce.day;
+    //     var w = msg.ExpireDate.Writer();
+    //     w.TimeNs = 1111;
+    //     var msg2 = buyLimit.Populate();
+    //     msg2.OrderQty = 1;
+    //     msg2.Price = 1000.00;
+    //     w  = msg2.ExtractTimestamp.Writer();
+    //     w.TimeNs = 2222;
 
-        var arenaMeta = buyLimit.Meta;
-        arenaMeta.IncrementWordCount(0, 2);
-        var frame = buyLimit.GetArenaAsSpan.Slice(7, arenaMeta.TotalWords);
-        var meta = new SegmentMeta
-        {
-            SegmentCount = arenaMeta.SegmentCount,
-        };
-
-        for (var i = 0; i < meta.SegmentCount; i++)
-        {
-            meta.SetWordCount(i, arenaMeta.GetWordCount(i));
-            meta.TotalWords += arenaMeta.GetWordCount(i);
-        }
-        
-        FrameInspector.DumpFrame(frame);
-        Console.WriteLine($"total words: {meta.TotalWords}");
-        
-        var decode = new OrderRequestNewOrderDecoder(frame, meta, 0, 3);
-        //Console.WriteLine($"New Order Decoder Type: price {decode.Price} qty {decode.OrderQty} type {decode.OrdType} TIF: {decode.TimeInForce} ");
-        Console.WriteLine($"New Order Decoder " +
-                          $"{decode.Price}, " +
-                          $"{decode.OrderQty}, " +
-                          $"{decode.SecurityId}, " +
-                          $"{decode.DisplayQty}, " +
-                          $"{decode.OrdType}, " +
-                          $"{decode.Side}, " +
-                          $"{decode.Location}, " +
-                          $"{decode.SenderId} " +
-                          $"{decode.PartyListId}, " +
-                          $"{decode.ExpireDate.Reader().TimeNs}, " +
-                          $"{decode.ExtractTimestamp.Reader().TimeNs}");
-        
-        var msg3 = buyLimit.Populate();
-        msg3.OrderQty = 10;
-        msg3.Price = 2000.00;
-        var w1  = msg3.ExtractTimestamp.Writer();
-        w1.TimeNs = 3333;
-        var frame1 = buyLimit.GetArenaAsSpan.Slice(7, arenaMeta.TotalWords);
-        meta = new SegmentMeta
-        {
-            SegmentCount = arenaMeta.SegmentCount,
-        };
-
-        for (var i = 0; i < meta.SegmentCount; i++)
-        {
-            meta.SetWordCount(i, arenaMeta.GetWordCount(i));
-            meta.TotalWords += arenaMeta.GetWordCount(i);
-        }
-        
-        FrameInspector.DumpFrame(frame1);
-        Console.WriteLine($"total words: {meta.TotalWords}");
-        
-        var decode1 = new OrderRequestNewOrderDecoder(frame1, meta, 0, 3);
-        Console.WriteLine($"New Order Decoder " +
-                          $"{decode1.Price}, " +
-                          $"{decode1.OrderQty}, " +
-                          $"{decode1.SecurityId}, " +
-                          $"{decode1.DisplayQty}, " +
-                          $"{decode1.OrdType}, " +
-                          $"{decode1.Side}, " +
-                          $"{decode1.Location}, " +
-                          $"{decode1.SenderId} " +
-                          $"{decode1.PartyListId}, " +
-                          $"{decode1.ExpireDate.Reader().TimeNs}, " +
-                          $"{decode1.ExtractTimestamp.Reader().TimeNs}");
-    }
+    //     var arenaMeta = buyLimit.Meta;
+    //     arenaMeta.IncrementWordCount(0, 2);
+    //     var frame = buyLimit.GetArenaAsSpan.Slice(7, arenaMeta.TotalWords);
+    //     var meta = new SegmentMeta
+    //     {
+    //         SegmentCount = arenaMeta.SegmentCount,
+    //     };
+    //
+    //     for (var i = 0; i < meta.SegmentCount; i++)
+    //     {
+    //         meta.SetWordCount(i, arenaMeta.GetWordCount(i));
+    //         meta.TotalWords += arenaMeta.GetWordCount(i);
+    //     }
+    //     
+    //     FrameInspector.DumpFrame(frame);
+    //     Console.WriteLine($"total words: {meta.TotalWords}");
+    //     
+    //     var decode = new OrderRequestNewOrderDecoder(frame, meta, 0, 3);
+    //     //Console.WriteLine($"New Order Decoder Type: price {decode.Price} qty {decode.OrderQty} type {decode.OrdType} TIF: {decode.TimeInForce} ");
+    //     Console.WriteLine($"New Order Decoder " +
+    //                       $"{decode.Price}, " +
+    //                       $"{decode.OrderQty}, " +
+    //                       $"{decode.SecurityId}, " +
+    //                       $"{decode.DisplayQty}, " +
+    //                       $"{decode.OrdType}, " +
+    //                       $"{decode.Side}, " +
+    //                       $"{decode.Location}, " +
+    //                       $"{decode.SenderId} " +
+    //                       $"{decode.PartyListId}, " +
+    //                       $"{decode.ExpireDate.Reader().TimeNs}, " +
+    //                       $"{decode.ExtractTimestamp.Reader().TimeNs}");
+    //     
+    //     var msg3 = buyLimit.Populate();
+    //     msg3.OrderQty = 10;
+    //     msg3.Price = 2000.00;
+    //     var w1  = msg3.ExtractTimestamp.Writer();
+    //     w1.TimeNs = 3333;
+    //     var frame1 = buyLimit.GetArenaAsSpan.Slice(7, arenaMeta.TotalWords);
+    //     meta = new SegmentMeta
+    //     {
+    //         SegmentCount = arenaMeta.SegmentCount,
+    //     };
+    //
+    //     for (var i = 0; i < meta.SegmentCount; i++)
+    //     {
+    //         meta.SetWordCount(i, arenaMeta.GetWordCount(i));
+    //         meta.TotalWords += arenaMeta.GetWordCount(i);
+    //     }
+    //     
+    //     FrameInspector.DumpFrame(frame1);
+    //     Console.WriteLine($"total words: {meta.TotalWords}");
+    //     
+    //     var decode1 = new OrderRequestNewOrderDecoder(frame1, meta, 0, 3);
+    //     Console.WriteLine($"New Order Decoder " +
+    //                       $"{decode1.Price}, " +
+    //                       $"{decode1.OrderQty}, " +
+    //                       $"{decode1.SecurityId}, " +
+    //                       $"{decode1.DisplayQty}, " +
+    //                       $"{decode1.OrdType}, " +
+    //                       $"{decode1.Side}, " +
+    //                       $"{decode1.Location}, " +
+    //                       $"{decode1.SenderId} " +
+    //                       $"{decode1.PartyListId}, " +
+    //                       $"{decode1.ExpireDate.Reader().TimeNs}, " +
+    //                       $"{decode1.ExtractTimestamp.Reader().TimeNs}");
+    // }
 
     private void Test_ReadText()
     {
