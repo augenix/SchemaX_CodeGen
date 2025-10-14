@@ -41,11 +41,11 @@ namespace SchemaX_CodeGen.CodeGen
 
 
             var knownEnumNames = new HashSet<string>(enumResults.Select(e => e.Name));
-
+            
             // Extract structs from nested WRITER classes
             foreach (var parentClass in root.DescendantNodes().OfType<ClassDeclarationSyntax>())
             {
-                // Skip union container classes
+                // Skip pure container classes that only hold nested classes (like unions)
                 if (parentClass.Members.All(m => m is ClassDeclarationSyntax))
                     continue;
 
@@ -53,18 +53,22 @@ namespace SchemaX_CodeGen.CodeGen
                 {
                     if (nested.Identifier.Text == "WRITER")
                     {
+                        // Pass structMap into Extractor for flattenable chain detection
                         var meta = Extractor.FromWriterClass(nested);
                         if (meta != null)
                         {
+                            // Build usedEnums list
                             var usedEnums = new HashSet<string>(
                                 meta.Fields.Where(f => knownEnumNames.Contains(f.Type))
-                                           .Select(f => f.Type));
+                                    .Select(f => f.Type));
+
                             meta.UsedEnums = usedEnums;
                             structResults.Add(meta);
                         }
                     }
                 }
             }
+
             
             // Infer child structs from usage in pointer fields
             var nameToMeta = structResults.ToDictionary(s => s.Name);

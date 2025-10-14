@@ -12,15 +12,15 @@ public static class DecodeStructEmitter
             .Where(f => f.IsPointerStruct && !f.Type.StartsWith("StructList<"))
             .Select(f => f.Type)
             .Distinct();
-        var allChildStructs = structs
-            .SelectMany(s => s.Fields)
-            .Where(f => f.IsPointerStruct && !f.Type.StartsWith("StructList<"))
-            .Select(f => f.Type)
-            .ToHashSet();
+        
         var structLists = meta.Fields
             .Where(f => f.Type.StartsWith("StructList<"))
             .Select(f => f.Type.Substring("StructList<".Length).TrimEnd('>'))
             .Distinct();
+        
+        static string Mask(ulong widthBits, int bit) =>
+            bit == 0 ? $"~0x{widthBits:X}UL" : $"~(0x{widthBits:X}UL << {bit})";
+
 
         // 1. Header
         
@@ -111,52 +111,67 @@ public static class DecodeStructEmitter
                 
                 if (type == "bool")
                 {
+                    string maskClear = Mask(1, bit);
+                    string read      = bit == 0 ? $"buffer[{word}]" : $"(buffer[{word}] >> {bit})";
+                    string defBool   = isZeroDefault ? "" : "true"; // only non-zero default for bool is 'true'
+
+                    // GET: ((buffer[..] >> bit) & 1UL) != 0  [with bit==0 suppression]  then XOR if default==true
+                    string getCore = $"(({read} & 1UL) != 0)";
+                    string getExpr = string.IsNullOrEmpty(defBool) ? getCore : $"{getCore} ^ {defBool}";
+                    
                     sb.AppendLine($"    public bool {name}");
                     sb.AppendLine("    {");
                     sb.AppendLine("        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]");
-                    sb.AppendLine(bit == 0
-                        ? $"        get => (buffer[{word}] & 1UL) != 0;"
-                        : $"        get => ((buffer[{word}] >> {bit}) & 1UL) != 0;");
+                    sb.AppendLine($"        get => {getExpr};");
+                    sb.AppendLine("    }");
+                    
+                }
+                else if (type is "byte" or "ushort")
+                {
+                    int widthBits = type == "byte" ? 8 : 16;
+                    string maskClear = Mask((ulong)((1 << widthBits) - 1), bit);
+                    string defExpr = isZeroDefault ? "" : Convert.ToUInt64(field.DefaultValue).ToString(CultureInfo.InvariantCulture);
 
-                    sb.AppendLine("    }");
-                }
-                else if (type == "byte")
-                {
-                    sb.AppendLine($"    public byte {name}");
-                    sb.AppendLine("    {");
-                    sb.AppendLine("        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]");
-                    sb.AppendLine(bit == 0
-                        ? $"        get => (byte)(buffer[{word}] & 0xFF);"
-                        : $"        get => (byte)((buffer[{word}] >> {bit}) & 0xFF);");
-                    sb.AppendLine("    }");
-                }
+                    // --- Getter ---
+                    // Ensure the mask is *inside* the cast and suppress >> 0
+                    string getCore = bit == 0
+                        ? $"buffer[{word}] & 0x{((1 << widthBits) - 1):X}UL"
+                        : $"(buffer[{word}] >> {bit} & 0x{((1 << widthBits) - 1):X}UL)";
 
-                else if (type == "ushort")
-                {
-                    sb.AppendLine($"    public ushort {name}");
+                    string getExpr = isZeroDefault
+                        ? $"({type})({getCore})"
+                        : $"({type})(({getCore}) ^ {defExpr}UL)";
+                    
+                    // --- Emit ---
+                    sb.AppendLine($"    public {type} {name}");
                     sb.AppendLine("    {");
                     sb.AppendLine("        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]");
-                    sb.AppendLine($"        get => (ushort)((buffer[{word}] >> {bit}) & 0xFFFF);");
+                    sb.AppendLine($"        get => {getExpr};");
                     sb.AppendLine("    }");
                 }
-                else if (type == "uint")
+                else if (type is "int" or "uint")
                 {
-                    sb.AppendLine($"    public uint {name}");
+                    bool isSigned = type == "int";
+                    string maskClear = Mask(0xFFFFFFFF, bit);
+                    string defExpr = isZeroDefault ? "" : Convert.ToUInt32(field.DefaultValue).ToString(CultureInfo.InvariantCulture);
+
+                    // getter core (no >>0, mask inside cast)
+                    string getCore = bit == 0
+                        ? $"buffer[{word}] & 0xFFFFFFFFUL"
+                        : $"(buffer[{word}] >> {bit} & 0xFFFFFFFFUL)";
+
+                    string getExpr = isZeroDefault
+                        ? isSigned
+                            ? $"(int)({getCore})"
+                            : $"(uint)({getCore})"
+                        : isSigned
+                            ? $"(int)(({getCore}) ^ {defExpr}U)"
+                            : $"(uint)(({getCore}) ^ {defExpr}U)";
+
+                    sb.AppendLine($"    public {type} {name}");
                     sb.AppendLine("    {");
                     sb.AppendLine("        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]");
-                    sb.AppendLine(bit == 0
-                        ? $"        get => (uint)(buffer[{word}] & 0xFFFFFFFFUL);"
-                        : $"        get => (uint)((buffer[{word}] >> {bit}) & 0xFFFFFFFFUL);");
-                    sb.AppendLine("    }");
-                }
-                else if (type == "int")
-                {
-                    sb.AppendLine($"    public int {name}");
-                    sb.AppendLine("    {");
-                    sb.AppendLine("        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]");
-                    sb.AppendLine(bit == 0
-                        ? $"        get => (int)(buffer[{word}] & 0xFFFFFFFFUL);"
-                        : $"        get => (int)((buffer[{word}] >> {bit}) & 0xFFFFFFFFUL);");
+                    sb.AppendLine($"        get => {getExpr};");
                     sb.AppendLine("    }");
                 }
                 else if (type == "ulong")
@@ -169,34 +184,90 @@ public static class DecodeStructEmitter
                         : $"        get => buffer[{word}] ^ {field.DefaultValue};");
                     sb.AppendLine("    }");
                 }
-                else if (type == "long")
+                else if (type is "long" or "ulong")
                 {
-                    sb.AppendLine($"    public long {name}");
-                    sb.AppendLine("    {");
-                    sb.AppendLine("        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]");
-                    sb.AppendLine(isZeroDefault
-                       ? $"        get => (long)buffer[{word}];"
-                       : $"        get => (long)buffer[{word}] ^ {field.DefaultValue};");
-                    sb.AppendLine("    }");
-                }
-                else if (type == "double")
-                {
-                    sb.AppendLine($"    public double {name}");
-                    sb.AppendLine("    {");
-                    sb.AppendLine("        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]");
-                    sb.AppendLine($"        get => BitConverter.Int64BitsToDouble((long)buffer[{word}]);");
-                    sb.AppendLine("    }");
-                }
-                else if (isEnum)
-                {
+                    bool isSigned = type == "long";
+                    string defExpr = isZeroDefault
+                        ? ""
+                        : isSigned
+                            ? $"{Convert.ToInt64(field.DefaultValue)}L"
+                            : $"{Convert.ToUInt64(field.DefaultValue)}UL";
+
+                    string getExpr;
+
+                    if (isSigned)
+                    {
+                        // signed: cast buffer to long before XOR
+                        getExpr = isZeroDefault
+                            ? $"(long)buffer[{word}]"
+                            : $"(long)buffer[{word}] ^ {defExpr}";
+                    }
+                    else
+                    {
+                        // unsigned: operate directly in ulong domain
+                        getExpr = isZeroDefault
+                            ? $"(ulong)buffer[{word}]"
+                            : $"buffer[{word}] ^ {defExpr}";
+                    }
+
                     sb.AppendLine($"    public {type} {name}");
                     sb.AppendLine("    {");
-                    sb.AppendLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
-                    sb.AppendLine(bit == 0
-                        ? $"        get => ({type})(ushort)(buffer[{word}] & 0xFFFF);"
-                        : $"        get => ({type})(ushort)((buffer[{word}] >> {bit}) & 0xFFFF);");
+                    sb.AppendLine("        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]");
+                    sb.AppendLine($"        get => {getExpr};");
                     sb.AppendLine("    }");
                 }
+                 else if (type is "float" or "double")
+                {
+                    bool isFloat = type == "float";
+                    string defExpr = isZeroDefault
+                        ? ""
+                        : isFloat
+                            ? $"{Convert.ToSingle(field.DefaultValue, CultureInfo.InvariantCulture)}f"
+                            : $"{Convert.ToDouble(field.DefaultValue, CultureInfo.InvariantCulture)}";
+
+                    // --- Getter ---
+                    string readBits = isFloat
+                        ? $"(uint)(buffer[{word}] & 0xFFFFFFFFUL)"
+                        : $"buffer[{word}]";
+
+                    string getBits = isZeroDefault
+                        ? readBits
+                        : isFloat
+                            ? $"{readBits} ^ (uint)BitConverter.SingleToInt32Bits({defExpr})"
+                            : $"{readBits} ^ (ulong)BitConverter.DoubleToInt64Bits({defExpr})";
+
+                    string getExpr = isFloat
+                        ? $"BitConverter.Int32BitsToSingle((int){getBits})"
+                        : $"BitConverter.Int64BitsToDouble((long){getBits})";
+                    
+
+                    // --- Emit ---
+                    sb.AppendLine($"    public {type} {name}");
+                    sb.AppendLine("    {");
+                    sb.AppendLine("        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]");
+                    sb.AppendLine($"        get => {getExpr};");
+                    sb.AppendLine("    }");
+                }
+                
+                 else if (isEnum)
+                 {
+                     string maskClear = Mask(0xFFFF, bit);
+                     string defExpr = isZeroDefault ? "" : $"{Convert.ToUInt64(field.DefaultValue)}UL";
+
+                     // --- Getter ---
+                     string getBits = bit == 0
+                         ? $"buffer[{word}] & 0xFFFFUL"
+                         : $"(buffer[{word}] >> {bit} & 0xFFFFUL)";
+                     string getExpr = isZeroDefault
+                         ? $"({type})(ushort)({getBits})"
+                         : $"({type})(ushort)(({getBits}) ^ {defExpr})";
+
+                     sb.AppendLine($"    public {type} {name}");
+                     sb.AppendLine("    {");
+                     sb.AppendLine("        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]");
+                     sb.AppendLine($"        get => {getExpr};");
+                     sb.AppendLine("    }");
+                 }
                 else
                 {
                     sb.AppendLine($"    // Unhandled field type: {type} at bit {bitOffset}");

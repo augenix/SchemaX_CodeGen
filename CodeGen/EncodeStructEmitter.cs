@@ -12,11 +12,7 @@ public static class EncodeStructEmitter
             .Where(f => f.IsPointerStruct && !f.Type.StartsWith("StructList<"))
             .Select(f => f.Type)
             .Distinct();
-        var allChildStructs = structs
-            .SelectMany(s => s.Fields)
-            .Where(f => f.IsPointerStruct && !f.Type.StartsWith("StructList<"))
-            .Select(f => f.Type)
-            .ToHashSet();
+        
         var structLists = meta.Fields
             .Where(f => f.Type.StartsWith("StructList<"))
             .Select(f => f.Type.Substring("StructList<".Length).TrimEnd('>'))
@@ -24,17 +20,6 @@ public static class EncodeStructEmitter
         
         static string Mask(ulong widthBits, int bit) =>
             bit == 0 ? $"~0x{widthBits:X}UL" : $"~(0x{widthBits:X}UL << {bit})";
-
-        static string Shift(string expr, int bit, bool left)
-            => bit == 0 ? expr : $"({expr} {(left ? "<<" : ">>")} {bit})";
-
-        static string Xor(string expr, string? defExpr)
-            => string.IsNullOrEmpty(defExpr) ? expr : $"{expr} ^ {defExpr}";
-        
-        static string ReadBits(string bufferExpr, int bit)
-            => bit == 0 ? bufferExpr : $"({bufferExpr} >> {bit})";
-
-
         
         // 1. Header
         

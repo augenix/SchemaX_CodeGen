@@ -13,7 +13,7 @@ namespace SchemaX_CodeGen
             var outputDir = $"/home/jbroiles/RiderProjects/SchemaX_CodeGen/Generated/{EmitterRunner.ProjectName}/";
             var emitEnumsAndPointers = false;
             var emitStructs = true;
-            var emitTemplates = true;
+            var emitTemplates = false;
             var runTests = false;
 
             if (!Directory.Exists(outputDir))

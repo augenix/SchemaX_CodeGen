@@ -28,17 +28,6 @@ public static class EmitterRunner
             
         }
         code = sb.ToString();
-        // 🔹 Cleanup pass before writing to file
-        // code = Regex.Replace(code, @"\(\s*ushort\s*\)\s*\(\s*ushort\s*\)", "(ushort)");
-        // code = Regex.Replace(code, @"\(\s*ulong\s*\)\s*\(\s*ulong\s*\)", "(ulong)");
-        // code = Regex.Replace(code, @"\(\s*uint\s*\)\s*\(\s*uint\s*\)", "(uint)");
-        // code = Regex.Replace(code, @"\(\s*long\s*\)\s*\(\s*long\s*\)", "(long)");
-        // code = Regex.Replace(code, @"\(\s*int\s*\)\s*\(\s*int\s*\)", "(int)");
-        // code = Regex.Replace(code, @"\s{2,}", " ");   // collapse extra spaces
-        // code = Regex.Replace(code, @"\(\s+", "(");    // trim inside parens
-        // code = Regex.Replace(code, @"\s+\)", ")");    // trim before ')'
-        // code = Regex.Replace(code, @"\(\(([^()]+)\)\)", "($1)"); // flatten ((...))
-
         var filePath = Path.Combine(outputDir, "EncodeStructs.cs");
         File.WriteAllText(filePath, code);
 
@@ -57,16 +46,6 @@ public static class EmitterRunner
             
         }
         code = sb.ToString();
-        // 🔹 Cleanup pass before writing to file
-        // code = Regex.Replace(code, @"\(\s*ushort\s*\)\s*\(\s*ushort\s*\)", "(ushort)");
-        // code = Regex.Replace(code, @"\(\s*ulong\s*\)\s*\(\s*ulong\s*\)", "(ulong)");
-        // code = Regex.Replace(code, @"\(\s*uint\s*\)\s*\(\s*uint\s*\)", "(uint)");
-        // code = Regex.Replace(code, @"\(\s*long\s*\)\s*\(\s*long\s*\)", "(long)");
-        // code = Regex.Replace(code, @"\(\s*int\s*\)\s*\(\s*int\s*\)", "(int)");
-        // code = Regex.Replace(code, @"\s{2,}", " ");   // collapse extra spaces
-        // code = Regex.Replace(code, @"\(\s+", "(");    // trim inside parens
-        // code = Regex.Replace(code, @"\s+\)", ")");    // trim before ')'
-        // code = Regex.Replace(code, @"\(\(([^()]+)\)\)", "($1)"); // flatten ((...))
         filePath = Path.Combine(outputDir, "DecodeStructs.cs");
         File.WriteAllText(filePath, code);
 
@@ -75,6 +54,7 @@ public static class EmitterRunner
         sb = new IndentedStringBuilder();
         sb.AppendLine("using System;");
         sb.AppendLine("using System.Runtime.InteropServices;");
+        sb.AppendLine("using System.Runtime.CompilerServices;");
         sb.AppendLine();
         sb.AppendLine($"namespace SchemaX_CodeGen.Generated.{ProjectName};");
         sb.AppendLine();

@@ -217,7 +217,7 @@ namespace SchemaX_CodeGen.CodeGen
                 // this struct has a WHICH and fields — real struct with embedded union
                 meta.IsUnion = true;
             }
-
+            
             return meta;
         }
 
