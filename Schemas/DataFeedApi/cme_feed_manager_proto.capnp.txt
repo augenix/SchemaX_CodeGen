@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CapnpGen
+namespace Cfm2sm_proto
 {
     [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xafbadb56d67d6b72UL)]
     public class UtcTime : ICapnpSerializable
@@ -76,10 +76,10 @@ namespace CapnpGen
         void ICapnpSerializable.Deserialize(DeserializerState arg_)
         {
             var reader = READER.create(arg_);
-            Exchange = CapnpSerializable.Create<CapnpGen.UtcTime>(reader.Exchange);
-            Sending = CapnpSerializable.Create<CapnpGen.UtcTime>(reader.Sending);
-            Receipt = CapnpSerializable.Create<CapnpGen.UtcTime>(reader.Receipt);
-            Extract = CapnpSerializable.Create<CapnpGen.UtcTime>(reader.Extract);
+            Exchange = CapnpSerializable.Create<Cfm2sm_proto.UtcTime>(reader.Exchange);
+            Sending = CapnpSerializable.Create<Cfm2sm_proto.UtcTime>(reader.Sending);
+            Receipt = CapnpSerializable.Create<Cfm2sm_proto.UtcTime>(reader.Receipt);
+            Extract = CapnpSerializable.Create<Cfm2sm_proto.UtcTime>(reader.Extract);
             applyDefaults();
         }
 
@@ -100,25 +100,25 @@ namespace CapnpGen
         {
         }
 
-        public CapnpGen.UtcTime Exchange
+        public Cfm2sm_proto.UtcTime Exchange
         {
             get;
             set;
         }
 
-        public CapnpGen.UtcTime Sending
+        public Cfm2sm_proto.UtcTime Sending
         {
             get;
             set;
         }
 
-        public CapnpGen.UtcTime Receipt
+        public Cfm2sm_proto.UtcTime Receipt
         {
             get;
             set;
         }
 
-        public CapnpGen.UtcTime Extract
+        public Cfm2sm_proto.UtcTime Extract
         {
             get;
             set;
@@ -135,10 +135,10 @@ namespace CapnpGen
             public static READER create(DeserializerState ctx) => new READER(ctx);
             public static implicit operator DeserializerState(READER reader) => reader.ctx;
             public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
-            public CapnpGen.UtcTime.READER Exchange => ctx.ReadStruct(0, CapnpGen.UtcTime.READER.create);
-            public CapnpGen.UtcTime.READER Sending => ctx.ReadStruct(1, CapnpGen.UtcTime.READER.create);
-            public CapnpGen.UtcTime.READER Receipt => ctx.ReadStruct(2, CapnpGen.UtcTime.READER.create);
-            public CapnpGen.UtcTime.READER Extract => ctx.ReadStruct(3, CapnpGen.UtcTime.READER.create);
+            public Cfm2sm_proto.UtcTime.READER Exchange => ctx.ReadStruct(0, Cfm2sm_proto.UtcTime.READER.create);
+            public Cfm2sm_proto.UtcTime.READER Sending => ctx.ReadStruct(1, Cfm2sm_proto.UtcTime.READER.create);
+            public Cfm2sm_proto.UtcTime.READER Receipt => ctx.ReadStruct(2, Cfm2sm_proto.UtcTime.READER.create);
+            public Cfm2sm_proto.UtcTime.READER Extract => ctx.ReadStruct(3, Cfm2sm_proto.UtcTime.READER.create);
         }
 
         public class WRITER : SerializerState
@@ -148,27 +148,27 @@ namespace CapnpGen
                 this.SetStruct(0, 4);
             }
 
-            public CapnpGen.UtcTime.WRITER Exchange
+            public Cfm2sm_proto.UtcTime.WRITER Exchange
             {
-                get => BuildPointer<CapnpGen.UtcTime.WRITER>(0);
+                get => BuildPointer<Cfm2sm_proto.UtcTime.WRITER>(0);
                 set => Link(0, value);
             }
 
-            public CapnpGen.UtcTime.WRITER Sending
+            public Cfm2sm_proto.UtcTime.WRITER Sending
             {
-                get => BuildPointer<CapnpGen.UtcTime.WRITER>(1);
+                get => BuildPointer<Cfm2sm_proto.UtcTime.WRITER>(1);
                 set => Link(1, value);
             }
 
-            public CapnpGen.UtcTime.WRITER Receipt
+            public Cfm2sm_proto.UtcTime.WRITER Receipt
             {
-                get => BuildPointer<CapnpGen.UtcTime.WRITER>(2);
+                get => BuildPointer<Cfm2sm_proto.UtcTime.WRITER>(2);
                 set => Link(2, value);
             }
 
-            public CapnpGen.UtcTime.WRITER Extract
+            public Cfm2sm_proto.UtcTime.WRITER Extract
             {
-                get => BuildPointer<CapnpGen.UtcTime.WRITER>(3);
+                get => BuildPointer<Cfm2sm_proto.UtcTime.WRITER>(3);
                 set => Link(3, value);
             }
         }
@@ -264,6 +264,34 @@ namespace CapnpGen
         }
     }
 
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0x9a6a3a16bba9ea9dUL)]
+    public enum BookSideKind : ushort
+    {
+        invalid,
+        unknown,
+        bid,
+        ask
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0x8811f61a6dcc0356UL)]
+    public enum BookSideOrdersKind : ushort
+    {
+        invalid,
+        direct,
+        implied,
+        combined,
+        both
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xa12101742cd8affaUL)]
+    public enum AggressorSideKind : ushort
+    {
+        invalid,
+        none,
+        buy,
+        sell
+    }
+
     [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xc352e4c46abe2a05UL)]
     public class CmeFeedManagerUpdate : ICapnpSerializable
     {
@@ -275,25 +303,28 @@ namespace CapnpGen
             IndicativeOpening = 2,
             OpeningPrice = 3,
             Settlement = 4,
-            Trade = 5,
-            Side = 6,
-            LastMessageForEvent = 7,
-            FinishedAll = 8,
-            Firehose = 9,
-            Subscribe = 10,
-            SubscribeResp = 11,
-            InstState = 12,
-            DefinitionResp = 13,
-            DefinitionReq = 14,
-            SymbolAvailReq = 15,
-            SymbolAvailResp = 16,
-            FeedApiLogin = 17,
-            FeedApiLoginResp = 18,
-            FeedApiReject = 19,
-            FeedApiSetSymbolList = 20,
-            FeedApiSetSymbolListResp = 21,
-            FeedApiGetSymbolListContents = 22,
-            FeedApiGetSymbolListContentsResp = 23,
+            Volume = 5,
+            HighLow = 6,
+            DailyStats = 7,
+            Trade = 8,
+            Side = 9,
+            LastMessageForEvent = 10,
+            FinishedAll = 11,
+            Firehose = 12,
+            Subscribe = 13,
+            SubscribeResp = 14,
+            InstState = 15,
+            DefinitionResp = 16,
+            DefinitionReq = 17,
+            SymbolAvailReq = 18,
+            SymbolAvailResp = 19,
+            FeedApiLogin = 20,
+            FeedApiLoginResp = 21,
+            FeedApiReject = 22,
+            FeedApiSetSymbolList = 23,
+            FeedApiSetSymbolListResp = 24,
+            FeedApiGetSymbolListContents = 25,
+            FeedApiGetSymbolListContentsResp = 26,
             undefined = 65535
         }
 
@@ -303,76 +334,85 @@ namespace CapnpGen
             switch (reader.which)
             {
                 case WHICH.GroupStatus:
-                    GroupStatus = CapnpSerializable.Create<CapnpGen.CmeFeedUpdateGroupStatus>(reader.GroupStatus);
+                    GroupStatus = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedUpdateGroupStatus>(reader.GroupStatus);
                     break;
                 case WHICH.InstStatus:
-                    InstStatus = CapnpSerializable.Create<CapnpGen.CmeFeedUpdateInstStatus>(reader.InstStatus);
+                    InstStatus = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedUpdateInstStatus>(reader.InstStatus);
                     break;
                 case WHICH.IndicativeOpening:
-                    IndicativeOpening = CapnpSerializable.Create<CapnpGen.CmeFeedUpdateIndicativeOpening>(reader.IndicativeOpening);
+                    IndicativeOpening = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedUpdateIndicativeOpening>(reader.IndicativeOpening);
                     break;
                 case WHICH.OpeningPrice:
-                    OpeningPrice = CapnpSerializable.Create<CapnpGen.CmeFeedUpdateOpeningPrice>(reader.OpeningPrice);
+                    OpeningPrice = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedUpdateOpeningPrice>(reader.OpeningPrice);
                     break;
                 case WHICH.Settlement:
-                    Settlement = CapnpSerializable.Create<CapnpGen.CmeFeedUpdateSettlement>(reader.Settlement);
+                    Settlement = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedUpdateSettlement>(reader.Settlement);
+                    break;
+                case WHICH.Volume:
+                    Volume = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedUpdateVolume>(reader.Volume);
+                    break;
+                case WHICH.HighLow:
+                    HighLow = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedUpdateHighLow>(reader.HighLow);
+                    break;
+                case WHICH.DailyStats:
+                    DailyStats = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedUpdateDailyStats>(reader.DailyStats);
                     break;
                 case WHICH.Trade:
-                    Trade = CapnpSerializable.Create<CapnpGen.CmeFeedUpdateTrade>(reader.Trade);
+                    Trade = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedUpdateTrade>(reader.Trade);
                     break;
                 case WHICH.Side:
-                    Side = CapnpSerializable.Create<CapnpGen.CmeFeedUpdateSide>(reader.Side);
+                    Side = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedUpdateSide>(reader.Side);
                     break;
                 case WHICH.LastMessageForEvent:
-                    LastMessageForEvent = CapnpSerializable.Create<CapnpGen.CmeFeedUpdateLastMessageForEvent>(reader.LastMessageForEvent);
+                    LastMessageForEvent = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedUpdateLastMessageForEvent>(reader.LastMessageForEvent);
                     break;
                 case WHICH.FinishedAll:
-                    FinishedAll = CapnpSerializable.Create<CapnpGen.CmeFeedUpdateFinishedAll>(reader.FinishedAll);
+                    FinishedAll = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedUpdateFinishedAll>(reader.FinishedAll);
                     break;
                 case WHICH.Firehose:
-                    Firehose = CapnpSerializable.Create<CapnpGen.CmeFeedClientFirehose>(reader.Firehose);
+                    Firehose = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedClientFirehose>(reader.Firehose);
                     break;
                 case WHICH.Subscribe:
-                    Subscribe = CapnpSerializable.Create<CapnpGen.CmeFeedClientSubscribe>(reader.Subscribe);
+                    Subscribe = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedClientSubscribe>(reader.Subscribe);
                     break;
                 case WHICH.SubscribeResp:
-                    SubscribeResp = CapnpSerializable.Create<CapnpGen.CmeFeedClientSubscribeResponse>(reader.SubscribeResp);
+                    SubscribeResp = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedClientSubscribeResponse>(reader.SubscribeResp);
                     break;
                 case WHICH.InstState:
-                    InstState = CapnpSerializable.Create<CapnpGen.CmeFeedInstrumentState>(reader.InstState);
+                    InstState = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedInstrumentState>(reader.InstState);
                     break;
                 case WHICH.DefinitionResp:
-                    DefinitionResp = CapnpSerializable.Create<CapnpGen.CmeFuturesDefinitionResponse>(reader.DefinitionResp);
+                    DefinitionResp = CapnpSerializable.Create<Cfm2sm_proto.CmeFuturesDefinitionResponse>(reader.DefinitionResp);
                     break;
                 case WHICH.DefinitionReq:
-                    DefinitionReq = CapnpSerializable.Create<CapnpGen.CmeFuturesDefinitionRequest>(reader.DefinitionReq);
+                    DefinitionReq = CapnpSerializable.Create<Cfm2sm_proto.CmeFuturesDefinitionRequest>(reader.DefinitionReq);
                     break;
                 case WHICH.SymbolAvailReq:
-                    SymbolAvailReq = CapnpSerializable.Create<CapnpGen.CmeFeedRequestSymbolAvailability>(reader.SymbolAvailReq);
+                    SymbolAvailReq = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedRequestSymbolAvailability>(reader.SymbolAvailReq);
                     break;
                 case WHICH.SymbolAvailResp:
-                    SymbolAvailResp = CapnpSerializable.Create<CapnpGen.CmeFeedRequestSymbolAvailabilityResponse>(reader.SymbolAvailResp);
+                    SymbolAvailResp = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedRequestSymbolAvailabilityResponse>(reader.SymbolAvailResp);
                     break;
                 case WHICH.FeedApiLogin:
-                    FeedApiLogin = CapnpSerializable.Create<CapnpGen.FeedApiLogin>(reader.FeedApiLogin);
+                    FeedApiLogin = CapnpSerializable.Create<Cfm2sm_proto.FeedApiLogin>(reader.FeedApiLogin);
                     break;
                 case WHICH.FeedApiLoginResp:
-                    FeedApiLoginResp = CapnpSerializable.Create<CapnpGen.FeedApiLoginResponse>(reader.FeedApiLoginResp);
+                    FeedApiLoginResp = CapnpSerializable.Create<Cfm2sm_proto.FeedApiLoginResponse>(reader.FeedApiLoginResp);
                     break;
                 case WHICH.FeedApiReject:
-                    FeedApiReject = CapnpSerializable.Create<CapnpGen.FeedApiReject>(reader.FeedApiReject);
+                    FeedApiReject = CapnpSerializable.Create<Cfm2sm_proto.FeedApiReject>(reader.FeedApiReject);
                     break;
                 case WHICH.FeedApiSetSymbolList:
-                    FeedApiSetSymbolList = CapnpSerializable.Create<CapnpGen.FeedApiSetSymbolList>(reader.FeedApiSetSymbolList);
+                    FeedApiSetSymbolList = CapnpSerializable.Create<Cfm2sm_proto.FeedApiSetSymbolList>(reader.FeedApiSetSymbolList);
                     break;
                 case WHICH.FeedApiSetSymbolListResp:
-                    FeedApiSetSymbolListResp = CapnpSerializable.Create<CapnpGen.FeedApiSetSymbolListResponse>(reader.FeedApiSetSymbolListResp);
+                    FeedApiSetSymbolListResp = CapnpSerializable.Create<Cfm2sm_proto.FeedApiSetSymbolListResponse>(reader.FeedApiSetSymbolListResp);
                     break;
                 case WHICH.FeedApiGetSymbolListContents:
-                    FeedApiGetSymbolListContents = CapnpSerializable.Create<CapnpGen.FeedApiGetSymbolListContents>(reader.FeedApiGetSymbolListContents);
+                    FeedApiGetSymbolListContents = CapnpSerializable.Create<Cfm2sm_proto.FeedApiGetSymbolListContents>(reader.FeedApiGetSymbolListContents);
                     break;
                 case WHICH.FeedApiGetSymbolListContentsResp:
-                    FeedApiGetSymbolListContentsResp = CapnpSerializable.Create<CapnpGen.FeedApiGetSymbolListContentsResponse>(reader.FeedApiGetSymbolListContentsResp);
+                    FeedApiGetSymbolListContentsResp = CapnpSerializable.Create<Cfm2sm_proto.FeedApiGetSymbolListContentsResponse>(reader.FeedApiGetSymbolListContentsResp);
                     break;
             }
 
@@ -404,6 +444,15 @@ namespace CapnpGen
                         _content = null;
                         break;
                     case WHICH.Settlement:
+                        _content = null;
+                        break;
+                    case WHICH.Volume:
+                        _content = null;
+                        break;
+                    case WHICH.HighLow:
+                        _content = null;
+                        break;
+                    case WHICH.DailyStats:
                         _content = null;
                         break;
                     case WHICH.Trade:
@@ -487,6 +536,15 @@ namespace CapnpGen
                 case WHICH.Settlement:
                     Settlement?.serialize(writer.Settlement);
                     break;
+                case WHICH.Volume:
+                    Volume?.serialize(writer.Volume);
+                    break;
+                case WHICH.HighLow:
+                    HighLow?.serialize(writer.HighLow);
+                    break;
+                case WHICH.DailyStats:
+                    DailyStats?.serialize(writer.DailyStats);
+                    break;
                 case WHICH.Trade:
                     Trade?.serialize(writer.Trade);
                     break;
@@ -556,9 +614,9 @@ namespace CapnpGen
         {
         }
 
-        public CapnpGen.CmeFeedUpdateGroupStatus GroupStatus
+        public Cfm2sm_proto.CmeFeedUpdateGroupStatus GroupStatus
         {
-            get => _which == WHICH.GroupStatus ? (CapnpGen.CmeFeedUpdateGroupStatus)_content : null;
+            get => _which == WHICH.GroupStatus ? (Cfm2sm_proto.CmeFeedUpdateGroupStatus)_content : null;
             set
             {
                 _which = WHICH.GroupStatus;
@@ -566,9 +624,9 @@ namespace CapnpGen
             }
         }
 
-        public CapnpGen.CmeFeedUpdateInstStatus InstStatus
+        public Cfm2sm_proto.CmeFeedUpdateInstStatus InstStatus
         {
-            get => _which == WHICH.InstStatus ? (CapnpGen.CmeFeedUpdateInstStatus)_content : null;
+            get => _which == WHICH.InstStatus ? (Cfm2sm_proto.CmeFeedUpdateInstStatus)_content : null;
             set
             {
                 _which = WHICH.InstStatus;
@@ -576,9 +634,9 @@ namespace CapnpGen
             }
         }
 
-        public CapnpGen.CmeFeedUpdateIndicativeOpening IndicativeOpening
+        public Cfm2sm_proto.CmeFeedUpdateIndicativeOpening IndicativeOpening
         {
-            get => _which == WHICH.IndicativeOpening ? (CapnpGen.CmeFeedUpdateIndicativeOpening)_content : null;
+            get => _which == WHICH.IndicativeOpening ? (Cfm2sm_proto.CmeFeedUpdateIndicativeOpening)_content : null;
             set
             {
                 _which = WHICH.IndicativeOpening;
@@ -586,9 +644,9 @@ namespace CapnpGen
             }
         }
 
-        public CapnpGen.CmeFeedUpdateOpeningPrice OpeningPrice
+        public Cfm2sm_proto.CmeFeedUpdateOpeningPrice OpeningPrice
         {
-            get => _which == WHICH.OpeningPrice ? (CapnpGen.CmeFeedUpdateOpeningPrice)_content : null;
+            get => _which == WHICH.OpeningPrice ? (Cfm2sm_proto.CmeFeedUpdateOpeningPrice)_content : null;
             set
             {
                 _which = WHICH.OpeningPrice;
@@ -596,9 +654,9 @@ namespace CapnpGen
             }
         }
 
-        public CapnpGen.CmeFeedUpdateSettlement Settlement
+        public Cfm2sm_proto.CmeFeedUpdateSettlement Settlement
         {
-            get => _which == WHICH.Settlement ? (CapnpGen.CmeFeedUpdateSettlement)_content : null;
+            get => _which == WHICH.Settlement ? (Cfm2sm_proto.CmeFeedUpdateSettlement)_content : null;
             set
             {
                 _which = WHICH.Settlement;
@@ -606,9 +664,39 @@ namespace CapnpGen
             }
         }
 
-        public CapnpGen.CmeFeedUpdateTrade Trade
+        public Cfm2sm_proto.CmeFeedUpdateVolume Volume
         {
-            get => _which == WHICH.Trade ? (CapnpGen.CmeFeedUpdateTrade)_content : null;
+            get => _which == WHICH.Volume ? (Cfm2sm_proto.CmeFeedUpdateVolume)_content : null;
+            set
+            {
+                _which = WHICH.Volume;
+                _content = value;
+            }
+        }
+
+        public Cfm2sm_proto.CmeFeedUpdateHighLow HighLow
+        {
+            get => _which == WHICH.HighLow ? (Cfm2sm_proto.CmeFeedUpdateHighLow)_content : null;
+            set
+            {
+                _which = WHICH.HighLow;
+                _content = value;
+            }
+        }
+
+        public Cfm2sm_proto.CmeFeedUpdateDailyStats DailyStats
+        {
+            get => _which == WHICH.DailyStats ? (Cfm2sm_proto.CmeFeedUpdateDailyStats)_content : null;
+            set
+            {
+                _which = WHICH.DailyStats;
+                _content = value;
+            }
+        }
+
+        public Cfm2sm_proto.CmeFeedUpdateTrade Trade
+        {
+            get => _which == WHICH.Trade ? (Cfm2sm_proto.CmeFeedUpdateTrade)_content : null;
             set
             {
                 _which = WHICH.Trade;
@@ -616,9 +704,9 @@ namespace CapnpGen
             }
         }
 
-        public CapnpGen.CmeFeedUpdateSide Side
+        public Cfm2sm_proto.CmeFeedUpdateSide Side
         {
-            get => _which == WHICH.Side ? (CapnpGen.CmeFeedUpdateSide)_content : null;
+            get => _which == WHICH.Side ? (Cfm2sm_proto.CmeFeedUpdateSide)_content : null;
             set
             {
                 _which = WHICH.Side;
@@ -626,9 +714,9 @@ namespace CapnpGen
             }
         }
 
-        public CapnpGen.CmeFeedUpdateLastMessageForEvent LastMessageForEvent
+        public Cfm2sm_proto.CmeFeedUpdateLastMessageForEvent LastMessageForEvent
         {
-            get => _which == WHICH.LastMessageForEvent ? (CapnpGen.CmeFeedUpdateLastMessageForEvent)_content : null;
+            get => _which == WHICH.LastMessageForEvent ? (Cfm2sm_proto.CmeFeedUpdateLastMessageForEvent)_content : null;
             set
             {
                 _which = WHICH.LastMessageForEvent;
@@ -636,9 +724,9 @@ namespace CapnpGen
             }
         }
 
-        public CapnpGen.CmeFeedUpdateFinishedAll FinishedAll
+        public Cfm2sm_proto.CmeFeedUpdateFinishedAll FinishedAll
         {
-            get => _which == WHICH.FinishedAll ? (CapnpGen.CmeFeedUpdateFinishedAll)_content : null;
+            get => _which == WHICH.FinishedAll ? (Cfm2sm_proto.CmeFeedUpdateFinishedAll)_content : null;
             set
             {
                 _which = WHICH.FinishedAll;
@@ -646,9 +734,9 @@ namespace CapnpGen
             }
         }
 
-        public CapnpGen.CmeFeedClientFirehose Firehose
+        public Cfm2sm_proto.CmeFeedClientFirehose Firehose
         {
-            get => _which == WHICH.Firehose ? (CapnpGen.CmeFeedClientFirehose)_content : null;
+            get => _which == WHICH.Firehose ? (Cfm2sm_proto.CmeFeedClientFirehose)_content : null;
             set
             {
                 _which = WHICH.Firehose;
@@ -656,9 +744,9 @@ namespace CapnpGen
             }
         }
 
-        public CapnpGen.CmeFeedClientSubscribe Subscribe
+        public Cfm2sm_proto.CmeFeedClientSubscribe Subscribe
         {
-            get => _which == WHICH.Subscribe ? (CapnpGen.CmeFeedClientSubscribe)_content : null;
+            get => _which == WHICH.Subscribe ? (Cfm2sm_proto.CmeFeedClientSubscribe)_content : null;
             set
             {
                 _which = WHICH.Subscribe;
@@ -666,9 +754,9 @@ namespace CapnpGen
             }
         }
 
-        public CapnpGen.CmeFeedClientSubscribeResponse SubscribeResp
+        public Cfm2sm_proto.CmeFeedClientSubscribeResponse SubscribeResp
         {
-            get => _which == WHICH.SubscribeResp ? (CapnpGen.CmeFeedClientSubscribeResponse)_content : null;
+            get => _which == WHICH.SubscribeResp ? (Cfm2sm_proto.CmeFeedClientSubscribeResponse)_content : null;
             set
             {
                 _which = WHICH.SubscribeResp;
@@ -676,9 +764,9 @@ namespace CapnpGen
             }
         }
 
-        public CapnpGen.CmeFeedInstrumentState InstState
+        public Cfm2sm_proto.CmeFeedInstrumentState InstState
         {
-            get => _which == WHICH.InstState ? (CapnpGen.CmeFeedInstrumentState)_content : null;
+            get => _which == WHICH.InstState ? (Cfm2sm_proto.CmeFeedInstrumentState)_content : null;
             set
             {
                 _which = WHICH.InstState;
@@ -686,9 +774,9 @@ namespace CapnpGen
             }
         }
 
-        public CapnpGen.CmeFuturesDefinitionResponse DefinitionResp
+        public Cfm2sm_proto.CmeFuturesDefinitionResponse DefinitionResp
         {
-            get => _which == WHICH.DefinitionResp ? (CapnpGen.CmeFuturesDefinitionResponse)_content : null;
+            get => _which == WHICH.DefinitionResp ? (Cfm2sm_proto.CmeFuturesDefinitionResponse)_content : null;
             set
             {
                 _which = WHICH.DefinitionResp;
@@ -696,9 +784,9 @@ namespace CapnpGen
             }
         }
 
-        public CapnpGen.CmeFuturesDefinitionRequest DefinitionReq
+        public Cfm2sm_proto.CmeFuturesDefinitionRequest DefinitionReq
         {
-            get => _which == WHICH.DefinitionReq ? (CapnpGen.CmeFuturesDefinitionRequest)_content : null;
+            get => _which == WHICH.DefinitionReq ? (Cfm2sm_proto.CmeFuturesDefinitionRequest)_content : null;
             set
             {
                 _which = WHICH.DefinitionReq;
@@ -706,9 +794,9 @@ namespace CapnpGen
             }
         }
 
-        public CapnpGen.CmeFeedRequestSymbolAvailability SymbolAvailReq
+        public Cfm2sm_proto.CmeFeedRequestSymbolAvailability SymbolAvailReq
         {
-            get => _which == WHICH.SymbolAvailReq ? (CapnpGen.CmeFeedRequestSymbolAvailability)_content : null;
+            get => _which == WHICH.SymbolAvailReq ? (Cfm2sm_proto.CmeFeedRequestSymbolAvailability)_content : null;
             set
             {
                 _which = WHICH.SymbolAvailReq;
@@ -716,9 +804,9 @@ namespace CapnpGen
             }
         }
 
-        public CapnpGen.CmeFeedRequestSymbolAvailabilityResponse SymbolAvailResp
+        public Cfm2sm_proto.CmeFeedRequestSymbolAvailabilityResponse SymbolAvailResp
         {
-            get => _which == WHICH.SymbolAvailResp ? (CapnpGen.CmeFeedRequestSymbolAvailabilityResponse)_content : null;
+            get => _which == WHICH.SymbolAvailResp ? (Cfm2sm_proto.CmeFeedRequestSymbolAvailabilityResponse)_content : null;
             set
             {
                 _which = WHICH.SymbolAvailResp;
@@ -726,9 +814,9 @@ namespace CapnpGen
             }
         }
 
-        public CapnpGen.FeedApiLogin FeedApiLogin
+        public Cfm2sm_proto.FeedApiLogin FeedApiLogin
         {
-            get => _which == WHICH.FeedApiLogin ? (CapnpGen.FeedApiLogin)_content : null;
+            get => _which == WHICH.FeedApiLogin ? (Cfm2sm_proto.FeedApiLogin)_content : null;
             set
             {
                 _which = WHICH.FeedApiLogin;
@@ -736,9 +824,9 @@ namespace CapnpGen
             }
         }
 
-        public CapnpGen.FeedApiLoginResponse FeedApiLoginResp
+        public Cfm2sm_proto.FeedApiLoginResponse FeedApiLoginResp
         {
-            get => _which == WHICH.FeedApiLoginResp ? (CapnpGen.FeedApiLoginResponse)_content : null;
+            get => _which == WHICH.FeedApiLoginResp ? (Cfm2sm_proto.FeedApiLoginResponse)_content : null;
             set
             {
                 _which = WHICH.FeedApiLoginResp;
@@ -746,9 +834,9 @@ namespace CapnpGen
             }
         }
 
-        public CapnpGen.FeedApiReject FeedApiReject
+        public Cfm2sm_proto.FeedApiReject FeedApiReject
         {
-            get => _which == WHICH.FeedApiReject ? (CapnpGen.FeedApiReject)_content : null;
+            get => _which == WHICH.FeedApiReject ? (Cfm2sm_proto.FeedApiReject)_content : null;
             set
             {
                 _which = WHICH.FeedApiReject;
@@ -756,9 +844,9 @@ namespace CapnpGen
             }
         }
 
-        public CapnpGen.FeedApiSetSymbolList FeedApiSetSymbolList
+        public Cfm2sm_proto.FeedApiSetSymbolList FeedApiSetSymbolList
         {
-            get => _which == WHICH.FeedApiSetSymbolList ? (CapnpGen.FeedApiSetSymbolList)_content : null;
+            get => _which == WHICH.FeedApiSetSymbolList ? (Cfm2sm_proto.FeedApiSetSymbolList)_content : null;
             set
             {
                 _which = WHICH.FeedApiSetSymbolList;
@@ -766,9 +854,9 @@ namespace CapnpGen
             }
         }
 
-        public CapnpGen.FeedApiSetSymbolListResponse FeedApiSetSymbolListResp
+        public Cfm2sm_proto.FeedApiSetSymbolListResponse FeedApiSetSymbolListResp
         {
-            get => _which == WHICH.FeedApiSetSymbolListResp ? (CapnpGen.FeedApiSetSymbolListResponse)_content : null;
+            get => _which == WHICH.FeedApiSetSymbolListResp ? (Cfm2sm_proto.FeedApiSetSymbolListResponse)_content : null;
             set
             {
                 _which = WHICH.FeedApiSetSymbolListResp;
@@ -776,9 +864,9 @@ namespace CapnpGen
             }
         }
 
-        public CapnpGen.FeedApiGetSymbolListContents FeedApiGetSymbolListContents
+        public Cfm2sm_proto.FeedApiGetSymbolListContents FeedApiGetSymbolListContents
         {
-            get => _which == WHICH.FeedApiGetSymbolListContents ? (CapnpGen.FeedApiGetSymbolListContents)_content : null;
+            get => _which == WHICH.FeedApiGetSymbolListContents ? (Cfm2sm_proto.FeedApiGetSymbolListContents)_content : null;
             set
             {
                 _which = WHICH.FeedApiGetSymbolListContents;
@@ -786,9 +874,9 @@ namespace CapnpGen
             }
         }
 
-        public CapnpGen.FeedApiGetSymbolListContentsResponse FeedApiGetSymbolListContentsResp
+        public Cfm2sm_proto.FeedApiGetSymbolListContentsResponse FeedApiGetSymbolListContentsResp
         {
-            get => _which == WHICH.FeedApiGetSymbolListContentsResp ? (CapnpGen.FeedApiGetSymbolListContentsResponse)_content : null;
+            get => _which == WHICH.FeedApiGetSymbolListContentsResp ? (Cfm2sm_proto.FeedApiGetSymbolListContentsResponse)_content : null;
             set
             {
                 _which = WHICH.FeedApiGetSymbolListContentsResp;
@@ -808,30 +896,33 @@ namespace CapnpGen
             public static implicit operator DeserializerState(READER reader) => reader.ctx;
             public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
             public WHICH which => (WHICH)ctx.ReadDataUShort(0U, (ushort)0);
-            public CapnpGen.CmeFeedUpdateGroupStatus.READER GroupStatus => which == WHICH.GroupStatus ? ctx.ReadStruct(0, CapnpGen.CmeFeedUpdateGroupStatus.READER.create) : default;
-            public CapnpGen.CmeFeedUpdateInstStatus.READER InstStatus => which == WHICH.InstStatus ? ctx.ReadStruct(0, CapnpGen.CmeFeedUpdateInstStatus.READER.create) : default;
-            public CapnpGen.CmeFeedUpdateIndicativeOpening.READER IndicativeOpening => which == WHICH.IndicativeOpening ? ctx.ReadStruct(0, CapnpGen.CmeFeedUpdateIndicativeOpening.READER.create) : default;
-            public CapnpGen.CmeFeedUpdateOpeningPrice.READER OpeningPrice => which == WHICH.OpeningPrice ? ctx.ReadStruct(0, CapnpGen.CmeFeedUpdateOpeningPrice.READER.create) : default;
-            public CapnpGen.CmeFeedUpdateSettlement.READER Settlement => which == WHICH.Settlement ? ctx.ReadStruct(0, CapnpGen.CmeFeedUpdateSettlement.READER.create) : default;
-            public CapnpGen.CmeFeedUpdateTrade.READER Trade => which == WHICH.Trade ? ctx.ReadStruct(0, CapnpGen.CmeFeedUpdateTrade.READER.create) : default;
-            public CapnpGen.CmeFeedUpdateSide.READER Side => which == WHICH.Side ? ctx.ReadStruct(0, CapnpGen.CmeFeedUpdateSide.READER.create) : default;
-            public CapnpGen.CmeFeedUpdateLastMessageForEvent.READER LastMessageForEvent => which == WHICH.LastMessageForEvent ? ctx.ReadStruct(0, CapnpGen.CmeFeedUpdateLastMessageForEvent.READER.create) : default;
-            public CapnpGen.CmeFeedUpdateFinishedAll.READER FinishedAll => which == WHICH.FinishedAll ? ctx.ReadStruct(0, CapnpGen.CmeFeedUpdateFinishedAll.READER.create) : default;
-            public CapnpGen.CmeFeedClientFirehose.READER Firehose => which == WHICH.Firehose ? ctx.ReadStruct(0, CapnpGen.CmeFeedClientFirehose.READER.create) : default;
-            public CapnpGen.CmeFeedClientSubscribe.READER Subscribe => which == WHICH.Subscribe ? ctx.ReadStruct(0, CapnpGen.CmeFeedClientSubscribe.READER.create) : default;
-            public CapnpGen.CmeFeedClientSubscribeResponse.READER SubscribeResp => which == WHICH.SubscribeResp ? ctx.ReadStruct(0, CapnpGen.CmeFeedClientSubscribeResponse.READER.create) : default;
-            public CapnpGen.CmeFeedInstrumentState.READER InstState => which == WHICH.InstState ? ctx.ReadStruct(0, CapnpGen.CmeFeedInstrumentState.READER.create) : default;
-            public CapnpGen.CmeFuturesDefinitionResponse.READER DefinitionResp => which == WHICH.DefinitionResp ? ctx.ReadStruct(0, CapnpGen.CmeFuturesDefinitionResponse.READER.create) : default;
-            public CapnpGen.CmeFuturesDefinitionRequest.READER DefinitionReq => which == WHICH.DefinitionReq ? ctx.ReadStruct(0, CapnpGen.CmeFuturesDefinitionRequest.READER.create) : default;
-            public CapnpGen.CmeFeedRequestSymbolAvailability.READER SymbolAvailReq => which == WHICH.SymbolAvailReq ? ctx.ReadStruct(0, CapnpGen.CmeFeedRequestSymbolAvailability.READER.create) : default;
-            public CapnpGen.CmeFeedRequestSymbolAvailabilityResponse.READER SymbolAvailResp => which == WHICH.SymbolAvailResp ? ctx.ReadStruct(0, CapnpGen.CmeFeedRequestSymbolAvailabilityResponse.READER.create) : default;
-            public CapnpGen.FeedApiLogin.READER FeedApiLogin => which == WHICH.FeedApiLogin ? ctx.ReadStruct(0, CapnpGen.FeedApiLogin.READER.create) : default;
-            public CapnpGen.FeedApiLoginResponse.READER FeedApiLoginResp => which == WHICH.FeedApiLoginResp ? ctx.ReadStruct(0, CapnpGen.FeedApiLoginResponse.READER.create) : default;
-            public CapnpGen.FeedApiReject.READER FeedApiReject => which == WHICH.FeedApiReject ? ctx.ReadStruct(0, CapnpGen.FeedApiReject.READER.create) : default;
-            public CapnpGen.FeedApiSetSymbolList.READER FeedApiSetSymbolList => which == WHICH.FeedApiSetSymbolList ? ctx.ReadStruct(0, CapnpGen.FeedApiSetSymbolList.READER.create) : default;
-            public CapnpGen.FeedApiSetSymbolListResponse.READER FeedApiSetSymbolListResp => which == WHICH.FeedApiSetSymbolListResp ? ctx.ReadStruct(0, CapnpGen.FeedApiSetSymbolListResponse.READER.create) : default;
-            public CapnpGen.FeedApiGetSymbolListContents.READER FeedApiGetSymbolListContents => which == WHICH.FeedApiGetSymbolListContents ? ctx.ReadStruct(0, CapnpGen.FeedApiGetSymbolListContents.READER.create) : default;
-            public CapnpGen.FeedApiGetSymbolListContentsResponse.READER FeedApiGetSymbolListContentsResp => which == WHICH.FeedApiGetSymbolListContentsResp ? ctx.ReadStruct(0, CapnpGen.FeedApiGetSymbolListContentsResponse.READER.create) : default;
+            public Cfm2sm_proto.CmeFeedUpdateGroupStatus.READER GroupStatus => which == WHICH.GroupStatus ? ctx.ReadStruct(0, Cfm2sm_proto.CmeFeedUpdateGroupStatus.READER.create) : default;
+            public Cfm2sm_proto.CmeFeedUpdateInstStatus.READER InstStatus => which == WHICH.InstStatus ? ctx.ReadStruct(0, Cfm2sm_proto.CmeFeedUpdateInstStatus.READER.create) : default;
+            public Cfm2sm_proto.CmeFeedUpdateIndicativeOpening.READER IndicativeOpening => which == WHICH.IndicativeOpening ? ctx.ReadStruct(0, Cfm2sm_proto.CmeFeedUpdateIndicativeOpening.READER.create) : default;
+            public Cfm2sm_proto.CmeFeedUpdateOpeningPrice.READER OpeningPrice => which == WHICH.OpeningPrice ? ctx.ReadStruct(0, Cfm2sm_proto.CmeFeedUpdateOpeningPrice.READER.create) : default;
+            public Cfm2sm_proto.CmeFeedUpdateSettlement.READER Settlement => which == WHICH.Settlement ? ctx.ReadStruct(0, Cfm2sm_proto.CmeFeedUpdateSettlement.READER.create) : default;
+            public Cfm2sm_proto.CmeFeedUpdateVolume.READER Volume => which == WHICH.Volume ? ctx.ReadStruct(0, Cfm2sm_proto.CmeFeedUpdateVolume.READER.create) : default;
+            public Cfm2sm_proto.CmeFeedUpdateHighLow.READER HighLow => which == WHICH.HighLow ? ctx.ReadStruct(0, Cfm2sm_proto.CmeFeedUpdateHighLow.READER.create) : default;
+            public Cfm2sm_proto.CmeFeedUpdateDailyStats.READER DailyStats => which == WHICH.DailyStats ? ctx.ReadStruct(0, Cfm2sm_proto.CmeFeedUpdateDailyStats.READER.create) : default;
+            public Cfm2sm_proto.CmeFeedUpdateTrade.READER Trade => which == WHICH.Trade ? ctx.ReadStruct(0, Cfm2sm_proto.CmeFeedUpdateTrade.READER.create) : default;
+            public Cfm2sm_proto.CmeFeedUpdateSide.READER Side => which == WHICH.Side ? ctx.ReadStruct(0, Cfm2sm_proto.CmeFeedUpdateSide.READER.create) : default;
+            public Cfm2sm_proto.CmeFeedUpdateLastMessageForEvent.READER LastMessageForEvent => which == WHICH.LastMessageForEvent ? ctx.ReadStruct(0, Cfm2sm_proto.CmeFeedUpdateLastMessageForEvent.READER.create) : default;
+            public Cfm2sm_proto.CmeFeedUpdateFinishedAll.READER FinishedAll => which == WHICH.FinishedAll ? ctx.ReadStruct(0, Cfm2sm_proto.CmeFeedUpdateFinishedAll.READER.create) : default;
+            public Cfm2sm_proto.CmeFeedClientFirehose.READER Firehose => which == WHICH.Firehose ? ctx.ReadStruct(0, Cfm2sm_proto.CmeFeedClientFirehose.READER.create) : default;
+            public Cfm2sm_proto.CmeFeedClientSubscribe.READER Subscribe => which == WHICH.Subscribe ? ctx.ReadStruct(0, Cfm2sm_proto.CmeFeedClientSubscribe.READER.create) : default;
+            public Cfm2sm_proto.CmeFeedClientSubscribeResponse.READER SubscribeResp => which == WHICH.SubscribeResp ? ctx.ReadStruct(0, Cfm2sm_proto.CmeFeedClientSubscribeResponse.READER.create) : default;
+            public Cfm2sm_proto.CmeFeedInstrumentState.READER InstState => which == WHICH.InstState ? ctx.ReadStruct(0, Cfm2sm_proto.CmeFeedInstrumentState.READER.create) : default;
+            public Cfm2sm_proto.CmeFuturesDefinitionResponse.READER DefinitionResp => which == WHICH.DefinitionResp ? ctx.ReadStruct(0, Cfm2sm_proto.CmeFuturesDefinitionResponse.READER.create) : default;
+            public Cfm2sm_proto.CmeFuturesDefinitionRequest.READER DefinitionReq => which == WHICH.DefinitionReq ? ctx.ReadStruct(0, Cfm2sm_proto.CmeFuturesDefinitionRequest.READER.create) : default;
+            public Cfm2sm_proto.CmeFeedRequestSymbolAvailability.READER SymbolAvailReq => which == WHICH.SymbolAvailReq ? ctx.ReadStruct(0, Cfm2sm_proto.CmeFeedRequestSymbolAvailability.READER.create) : default;
+            public Cfm2sm_proto.CmeFeedRequestSymbolAvailabilityResponse.READER SymbolAvailResp => which == WHICH.SymbolAvailResp ? ctx.ReadStruct(0, Cfm2sm_proto.CmeFeedRequestSymbolAvailabilityResponse.READER.create) : default;
+            public Cfm2sm_proto.FeedApiLogin.READER FeedApiLogin => which == WHICH.FeedApiLogin ? ctx.ReadStruct(0, Cfm2sm_proto.FeedApiLogin.READER.create) : default;
+            public Cfm2sm_proto.FeedApiLoginResponse.READER FeedApiLoginResp => which == WHICH.FeedApiLoginResp ? ctx.ReadStruct(0, Cfm2sm_proto.FeedApiLoginResponse.READER.create) : default;
+            public Cfm2sm_proto.FeedApiReject.READER FeedApiReject => which == WHICH.FeedApiReject ? ctx.ReadStruct(0, Cfm2sm_proto.FeedApiReject.READER.create) : default;
+            public Cfm2sm_proto.FeedApiSetSymbolList.READER FeedApiSetSymbolList => which == WHICH.FeedApiSetSymbolList ? ctx.ReadStruct(0, Cfm2sm_proto.FeedApiSetSymbolList.READER.create) : default;
+            public Cfm2sm_proto.FeedApiSetSymbolListResponse.READER FeedApiSetSymbolListResp => which == WHICH.FeedApiSetSymbolListResp ? ctx.ReadStruct(0, Cfm2sm_proto.FeedApiSetSymbolListResponse.READER.create) : default;
+            public Cfm2sm_proto.FeedApiGetSymbolListContents.READER FeedApiGetSymbolListContents => which == WHICH.FeedApiGetSymbolListContents ? ctx.ReadStruct(0, Cfm2sm_proto.FeedApiGetSymbolListContents.READER.create) : default;
+            public Cfm2sm_proto.FeedApiGetSymbolListContentsResponse.READER FeedApiGetSymbolListContentsResp => which == WHICH.FeedApiGetSymbolListContentsResp ? ctx.ReadStruct(0, Cfm2sm_proto.FeedApiGetSymbolListContentsResponse.READER.create) : default;
         }
 
         public class WRITER : SerializerState
@@ -847,147 +938,165 @@ namespace CapnpGen
                 set => this.WriteData(0U, (ushort)value, (ushort)0);
             }
 
-            public CapnpGen.CmeFeedUpdateGroupStatus.WRITER GroupStatus
+            public Cfm2sm_proto.CmeFeedUpdateGroupStatus.WRITER GroupStatus
             {
-                get => which == WHICH.GroupStatus ? BuildPointer<CapnpGen.CmeFeedUpdateGroupStatus.WRITER>(0) : default;
+                get => which == WHICH.GroupStatus ? BuildPointer<Cfm2sm_proto.CmeFeedUpdateGroupStatus.WRITER>(0) : default;
                 set => Link(0, value);
             }
 
-            public CapnpGen.CmeFeedUpdateInstStatus.WRITER InstStatus
+            public Cfm2sm_proto.CmeFeedUpdateInstStatus.WRITER InstStatus
             {
-                get => which == WHICH.InstStatus ? BuildPointer<CapnpGen.CmeFeedUpdateInstStatus.WRITER>(0) : default;
+                get => which == WHICH.InstStatus ? BuildPointer<Cfm2sm_proto.CmeFeedUpdateInstStatus.WRITER>(0) : default;
                 set => Link(0, value);
             }
 
-            public CapnpGen.CmeFeedUpdateIndicativeOpening.WRITER IndicativeOpening
+            public Cfm2sm_proto.CmeFeedUpdateIndicativeOpening.WRITER IndicativeOpening
             {
-                get => which == WHICH.IndicativeOpening ? BuildPointer<CapnpGen.CmeFeedUpdateIndicativeOpening.WRITER>(0) : default;
+                get => which == WHICH.IndicativeOpening ? BuildPointer<Cfm2sm_proto.CmeFeedUpdateIndicativeOpening.WRITER>(0) : default;
                 set => Link(0, value);
             }
 
-            public CapnpGen.CmeFeedUpdateOpeningPrice.WRITER OpeningPrice
+            public Cfm2sm_proto.CmeFeedUpdateOpeningPrice.WRITER OpeningPrice
             {
-                get => which == WHICH.OpeningPrice ? BuildPointer<CapnpGen.CmeFeedUpdateOpeningPrice.WRITER>(0) : default;
+                get => which == WHICH.OpeningPrice ? BuildPointer<Cfm2sm_proto.CmeFeedUpdateOpeningPrice.WRITER>(0) : default;
                 set => Link(0, value);
             }
 
-            public CapnpGen.CmeFeedUpdateSettlement.WRITER Settlement
+            public Cfm2sm_proto.CmeFeedUpdateSettlement.WRITER Settlement
             {
-                get => which == WHICH.Settlement ? BuildPointer<CapnpGen.CmeFeedUpdateSettlement.WRITER>(0) : default;
+                get => which == WHICH.Settlement ? BuildPointer<Cfm2sm_proto.CmeFeedUpdateSettlement.WRITER>(0) : default;
                 set => Link(0, value);
             }
 
-            public CapnpGen.CmeFeedUpdateTrade.WRITER Trade
+            public Cfm2sm_proto.CmeFeedUpdateVolume.WRITER Volume
             {
-                get => which == WHICH.Trade ? BuildPointer<CapnpGen.CmeFeedUpdateTrade.WRITER>(0) : default;
+                get => which == WHICH.Volume ? BuildPointer<Cfm2sm_proto.CmeFeedUpdateVolume.WRITER>(0) : default;
                 set => Link(0, value);
             }
 
-            public CapnpGen.CmeFeedUpdateSide.WRITER Side
+            public Cfm2sm_proto.CmeFeedUpdateHighLow.WRITER HighLow
             {
-                get => which == WHICH.Side ? BuildPointer<CapnpGen.CmeFeedUpdateSide.WRITER>(0) : default;
+                get => which == WHICH.HighLow ? BuildPointer<Cfm2sm_proto.CmeFeedUpdateHighLow.WRITER>(0) : default;
                 set => Link(0, value);
             }
 
-            public CapnpGen.CmeFeedUpdateLastMessageForEvent.WRITER LastMessageForEvent
+            public Cfm2sm_proto.CmeFeedUpdateDailyStats.WRITER DailyStats
             {
-                get => which == WHICH.LastMessageForEvent ? BuildPointer<CapnpGen.CmeFeedUpdateLastMessageForEvent.WRITER>(0) : default;
+                get => which == WHICH.DailyStats ? BuildPointer<Cfm2sm_proto.CmeFeedUpdateDailyStats.WRITER>(0) : default;
                 set => Link(0, value);
             }
 
-            public CapnpGen.CmeFeedUpdateFinishedAll.WRITER FinishedAll
+            public Cfm2sm_proto.CmeFeedUpdateTrade.WRITER Trade
             {
-                get => which == WHICH.FinishedAll ? BuildPointer<CapnpGen.CmeFeedUpdateFinishedAll.WRITER>(0) : default;
+                get => which == WHICH.Trade ? BuildPointer<Cfm2sm_proto.CmeFeedUpdateTrade.WRITER>(0) : default;
                 set => Link(0, value);
             }
 
-            public CapnpGen.CmeFeedClientFirehose.WRITER Firehose
+            public Cfm2sm_proto.CmeFeedUpdateSide.WRITER Side
             {
-                get => which == WHICH.Firehose ? BuildPointer<CapnpGen.CmeFeedClientFirehose.WRITER>(0) : default;
+                get => which == WHICH.Side ? BuildPointer<Cfm2sm_proto.CmeFeedUpdateSide.WRITER>(0) : default;
                 set => Link(0, value);
             }
 
-            public CapnpGen.CmeFeedClientSubscribe.WRITER Subscribe
+            public Cfm2sm_proto.CmeFeedUpdateLastMessageForEvent.WRITER LastMessageForEvent
             {
-                get => which == WHICH.Subscribe ? BuildPointer<CapnpGen.CmeFeedClientSubscribe.WRITER>(0) : default;
+                get => which == WHICH.LastMessageForEvent ? BuildPointer<Cfm2sm_proto.CmeFeedUpdateLastMessageForEvent.WRITER>(0) : default;
                 set => Link(0, value);
             }
 
-            public CapnpGen.CmeFeedClientSubscribeResponse.WRITER SubscribeResp
+            public Cfm2sm_proto.CmeFeedUpdateFinishedAll.WRITER FinishedAll
             {
-                get => which == WHICH.SubscribeResp ? BuildPointer<CapnpGen.CmeFeedClientSubscribeResponse.WRITER>(0) : default;
+                get => which == WHICH.FinishedAll ? BuildPointer<Cfm2sm_proto.CmeFeedUpdateFinishedAll.WRITER>(0) : default;
                 set => Link(0, value);
             }
 
-            public CapnpGen.CmeFeedInstrumentState.WRITER InstState
+            public Cfm2sm_proto.CmeFeedClientFirehose.WRITER Firehose
             {
-                get => which == WHICH.InstState ? BuildPointer<CapnpGen.CmeFeedInstrumentState.WRITER>(0) : default;
+                get => which == WHICH.Firehose ? BuildPointer<Cfm2sm_proto.CmeFeedClientFirehose.WRITER>(0) : default;
                 set => Link(0, value);
             }
 
-            public CapnpGen.CmeFuturesDefinitionResponse.WRITER DefinitionResp
+            public Cfm2sm_proto.CmeFeedClientSubscribe.WRITER Subscribe
             {
-                get => which == WHICH.DefinitionResp ? BuildPointer<CapnpGen.CmeFuturesDefinitionResponse.WRITER>(0) : default;
+                get => which == WHICH.Subscribe ? BuildPointer<Cfm2sm_proto.CmeFeedClientSubscribe.WRITER>(0) : default;
                 set => Link(0, value);
             }
 
-            public CapnpGen.CmeFuturesDefinitionRequest.WRITER DefinitionReq
+            public Cfm2sm_proto.CmeFeedClientSubscribeResponse.WRITER SubscribeResp
             {
-                get => which == WHICH.DefinitionReq ? BuildPointer<CapnpGen.CmeFuturesDefinitionRequest.WRITER>(0) : default;
+                get => which == WHICH.SubscribeResp ? BuildPointer<Cfm2sm_proto.CmeFeedClientSubscribeResponse.WRITER>(0) : default;
                 set => Link(0, value);
             }
 
-            public CapnpGen.CmeFeedRequestSymbolAvailability.WRITER SymbolAvailReq
+            public Cfm2sm_proto.CmeFeedInstrumentState.WRITER InstState
             {
-                get => which == WHICH.SymbolAvailReq ? BuildPointer<CapnpGen.CmeFeedRequestSymbolAvailability.WRITER>(0) : default;
+                get => which == WHICH.InstState ? BuildPointer<Cfm2sm_proto.CmeFeedInstrumentState.WRITER>(0) : default;
                 set => Link(0, value);
             }
 
-            public CapnpGen.CmeFeedRequestSymbolAvailabilityResponse.WRITER SymbolAvailResp
+            public Cfm2sm_proto.CmeFuturesDefinitionResponse.WRITER DefinitionResp
             {
-                get => which == WHICH.SymbolAvailResp ? BuildPointer<CapnpGen.CmeFeedRequestSymbolAvailabilityResponse.WRITER>(0) : default;
+                get => which == WHICH.DefinitionResp ? BuildPointer<Cfm2sm_proto.CmeFuturesDefinitionResponse.WRITER>(0) : default;
                 set => Link(0, value);
             }
 
-            public CapnpGen.FeedApiLogin.WRITER FeedApiLogin
+            public Cfm2sm_proto.CmeFuturesDefinitionRequest.WRITER DefinitionReq
             {
-                get => which == WHICH.FeedApiLogin ? BuildPointer<CapnpGen.FeedApiLogin.WRITER>(0) : default;
+                get => which == WHICH.DefinitionReq ? BuildPointer<Cfm2sm_proto.CmeFuturesDefinitionRequest.WRITER>(0) : default;
                 set => Link(0, value);
             }
 
-            public CapnpGen.FeedApiLoginResponse.WRITER FeedApiLoginResp
+            public Cfm2sm_proto.CmeFeedRequestSymbolAvailability.WRITER SymbolAvailReq
             {
-                get => which == WHICH.FeedApiLoginResp ? BuildPointer<CapnpGen.FeedApiLoginResponse.WRITER>(0) : default;
+                get => which == WHICH.SymbolAvailReq ? BuildPointer<Cfm2sm_proto.CmeFeedRequestSymbolAvailability.WRITER>(0) : default;
                 set => Link(0, value);
             }
 
-            public CapnpGen.FeedApiReject.WRITER FeedApiReject
+            public Cfm2sm_proto.CmeFeedRequestSymbolAvailabilityResponse.WRITER SymbolAvailResp
             {
-                get => which == WHICH.FeedApiReject ? BuildPointer<CapnpGen.FeedApiReject.WRITER>(0) : default;
+                get => which == WHICH.SymbolAvailResp ? BuildPointer<Cfm2sm_proto.CmeFeedRequestSymbolAvailabilityResponse.WRITER>(0) : default;
                 set => Link(0, value);
             }
 
-            public CapnpGen.FeedApiSetSymbolList.WRITER FeedApiSetSymbolList
+            public Cfm2sm_proto.FeedApiLogin.WRITER FeedApiLogin
             {
-                get => which == WHICH.FeedApiSetSymbolList ? BuildPointer<CapnpGen.FeedApiSetSymbolList.WRITER>(0) : default;
+                get => which == WHICH.FeedApiLogin ? BuildPointer<Cfm2sm_proto.FeedApiLogin.WRITER>(0) : default;
                 set => Link(0, value);
             }
 
-            public CapnpGen.FeedApiSetSymbolListResponse.WRITER FeedApiSetSymbolListResp
+            public Cfm2sm_proto.FeedApiLoginResponse.WRITER FeedApiLoginResp
             {
-                get => which == WHICH.FeedApiSetSymbolListResp ? BuildPointer<CapnpGen.FeedApiSetSymbolListResponse.WRITER>(0) : default;
+                get => which == WHICH.FeedApiLoginResp ? BuildPointer<Cfm2sm_proto.FeedApiLoginResponse.WRITER>(0) : default;
                 set => Link(0, value);
             }
 
-            public CapnpGen.FeedApiGetSymbolListContents.WRITER FeedApiGetSymbolListContents
+            public Cfm2sm_proto.FeedApiReject.WRITER FeedApiReject
             {
-                get => which == WHICH.FeedApiGetSymbolListContents ? BuildPointer<CapnpGen.FeedApiGetSymbolListContents.WRITER>(0) : default;
+                get => which == WHICH.FeedApiReject ? BuildPointer<Cfm2sm_proto.FeedApiReject.WRITER>(0) : default;
                 set => Link(0, value);
             }
 
-            public CapnpGen.FeedApiGetSymbolListContentsResponse.WRITER FeedApiGetSymbolListContentsResp
+            public Cfm2sm_proto.FeedApiSetSymbolList.WRITER FeedApiSetSymbolList
             {
-                get => which == WHICH.FeedApiGetSymbolListContentsResp ? BuildPointer<CapnpGen.FeedApiGetSymbolListContentsResponse.WRITER>(0) : default;
+                get => which == WHICH.FeedApiSetSymbolList ? BuildPointer<Cfm2sm_proto.FeedApiSetSymbolList.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+
+            public Cfm2sm_proto.FeedApiSetSymbolListResponse.WRITER FeedApiSetSymbolListResp
+            {
+                get => which == WHICH.FeedApiSetSymbolListResp ? BuildPointer<Cfm2sm_proto.FeedApiSetSymbolListResponse.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+
+            public Cfm2sm_proto.FeedApiGetSymbolListContents.WRITER FeedApiGetSymbolListContents
+            {
+                get => which == WHICH.FeedApiGetSymbolListContents ? BuildPointer<Cfm2sm_proto.FeedApiGetSymbolListContents.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+
+            public Cfm2sm_proto.FeedApiGetSymbolListContentsResponse.WRITER FeedApiGetSymbolListContentsResp
+            {
+                get => which == WHICH.FeedApiGetSymbolListContentsResp ? BuildPointer<Cfm2sm_proto.FeedApiGetSymbolListContentsResponse.WRITER>(0) : default;
                 set => Link(0, value);
             }
         }
@@ -1004,7 +1113,7 @@ namespace CapnpGen
             MdpChannelId = reader.MdpChannelId;
             InstGroupNum = reader.InstGroupNum;
             AssetCode = reader.AssetCode;
-            Timestamp = CapnpSerializable.Create<CapnpGen.CmeFeedManagerTimestamps>(reader.Timestamp);
+            Timestamp = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedManagerTimestamps>(reader.Timestamp);
             TradingStatus = reader.TradingStatus;
             HaltReason = reader.HaltReason;
             TradingEvent = reader.TradingEvent;
@@ -1056,33 +1165,33 @@ namespace CapnpGen
             set;
         }
 
-        public CapnpGen.CmeFeedManagerTimestamps Timestamp
+        public Cfm2sm_proto.CmeFeedManagerTimestamps Timestamp
         {
             get;
             set;
         }
 
-        public CapnpGen.TradingStatus TradingStatus
+        public Cfm2sm_proto.TradingStatus TradingStatus
         {
             get;
             set;
         }
 
-        = CapnpGen.TradingStatus.unknown;
-        public CapnpGen.HaltReason HaltReason
+        = Cfm2sm_proto.TradingStatus.unknown;
+        public Cfm2sm_proto.HaltReason HaltReason
         {
             get;
             set;
         }
 
-        = CapnpGen.HaltReason.unknown;
-        public CapnpGen.TradingEvent TradingEvent
+        = Cfm2sm_proto.HaltReason.unknown;
+        public Cfm2sm_proto.TradingEvent TradingEvent
         {
             get;
             set;
         }
 
-        = CapnpGen.TradingEvent.unknown;
+        = Cfm2sm_proto.TradingEvent.unknown;
         public struct READER
         {
             readonly DeserializerState ctx;
@@ -1098,10 +1207,10 @@ namespace CapnpGen
             public int MdpChannelId => ctx.ReadDataInt(0UL, 0);
             public ushort InstGroupNum => ctx.ReadDataUShort(32UL, (ushort)0);
             public string AssetCode => ctx.ReadText(1, null);
-            public CapnpGen.CmeFeedManagerTimestamps.READER Timestamp => ctx.ReadStruct(2, CapnpGen.CmeFeedManagerTimestamps.READER.create);
-            public CapnpGen.TradingStatus TradingStatus => (CapnpGen.TradingStatus)ctx.ReadDataUShort(48UL, (ushort)81);
-            public CapnpGen.HaltReason HaltReason => (CapnpGen.HaltReason)ctx.ReadDataUShort(64UL, (ushort)33);
-            public CapnpGen.TradingEvent TradingEvent => (CapnpGen.TradingEvent)ctx.ReadDataUShort(80UL, (ushort)16);
+            public Cfm2sm_proto.CmeFeedManagerTimestamps.READER Timestamp => ctx.ReadStruct(2, Cfm2sm_proto.CmeFeedManagerTimestamps.READER.create);
+            public Cfm2sm_proto.TradingStatus TradingStatus => (Cfm2sm_proto.TradingStatus)ctx.ReadDataUShort(48UL, (ushort)85);
+            public Cfm2sm_proto.HaltReason HaltReason => (Cfm2sm_proto.HaltReason)ctx.ReadDataUShort(64UL, (ushort)33);
+            public Cfm2sm_proto.TradingEvent TradingEvent => (Cfm2sm_proto.TradingEvent)ctx.ReadDataUShort(80UL, (ushort)27);
         }
 
         public class WRITER : SerializerState
@@ -1135,28 +1244,28 @@ namespace CapnpGen
                 set => this.WriteText(1, value, null);
             }
 
-            public CapnpGen.CmeFeedManagerTimestamps.WRITER Timestamp
+            public Cfm2sm_proto.CmeFeedManagerTimestamps.WRITER Timestamp
             {
-                get => BuildPointer<CapnpGen.CmeFeedManagerTimestamps.WRITER>(2);
+                get => BuildPointer<Cfm2sm_proto.CmeFeedManagerTimestamps.WRITER>(2);
                 set => Link(2, value);
             }
 
-            public CapnpGen.TradingStatus TradingStatus
+            public Cfm2sm_proto.TradingStatus TradingStatus
             {
-                get => (CapnpGen.TradingStatus)this.ReadDataUShort(48UL, (ushort)81);
-                set => this.WriteData(48UL, (ushort)value, (ushort)81);
+                get => (Cfm2sm_proto.TradingStatus)this.ReadDataUShort(48UL, (ushort)85);
+                set => this.WriteData(48UL, (ushort)value, (ushort)85);
             }
 
-            public CapnpGen.HaltReason HaltReason
+            public Cfm2sm_proto.HaltReason HaltReason
             {
-                get => (CapnpGen.HaltReason)this.ReadDataUShort(64UL, (ushort)33);
+                get => (Cfm2sm_proto.HaltReason)this.ReadDataUShort(64UL, (ushort)33);
                 set => this.WriteData(64UL, (ushort)value, (ushort)33);
             }
 
-            public CapnpGen.TradingEvent TradingEvent
+            public Cfm2sm_proto.TradingEvent TradingEvent
             {
-                get => (CapnpGen.TradingEvent)this.ReadDataUShort(80UL, (ushort)16);
-                set => this.WriteData(80UL, (ushort)value, (ushort)16);
+                get => (Cfm2sm_proto.TradingEvent)this.ReadDataUShort(80UL, (ushort)27);
+                set => this.WriteData(80UL, (ushort)value, (ushort)27);
             }
         }
     }
@@ -1171,7 +1280,7 @@ namespace CapnpGen
             SecurityId = reader.SecurityId;
             MdpChannelId = reader.MdpChannelId;
             InstNum = reader.InstNum;
-            Timestamp = CapnpSerializable.Create<CapnpGen.CmeFeedManagerTimestamps>(reader.Timestamp);
+            Timestamp = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedManagerTimestamps>(reader.Timestamp);
             TradingStatus = reader.TradingStatus;
             HaltReason = reader.HaltReason;
             TradingEvent = reader.TradingEvent;
@@ -1228,33 +1337,33 @@ namespace CapnpGen
             set;
         }
 
-        public CapnpGen.CmeFeedManagerTimestamps Timestamp
+        public Cfm2sm_proto.CmeFeedManagerTimestamps Timestamp
         {
             get;
             set;
         }
 
-        public CapnpGen.TradingStatus TradingStatus
+        public Cfm2sm_proto.TradingStatus TradingStatus
         {
             get;
             set;
         }
 
-        = CapnpGen.TradingStatus.unknown;
-        public CapnpGen.HaltReason HaltReason
+        = Cfm2sm_proto.TradingStatus.unknown;
+        public Cfm2sm_proto.HaltReason HaltReason
         {
             get;
             set;
         }
 
-        = CapnpGen.HaltReason.unknown;
-        public CapnpGen.TradingEvent TradingEvent
+        = Cfm2sm_proto.HaltReason.unknown;
+        public Cfm2sm_proto.TradingEvent TradingEvent
         {
             get;
             set;
         }
 
-        = CapnpGen.TradingEvent.unknown;
+        = Cfm2sm_proto.TradingEvent.unknown;
         public bool DailyLimitPriceLbValid
         {
             get;
@@ -1305,10 +1414,10 @@ namespace CapnpGen
             public int SecurityId => ctx.ReadDataInt(0UL, 0);
             public int MdpChannelId => ctx.ReadDataInt(32UL, 0);
             public ushort InstNum => ctx.ReadDataUShort(64UL, (ushort)0);
-            public CapnpGen.CmeFeedManagerTimestamps.READER Timestamp => ctx.ReadStruct(0, CapnpGen.CmeFeedManagerTimestamps.READER.create);
-            public CapnpGen.TradingStatus TradingStatus => (CapnpGen.TradingStatus)ctx.ReadDataUShort(80UL, (ushort)81);
-            public CapnpGen.HaltReason HaltReason => (CapnpGen.HaltReason)ctx.ReadDataUShort(96UL, (ushort)33);
-            public CapnpGen.TradingEvent TradingEvent => (CapnpGen.TradingEvent)ctx.ReadDataUShort(112UL, (ushort)16);
+            public Cfm2sm_proto.CmeFeedManagerTimestamps.READER Timestamp => ctx.ReadStruct(0, Cfm2sm_proto.CmeFeedManagerTimestamps.READER.create);
+            public Cfm2sm_proto.TradingStatus TradingStatus => (Cfm2sm_proto.TradingStatus)ctx.ReadDataUShort(80UL, (ushort)85);
+            public Cfm2sm_proto.HaltReason HaltReason => (Cfm2sm_proto.HaltReason)ctx.ReadDataUShort(96UL, (ushort)33);
+            public Cfm2sm_proto.TradingEvent TradingEvent => (Cfm2sm_proto.TradingEvent)ctx.ReadDataUShort(112UL, (ushort)27);
             public bool DailyLimitPriceLbValid => ctx.ReadDataBool(128UL, false);
             public double DailyLimitPriceLb => ctx.ReadDataDouble(192UL, 0);
             public bool DailyLimitPriceUbValid => ctx.ReadDataBool(129UL, false);
@@ -1342,28 +1451,28 @@ namespace CapnpGen
                 set => this.WriteData(64UL, value, (ushort)0);
             }
 
-            public CapnpGen.CmeFeedManagerTimestamps.WRITER Timestamp
+            public Cfm2sm_proto.CmeFeedManagerTimestamps.WRITER Timestamp
             {
-                get => BuildPointer<CapnpGen.CmeFeedManagerTimestamps.WRITER>(0);
+                get => BuildPointer<Cfm2sm_proto.CmeFeedManagerTimestamps.WRITER>(0);
                 set => Link(0, value);
             }
 
-            public CapnpGen.TradingStatus TradingStatus
+            public Cfm2sm_proto.TradingStatus TradingStatus
             {
-                get => (CapnpGen.TradingStatus)this.ReadDataUShort(80UL, (ushort)81);
-                set => this.WriteData(80UL, (ushort)value, (ushort)81);
+                get => (Cfm2sm_proto.TradingStatus)this.ReadDataUShort(80UL, (ushort)85);
+                set => this.WriteData(80UL, (ushort)value, (ushort)85);
             }
 
-            public CapnpGen.HaltReason HaltReason
+            public Cfm2sm_proto.HaltReason HaltReason
             {
-                get => (CapnpGen.HaltReason)this.ReadDataUShort(96UL, (ushort)33);
+                get => (Cfm2sm_proto.HaltReason)this.ReadDataUShort(96UL, (ushort)33);
                 set => this.WriteData(96UL, (ushort)value, (ushort)33);
             }
 
-            public CapnpGen.TradingEvent TradingEvent
+            public Cfm2sm_proto.TradingEvent TradingEvent
             {
-                get => (CapnpGen.TradingEvent)this.ReadDataUShort(112UL, (ushort)16);
-                set => this.WriteData(112UL, (ushort)value, (ushort)16);
+                get => (Cfm2sm_proto.TradingEvent)this.ReadDataUShort(112UL, (ushort)27);
+                set => this.WriteData(112UL, (ushort)value, (ushort)27);
             }
 
             public bool DailyLimitPriceLbValid
@@ -1414,7 +1523,7 @@ namespace CapnpGen
             SecurityId = reader.SecurityId;
             MdpChannelId = reader.MdpChannelId;
             InstNum = reader.InstNum;
-            Timestamp = CapnpSerializable.Create<CapnpGen.CmeFeedManagerTimestamps>(reader.Timestamp);
+            Timestamp = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedManagerTimestamps>(reader.Timestamp);
             Quantity = reader.Quantity;
             Price = reader.Price;
             applyDefaults();
@@ -1457,7 +1566,7 @@ namespace CapnpGen
             set;
         }
 
-        public CapnpGen.CmeFeedManagerTimestamps Timestamp
+        public Cfm2sm_proto.CmeFeedManagerTimestamps Timestamp
         {
             get;
             set;
@@ -1489,7 +1598,7 @@ namespace CapnpGen
             public int SecurityId => ctx.ReadDataInt(0UL, 0);
             public int MdpChannelId => ctx.ReadDataInt(32UL, 0);
             public ushort InstNum => ctx.ReadDataUShort(64UL, (ushort)0);
-            public CapnpGen.CmeFeedManagerTimestamps.READER Timestamp => ctx.ReadStruct(0, CapnpGen.CmeFeedManagerTimestamps.READER.create);
+            public Cfm2sm_proto.CmeFeedManagerTimestamps.READER Timestamp => ctx.ReadStruct(0, Cfm2sm_proto.CmeFeedManagerTimestamps.READER.create);
             public uint Quantity => ctx.ReadDataUInt(96UL, 0U);
             public double Price => ctx.ReadDataDouble(128UL, 0);
         }
@@ -1519,9 +1628,9 @@ namespace CapnpGen
                 set => this.WriteData(64UL, value, (ushort)0);
             }
 
-            public CapnpGen.CmeFeedManagerTimestamps.WRITER Timestamp
+            public Cfm2sm_proto.CmeFeedManagerTimestamps.WRITER Timestamp
             {
-                get => BuildPointer<CapnpGen.CmeFeedManagerTimestamps.WRITER>(0);
+                get => BuildPointer<Cfm2sm_proto.CmeFeedManagerTimestamps.WRITER>(0);
                 set => Link(0, value);
             }
 
@@ -1549,7 +1658,7 @@ namespace CapnpGen
             SecurityId = reader.SecurityId;
             MdpChannelId = reader.MdpChannelId;
             InstNum = reader.InstNum;
-            Timestamp = CapnpSerializable.Create<CapnpGen.CmeFeedManagerTimestamps>(reader.Timestamp);
+            Timestamp = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedManagerTimestamps>(reader.Timestamp);
             Price = reader.Price;
             applyDefaults();
         }
@@ -1590,7 +1699,7 @@ namespace CapnpGen
             set;
         }
 
-        public CapnpGen.CmeFeedManagerTimestamps Timestamp
+        public Cfm2sm_proto.CmeFeedManagerTimestamps Timestamp
         {
             get;
             set;
@@ -1616,7 +1725,7 @@ namespace CapnpGen
             public int SecurityId => ctx.ReadDataInt(0UL, 0);
             public int MdpChannelId => ctx.ReadDataInt(32UL, 0);
             public ushort InstNum => ctx.ReadDataUShort(64UL, (ushort)0);
-            public CapnpGen.CmeFeedManagerTimestamps.READER Timestamp => ctx.ReadStruct(0, CapnpGen.CmeFeedManagerTimestamps.READER.create);
+            public Cfm2sm_proto.CmeFeedManagerTimestamps.READER Timestamp => ctx.ReadStruct(0, Cfm2sm_proto.CmeFeedManagerTimestamps.READER.create);
             public double Price => ctx.ReadDataDouble(128UL, 0);
         }
 
@@ -1645,9 +1754,9 @@ namespace CapnpGen
                 set => this.WriteData(64UL, value, (ushort)0);
             }
 
-            public CapnpGen.CmeFeedManagerTimestamps.WRITER Timestamp
+            public Cfm2sm_proto.CmeFeedManagerTimestamps.WRITER Timestamp
             {
-                get => BuildPointer<CapnpGen.CmeFeedManagerTimestamps.WRITER>(0);
+                get => BuildPointer<Cfm2sm_proto.CmeFeedManagerTimestamps.WRITER>(0);
                 set => Link(0, value);
             }
 
@@ -1669,13 +1778,13 @@ namespace CapnpGen
             SecurityId = reader.SecurityId;
             MdpChannelId = reader.MdpChannelId;
             InstNum = reader.InstNum;
-            Timestamp = CapnpSerializable.Create<CapnpGen.CmeFeedManagerTimestamps>(reader.Timestamp);
+            Timestamp = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedManagerTimestamps>(reader.Timestamp);
             PriceValid = reader.PriceValid;
             Price = reader.Price;
-            PriceTimestamp = CapnpSerializable.Create<CapnpGen.UtcTime>(reader.PriceTimestamp);
+            PriceTimestamp = CapnpSerializable.Create<Cfm2sm_proto.UtcTime>(reader.PriceTimestamp);
             PreliminaryPriceValid = reader.PreliminaryPriceValid;
             PreliminaryPrice = reader.PreliminaryPrice;
-            PreliminaryPriceTimestamp = CapnpSerializable.Create<CapnpGen.UtcTime>(reader.PreliminaryPriceTimestamp);
+            PreliminaryPriceTimestamp = CapnpSerializable.Create<Cfm2sm_proto.UtcTime>(reader.PreliminaryPriceTimestamp);
             applyDefaults();
         }
 
@@ -1720,7 +1829,7 @@ namespace CapnpGen
             set;
         }
 
-        public CapnpGen.CmeFeedManagerTimestamps Timestamp
+        public Cfm2sm_proto.CmeFeedManagerTimestamps Timestamp
         {
             get;
             set;
@@ -1738,7 +1847,7 @@ namespace CapnpGen
             set;
         }
 
-        public CapnpGen.UtcTime PriceTimestamp
+        public Cfm2sm_proto.UtcTime PriceTimestamp
         {
             get;
             set;
@@ -1756,7 +1865,7 @@ namespace CapnpGen
             set;
         }
 
-        public CapnpGen.UtcTime PreliminaryPriceTimestamp
+        public Cfm2sm_proto.UtcTime PreliminaryPriceTimestamp
         {
             get;
             set;
@@ -1776,13 +1885,13 @@ namespace CapnpGen
             public int SecurityId => ctx.ReadDataInt(0UL, 0);
             public int MdpChannelId => ctx.ReadDataInt(32UL, 0);
             public ushort InstNum => ctx.ReadDataUShort(64UL, (ushort)0);
-            public CapnpGen.CmeFeedManagerTimestamps.READER Timestamp => ctx.ReadStruct(0, CapnpGen.CmeFeedManagerTimestamps.READER.create);
+            public Cfm2sm_proto.CmeFeedManagerTimestamps.READER Timestamp => ctx.ReadStruct(0, Cfm2sm_proto.CmeFeedManagerTimestamps.READER.create);
             public bool PriceValid => ctx.ReadDataBool(80UL, false);
             public double Price => ctx.ReadDataDouble(128UL, 0);
-            public CapnpGen.UtcTime.READER PriceTimestamp => ctx.ReadStruct(1, CapnpGen.UtcTime.READER.create);
+            public Cfm2sm_proto.UtcTime.READER PriceTimestamp => ctx.ReadStruct(1, Cfm2sm_proto.UtcTime.READER.create);
             public bool PreliminaryPriceValid => ctx.ReadDataBool(81UL, false);
             public double PreliminaryPrice => ctx.ReadDataDouble(192UL, 0);
-            public CapnpGen.UtcTime.READER PreliminaryPriceTimestamp => ctx.ReadStruct(2, CapnpGen.UtcTime.READER.create);
+            public Cfm2sm_proto.UtcTime.READER PreliminaryPriceTimestamp => ctx.ReadStruct(2, Cfm2sm_proto.UtcTime.READER.create);
         }
 
         public class WRITER : SerializerState
@@ -1810,9 +1919,9 @@ namespace CapnpGen
                 set => this.WriteData(64UL, value, (ushort)0);
             }
 
-            public CapnpGen.CmeFeedManagerTimestamps.WRITER Timestamp
+            public Cfm2sm_proto.CmeFeedManagerTimestamps.WRITER Timestamp
             {
-                get => BuildPointer<CapnpGen.CmeFeedManagerTimestamps.WRITER>(0);
+                get => BuildPointer<Cfm2sm_proto.CmeFeedManagerTimestamps.WRITER>(0);
                 set => Link(0, value);
             }
 
@@ -1828,9 +1937,9 @@ namespace CapnpGen
                 set => this.WriteData(128UL, value, 0);
             }
 
-            public CapnpGen.UtcTime.WRITER PriceTimestamp
+            public Cfm2sm_proto.UtcTime.WRITER PriceTimestamp
             {
-                get => BuildPointer<CapnpGen.UtcTime.WRITER>(1);
+                get => BuildPointer<Cfm2sm_proto.UtcTime.WRITER>(1);
                 set => Link(1, value);
             }
 
@@ -1846,10 +1955,565 @@ namespace CapnpGen
                 set => this.WriteData(192UL, value, 0);
             }
 
-            public CapnpGen.UtcTime.WRITER PreliminaryPriceTimestamp
+            public Cfm2sm_proto.UtcTime.WRITER PreliminaryPriceTimestamp
             {
-                get => BuildPointer<CapnpGen.UtcTime.WRITER>(2);
+                get => BuildPointer<Cfm2sm_proto.UtcTime.WRITER>(2);
                 set => Link(2, value);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xdf7f7eafb5ef1012UL)]
+    public class CmeFeedUpdateVolume : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xdf7f7eafb5ef1012UL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            SecurityId = reader.SecurityId;
+            MdpChannelId = reader.MdpChannelId;
+            InstNum = reader.InstNum;
+            Timestamp = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedManagerTimestamps>(reader.Timestamp);
+            Volume = reader.Volume;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.SecurityId = SecurityId;
+            writer.MdpChannelId = MdpChannelId;
+            writer.InstNum = InstNum;
+            Timestamp?.serialize(writer.Timestamp);
+            writer.Volume = Volume;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public int SecurityId
+        {
+            get;
+            set;
+        }
+
+        public int MdpChannelId
+        {
+            get;
+            set;
+        }
+
+        public ushort InstNum
+        {
+            get;
+            set;
+        }
+
+        public Cfm2sm_proto.CmeFeedManagerTimestamps Timestamp
+        {
+            get;
+            set;
+        }
+
+        public uint Volume
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public int SecurityId => ctx.ReadDataInt(0UL, 0);
+            public int MdpChannelId => ctx.ReadDataInt(32UL, 0);
+            public ushort InstNum => ctx.ReadDataUShort(64UL, (ushort)0);
+            public Cfm2sm_proto.CmeFeedManagerTimestamps.READER Timestamp => ctx.ReadStruct(0, Cfm2sm_proto.CmeFeedManagerTimestamps.READER.create);
+            public uint Volume => ctx.ReadDataUInt(96UL, 0U);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(2, 1);
+            }
+
+            public int SecurityId
+            {
+                get => this.ReadDataInt(0UL, 0);
+                set => this.WriteData(0UL, value, 0);
+            }
+
+            public int MdpChannelId
+            {
+                get => this.ReadDataInt(32UL, 0);
+                set => this.WriteData(32UL, value, 0);
+            }
+
+            public ushort InstNum
+            {
+                get => this.ReadDataUShort(64UL, (ushort)0);
+                set => this.WriteData(64UL, value, (ushort)0);
+            }
+
+            public Cfm2sm_proto.CmeFeedManagerTimestamps.WRITER Timestamp
+            {
+                get => BuildPointer<Cfm2sm_proto.CmeFeedManagerTimestamps.WRITER>(0);
+                set => Link(0, value);
+            }
+
+            public uint Volume
+            {
+                get => this.ReadDataUInt(96UL, 0U);
+                set => this.WriteData(96UL, value, 0U);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xd27f133fe03f4b3eUL)]
+    public class CmeFeedUpdateHighLow : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xd27f133fe03f4b3eUL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            SecurityId = reader.SecurityId;
+            MdpChannelId = reader.MdpChannelId;
+            InstNum = reader.InstNum;
+            Timestamp = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedManagerTimestamps>(reader.Timestamp);
+            HighTradeValid = reader.HighTradeValid;
+            HighTrade = reader.HighTrade;
+            LowTradeValid = reader.LowTradeValid;
+            LowTrade = reader.LowTrade;
+            HighBidValid = reader.HighBidValid;
+            HighBid = reader.HighBid;
+            LowOfferValid = reader.LowOfferValid;
+            LowOffer = reader.LowOffer;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.SecurityId = SecurityId;
+            writer.MdpChannelId = MdpChannelId;
+            writer.InstNum = InstNum;
+            Timestamp?.serialize(writer.Timestamp);
+            writer.HighTradeValid = HighTradeValid;
+            writer.HighTrade = HighTrade;
+            writer.LowTradeValid = LowTradeValid;
+            writer.LowTrade = LowTrade;
+            writer.HighBidValid = HighBidValid;
+            writer.HighBid = HighBid;
+            writer.LowOfferValid = LowOfferValid;
+            writer.LowOffer = LowOffer;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public int SecurityId
+        {
+            get;
+            set;
+        }
+
+        public int MdpChannelId
+        {
+            get;
+            set;
+        }
+
+        public ushort InstNum
+        {
+            get;
+            set;
+        }
+
+        public Cfm2sm_proto.CmeFeedManagerTimestamps Timestamp
+        {
+            get;
+            set;
+        }
+
+        public bool HighTradeValid
+        {
+            get;
+            set;
+        }
+
+        public double HighTrade
+        {
+            get;
+            set;
+        }
+
+        public bool LowTradeValid
+        {
+            get;
+            set;
+        }
+
+        public double LowTrade
+        {
+            get;
+            set;
+        }
+
+        public bool HighBidValid
+        {
+            get;
+            set;
+        }
+
+        public double HighBid
+        {
+            get;
+            set;
+        }
+
+        public bool LowOfferValid
+        {
+            get;
+            set;
+        }
+
+        public double LowOffer
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public int SecurityId => ctx.ReadDataInt(0UL, 0);
+            public int MdpChannelId => ctx.ReadDataInt(32UL, 0);
+            public ushort InstNum => ctx.ReadDataUShort(64UL, (ushort)0);
+            public Cfm2sm_proto.CmeFeedManagerTimestamps.READER Timestamp => ctx.ReadStruct(0, Cfm2sm_proto.CmeFeedManagerTimestamps.READER.create);
+            public bool HighTradeValid => ctx.ReadDataBool(80UL, false);
+            public double HighTrade => ctx.ReadDataDouble(128UL, 0);
+            public bool LowTradeValid => ctx.ReadDataBool(81UL, false);
+            public double LowTrade => ctx.ReadDataDouble(192UL, 0);
+            public bool HighBidValid => ctx.ReadDataBool(82UL, false);
+            public double HighBid => ctx.ReadDataDouble(256UL, 0);
+            public bool LowOfferValid => ctx.ReadDataBool(83UL, false);
+            public double LowOffer => ctx.ReadDataDouble(320UL, 0);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(6, 1);
+            }
+
+            public int SecurityId
+            {
+                get => this.ReadDataInt(0UL, 0);
+                set => this.WriteData(0UL, value, 0);
+            }
+
+            public int MdpChannelId
+            {
+                get => this.ReadDataInt(32UL, 0);
+                set => this.WriteData(32UL, value, 0);
+            }
+
+            public ushort InstNum
+            {
+                get => this.ReadDataUShort(64UL, (ushort)0);
+                set => this.WriteData(64UL, value, (ushort)0);
+            }
+
+            public Cfm2sm_proto.CmeFeedManagerTimestamps.WRITER Timestamp
+            {
+                get => BuildPointer<Cfm2sm_proto.CmeFeedManagerTimestamps.WRITER>(0);
+                set => Link(0, value);
+            }
+
+            public bool HighTradeValid
+            {
+                get => this.ReadDataBool(80UL, false);
+                set => this.WriteData(80UL, value, false);
+            }
+
+            public double HighTrade
+            {
+                get => this.ReadDataDouble(128UL, 0);
+                set => this.WriteData(128UL, value, 0);
+            }
+
+            public bool LowTradeValid
+            {
+                get => this.ReadDataBool(81UL, false);
+                set => this.WriteData(81UL, value, false);
+            }
+
+            public double LowTrade
+            {
+                get => this.ReadDataDouble(192UL, 0);
+                set => this.WriteData(192UL, value, 0);
+            }
+
+            public bool HighBidValid
+            {
+                get => this.ReadDataBool(82UL, false);
+                set => this.WriteData(82UL, value, false);
+            }
+
+            public double HighBid
+            {
+                get => this.ReadDataDouble(256UL, 0);
+                set => this.WriteData(256UL, value, 0);
+            }
+
+            public bool LowOfferValid
+            {
+                get => this.ReadDataBool(83UL, false);
+                set => this.WriteData(83UL, value, false);
+            }
+
+            public double LowOffer
+            {
+                get => this.ReadDataDouble(320UL, 0);
+                set => this.WriteData(320UL, value, 0);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xb3a763af4263b79eUL)]
+    public class CmeFeedUpdateDailyStats : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xb3a763af4263b79eUL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            SecurityId = reader.SecurityId;
+            MdpChannelId = reader.MdpChannelId;
+            InstNum = reader.InstNum;
+            Timestamp = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedManagerTimestamps>(reader.Timestamp);
+            ClearedVolumeValid = reader.ClearedVolumeValid;
+            ClearedVolume = reader.ClearedVolume;
+            ClearedVolumeTimestamp = CapnpSerializable.Create<Cfm2sm_proto.UtcTime>(reader.ClearedVolumeTimestamp);
+            OpenInterestValid = reader.OpenInterestValid;
+            OpenInterest = reader.OpenInterest;
+            FixingPriceValid = reader.FixingPriceValid;
+            FixingPrice = reader.FixingPrice;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.SecurityId = SecurityId;
+            writer.MdpChannelId = MdpChannelId;
+            writer.InstNum = InstNum;
+            Timestamp?.serialize(writer.Timestamp);
+            writer.ClearedVolumeValid = ClearedVolumeValid;
+            writer.ClearedVolume = ClearedVolume;
+            ClearedVolumeTimestamp?.serialize(writer.ClearedVolumeTimestamp);
+            writer.OpenInterestValid = OpenInterestValid;
+            writer.OpenInterest = OpenInterest;
+            writer.FixingPriceValid = FixingPriceValid;
+            writer.FixingPrice = FixingPrice;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public int SecurityId
+        {
+            get;
+            set;
+        }
+
+        public int MdpChannelId
+        {
+            get;
+            set;
+        }
+
+        public ushort InstNum
+        {
+            get;
+            set;
+        }
+
+        public Cfm2sm_proto.CmeFeedManagerTimestamps Timestamp
+        {
+            get;
+            set;
+        }
+
+        public bool ClearedVolumeValid
+        {
+            get;
+            set;
+        }
+
+        public uint ClearedVolume
+        {
+            get;
+            set;
+        }
+
+        public Cfm2sm_proto.UtcTime ClearedVolumeTimestamp
+        {
+            get;
+            set;
+        }
+
+        public bool OpenInterestValid
+        {
+            get;
+            set;
+        }
+
+        public uint OpenInterest
+        {
+            get;
+            set;
+        }
+
+        public bool FixingPriceValid
+        {
+            get;
+            set;
+        }
+
+        public double FixingPrice
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public int SecurityId => ctx.ReadDataInt(0UL, 0);
+            public int MdpChannelId => ctx.ReadDataInt(32UL, 0);
+            public ushort InstNum => ctx.ReadDataUShort(64UL, (ushort)0);
+            public Cfm2sm_proto.CmeFeedManagerTimestamps.READER Timestamp => ctx.ReadStruct(0, Cfm2sm_proto.CmeFeedManagerTimestamps.READER.create);
+            public bool ClearedVolumeValid => ctx.ReadDataBool(80UL, false);
+            public uint ClearedVolume => ctx.ReadDataUInt(96UL, 0U);
+            public Cfm2sm_proto.UtcTime.READER ClearedVolumeTimestamp => ctx.ReadStruct(1, Cfm2sm_proto.UtcTime.READER.create);
+            public bool OpenInterestValid => ctx.ReadDataBool(81UL, false);
+            public uint OpenInterest => ctx.ReadDataUInt(128UL, 0U);
+            public bool FixingPriceValid => ctx.ReadDataBool(82UL, false);
+            public double FixingPrice => ctx.ReadDataDouble(192UL, 0);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(4, 2);
+            }
+
+            public int SecurityId
+            {
+                get => this.ReadDataInt(0UL, 0);
+                set => this.WriteData(0UL, value, 0);
+            }
+
+            public int MdpChannelId
+            {
+                get => this.ReadDataInt(32UL, 0);
+                set => this.WriteData(32UL, value, 0);
+            }
+
+            public ushort InstNum
+            {
+                get => this.ReadDataUShort(64UL, (ushort)0);
+                set => this.WriteData(64UL, value, (ushort)0);
+            }
+
+            public Cfm2sm_proto.CmeFeedManagerTimestamps.WRITER Timestamp
+            {
+                get => BuildPointer<Cfm2sm_proto.CmeFeedManagerTimestamps.WRITER>(0);
+                set => Link(0, value);
+            }
+
+            public bool ClearedVolumeValid
+            {
+                get => this.ReadDataBool(80UL, false);
+                set => this.WriteData(80UL, value, false);
+            }
+
+            public uint ClearedVolume
+            {
+                get => this.ReadDataUInt(96UL, 0U);
+                set => this.WriteData(96UL, value, 0U);
+            }
+
+            public Cfm2sm_proto.UtcTime.WRITER ClearedVolumeTimestamp
+            {
+                get => BuildPointer<Cfm2sm_proto.UtcTime.WRITER>(1);
+                set => Link(1, value);
+            }
+
+            public bool OpenInterestValid
+            {
+                get => this.ReadDataBool(81UL, false);
+                set => this.WriteData(81UL, value, false);
+            }
+
+            public uint OpenInterest
+            {
+                get => this.ReadDataUInt(128UL, 0U);
+                set => this.WriteData(128UL, value, 0U);
+            }
+
+            public bool FixingPriceValid
+            {
+                get => this.ReadDataBool(82UL, false);
+                set => this.WriteData(82UL, value, false);
+            }
+
+            public double FixingPrice
+            {
+                get => this.ReadDataDouble(192UL, 0);
+                set => this.WriteData(192UL, value, 0);
             }
         }
     }
@@ -1864,7 +2528,7 @@ namespace CapnpGen
             SecurityId = reader.SecurityId;
             MdpChannelId = reader.MdpChannelId;
             InstNum = reader.InstNum;
-            Timestamp = CapnpSerializable.Create<CapnpGen.CmeFeedManagerTimestamps>(reader.Timestamp);
+            Timestamp = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedManagerTimestamps>(reader.Timestamp);
             BookStatus = reader.BookStatus;
             AggressorSideKind = reader.AggressorSideKind;
             OrderCnt = reader.OrderCnt;
@@ -1913,19 +2577,19 @@ namespace CapnpGen
             set;
         }
 
-        public CapnpGen.CmeFeedManagerTimestamps Timestamp
+        public Cfm2sm_proto.CmeFeedManagerTimestamps Timestamp
         {
             get;
             set;
         }
 
-        public CapnpGen.BookStatus BookStatus
+        public Cfm2sm_proto.BookStatus BookStatus
         {
             get;
             set;
         }
 
-        public CapnpGen.AggressorSideKind AggressorSideKind
+        public Cfm2sm_proto.AggressorSideKind AggressorSideKind
         {
             get;
             set;
@@ -1963,9 +2627,9 @@ namespace CapnpGen
             public int SecurityId => ctx.ReadDataInt(0UL, 0);
             public int MdpChannelId => ctx.ReadDataInt(32UL, 0);
             public ushort InstNum => ctx.ReadDataUShort(64UL, (ushort)0);
-            public CapnpGen.CmeFeedManagerTimestamps.READER Timestamp => ctx.ReadStruct(0, CapnpGen.CmeFeedManagerTimestamps.READER.create);
-            public CapnpGen.BookStatus BookStatus => (CapnpGen.BookStatus)ctx.ReadDataUShort(80UL, (ushort)0);
-            public CapnpGen.AggressorSideKind AggressorSideKind => (CapnpGen.AggressorSideKind)ctx.ReadDataUShort(96UL, (ushort)0);
+            public Cfm2sm_proto.CmeFeedManagerTimestamps.READER Timestamp => ctx.ReadStruct(0, Cfm2sm_proto.CmeFeedManagerTimestamps.READER.create);
+            public Cfm2sm_proto.BookStatus BookStatus => (Cfm2sm_proto.BookStatus)ctx.ReadDataUShort(80UL, (ushort)0);
+            public Cfm2sm_proto.AggressorSideKind AggressorSideKind => (Cfm2sm_proto.AggressorSideKind)ctx.ReadDataUShort(96UL, (ushort)0);
             public uint OrderCnt => ctx.ReadDataUInt(128UL, 0U);
             public uint Quantity => ctx.ReadDataUInt(160UL, 0U);
             public double Price => ctx.ReadDataDouble(192UL, 0);
@@ -1996,21 +2660,21 @@ namespace CapnpGen
                 set => this.WriteData(64UL, value, (ushort)0);
             }
 
-            public CapnpGen.CmeFeedManagerTimestamps.WRITER Timestamp
+            public Cfm2sm_proto.CmeFeedManagerTimestamps.WRITER Timestamp
             {
-                get => BuildPointer<CapnpGen.CmeFeedManagerTimestamps.WRITER>(0);
+                get => BuildPointer<Cfm2sm_proto.CmeFeedManagerTimestamps.WRITER>(0);
                 set => Link(0, value);
             }
 
-            public CapnpGen.BookStatus BookStatus
+            public Cfm2sm_proto.BookStatus BookStatus
             {
-                get => (CapnpGen.BookStatus)this.ReadDataUShort(80UL, (ushort)0);
+                get => (Cfm2sm_proto.BookStatus)this.ReadDataUShort(80UL, (ushort)0);
                 set => this.WriteData(80UL, (ushort)value, (ushort)0);
             }
 
-            public CapnpGen.AggressorSideKind AggressorSideKind
+            public Cfm2sm_proto.AggressorSideKind AggressorSideKind
             {
-                get => (CapnpGen.AggressorSideKind)this.ReadDataUShort(96UL, (ushort)0);
+                get => (Cfm2sm_proto.AggressorSideKind)this.ReadDataUShort(96UL, (ushort)0);
                 set => this.WriteData(96UL, (ushort)value, (ushort)0);
             }
 
@@ -2044,12 +2708,12 @@ namespace CapnpGen
             SecurityId = reader.SecurityId;
             MdpChannelId = reader.MdpChannelId;
             InstNum = reader.InstNum;
-            Timestamp = CapnpSerializable.Create<CapnpGen.CmeFeedManagerTimestamps>(reader.Timestamp);
+            Timestamp = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedManagerTimestamps>(reader.Timestamp);
             BookStatus = reader.BookStatus;
             SideKind = reader.SideKind;
             OrdersKind = reader.OrdersKind;
             IsLastSideOfBook = reader.IsLastSideOfBook;
-            Levels = reader.Levels?.ToReadOnlyList(_ => CapnpSerializable.Create<CapnpGen.CmeFeedPriceLevel>(_));
+            Levels = reader.Levels?.ToReadOnlyList(_ => CapnpSerializable.Create<Cfm2sm_proto.CmeFeedPriceLevel>(_));
             applyDefaults();
         }
 
@@ -2093,25 +2757,25 @@ namespace CapnpGen
             set;
         }
 
-        public CapnpGen.CmeFeedManagerTimestamps Timestamp
+        public Cfm2sm_proto.CmeFeedManagerTimestamps Timestamp
         {
             get;
             set;
         }
 
-        public CapnpGen.BookStatus BookStatus
+        public Cfm2sm_proto.BookStatus BookStatus
         {
             get;
             set;
         }
 
-        public CapnpGen.BookSideKind SideKind
+        public Cfm2sm_proto.BookSideKind SideKind
         {
             get;
             set;
         }
 
-        public CapnpGen.BookSideOrdersKind OrdersKind
+        public Cfm2sm_proto.BookSideOrdersKind OrdersKind
         {
             get;
             set;
@@ -2123,7 +2787,7 @@ namespace CapnpGen
             set;
         }
 
-        public IReadOnlyList<CapnpGen.CmeFeedPriceLevel> Levels
+        public IReadOnlyList<Cfm2sm_proto.CmeFeedPriceLevel> Levels
         {
             get;
             set;
@@ -2143,12 +2807,12 @@ namespace CapnpGen
             public int SecurityId => ctx.ReadDataInt(0UL, 0);
             public int MdpChannelId => ctx.ReadDataInt(32UL, 0);
             public ushort InstNum => ctx.ReadDataUShort(64UL, (ushort)0);
-            public CapnpGen.CmeFeedManagerTimestamps.READER Timestamp => ctx.ReadStruct(0, CapnpGen.CmeFeedManagerTimestamps.READER.create);
-            public CapnpGen.BookStatus BookStatus => (CapnpGen.BookStatus)ctx.ReadDataUShort(80UL, (ushort)0);
-            public CapnpGen.BookSideKind SideKind => (CapnpGen.BookSideKind)ctx.ReadDataUShort(96UL, (ushort)0);
-            public CapnpGen.BookSideOrdersKind OrdersKind => (CapnpGen.BookSideOrdersKind)ctx.ReadDataUShort(112UL, (ushort)0);
+            public Cfm2sm_proto.CmeFeedManagerTimestamps.READER Timestamp => ctx.ReadStruct(0, Cfm2sm_proto.CmeFeedManagerTimestamps.READER.create);
+            public Cfm2sm_proto.BookStatus BookStatus => (Cfm2sm_proto.BookStatus)ctx.ReadDataUShort(80UL, (ushort)0);
+            public Cfm2sm_proto.BookSideKind SideKind => (Cfm2sm_proto.BookSideKind)ctx.ReadDataUShort(96UL, (ushort)0);
+            public Cfm2sm_proto.BookSideOrdersKind OrdersKind => (Cfm2sm_proto.BookSideOrdersKind)ctx.ReadDataUShort(112UL, (ushort)0);
             public bool IsLastSideOfBook => ctx.ReadDataBool(128UL, false);
-            public IReadOnlyList<CapnpGen.CmeFeedPriceLevel.READER> Levels => ctx.ReadList(1).Cast(CapnpGen.CmeFeedPriceLevel.READER.create);
+            public IReadOnlyList<Cfm2sm_proto.CmeFeedPriceLevel.READER> Levels => ctx.ReadList(1).Cast(Cfm2sm_proto.CmeFeedPriceLevel.READER.create);
         }
 
         public class WRITER : SerializerState
@@ -2176,27 +2840,27 @@ namespace CapnpGen
                 set => this.WriteData(64UL, value, (ushort)0);
             }
 
-            public CapnpGen.CmeFeedManagerTimestamps.WRITER Timestamp
+            public Cfm2sm_proto.CmeFeedManagerTimestamps.WRITER Timestamp
             {
-                get => BuildPointer<CapnpGen.CmeFeedManagerTimestamps.WRITER>(0);
+                get => BuildPointer<Cfm2sm_proto.CmeFeedManagerTimestamps.WRITER>(0);
                 set => Link(0, value);
             }
 
-            public CapnpGen.BookStatus BookStatus
+            public Cfm2sm_proto.BookStatus BookStatus
             {
-                get => (CapnpGen.BookStatus)this.ReadDataUShort(80UL, (ushort)0);
+                get => (Cfm2sm_proto.BookStatus)this.ReadDataUShort(80UL, (ushort)0);
                 set => this.WriteData(80UL, (ushort)value, (ushort)0);
             }
 
-            public CapnpGen.BookSideKind SideKind
+            public Cfm2sm_proto.BookSideKind SideKind
             {
-                get => (CapnpGen.BookSideKind)this.ReadDataUShort(96UL, (ushort)0);
+                get => (Cfm2sm_proto.BookSideKind)this.ReadDataUShort(96UL, (ushort)0);
                 set => this.WriteData(96UL, (ushort)value, (ushort)0);
             }
 
-            public CapnpGen.BookSideOrdersKind OrdersKind
+            public Cfm2sm_proto.BookSideOrdersKind OrdersKind
             {
-                get => (CapnpGen.BookSideOrdersKind)this.ReadDataUShort(112UL, (ushort)0);
+                get => (Cfm2sm_proto.BookSideOrdersKind)this.ReadDataUShort(112UL, (ushort)0);
                 set => this.WriteData(112UL, (ushort)value, (ushort)0);
             }
 
@@ -2206,9 +2870,9 @@ namespace CapnpGen
                 set => this.WriteData(128UL, value, false);
             }
 
-            public ListOfStructsSerializer<CapnpGen.CmeFeedPriceLevel.WRITER> Levels
+            public ListOfStructsSerializer<Cfm2sm_proto.CmeFeedPriceLevel.WRITER> Levels
             {
-                get => BuildPointer<ListOfStructsSerializer<CapnpGen.CmeFeedPriceLevel.WRITER>>(1);
+                get => BuildPointer<ListOfStructsSerializer<Cfm2sm_proto.CmeFeedPriceLevel.WRITER>>(1);
                 set => Link(1, value);
             }
         }
@@ -2222,7 +2886,7 @@ namespace CapnpGen
         {
             var reader = READER.create(arg_);
             MdpChannelId = reader.MdpChannelId;
-            Timestamp = CapnpSerializable.Create<CapnpGen.CmeFeedManagerTimestamps>(reader.Timestamp);
+            Timestamp = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedManagerTimestamps>(reader.Timestamp);
             applyDefaults();
         }
 
@@ -2247,7 +2911,7 @@ namespace CapnpGen
             set;
         }
 
-        public CapnpGen.CmeFeedManagerTimestamps Timestamp
+        public Cfm2sm_proto.CmeFeedManagerTimestamps Timestamp
         {
             get;
             set;
@@ -2265,7 +2929,7 @@ namespace CapnpGen
             public static implicit operator DeserializerState(READER reader) => reader.ctx;
             public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
             public int MdpChannelId => ctx.ReadDataInt(0UL, 0);
-            public CapnpGen.CmeFeedManagerTimestamps.READER Timestamp => ctx.ReadStruct(0, CapnpGen.CmeFeedManagerTimestamps.READER.create);
+            public Cfm2sm_proto.CmeFeedManagerTimestamps.READER Timestamp => ctx.ReadStruct(0, Cfm2sm_proto.CmeFeedManagerTimestamps.READER.create);
         }
 
         public class WRITER : SerializerState
@@ -2281,9 +2945,9 @@ namespace CapnpGen
                 set => this.WriteData(0UL, value, 0);
             }
 
-            public CapnpGen.CmeFeedManagerTimestamps.WRITER Timestamp
+            public Cfm2sm_proto.CmeFeedManagerTimestamps.WRITER Timestamp
             {
-                get => BuildPointer<CapnpGen.CmeFeedManagerTimestamps.WRITER>(0);
+                get => BuildPointer<Cfm2sm_proto.CmeFeedManagerTimestamps.WRITER>(0);
                 set => Link(0, value);
             }
         }
@@ -2296,7 +2960,7 @@ namespace CapnpGen
         void ICapnpSerializable.Deserialize(DeserializerState arg_)
         {
             var reader = READER.create(arg_);
-            ExtractTimestamp = CapnpSerializable.Create<CapnpGen.UtcTime>(reader.ExtractTimestamp);
+            ExtractTimestamp = CapnpSerializable.Create<Cfm2sm_proto.UtcTime>(reader.ExtractTimestamp);
             applyDefaults();
         }
 
@@ -2314,7 +2978,7 @@ namespace CapnpGen
         {
         }
 
-        public CapnpGen.UtcTime ExtractTimestamp
+        public Cfm2sm_proto.UtcTime ExtractTimestamp
         {
             get;
             set;
@@ -2331,7 +2995,7 @@ namespace CapnpGen
             public static READER create(DeserializerState ctx) => new READER(ctx);
             public static implicit operator DeserializerState(READER reader) => reader.ctx;
             public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
-            public CapnpGen.UtcTime.READER ExtractTimestamp => ctx.ReadStruct(0, CapnpGen.UtcTime.READER.create);
+            public Cfm2sm_proto.UtcTime.READER ExtractTimestamp => ctx.ReadStruct(0, Cfm2sm_proto.UtcTime.READER.create);
         }
 
         public class WRITER : SerializerState
@@ -2341,9 +3005,9 @@ namespace CapnpGen
                 this.SetStruct(0, 1);
             }
 
-            public CapnpGen.UtcTime.WRITER ExtractTimestamp
+            public Cfm2sm_proto.UtcTime.WRITER ExtractTimestamp
             {
-                get => BuildPointer<CapnpGen.UtcTime.WRITER>(0);
+                get => BuildPointer<Cfm2sm_proto.UtcTime.WRITER>(0);
                 set => Link(0, value);
             }
         }
@@ -2478,18 +3142,24 @@ namespace CapnpGen
             var reader = READER.create(arg_);
             InstNum = reader.InstNum;
             SecurityId = reader.SecurityId;
-            InstStatus = CapnpSerializable.Create<CapnpGen.CmeFeedUpdateInstStatus>(reader.InstStatus);
-            LastTrade = CapnpSerializable.Create<CapnpGen.CmeFeedUpdateTrade>(reader.LastTrade);
-            OpeningPrice = CapnpSerializable.Create<CapnpGen.CmeFeedUpdateOpeningPrice>(reader.OpeningPrice);
-            Settlement = CapnpSerializable.Create<CapnpGen.CmeFeedUpdateSettlement>(reader.Settlement);
-            BidBook = CapnpSerializable.Create<CapnpGen.CmeFeedUpdateSide>(reader.BidBook);
-            ImpBidBook = CapnpSerializable.Create<CapnpGen.CmeFeedUpdateSide>(reader.ImpBidBook);
-            AskBook = CapnpSerializable.Create<CapnpGen.CmeFeedUpdateSide>(reader.AskBook);
-            ImpAskBook = CapnpSerializable.Create<CapnpGen.CmeFeedUpdateSide>(reader.ImpAskBook);
+            InstStatus = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedUpdateInstStatus>(reader.InstStatus);
+            LastTrade = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedUpdateTrade>(reader.LastTrade);
+            OpeningPrice = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedUpdateOpeningPrice>(reader.OpeningPrice);
+            Settlement = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedUpdateSettlement>(reader.Settlement);
+            Volume = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedUpdateVolume>(reader.Volume);
+            HighLow = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedUpdateHighLow>(reader.HighLow);
+            DailyStats = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedUpdateDailyStats>(reader.DailyStats);
+            BidBook = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedUpdateSide>(reader.BidBook);
+            ImpBidBook = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedUpdateSide>(reader.ImpBidBook);
+            AskBook = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedUpdateSide>(reader.AskBook);
+            ImpAskBook = CapnpSerializable.Create<Cfm2sm_proto.CmeFeedUpdateSide>(reader.ImpAskBook);
             InstStatusValid = reader.InstStatusValid;
             LastTradeValid = reader.LastTradeValid;
             OpeningPriceValid = reader.OpeningPriceValid;
             SettlementValid = reader.SettlementValid;
+            VolumeValid = reader.VolumeValid;
+            HighLowValid = reader.HighLowValid;
+            DailyStatsValid = reader.DailyStatsValid;
             BidBookValid = reader.BidBookValid;
             ImpBidBookValid = reader.ImpBidBookValid;
             AskBookValid = reader.AskBookValid;
@@ -2505,6 +3175,9 @@ namespace CapnpGen
             LastTrade?.serialize(writer.LastTrade);
             OpeningPrice?.serialize(writer.OpeningPrice);
             Settlement?.serialize(writer.Settlement);
+            Volume?.serialize(writer.Volume);
+            HighLow?.serialize(writer.HighLow);
+            DailyStats?.serialize(writer.DailyStats);
             BidBook?.serialize(writer.BidBook);
             ImpBidBook?.serialize(writer.ImpBidBook);
             AskBook?.serialize(writer.AskBook);
@@ -2513,6 +3186,9 @@ namespace CapnpGen
             writer.LastTradeValid = LastTradeValid;
             writer.OpeningPriceValid = OpeningPriceValid;
             writer.SettlementValid = SettlementValid;
+            writer.VolumeValid = VolumeValid;
+            writer.HighLowValid = HighLowValid;
+            writer.DailyStatsValid = DailyStatsValid;
             writer.BidBookValid = BidBookValid;
             writer.ImpBidBookValid = ImpBidBookValid;
             writer.AskBookValid = AskBookValid;
@@ -2540,49 +3216,67 @@ namespace CapnpGen
             set;
         }
 
-        public CapnpGen.CmeFeedUpdateInstStatus InstStatus
+        public Cfm2sm_proto.CmeFeedUpdateInstStatus InstStatus
         {
             get;
             set;
         }
 
-        public CapnpGen.CmeFeedUpdateTrade LastTrade
+        public Cfm2sm_proto.CmeFeedUpdateTrade LastTrade
         {
             get;
             set;
         }
 
-        public CapnpGen.CmeFeedUpdateOpeningPrice OpeningPrice
+        public Cfm2sm_proto.CmeFeedUpdateOpeningPrice OpeningPrice
         {
             get;
             set;
         }
 
-        public CapnpGen.CmeFeedUpdateSettlement Settlement
+        public Cfm2sm_proto.CmeFeedUpdateSettlement Settlement
         {
             get;
             set;
         }
 
-        public CapnpGen.CmeFeedUpdateSide BidBook
+        public Cfm2sm_proto.CmeFeedUpdateVolume Volume
         {
             get;
             set;
         }
 
-        public CapnpGen.CmeFeedUpdateSide ImpBidBook
+        public Cfm2sm_proto.CmeFeedUpdateHighLow HighLow
         {
             get;
             set;
         }
 
-        public CapnpGen.CmeFeedUpdateSide AskBook
+        public Cfm2sm_proto.CmeFeedUpdateDailyStats DailyStats
         {
             get;
             set;
         }
 
-        public CapnpGen.CmeFeedUpdateSide ImpAskBook
+        public Cfm2sm_proto.CmeFeedUpdateSide BidBook
+        {
+            get;
+            set;
+        }
+
+        public Cfm2sm_proto.CmeFeedUpdateSide ImpBidBook
+        {
+            get;
+            set;
+        }
+
+        public Cfm2sm_proto.CmeFeedUpdateSide AskBook
+        {
+            get;
+            set;
+        }
+
+        public Cfm2sm_proto.CmeFeedUpdateSide ImpAskBook
         {
             get;
             set;
@@ -2607,6 +3301,24 @@ namespace CapnpGen
         }
 
         public bool SettlementValid
+        {
+            get;
+            set;
+        }
+
+        public bool VolumeValid
+        {
+            get;
+            set;
+        }
+
+        public bool HighLowValid
+        {
+            get;
+            set;
+        }
+
+        public bool DailyStatsValid
         {
             get;
             set;
@@ -2649,29 +3361,35 @@ namespace CapnpGen
             public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
             public ushort InstNum => ctx.ReadDataUShort(0UL, (ushort)0);
             public int SecurityId => ctx.ReadDataInt(32UL, 0);
-            public CapnpGen.CmeFeedUpdateInstStatus.READER InstStatus => ctx.ReadStruct(0, CapnpGen.CmeFeedUpdateInstStatus.READER.create);
-            public CapnpGen.CmeFeedUpdateTrade.READER LastTrade => ctx.ReadStruct(1, CapnpGen.CmeFeedUpdateTrade.READER.create);
-            public CapnpGen.CmeFeedUpdateOpeningPrice.READER OpeningPrice => ctx.ReadStruct(2, CapnpGen.CmeFeedUpdateOpeningPrice.READER.create);
-            public CapnpGen.CmeFeedUpdateSettlement.READER Settlement => ctx.ReadStruct(3, CapnpGen.CmeFeedUpdateSettlement.READER.create);
-            public CapnpGen.CmeFeedUpdateSide.READER BidBook => ctx.ReadStruct(4, CapnpGen.CmeFeedUpdateSide.READER.create);
-            public CapnpGen.CmeFeedUpdateSide.READER ImpBidBook => ctx.ReadStruct(5, CapnpGen.CmeFeedUpdateSide.READER.create);
-            public CapnpGen.CmeFeedUpdateSide.READER AskBook => ctx.ReadStruct(6, CapnpGen.CmeFeedUpdateSide.READER.create);
-            public CapnpGen.CmeFeedUpdateSide.READER ImpAskBook => ctx.ReadStruct(7, CapnpGen.CmeFeedUpdateSide.READER.create);
+            public Cfm2sm_proto.CmeFeedUpdateInstStatus.READER InstStatus => ctx.ReadStruct(0, Cfm2sm_proto.CmeFeedUpdateInstStatus.READER.create);
+            public Cfm2sm_proto.CmeFeedUpdateTrade.READER LastTrade => ctx.ReadStruct(1, Cfm2sm_proto.CmeFeedUpdateTrade.READER.create);
+            public Cfm2sm_proto.CmeFeedUpdateOpeningPrice.READER OpeningPrice => ctx.ReadStruct(2, Cfm2sm_proto.CmeFeedUpdateOpeningPrice.READER.create);
+            public Cfm2sm_proto.CmeFeedUpdateSettlement.READER Settlement => ctx.ReadStruct(3, Cfm2sm_proto.CmeFeedUpdateSettlement.READER.create);
+            public Cfm2sm_proto.CmeFeedUpdateVolume.READER Volume => ctx.ReadStruct(4, Cfm2sm_proto.CmeFeedUpdateVolume.READER.create);
+            public Cfm2sm_proto.CmeFeedUpdateHighLow.READER HighLow => ctx.ReadStruct(5, Cfm2sm_proto.CmeFeedUpdateHighLow.READER.create);
+            public Cfm2sm_proto.CmeFeedUpdateDailyStats.READER DailyStats => ctx.ReadStruct(6, Cfm2sm_proto.CmeFeedUpdateDailyStats.READER.create);
+            public Cfm2sm_proto.CmeFeedUpdateSide.READER BidBook => ctx.ReadStruct(7, Cfm2sm_proto.CmeFeedUpdateSide.READER.create);
+            public Cfm2sm_proto.CmeFeedUpdateSide.READER ImpBidBook => ctx.ReadStruct(8, Cfm2sm_proto.CmeFeedUpdateSide.READER.create);
+            public Cfm2sm_proto.CmeFeedUpdateSide.READER AskBook => ctx.ReadStruct(9, Cfm2sm_proto.CmeFeedUpdateSide.READER.create);
+            public Cfm2sm_proto.CmeFeedUpdateSide.READER ImpAskBook => ctx.ReadStruct(10, Cfm2sm_proto.CmeFeedUpdateSide.READER.create);
             public bool InstStatusValid => ctx.ReadDataBool(16UL, false);
             public bool LastTradeValid => ctx.ReadDataBool(17UL, false);
             public bool OpeningPriceValid => ctx.ReadDataBool(18UL, false);
             public bool SettlementValid => ctx.ReadDataBool(19UL, false);
-            public bool BidBookValid => ctx.ReadDataBool(20UL, false);
-            public bool ImpBidBookValid => ctx.ReadDataBool(21UL, false);
-            public bool AskBookValid => ctx.ReadDataBool(22UL, false);
-            public bool ImpAskBookValid => ctx.ReadDataBool(23UL, false);
+            public bool VolumeValid => ctx.ReadDataBool(20UL, false);
+            public bool HighLowValid => ctx.ReadDataBool(21UL, false);
+            public bool DailyStatsValid => ctx.ReadDataBool(22UL, false);
+            public bool BidBookValid => ctx.ReadDataBool(23UL, false);
+            public bool ImpBidBookValid => ctx.ReadDataBool(24UL, false);
+            public bool AskBookValid => ctx.ReadDataBool(25UL, false);
+            public bool ImpAskBookValid => ctx.ReadDataBool(26UL, false);
         }
 
         public class WRITER : SerializerState
         {
             public WRITER()
             {
-                this.SetStruct(1, 8);
+                this.SetStruct(1, 11);
             }
 
             public ushort InstNum
@@ -2686,52 +3404,70 @@ namespace CapnpGen
                 set => this.WriteData(32UL, value, 0);
             }
 
-            public CapnpGen.CmeFeedUpdateInstStatus.WRITER InstStatus
+            public Cfm2sm_proto.CmeFeedUpdateInstStatus.WRITER InstStatus
             {
-                get => BuildPointer<CapnpGen.CmeFeedUpdateInstStatus.WRITER>(0);
+                get => BuildPointer<Cfm2sm_proto.CmeFeedUpdateInstStatus.WRITER>(0);
                 set => Link(0, value);
             }
 
-            public CapnpGen.CmeFeedUpdateTrade.WRITER LastTrade
+            public Cfm2sm_proto.CmeFeedUpdateTrade.WRITER LastTrade
             {
-                get => BuildPointer<CapnpGen.CmeFeedUpdateTrade.WRITER>(1);
+                get => BuildPointer<Cfm2sm_proto.CmeFeedUpdateTrade.WRITER>(1);
                 set => Link(1, value);
             }
 
-            public CapnpGen.CmeFeedUpdateOpeningPrice.WRITER OpeningPrice
+            public Cfm2sm_proto.CmeFeedUpdateOpeningPrice.WRITER OpeningPrice
             {
-                get => BuildPointer<CapnpGen.CmeFeedUpdateOpeningPrice.WRITER>(2);
+                get => BuildPointer<Cfm2sm_proto.CmeFeedUpdateOpeningPrice.WRITER>(2);
                 set => Link(2, value);
             }
 
-            public CapnpGen.CmeFeedUpdateSettlement.WRITER Settlement
+            public Cfm2sm_proto.CmeFeedUpdateSettlement.WRITER Settlement
             {
-                get => BuildPointer<CapnpGen.CmeFeedUpdateSettlement.WRITER>(3);
+                get => BuildPointer<Cfm2sm_proto.CmeFeedUpdateSettlement.WRITER>(3);
                 set => Link(3, value);
             }
 
-            public CapnpGen.CmeFeedUpdateSide.WRITER BidBook
+            public Cfm2sm_proto.CmeFeedUpdateVolume.WRITER Volume
             {
-                get => BuildPointer<CapnpGen.CmeFeedUpdateSide.WRITER>(4);
+                get => BuildPointer<Cfm2sm_proto.CmeFeedUpdateVolume.WRITER>(4);
                 set => Link(4, value);
             }
 
-            public CapnpGen.CmeFeedUpdateSide.WRITER ImpBidBook
+            public Cfm2sm_proto.CmeFeedUpdateHighLow.WRITER HighLow
             {
-                get => BuildPointer<CapnpGen.CmeFeedUpdateSide.WRITER>(5);
+                get => BuildPointer<Cfm2sm_proto.CmeFeedUpdateHighLow.WRITER>(5);
                 set => Link(5, value);
             }
 
-            public CapnpGen.CmeFeedUpdateSide.WRITER AskBook
+            public Cfm2sm_proto.CmeFeedUpdateDailyStats.WRITER DailyStats
             {
-                get => BuildPointer<CapnpGen.CmeFeedUpdateSide.WRITER>(6);
+                get => BuildPointer<Cfm2sm_proto.CmeFeedUpdateDailyStats.WRITER>(6);
                 set => Link(6, value);
             }
 
-            public CapnpGen.CmeFeedUpdateSide.WRITER ImpAskBook
+            public Cfm2sm_proto.CmeFeedUpdateSide.WRITER BidBook
             {
-                get => BuildPointer<CapnpGen.CmeFeedUpdateSide.WRITER>(7);
+                get => BuildPointer<Cfm2sm_proto.CmeFeedUpdateSide.WRITER>(7);
                 set => Link(7, value);
+            }
+
+            public Cfm2sm_proto.CmeFeedUpdateSide.WRITER ImpBidBook
+            {
+                get => BuildPointer<Cfm2sm_proto.CmeFeedUpdateSide.WRITER>(8);
+                set => Link(8, value);
+            }
+
+            public Cfm2sm_proto.CmeFeedUpdateSide.WRITER AskBook
+            {
+                get => BuildPointer<Cfm2sm_proto.CmeFeedUpdateSide.WRITER>(9);
+                set => Link(9, value);
+            }
+
+            public Cfm2sm_proto.CmeFeedUpdateSide.WRITER ImpAskBook
+            {
+                get => BuildPointer<Cfm2sm_proto.CmeFeedUpdateSide.WRITER>(10);
+                set => Link(10, value);
             }
 
             public bool InstStatusValid
@@ -2758,28 +3494,46 @@ namespace CapnpGen
                 set => this.WriteData(19UL, value, false);
             }
 
-            public bool BidBookValid
+            public bool VolumeValid
             {
                 get => this.ReadDataBool(20UL, false);
                 set => this.WriteData(20UL, value, false);
             }
 
-            public bool ImpBidBookValid
+            public bool HighLowValid
             {
                 get => this.ReadDataBool(21UL, false);
                 set => this.WriteData(21UL, value, false);
             }
 
-            public bool AskBookValid
+            public bool DailyStatsValid
             {
                 get => this.ReadDataBool(22UL, false);
                 set => this.WriteData(22UL, value, false);
             }
 
-            public bool ImpAskBookValid
+            public bool BidBookValid
             {
                 get => this.ReadDataBool(23UL, false);
                 set => this.WriteData(23UL, value, false);
+            }
+
+            public bool ImpBidBookValid
+            {
+                get => this.ReadDataBool(24UL, false);
+                set => this.WriteData(24UL, value, false);
+            }
+
+            public bool AskBookValid
+            {
+                get => this.ReadDataBool(25UL, false);
+                set => this.WriteData(25UL, value, false);
+            }
+
+            public bool ImpAskBookValid
+            {
+                get => this.ReadDataBool(26UL, false);
+                set => this.WriteData(26UL, value, false);
             }
         }
     }
@@ -2898,9 +3652,9 @@ namespace CapnpGen
             MinTradeVolume = reader.MinTradeVolume;
             MaxTradeVolume = reader.MaxTradeVolume;
             RelativeToPreviousSettlement = reader.RelativeToPreviousSettlement;
-            ActivationTime = CapnpSerializable.Create<CapnpGen.UtcTime>(reader.ActivationTime);
-            LastEligibleTradeTime = CapnpSerializable.Create<CapnpGen.UtcTime>(reader.LastEligibleTradeTime);
-            Legs = reader.Legs?.ToReadOnlyList(_ => CapnpSerializable.Create<CapnpGen.CmeLegDefinition>(_));
+            ActivationTime = CapnpSerializable.Create<Cfm2sm_proto.UtcTime>(reader.ActivationTime);
+            LastEligibleTradeTime = CapnpSerializable.Create<Cfm2sm_proto.UtcTime>(reader.LastEligibleTradeTime);
+            Legs = reader.Legs?.ToReadOnlyList(_ => CapnpSerializable.Create<Cfm2sm_proto.CmeLegDefinition>(_));
             IsFeedAvailable = reader.IsFeedAvailable;
             InstNum = reader.InstNum;
             GroupNum = reader.GroupNum;
@@ -2988,7 +3742,7 @@ namespace CapnpGen
             set;
         }
 
-        public CapnpGen.CmeAssetKind AssetKind
+        public Cfm2sm_proto.CmeAssetKind AssetKind
         {
             get;
             set;
@@ -3006,7 +3760,7 @@ namespace CapnpGen
             set;
         }
 
-        public CapnpGen.CmeSecuritySubtype SecuritySubtype
+        public Cfm2sm_proto.CmeSecuritySubtype SecuritySubtype
         {
             get;
             set;
@@ -3024,19 +3778,19 @@ namespace CapnpGen
             set;
         }
 
-        public CapnpGen.CmeAssetEquivalenceKind EquivalenceKind
+        public Cfm2sm_proto.CmeAssetEquivalenceKind EquivalenceKind
         {
             get;
             set;
         }
 
-        public CapnpGen.CmeAssetKind EquivalentAssetKind
+        public Cfm2sm_proto.CmeAssetKind EquivalentAssetKind
         {
             get;
             set;
         }
 
-        public CapnpGen.CmePriceValueKind PriceValueKind
+        public Cfm2sm_proto.CmePriceValueKind PriceValueKind
         {
             get;
             set;
@@ -3126,7 +3880,7 @@ namespace CapnpGen
             set;
         }
 
-        public CapnpGen.CmeMatchAlgorithm MatchAlgorithm
+        public Cfm2sm_proto.CmeMatchAlgorithm MatchAlgorithm
         {
             get;
             set;
@@ -3150,19 +3904,19 @@ namespace CapnpGen
             set;
         }
 
-        public CapnpGen.UtcTime ActivationTime
+        public Cfm2sm_proto.UtcTime ActivationTime
         {
             get;
             set;
         }
 
-        public CapnpGen.UtcTime LastEligibleTradeTime
+        public Cfm2sm_proto.UtcTime LastEligibleTradeTime
         {
             get;
             set;
         }
 
-        public IReadOnlyList<CapnpGen.CmeLegDefinition> Legs
+        public IReadOnlyList<Cfm2sm_proto.CmeLegDefinition> Legs
         {
             get;
             set;
@@ -3204,15 +3958,15 @@ namespace CapnpGen
             public int MarketSegmentGatewayId => ctx.ReadDataInt(32UL, 0);
             public int MdpChannelId => ctx.ReadDataInt(64UL, 0);
             public string SecurityGroupCode => ctx.ReadText(1, null);
-            public CapnpGen.CmeAssetKind AssetKind => (CapnpGen.CmeAssetKind)ctx.ReadDataUShort(96UL, (ushort)0);
+            public Cfm2sm_proto.CmeAssetKind AssetKind => (Cfm2sm_proto.CmeAssetKind)ctx.ReadDataUShort(96UL, (ushort)0);
             public string AssetCode => ctx.ReadText(2, null);
             public string CfiCode => ctx.ReadText(3, null);
-            public CapnpGen.CmeSecuritySubtype SecuritySubtype => (CapnpGen.CmeSecuritySubtype)ctx.ReadDataUShort(112UL, (ushort)0);
+            public Cfm2sm_proto.CmeSecuritySubtype SecuritySubtype => (Cfm2sm_proto.CmeSecuritySubtype)ctx.ReadDataUShort(112UL, (ushort)0);
             public string SecuritySubtypeCode => ctx.ReadText(4, null);
             public string MaturityMonthyear => ctx.ReadText(5, null);
-            public CapnpGen.CmeAssetEquivalenceKind EquivalenceKind => (CapnpGen.CmeAssetEquivalenceKind)ctx.ReadDataUShort(128UL, (ushort)0);
-            public CapnpGen.CmeAssetKind EquivalentAssetKind => (CapnpGen.CmeAssetKind)ctx.ReadDataUShort(144UL, (ushort)0);
-            public CapnpGen.CmePriceValueKind PriceValueKind => (CapnpGen.CmePriceValueKind)ctx.ReadDataUShort(160UL, (ushort)0);
+            public Cfm2sm_proto.CmeAssetEquivalenceKind EquivalenceKind => (Cfm2sm_proto.CmeAssetEquivalenceKind)ctx.ReadDataUShort(128UL, (ushort)0);
+            public Cfm2sm_proto.CmeAssetKind EquivalentAssetKind => (Cfm2sm_proto.CmeAssetKind)ctx.ReadDataUShort(144UL, (ushort)0);
+            public Cfm2sm_proto.CmePriceValueKind PriceValueKind => (Cfm2sm_proto.CmePriceValueKind)ctx.ReadDataUShort(160UL, (ushort)0);
             public double TruePriceOffset => ctx.ReadDataDouble(192UL, 0);
             public double PriceToCurrency => ctx.ReadDataDouble(256UL, 0);
             public double MinPriceIncrement => ctx.ReadDataDouble(320UL, 0);
@@ -3227,13 +3981,13 @@ namespace CapnpGen
             public double MaxPriceVariation => ctx.ReadDataDouble(576UL, 0);
             public int BookDepth => ctx.ReadDataInt(640UL, 0);
             public bool HasImpliedBook => ctx.ReadDataBool(178UL, false);
-            public CapnpGen.CmeMatchAlgorithm MatchAlgorithm => (CapnpGen.CmeMatchAlgorithm)ctx.ReadDataUShort(672UL, (ushort)0);
+            public Cfm2sm_proto.CmeMatchAlgorithm MatchAlgorithm => (Cfm2sm_proto.CmeMatchAlgorithm)ctx.ReadDataUShort(672UL, (ushort)0);
             public int MinTradeVolume => ctx.ReadDataInt(704UL, 0);
             public int MaxTradeVolume => ctx.ReadDataInt(736UL, 0);
             public bool RelativeToPreviousSettlement => ctx.ReadDataBool(179UL, false);
-            public CapnpGen.UtcTime.READER ActivationTime => ctx.ReadStruct(9, CapnpGen.UtcTime.READER.create);
-            public CapnpGen.UtcTime.READER LastEligibleTradeTime => ctx.ReadStruct(10, CapnpGen.UtcTime.READER.create);
-            public IReadOnlyList<CapnpGen.CmeLegDefinition.READER> Legs => ctx.ReadList(11).Cast(CapnpGen.CmeLegDefinition.READER.create);
+            public Cfm2sm_proto.UtcTime.READER ActivationTime => ctx.ReadStruct(9, Cfm2sm_proto.UtcTime.READER.create);
+            public Cfm2sm_proto.UtcTime.READER LastEligibleTradeTime => ctx.ReadStruct(10, Cfm2sm_proto.UtcTime.READER.create);
+            public IReadOnlyList<Cfm2sm_proto.CmeLegDefinition.READER> Legs => ctx.ReadList(11).Cast(Cfm2sm_proto.CmeLegDefinition.READER.create);
             public bool IsFeedAvailable => ctx.ReadDataBool(180UL, false);
             public ushort InstNum => ctx.ReadDataUShort(688UL, (ushort)65535);
             public ushort GroupNum => ctx.ReadDataUShort(768UL, (ushort)65535);
@@ -3276,9 +4030,9 @@ namespace CapnpGen
                 set => this.WriteText(1, value, null);
             }
 
-            public CapnpGen.CmeAssetKind AssetKind
+            public Cfm2sm_proto.CmeAssetKind AssetKind
             {
-                get => (CapnpGen.CmeAssetKind)this.ReadDataUShort(96UL, (ushort)0);
+                get => (Cfm2sm_proto.CmeAssetKind)this.ReadDataUShort(96UL, (ushort)0);
                 set => this.WriteData(96UL, (ushort)value, (ushort)0);
             }
 
@@ -3294,9 +4048,9 @@ namespace CapnpGen
                 set => this.WriteText(3, value, null);
             }
 
-            public CapnpGen.CmeSecuritySubtype SecuritySubtype
+            public Cfm2sm_proto.CmeSecuritySubtype SecuritySubtype
             {
-                get => (CapnpGen.CmeSecuritySubtype)this.ReadDataUShort(112UL, (ushort)0);
+                get => (Cfm2sm_proto.CmeSecuritySubtype)this.ReadDataUShort(112UL, (ushort)0);
                 set => this.WriteData(112UL, (ushort)value, (ushort)0);
             }
 
@@ -3312,21 +4066,21 @@ namespace CapnpGen
                 set => this.WriteText(5, value, null);
             }
 
-            public CapnpGen.CmeAssetEquivalenceKind EquivalenceKind
+            public Cfm2sm_proto.CmeAssetEquivalenceKind EquivalenceKind
             {
-                get => (CapnpGen.CmeAssetEquivalenceKind)this.ReadDataUShort(128UL, (ushort)0);
+                get => (Cfm2sm_proto.CmeAssetEquivalenceKind)this.ReadDataUShort(128UL, (ushort)0);
                 set => this.WriteData(128UL, (ushort)value, (ushort)0);
             }
 
-            public CapnpGen.CmeAssetKind EquivalentAssetKind
+            public Cfm2sm_proto.CmeAssetKind EquivalentAssetKind
             {
-                get => (CapnpGen.CmeAssetKind)this.ReadDataUShort(144UL, (ushort)0);
+                get => (Cfm2sm_proto.CmeAssetKind)this.ReadDataUShort(144UL, (ushort)0);
                 set => this.WriteData(144UL, (ushort)value, (ushort)0);
             }
 
-            public CapnpGen.CmePriceValueKind PriceValueKind
+            public Cfm2sm_proto.CmePriceValueKind PriceValueKind
             {
-                get => (CapnpGen.CmePriceValueKind)this.ReadDataUShort(160UL, (ushort)0);
+                get => (Cfm2sm_proto.CmePriceValueKind)this.ReadDataUShort(160UL, (ushort)0);
                 set => this.WriteData(160UL, (ushort)value, (ushort)0);
             }
 
@@ -3414,9 +4168,9 @@ namespace CapnpGen
                 set => this.WriteData(178UL, value, false);
             }
 
-            public CapnpGen.CmeMatchAlgorithm MatchAlgorithm
+            public Cfm2sm_proto.CmeMatchAlgorithm MatchAlgorithm
             {
-                get => (CapnpGen.CmeMatchAlgorithm)this.ReadDataUShort(672UL, (ushort)0);
+                get => (Cfm2sm_proto.CmeMatchAlgorithm)this.ReadDataUShort(672UL, (ushort)0);
                 set => this.WriteData(672UL, (ushort)value, (ushort)0);
             }
 
@@ -3438,21 +4192,21 @@ namespace CapnpGen
                 set => this.WriteData(179UL, value, false);
             }
 
-            public CapnpGen.UtcTime.WRITER ActivationTime
+            public Cfm2sm_proto.UtcTime.WRITER ActivationTime
             {
-                get => BuildPointer<CapnpGen.UtcTime.WRITER>(9);
+                get => BuildPointer<Cfm2sm_proto.UtcTime.WRITER>(9);
                 set => Link(9, value);
             }
 
-            public CapnpGen.UtcTime.WRITER LastEligibleTradeTime
+            public Cfm2sm_proto.UtcTime.WRITER LastEligibleTradeTime
             {
-                get => BuildPointer<CapnpGen.UtcTime.WRITER>(10);
+                get => BuildPointer<Cfm2sm_proto.UtcTime.WRITER>(10);
                 set => Link(10, value);
             }
 
-            public ListOfStructsSerializer<CapnpGen.CmeLegDefinition.WRITER> Legs
+            public ListOfStructsSerializer<Cfm2sm_proto.CmeLegDefinition.WRITER> Legs
             {
-                get => BuildPointer<ListOfStructsSerializer<CapnpGen.CmeLegDefinition.WRITER>>(11);
+                get => BuildPointer<ListOfStructsSerializer<Cfm2sm_proto.CmeLegDefinition.WRITER>>(11);
                 set => Link(11, value);
             }
 
@@ -3483,7 +4237,7 @@ namespace CapnpGen
         void ICapnpSerializable.Deserialize(DeserializerState arg_)
         {
             var reader = READER.create(arg_);
-            Definitions = reader.Definitions?.ToReadOnlyList(_ => CapnpSerializable.Create<CapnpGen.CmeFuturesDefinition>(_));
+            Definitions = reader.Definitions?.ToReadOnlyList(_ => CapnpSerializable.Create<Cfm2sm_proto.CmeFuturesDefinition>(_));
             Error = reader.Error;
             applyDefaults();
         }
@@ -3503,7 +4257,7 @@ namespace CapnpGen
         {
         }
 
-        public IReadOnlyList<CapnpGen.CmeFuturesDefinition> Definitions
+        public IReadOnlyList<Cfm2sm_proto.CmeFuturesDefinition> Definitions
         {
             get;
             set;
@@ -3526,7 +4280,7 @@ namespace CapnpGen
             public static READER create(DeserializerState ctx) => new READER(ctx);
             public static implicit operator DeserializerState(READER reader) => reader.ctx;
             public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
-            public IReadOnlyList<CapnpGen.CmeFuturesDefinition.READER> Definitions => ctx.ReadList(0).Cast(CapnpGen.CmeFuturesDefinition.READER.create);
+            public IReadOnlyList<Cfm2sm_proto.CmeFuturesDefinition.READER> Definitions => ctx.ReadList(0).Cast(Cfm2sm_proto.CmeFuturesDefinition.READER.create);
             public string Error => ctx.ReadText(1, null);
         }
 
@@ -3537,9 +4291,9 @@ namespace CapnpGen
                 this.SetStruct(0, 2);
             }
 
-            public ListOfStructsSerializer<CapnpGen.CmeFuturesDefinition.WRITER> Definitions
+            public ListOfStructsSerializer<Cfm2sm_proto.CmeFuturesDefinition.WRITER> Definitions
             {
-                get => BuildPointer<ListOfStructsSerializer<CapnpGen.CmeFuturesDefinition.WRITER>>(0);
+                get => BuildPointer<ListOfStructsSerializer<Cfm2sm_proto.CmeFuturesDefinition.WRITER>>(0);
                 set => Link(0, value);
             }
 
@@ -3571,6 +4325,7 @@ namespace CapnpGen
             SecurityId = reader.SecurityId;
             Symbol = reader.Symbol;
             Error = reader.Error;
+            InstGroupNum = reader.InstGroupNum;
             applyDefaults();
         }
 
@@ -3582,6 +4337,7 @@ namespace CapnpGen
             writer.SecurityId = SecurityId;
             writer.Symbol = Symbol;
             writer.Error = Error;
+            writer.InstGroupNum = InstGroupNum;
         }
 
         void ICapnpSerializable.Serialize(SerializerState arg_)
@@ -3599,7 +4355,7 @@ namespace CapnpGen
             set;
         }
 
-        public CapnpGen.AvailabilityAction Action
+        public Cfm2sm_proto.AvailabilityAction Action
         {
             get;
             set;
@@ -3629,6 +4385,12 @@ namespace CapnpGen
             set;
         }
 
+        public ushort InstGroupNum
+        {
+            get;
+            set;
+        }
+
         public struct READER
         {
             readonly DeserializerState ctx;
@@ -3641,11 +4403,12 @@ namespace CapnpGen
             public static implicit operator DeserializerState(READER reader) => reader.ctx;
             public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
             public bool Success => ctx.ReadDataBool(0UL, false);
-            public CapnpGen.AvailabilityAction Action => (CapnpGen.AvailabilityAction)ctx.ReadDataUShort(16UL, (ushort)0);
+            public Cfm2sm_proto.AvailabilityAction Action => (Cfm2sm_proto.AvailabilityAction)ctx.ReadDataUShort(16UL, (ushort)0);
             public ushort InstNum => ctx.ReadDataUShort(32UL, (ushort)0);
             public int SecurityId => ctx.ReadDataInt(64UL, 0);
             public string Symbol => ctx.ReadText(0, null);
             public string Error => ctx.ReadText(1, null);
+            public ushort InstGroupNum => ctx.ReadDataUShort(48UL, (ushort)0);
         }
 
         public class WRITER : SerializerState
@@ -3661,9 +4424,9 @@ namespace CapnpGen
                 set => this.WriteData(0UL, value, false);
             }
 
-            public CapnpGen.AvailabilityAction Action
+            public Cfm2sm_proto.AvailabilityAction Action
             {
-                get => (CapnpGen.AvailabilityAction)this.ReadDataUShort(16UL, (ushort)0);
+                get => (Cfm2sm_proto.AvailabilityAction)this.ReadDataUShort(16UL, (ushort)0);
                 set => this.WriteData(16UL, (ushort)value, (ushort)0);
             }
 
@@ -3689,6 +4452,12 @@ namespace CapnpGen
             {
                 get => this.ReadText(1, null);
                 set => this.WriteText(1, value, null);
+            }
+
+            public ushort InstGroupNum
+            {
+                get => this.ReadDataUShort(48UL, (ushort)0);
+                set => this.WriteData(48UL, value, (ushort)0);
             }
         }
     }
@@ -3725,13 +4494,13 @@ namespace CapnpGen
         {
         }
 
-        public CapnpGen.FirehoseAction Action
+        public Cfm2sm_proto.FirehoseAction Action
         {
             get;
             set;
         }
 
-        = CapnpGen.FirehoseAction.subscribe;
+        = Cfm2sm_proto.FirehoseAction.subscribe;
         public struct READER
         {
             readonly DeserializerState ctx;
@@ -3743,7 +4512,7 @@ namespace CapnpGen
             public static READER create(DeserializerState ctx) => new READER(ctx);
             public static implicit operator DeserializerState(READER reader) => reader.ctx;
             public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
-            public CapnpGen.FirehoseAction Action => (CapnpGen.FirehoseAction)ctx.ReadDataUShort(0UL, (ushort)1);
+            public Cfm2sm_proto.FirehoseAction Action => (Cfm2sm_proto.FirehoseAction)ctx.ReadDataUShort(0UL, (ushort)1);
         }
 
         public class WRITER : SerializerState
@@ -3753,9 +4522,9 @@ namespace CapnpGen
                 this.SetStruct(1, 0);
             }
 
-            public CapnpGen.FirehoseAction Action
+            public Cfm2sm_proto.FirehoseAction Action
             {
-                get => (CapnpGen.FirehoseAction)this.ReadDataUShort(0UL, (ushort)1);
+                get => (Cfm2sm_proto.FirehoseAction)this.ReadDataUShort(0UL, (ushort)1);
                 set => this.WriteData(0UL, (ushort)value, (ushort)1);
             }
         }
@@ -3848,13 +4617,13 @@ namespace CapnpGen
         {
         }
 
-        public CapnpGen.SubscriptionAction Action
+        public Cfm2sm_proto.SubscriptionAction Action
         {
             get;
             set;
         }
 
-        = CapnpGen.SubscriptionAction.subscribeAndGetState;
+        = Cfm2sm_proto.SubscriptionAction.subscribeAndGetState;
         public IReadOnlyList<int> SecurityIdList
         {
             get => _which == WHICH.SecurityIdList ? (IReadOnlyList<int>)_content : null;
@@ -3875,7 +4644,7 @@ namespace CapnpGen
             }
         }
 
-        public CapnpGen.BookSideOrdersKind OrdersKind
+        public Cfm2sm_proto.BookSideOrdersKind OrdersKind
         {
             get;
             set;
@@ -3899,10 +4668,10 @@ namespace CapnpGen
             public static implicit operator DeserializerState(READER reader) => reader.ctx;
             public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
             public WHICH which => (WHICH)ctx.ReadDataUShort(16U, (ushort)0);
-            public CapnpGen.SubscriptionAction Action => (CapnpGen.SubscriptionAction)ctx.ReadDataUShort(0UL, (ushort)2);
+            public Cfm2sm_proto.SubscriptionAction Action => (Cfm2sm_proto.SubscriptionAction)ctx.ReadDataUShort(0UL, (ushort)2);
             public IReadOnlyList<int> SecurityIdList => which == WHICH.SecurityIdList ? ctx.ReadList(0).CastInt() : default;
             public IReadOnlyList<ushort> InstList => which == WHICH.InstList ? ctx.ReadList(0).CastUShort() : default;
-            public CapnpGen.BookSideOrdersKind OrdersKind => (CapnpGen.BookSideOrdersKind)ctx.ReadDataUShort(32UL, (ushort)0);
+            public Cfm2sm_proto.BookSideOrdersKind OrdersKind => (Cfm2sm_proto.BookSideOrdersKind)ctx.ReadDataUShort(32UL, (ushort)0);
             public IReadOnlyList<ushort> DepthList => ctx.ReadList(1).CastUShort();
         }
 
@@ -3919,9 +4688,9 @@ namespace CapnpGen
                 set => this.WriteData(16U, (ushort)value, (ushort)0);
             }
 
-            public CapnpGen.SubscriptionAction Action
+            public Cfm2sm_proto.SubscriptionAction Action
             {
-                get => (CapnpGen.SubscriptionAction)this.ReadDataUShort(0UL, (ushort)2);
+                get => (Cfm2sm_proto.SubscriptionAction)this.ReadDataUShort(0UL, (ushort)2);
                 set => this.WriteData(0UL, (ushort)value, (ushort)2);
             }
 
@@ -3937,9 +4706,9 @@ namespace CapnpGen
                 set => Link(0, value);
             }
 
-            public CapnpGen.BookSideOrdersKind OrdersKind
+            public Cfm2sm_proto.BookSideOrdersKind OrdersKind
             {
-                get => (CapnpGen.BookSideOrdersKind)this.ReadDataUShort(32UL, (ushort)0);
+                get => (Cfm2sm_proto.BookSideOrdersKind)this.ReadDataUShort(32UL, (ushort)0);
                 set => this.WriteData(32UL, (ushort)value, (ushort)0);
             }
 
@@ -4037,7 +4806,7 @@ namespace CapnpGen
         {
         }
 
-        public CapnpGen.CmeFeedClientSubscribeResult Result
+        public Cfm2sm_proto.CmeFeedClientSubscribeResult Result
         {
             get;
             set;
@@ -4075,7 +4844,7 @@ namespace CapnpGen
             public static implicit operator DeserializerState(READER reader) => reader.ctx;
             public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
             public WHICH which => (WHICH)ctx.ReadDataUShort(16U, (ushort)0);
-            public CapnpGen.CmeFeedClientSubscribeResult Result => (CapnpGen.CmeFeedClientSubscribeResult)ctx.ReadDataUShort(0UL, (ushort)0);
+            public Cfm2sm_proto.CmeFeedClientSubscribeResult Result => (Cfm2sm_proto.CmeFeedClientSubscribeResult)ctx.ReadDataUShort(0UL, (ushort)0);
             public IReadOnlyList<int> BadSecurityIdList => which == WHICH.BadSecurityIdList ? ctx.ReadList(0).CastInt() : default;
             public IReadOnlyList<ushort> BadInstList => which == WHICH.BadInstList ? ctx.ReadList(0).CastUShort() : default;
         }
@@ -4093,9 +4862,9 @@ namespace CapnpGen
                 set => this.WriteData(16U, (ushort)value, (ushort)0);
             }
 
-            public CapnpGen.CmeFeedClientSubscribeResult Result
+            public Cfm2sm_proto.CmeFeedClientSubscribeResult Result
             {
-                get => (CapnpGen.CmeFeedClientSubscribeResult)this.ReadDataUShort(0UL, (ushort)0);
+                get => (Cfm2sm_proto.CmeFeedClientSubscribeResult)this.ReadDataUShort(0UL, (ushort)0);
                 set => this.WriteData(0UL, (ushort)value, (ushort)0);
             }
 
@@ -4123,10 +4892,10 @@ namespace CapnpGen
             AssetKind = reader.AssetKind;
             SecuritySubtype = reader.SecuritySubtype;
             SecurityGroupCode = reader.SecurityGroupCode;
-            ActivationTimeLb = CapnpSerializable.Create<CapnpGen.UtcTime>(reader.ActivationTimeLb);
-            ActivationTimeUb = CapnpSerializable.Create<CapnpGen.UtcTime>(reader.ActivationTimeUb);
-            LastEligibleTradeTimeLb = CapnpSerializable.Create<CapnpGen.UtcTime>(reader.LastEligibleTradeTimeLb);
-            LastEligibleTradeTimeUb = CapnpSerializable.Create<CapnpGen.UtcTime>(reader.LastEligibleTradeTimeUb);
+            ActivationTimeLb = CapnpSerializable.Create<Cfm2sm_proto.UtcTime>(reader.ActivationTimeLb);
+            ActivationTimeUb = CapnpSerializable.Create<Cfm2sm_proto.UtcTime>(reader.ActivationTimeUb);
+            LastEligibleTradeTimeLb = CapnpSerializable.Create<Cfm2sm_proto.UtcTime>(reader.LastEligibleTradeTimeLb);
+            LastEligibleTradeTimeUb = CapnpSerializable.Create<Cfm2sm_proto.UtcTime>(reader.LastEligibleTradeTimeUb);
             applyDefaults();
         }
 
@@ -4150,13 +4919,13 @@ namespace CapnpGen
         {
         }
 
-        public CapnpGen.CmeAssetKind AssetKind
+        public Cfm2sm_proto.CmeAssetKind AssetKind
         {
             get;
             set;
         }
 
-        public CapnpGen.CmeSecuritySubtype SecuritySubtype
+        public Cfm2sm_proto.CmeSecuritySubtype SecuritySubtype
         {
             get;
             set;
@@ -4168,25 +4937,25 @@ namespace CapnpGen
             set;
         }
 
-        public CapnpGen.UtcTime ActivationTimeLb
+        public Cfm2sm_proto.UtcTime ActivationTimeLb
         {
             get;
             set;
         }
 
-        public CapnpGen.UtcTime ActivationTimeUb
+        public Cfm2sm_proto.UtcTime ActivationTimeUb
         {
             get;
             set;
         }
 
-        public CapnpGen.UtcTime LastEligibleTradeTimeLb
+        public Cfm2sm_proto.UtcTime LastEligibleTradeTimeLb
         {
             get;
             set;
         }
 
-        public CapnpGen.UtcTime LastEligibleTradeTimeUb
+        public Cfm2sm_proto.UtcTime LastEligibleTradeTimeUb
         {
             get;
             set;
@@ -4203,13 +4972,13 @@ namespace CapnpGen
             public static READER create(DeserializerState ctx) => new READER(ctx);
             public static implicit operator DeserializerState(READER reader) => reader.ctx;
             public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
-            public CapnpGen.CmeAssetKind AssetKind => (CapnpGen.CmeAssetKind)ctx.ReadDataUShort(0UL, (ushort)0);
-            public CapnpGen.CmeSecuritySubtype SecuritySubtype => (CapnpGen.CmeSecuritySubtype)ctx.ReadDataUShort(16UL, (ushort)0);
+            public Cfm2sm_proto.CmeAssetKind AssetKind => (Cfm2sm_proto.CmeAssetKind)ctx.ReadDataUShort(0UL, (ushort)0);
+            public Cfm2sm_proto.CmeSecuritySubtype SecuritySubtype => (Cfm2sm_proto.CmeSecuritySubtype)ctx.ReadDataUShort(16UL, (ushort)0);
             public string SecurityGroupCode => ctx.ReadText(0, null);
-            public CapnpGen.UtcTime.READER ActivationTimeLb => ctx.ReadStruct(1, CapnpGen.UtcTime.READER.create);
-            public CapnpGen.UtcTime.READER ActivationTimeUb => ctx.ReadStruct(2, CapnpGen.UtcTime.READER.create);
-            public CapnpGen.UtcTime.READER LastEligibleTradeTimeLb => ctx.ReadStruct(3, CapnpGen.UtcTime.READER.create);
-            public CapnpGen.UtcTime.READER LastEligibleTradeTimeUb => ctx.ReadStruct(4, CapnpGen.UtcTime.READER.create);
+            public Cfm2sm_proto.UtcTime.READER ActivationTimeLb => ctx.ReadStruct(1, Cfm2sm_proto.UtcTime.READER.create);
+            public Cfm2sm_proto.UtcTime.READER ActivationTimeUb => ctx.ReadStruct(2, Cfm2sm_proto.UtcTime.READER.create);
+            public Cfm2sm_proto.UtcTime.READER LastEligibleTradeTimeLb => ctx.ReadStruct(3, Cfm2sm_proto.UtcTime.READER.create);
+            public Cfm2sm_proto.UtcTime.READER LastEligibleTradeTimeUb => ctx.ReadStruct(4, Cfm2sm_proto.UtcTime.READER.create);
         }
 
         public class WRITER : SerializerState
@@ -4219,15 +4988,15 @@ namespace CapnpGen
                 this.SetStruct(1, 5);
             }
 
-            public CapnpGen.CmeAssetKind AssetKind
+            public Cfm2sm_proto.CmeAssetKind AssetKind
             {
-                get => (CapnpGen.CmeAssetKind)this.ReadDataUShort(0UL, (ushort)0);
+                get => (Cfm2sm_proto.CmeAssetKind)this.ReadDataUShort(0UL, (ushort)0);
                 set => this.WriteData(0UL, (ushort)value, (ushort)0);
             }
 
-            public CapnpGen.CmeSecuritySubtype SecuritySubtype
+            public Cfm2sm_proto.CmeSecuritySubtype SecuritySubtype
             {
-                get => (CapnpGen.CmeSecuritySubtype)this.ReadDataUShort(16UL, (ushort)0);
+                get => (Cfm2sm_proto.CmeSecuritySubtype)this.ReadDataUShort(16UL, (ushort)0);
                 set => this.WriteData(16UL, (ushort)value, (ushort)0);
             }
 
@@ -4237,27 +5006,27 @@ namespace CapnpGen
                 set => this.WriteText(0, value, null);
             }
 
-            public CapnpGen.UtcTime.WRITER ActivationTimeLb
+            public Cfm2sm_proto.UtcTime.WRITER ActivationTimeLb
             {
-                get => BuildPointer<CapnpGen.UtcTime.WRITER>(1);
+                get => BuildPointer<Cfm2sm_proto.UtcTime.WRITER>(1);
                 set => Link(1, value);
             }
 
-            public CapnpGen.UtcTime.WRITER ActivationTimeUb
+            public Cfm2sm_proto.UtcTime.WRITER ActivationTimeUb
             {
-                get => BuildPointer<CapnpGen.UtcTime.WRITER>(2);
+                get => BuildPointer<Cfm2sm_proto.UtcTime.WRITER>(2);
                 set => Link(2, value);
             }
 
-            public CapnpGen.UtcTime.WRITER LastEligibleTradeTimeLb
+            public Cfm2sm_proto.UtcTime.WRITER LastEligibleTradeTimeLb
             {
-                get => BuildPointer<CapnpGen.UtcTime.WRITER>(3);
+                get => BuildPointer<Cfm2sm_proto.UtcTime.WRITER>(3);
                 set => Link(3, value);
             }
 
-            public CapnpGen.UtcTime.WRITER LastEligibleTradeTimeUb
+            public Cfm2sm_proto.UtcTime.WRITER LastEligibleTradeTimeUb
             {
-                get => BuildPointer<CapnpGen.UtcTime.WRITER>(4);
+                get => BuildPointer<Cfm2sm_proto.UtcTime.WRITER>(4);
                 set => Link(4, value);
             }
         }
@@ -4280,7 +5049,7 @@ namespace CapnpGen
             switch (reader.which)
             {
                 case WHICH.Specs:
-                    Specs = reader.Specs?.ToReadOnlyList(_ => CapnpSerializable.Create<CapnpGen.CmeFuturesDefinitionSpec>(_));
+                    Specs = reader.Specs?.ToReadOnlyList(_ => CapnpSerializable.Create<Cfm2sm_proto.CmeFuturesDefinitionSpec>(_));
                     break;
                 case WHICH.Symbols:
                     Symbols = reader.Symbols;
@@ -4338,9 +5107,9 @@ namespace CapnpGen
         {
         }
 
-        public IReadOnlyList<CapnpGen.CmeFuturesDefinitionSpec> Specs
+        public IReadOnlyList<Cfm2sm_proto.CmeFuturesDefinitionSpec> Specs
         {
-            get => _which == WHICH.Specs ? (IReadOnlyList<CapnpGen.CmeFuturesDefinitionSpec>)_content : null;
+            get => _which == WHICH.Specs ? (IReadOnlyList<Cfm2sm_proto.CmeFuturesDefinitionSpec>)_content : null;
             set
             {
                 _which = WHICH.Specs;
@@ -4376,7 +5145,7 @@ namespace CapnpGen
             public static implicit operator DeserializerState(READER reader) => reader.ctx;
             public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
             public WHICH which => (WHICH)ctx.ReadDataUShort(0U, (ushort)0);
-            public IReadOnlyList<CapnpGen.CmeFuturesDefinitionSpec.READER> Specs => which == WHICH.Specs ? ctx.ReadList(0).Cast(CapnpGen.CmeFuturesDefinitionSpec.READER.create) : default;
+            public IReadOnlyList<Cfm2sm_proto.CmeFuturesDefinitionSpec.READER> Specs => which == WHICH.Specs ? ctx.ReadList(0).Cast(Cfm2sm_proto.CmeFuturesDefinitionSpec.READER.create) : default;
             public IReadOnlyList<string> Symbols => which == WHICH.Symbols ? ctx.ReadList(0).CastText2() : default;
             public bool AvailableOnly => ctx.ReadDataBool(16UL, false);
         }
@@ -4394,9 +5163,9 @@ namespace CapnpGen
                 set => this.WriteData(0U, (ushort)value, (ushort)0);
             }
 
-            public ListOfStructsSerializer<CapnpGen.CmeFuturesDefinitionSpec.WRITER> Specs
+            public ListOfStructsSerializer<Cfm2sm_proto.CmeFuturesDefinitionSpec.WRITER> Specs
             {
-                get => which == WHICH.Specs ? BuildPointer<ListOfStructsSerializer<CapnpGen.CmeFuturesDefinitionSpec.WRITER>>(0) : default;
+                get => which == WHICH.Specs ? BuildPointer<ListOfStructsSerializer<Cfm2sm_proto.CmeFuturesDefinitionSpec.WRITER>>(0) : default;
                 set => Link(0, value);
             }
 
@@ -4489,7 +5258,7 @@ namespace CapnpGen
         {
         }
 
-        public CapnpGen.AvailabilityAction Action
+        public Cfm2sm_proto.AvailabilityAction Action
         {
             get;
             set;
@@ -4527,7 +5296,7 @@ namespace CapnpGen
             public static implicit operator DeserializerState(READER reader) => reader.ctx;
             public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
             public WHICH which => (WHICH)ctx.ReadDataUShort(16U, (ushort)0);
-            public CapnpGen.AvailabilityAction Action => (CapnpGen.AvailabilityAction)ctx.ReadDataUShort(0UL, (ushort)0);
+            public Cfm2sm_proto.AvailabilityAction Action => (Cfm2sm_proto.AvailabilityAction)ctx.ReadDataUShort(0UL, (ushort)0);
             public string Symbol => which == WHICH.Symbol ? ctx.ReadText(0, null) : default;
             public int SecurityId => which == WHICH.SecurityId ? ctx.ReadDataInt(32UL, 0) : default;
         }
@@ -4545,9 +5314,9 @@ namespace CapnpGen
                 set => this.WriteData(16U, (ushort)value, (ushort)0);
             }
 
-            public CapnpGen.AvailabilityAction Action
+            public Cfm2sm_proto.AvailabilityAction Action
             {
-                get => (CapnpGen.AvailabilityAction)this.ReadDataUShort(0UL, (ushort)0);
+                get => (Cfm2sm_proto.AvailabilityAction)this.ReadDataUShort(0UL, (ushort)0);
                 set => this.WriteData(0UL, (ushort)value, (ushort)0);
             }
 
@@ -4629,7 +5398,7 @@ namespace CapnpGen
         {
         }
 
-        public CapnpGen.FeedApiRejectReason ReasonCode
+        public Cfm2sm_proto.FeedApiRejectReason ReasonCode
         {
             get;
             set;
@@ -4652,7 +5421,7 @@ namespace CapnpGen
             public static READER create(DeserializerState ctx) => new READER(ctx);
             public static implicit operator DeserializerState(READER reader) => reader.ctx;
             public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
-            public CapnpGen.FeedApiRejectReason ReasonCode => (CapnpGen.FeedApiRejectReason)ctx.ReadDataUShort(0UL, (ushort)0);
+            public Cfm2sm_proto.FeedApiRejectReason ReasonCode => (Cfm2sm_proto.FeedApiRejectReason)ctx.ReadDataUShort(0UL, (ushort)0);
             public string ReasonText => ctx.ReadText(0, null);
         }
 
@@ -4663,9 +5432,9 @@ namespace CapnpGen
                 this.SetStruct(1, 1);
             }
 
-            public CapnpGen.FeedApiRejectReason ReasonCode
+            public Cfm2sm_proto.FeedApiRejectReason ReasonCode
             {
-                get => (CapnpGen.FeedApiRejectReason)this.ReadDataUShort(0UL, (ushort)0);
+                get => (Cfm2sm_proto.FeedApiRejectReason)this.ReadDataUShort(0UL, (ushort)0);
                 set => this.WriteData(0UL, (ushort)value, (ushort)0);
             }
 
@@ -4686,7 +5455,7 @@ namespace CapnpGen
             var reader = READER.create(arg_);
             User = reader.User;
             Password = reader.Password;
-            SetSymbolList = CapnpSerializable.Create<CapnpGen.FeedApiSetSymbolList>(reader.SetSymbolList);
+            SetSymbolList = CapnpSerializable.Create<Cfm2sm_proto.FeedApiSetSymbolList>(reader.SetSymbolList);
             applyDefaults();
         }
 
@@ -4718,7 +5487,7 @@ namespace CapnpGen
             set;
         }
 
-        public CapnpGen.FeedApiSetSymbolList SetSymbolList
+        public Cfm2sm_proto.FeedApiSetSymbolList SetSymbolList
         {
             get;
             set;
@@ -4737,7 +5506,7 @@ namespace CapnpGen
             public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
             public string User => ctx.ReadText(0, null);
             public string Password => ctx.ReadText(1, null);
-            public CapnpGen.FeedApiSetSymbolList.READER SetSymbolList => ctx.ReadStruct(2, CapnpGen.FeedApiSetSymbolList.READER.create);
+            public Cfm2sm_proto.FeedApiSetSymbolList.READER SetSymbolList => ctx.ReadStruct(2, Cfm2sm_proto.FeedApiSetSymbolList.READER.create);
         }
 
         public class WRITER : SerializerState
@@ -4759,9 +5528,9 @@ namespace CapnpGen
                 set => this.WriteText(1, value, null);
             }
 
-            public CapnpGen.FeedApiSetSymbolList.WRITER SetSymbolList
+            public Cfm2sm_proto.FeedApiSetSymbolList.WRITER SetSymbolList
             {
-                get => BuildPointer<CapnpGen.FeedApiSetSymbolList.WRITER>(2);
+                get => BuildPointer<Cfm2sm_proto.FeedApiSetSymbolList.WRITER>(2);
                 set => Link(2, value);
             }
         }
@@ -4796,19 +5565,19 @@ namespace CapnpGen
         {
         }
 
-        public CapnpGen.FeedApiLoginResult Result
+        public Cfm2sm_proto.FeedApiLoginResult Result
         {
             get;
             set;
         }
 
-        public CapnpGen.FeedApiSetSymbolListResult ListResult
+        public Cfm2sm_proto.FeedApiSetSymbolListResult ListResult
         {
             get;
             set;
         }
 
-        public CapnpGen.FeedApiEnvironment FeedEnv
+        public Cfm2sm_proto.FeedApiEnvironment FeedEnv
         {
             get;
             set;
@@ -4825,9 +5594,9 @@ namespace CapnpGen
             public static READER create(DeserializerState ctx) => new READER(ctx);
             public static implicit operator DeserializerState(READER reader) => reader.ctx;
             public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
-            public CapnpGen.FeedApiLoginResult Result => (CapnpGen.FeedApiLoginResult)ctx.ReadDataUShort(0UL, (ushort)0);
-            public CapnpGen.FeedApiSetSymbolListResult ListResult => (CapnpGen.FeedApiSetSymbolListResult)ctx.ReadDataUShort(16UL, (ushort)0);
-            public CapnpGen.FeedApiEnvironment FeedEnv => (CapnpGen.FeedApiEnvironment)ctx.ReadDataUShort(32UL, (ushort)0);
+            public Cfm2sm_proto.FeedApiLoginResult Result => (Cfm2sm_proto.FeedApiLoginResult)ctx.ReadDataUShort(0UL, (ushort)0);
+            public Cfm2sm_proto.FeedApiSetSymbolListResult ListResult => (Cfm2sm_proto.FeedApiSetSymbolListResult)ctx.ReadDataUShort(16UL, (ushort)0);
+            public Cfm2sm_proto.FeedApiEnvironment FeedEnv => (Cfm2sm_proto.FeedApiEnvironment)ctx.ReadDataUShort(32UL, (ushort)0);
         }
 
         public class WRITER : SerializerState
@@ -4837,21 +5606,21 @@ namespace CapnpGen
                 this.SetStruct(1, 0);
             }
 
-            public CapnpGen.FeedApiLoginResult Result
+            public Cfm2sm_proto.FeedApiLoginResult Result
             {
-                get => (CapnpGen.FeedApiLoginResult)this.ReadDataUShort(0UL, (ushort)0);
+                get => (Cfm2sm_proto.FeedApiLoginResult)this.ReadDataUShort(0UL, (ushort)0);
                 set => this.WriteData(0UL, (ushort)value, (ushort)0);
             }
 
-            public CapnpGen.FeedApiSetSymbolListResult ListResult
+            public Cfm2sm_proto.FeedApiSetSymbolListResult ListResult
             {
-                get => (CapnpGen.FeedApiSetSymbolListResult)this.ReadDataUShort(16UL, (ushort)0);
+                get => (Cfm2sm_proto.FeedApiSetSymbolListResult)this.ReadDataUShort(16UL, (ushort)0);
                 set => this.WriteData(16UL, (ushort)value, (ushort)0);
             }
 
-            public CapnpGen.FeedApiEnvironment FeedEnv
+            public Cfm2sm_proto.FeedApiEnvironment FeedEnv
             {
-                get => (CapnpGen.FeedApiEnvironment)this.ReadDataUShort(32UL, (ushort)0);
+                get => (Cfm2sm_proto.FeedApiEnvironment)this.ReadDataUShort(32UL, (ushort)0);
                 set => this.WriteData(32UL, (ushort)value, (ushort)0);
             }
         }
@@ -4957,7 +5726,7 @@ namespace CapnpGen
         {
         }
 
-        public CapnpGen.FeedApiSetSymbolListResult ListResult
+        public Cfm2sm_proto.FeedApiSetSymbolListResult ListResult
         {
             get;
             set;
@@ -4974,7 +5743,7 @@ namespace CapnpGen
             public static READER create(DeserializerState ctx) => new READER(ctx);
             public static implicit operator DeserializerState(READER reader) => reader.ctx;
             public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
-            public CapnpGen.FeedApiSetSymbolListResult ListResult => (CapnpGen.FeedApiSetSymbolListResult)ctx.ReadDataUShort(0UL, (ushort)0);
+            public Cfm2sm_proto.FeedApiSetSymbolListResult ListResult => (Cfm2sm_proto.FeedApiSetSymbolListResult)ctx.ReadDataUShort(0UL, (ushort)0);
         }
 
         public class WRITER : SerializerState
@@ -4984,9 +5753,9 @@ namespace CapnpGen
                 this.SetStruct(1, 0);
             }
 
-            public CapnpGen.FeedApiSetSymbolListResult ListResult
+            public Cfm2sm_proto.FeedApiSetSymbolListResult ListResult
             {
-                get => (CapnpGen.FeedApiSetSymbolListResult)this.ReadDataUShort(0UL, (ushort)0);
+                get => (Cfm2sm_proto.FeedApiSetSymbolListResult)this.ReadDataUShort(0UL, (ushort)0);
                 set => this.WriteData(0UL, (ushort)value, (ushort)0);
             }
         }
