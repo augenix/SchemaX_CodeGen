@@ -61,7 +61,7 @@ public static class EmitterRunner
         
         DtsEmitter.PrecomputeSizes(structs);
 
-        foreach (var meta in structs.Where(m =>m.IsResponse))
+        foreach (var meta in structs)// .Where(m =>m.IsMessage))
         {
             DtsEmitter.EmitDts(sb, meta, structs);
             sb.AppendLine();
@@ -82,7 +82,7 @@ public static class EmitterRunner
         sb.AppendLine("    private static int count;");
         sb.AppendLine();
 
-        foreach (var meta in structs.Where(m => m.IsResponse))
+        foreach (var meta in structs) //.Where(m => m.IsMessage))
         {
             DtsFactoryEmitter.EmitFromDecoder(sb, meta, structs);
         }

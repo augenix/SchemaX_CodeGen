@@ -1,33 +1,5 @@
 namespace SchemaX_CodeGen.Generated.DataFeedApi;
 
-public enum BookSideKind : ushort
-{
-    invalid,
-    unknown,
-    bid,
-    ask,
-}
-
-
-public enum BookSideOrdersKind : ushort
-{
-    invalid,
-    direct,
-    implied,
-    combined,
-    both,
-}
-
-
-public enum AggressorSideKind : ushort
-{
-    invalid,
-    none,
-    buy,
-    sell,
-}
-
-
 public enum TradingStatus : ushort
 {
     preOpen,
@@ -111,6 +83,10 @@ public enum TradingStatus : ushort
     liquidityProviderBidOnly,
     unreliable,
     recovered,
+    auctionUpdate,
+    startOfRandomEnd,
+    endOfRandomEnd,
+    delayAuction,
     unknown,
 }
 
@@ -172,6 +148,17 @@ public enum TradingEvent : ushort
     lULDPriceBand,
     startOfAuction,
     endOfAuction,
+    tradingClosed,
+    auction,
+    auctionExtended,
+    marketOpen,
+    marketClose,
+    startOfTrading,
+    endOfTrading,
+    startOfOrderReception,
+    startOfUnitTrading30mins,
+    openingAuction,
+    startOfAuctionUnitTrading,
     unknown,
 }
 
@@ -186,6 +173,34 @@ public enum BookStatus : ushort
 }
 
 
+public enum BookSideKind : ushort
+{
+    invalid,
+    unknown,
+    bid,
+    ask,
+}
+
+
+public enum BookSideOrdersKind : ushort
+{
+    invalid,
+    direct,
+    implied,
+    combined,
+    both,
+}
+
+
+public enum AggressorSideKind : ushort
+{
+    invalid,
+    none,
+    buy,
+    sell,
+}
+
+
 public enum CmeFeedManagerUpdateKind : ushort
 {
     GroupStatus = 0,
@@ -193,25 +208,28 @@ public enum CmeFeedManagerUpdateKind : ushort
     IndicativeOpening = 2,
     OpeningPrice = 3,
     Settlement = 4,
-    Trade = 5,
-    Side = 6,
-    LastMessageForEvent = 7,
-    FinishedAll = 8,
-    Firehose = 9,
-    Subscribe = 10,
-    SubscribeResp = 11,
-    InstState = 12,
-    DefinitionResp = 13,
-    DefinitionReq = 14,
-    SymbolAvailReq = 15,
-    SymbolAvailResp = 16,
-    FeedApiLogin = 17,
-    FeedApiLoginResp = 18,
-    FeedApiReject = 19,
-    FeedApiSetSymbolList = 20,
-    FeedApiSetSymbolListResp = 21,
-    FeedApiGetSymbolListContents = 22,
-    FeedApiGetSymbolListContentsResp = 23,
+    Volume = 5,
+    HighLow = 6,
+    DailyStats = 7,
+    Trade = 8,
+    Side = 9,
+    LastMessageForEvent = 10,
+    FinishedAll = 11,
+    Firehose = 12,
+    Subscribe = 13,
+    SubscribeResp = 14,
+    InstState = 15,
+    DefinitionResp = 16,
+    DefinitionReq = 17,
+    SymbolAvailReq = 18,
+    SymbolAvailResp = 19,
+    FeedApiLogin = 20,
+    FeedApiLoginResp = 21,
+    FeedApiReject = 22,
+    FeedApiSetSymbolList = 23,
+    FeedApiSetSymbolListResp = 24,
+    FeedApiGetSymbolListContents = 25,
+    FeedApiGetSymbolListContentsResp = 26,
     undefined = 65535,
 }
 

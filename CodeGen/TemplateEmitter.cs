@@ -17,7 +17,7 @@ namespace SchemaX_CodeGen.CodeGen
             
             foreach (var meta in structs)
             {
-                if (meta.IsRequest )
+                if (true )
                 {
                     var name = meta.Name;
                     var templateName = name + "Template";
@@ -63,25 +63,6 @@ namespace SchemaX_CodeGen.CodeGen
                     sb.AppendLine("    }");
                     sb.AppendLine();
                     
-                    // // GetWireFrame method for test purposes
-                    // sb.AppendLine("    [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]");
-                    // sb.AppendLine($"    public Span<ulong> GetWireFrame()");
-                    // sb.AppendLine("    {");
-                    // sb.AppendLine("        var buf = arena.Buffer;");
-                    // sb.AppendLine("        var segCount = arena.SegmentCount;");
-                    // sb.AppendLine("        var headerWords = 3 + (segCount - 1 + 1) / 2;");
-                    // sb.AppendLine("        var start = arena.ReservedWords - headerWords;");
-                    // sb.AppendLine("        arena.IncrementWordCount(0, 2);");
-                    // sb.AppendLine("        buf[start] = ((ulong)(arena.GetWordCount(0)) << 32) | (uint)(segCount - 1);");
-                    // sb.AppendLine();
-                    // sb.AppendLine("        var w = start + 1;");
-                    // sb.AppendLine("        for (int i = 1; i < segCount; i += 2)");
-                    // sb.AppendLine("            buf[w++] = (ulong)arena.GetWordCount(i + 1) << 32 | (uint) arena.GetWordCount(i);");
-                    // sb.AppendLine("        buf[w++] = Root;");
-                    // sb.AppendLine("        buf[w] = UnionTag;");
-                    // sb.AppendLine("        return buf.AsSpan(start, arena.GetWordCount(0) + headerWords);");
-                    // sb.AppendLine("    }");
-                    // sb.AppendLine();
                     // Get arena and meta data for testing purposes.
 
                     sb.AppendLine($"    public ArenaMeta Meta => arena.Meta;");

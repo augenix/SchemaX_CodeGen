@@ -265,16 +265,30 @@ namespace SchemaX_CodeGen.CodeGen
         private static void ClassifyMessage(StructMeta meta)
         {
             var n = meta.Name.TrimEnd(';');
-            if ((n.StartsWith("CmeFeedClient") && !n.EndsWith("Response")) ||
-                (n.Contains("Request") && !n.EndsWith("Response")) ||
-                (n.StartsWith("FeedApi") && !n.EndsWith("Response") && !n.EndsWith("Reject")) ||
-                n.EndsWith("Request") || n.Contains("Command"))
+
+            bool looksLikeMessage =
+                n.Contains("Request") ||
+                n.Contains("Response") ||
+                n.Contains("Command") ||
+                n.StartsWith("FeedApi") ||
+                n.StartsWith("CmeFeedClient");
+
+            if (!looksLikeMessage)
             {
-                meta.IsRequest = true;
+                meta.IsMessage = false;
+                meta.IsRequest = false;
+                meta.IsResponse = false;
                 return;
             }
 
-            meta.IsResponse = true;
+            meta.IsMessage = true;
+            meta.IsRequest =
+                (n.Contains("Request") && !n.EndsWith("Response")) ||
+                n.EndsWith("Command") ||
+                (n.StartsWith("FeedApi") && !n.EndsWith("Response") && !n.EndsWith("Reject")) ||
+                (n.StartsWith("CmeFeedClient") && !n.EndsWith("Response"));
+
+            meta.IsResponse = !meta.IsRequest;
         }
 
         private static string NormalizeListType(string type)
