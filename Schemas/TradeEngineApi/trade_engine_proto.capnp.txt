@@ -1,0 +1,992 @@
+using Capnp;
+using Capnp.Rpc;
+using System;
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace CapnpGen
+{
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0x9f74278c1478c430UL)]
+    public enum AggressorSideKind : ushort
+    {
+        invalid,
+        unknown,
+        buy,
+        sell
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0x8861846a16a76c65UL)]
+    public enum EventKind : ushort
+    {
+        side,
+        trade
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0x84ee45eacc00ee2eUL)]
+    public class TradeEngineUpdate : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0x84ee45eacc00ee2eUL;
+        public enum WHICH : ushort
+        {
+            LamPod = 0,
+            ScorePod = 1,
+            BarPod = 2,
+            Trace = 3,
+            Error = 4,
+            undefined = 65535
+        }
+
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            switch (reader.which)
+            {
+                case WHICH.LamPod:
+                    LamPod = CapnpSerializable.Create<CapnpGen.TradeEngineLamPod>(reader.LamPod);
+                    break;
+                case WHICH.ScorePod:
+                    ScorePod = CapnpSerializable.Create<CapnpGen.TradeEngineScorePod>(reader.ScorePod);
+                    break;
+                case WHICH.BarPod:
+                    BarPod = CapnpSerializable.Create<CapnpGen.TradeEngineBarPod>(reader.BarPod);
+                    break;
+                case WHICH.Trace:
+                    Trace = CapnpSerializable.Create<CapnpGen.TradeEngineTrace>(reader.Trace);
+                    break;
+                case WHICH.Error:
+                    Error = CapnpSerializable.Create<CapnpGen.TradeEngineError>(reader.Error);
+                    break;
+            }
+
+            applyDefaults();
+        }
+
+        private WHICH _which = WHICH.undefined;
+        private object _content;
+        public WHICH which
+        {
+            get => _which;
+            set
+            {
+                if (value == _which)
+                    return;
+                _which = value;
+                switch (value)
+                {
+                    case WHICH.LamPod:
+                        _content = null;
+                        break;
+                    case WHICH.ScorePod:
+                        _content = null;
+                        break;
+                    case WHICH.BarPod:
+                        _content = null;
+                        break;
+                    case WHICH.Trace:
+                        _content = null;
+                        break;
+                    case WHICH.Error:
+                        _content = null;
+                        break;
+                }
+            }
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.which = which;
+            switch (which)
+            {
+                case WHICH.LamPod:
+                    LamPod?.serialize(writer.LamPod);
+                    break;
+                case WHICH.ScorePod:
+                    ScorePod?.serialize(writer.ScorePod);
+                    break;
+                case WHICH.BarPod:
+                    BarPod?.serialize(writer.BarPod);
+                    break;
+                case WHICH.Trace:
+                    Trace?.serialize(writer.Trace);
+                    break;
+                case WHICH.Error:
+                    Error?.serialize(writer.Error);
+                    break;
+            }
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public CapnpGen.TradeEngineLamPod LamPod
+        {
+            get => _which == WHICH.LamPod ? (CapnpGen.TradeEngineLamPod)_content : null;
+            set
+            {
+                _which = WHICH.LamPod;
+                _content = value;
+            }
+        }
+
+        public CapnpGen.TradeEngineScorePod ScorePod
+        {
+            get => _which == WHICH.ScorePod ? (CapnpGen.TradeEngineScorePod)_content : null;
+            set
+            {
+                _which = WHICH.ScorePod;
+                _content = value;
+            }
+        }
+
+        public CapnpGen.TradeEngineBarPod BarPod
+        {
+            get => _which == WHICH.BarPod ? (CapnpGen.TradeEngineBarPod)_content : null;
+            set
+            {
+                _which = WHICH.BarPod;
+                _content = value;
+            }
+        }
+
+        public CapnpGen.TradeEngineTrace Trace
+        {
+            get => _which == WHICH.Trace ? (CapnpGen.TradeEngineTrace)_content : null;
+            set
+            {
+                _which = WHICH.Trace;
+                _content = value;
+            }
+        }
+
+        public CapnpGen.TradeEngineError Error
+        {
+            get => _which == WHICH.Error ? (CapnpGen.TradeEngineError)_content : null;
+            set
+            {
+                _which = WHICH.Error;
+                _content = value;
+            }
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public WHICH which => (WHICH)ctx.ReadDataUShort(0U, (ushort)0);
+            public CapnpGen.TradeEngineLamPod.READER LamPod => which == WHICH.LamPod ? ctx.ReadStruct(0, CapnpGen.TradeEngineLamPod.READER.create) : default;
+            public CapnpGen.TradeEngineScorePod.READER ScorePod => which == WHICH.ScorePod ? ctx.ReadStruct(0, CapnpGen.TradeEngineScorePod.READER.create) : default;
+            public CapnpGen.TradeEngineBarPod.READER BarPod => which == WHICH.BarPod ? ctx.ReadStruct(0, CapnpGen.TradeEngineBarPod.READER.create) : default;
+            public CapnpGen.TradeEngineTrace.READER Trace => which == WHICH.Trace ? ctx.ReadStruct(0, CapnpGen.TradeEngineTrace.READER.create) : default;
+            public CapnpGen.TradeEngineError.READER Error => which == WHICH.Error ? ctx.ReadStruct(0, CapnpGen.TradeEngineError.READER.create) : default;
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(1, 1);
+            }
+
+            public WHICH which
+            {
+                get => (WHICH)this.ReadDataUShort(0U, (ushort)0);
+                set => this.WriteData(0U, (ushort)value, (ushort)0);
+            }
+
+            public CapnpGen.TradeEngineLamPod.WRITER LamPod
+            {
+                get => which == WHICH.LamPod ? BuildPointer<CapnpGen.TradeEngineLamPod.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+
+            public CapnpGen.TradeEngineScorePod.WRITER ScorePod
+            {
+                get => which == WHICH.ScorePod ? BuildPointer<CapnpGen.TradeEngineScorePod.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+
+            public CapnpGen.TradeEngineBarPod.WRITER BarPod
+            {
+                get => which == WHICH.BarPod ? BuildPointer<CapnpGen.TradeEngineBarPod.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+
+            public CapnpGen.TradeEngineTrace.WRITER Trace
+            {
+                get => which == WHICH.Trace ? BuildPointer<CapnpGen.TradeEngineTrace.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+
+            public CapnpGen.TradeEngineError.WRITER Error
+            {
+                get => which == WHICH.Error ? BuildPointer<CapnpGen.TradeEngineError.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xeffcade680b8eee9UL)]
+    public class TradeEngineLamPod : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xeffcade680b8eee9UL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            TaiBuy = reader.TaiBuy;
+            TaiSell = reader.TaiSell;
+            LaiBid = reader.LaiBid;
+            LaiAsk = reader.LaiAsk;
+            Tai = reader.Tai;
+            Lai = reader.Lai;
+            Di = reader.Di;
+            LsiBid = reader.LsiBid;
+            LsiAsk = reader.LsiAsk;
+            Pli = reader.Pli;
+            CiBid = reader.CiBid;
+            CiAsk = reader.CiAsk;
+            BestBid = reader.BestBid;
+            BestAsk = reader.BestAsk;
+            Price = reader.Price;
+            Qty = reader.Qty;
+            OrdQty = reader.OrdQty;
+            AggressorSide = reader.AggressorSide;
+            ExchangeTs = reader.ExchangeTs;
+            ExtractTs = reader.ExtractTs;
+            SecurityId = reader.SecurityId;
+            Event = reader.Event;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.TaiBuy = TaiBuy;
+            writer.TaiSell = TaiSell;
+            writer.LaiBid = LaiBid;
+            writer.LaiAsk = LaiAsk;
+            writer.Tai = Tai;
+            writer.Lai = Lai;
+            writer.Di = Di;
+            writer.LsiBid = LsiBid;
+            writer.LsiAsk = LsiAsk;
+            writer.Pli = Pli;
+            writer.CiBid = CiBid;
+            writer.CiAsk = CiAsk;
+            writer.BestBid = BestBid;
+            writer.BestAsk = BestAsk;
+            writer.Price = Price;
+            writer.Qty = Qty;
+            writer.OrdQty = OrdQty;
+            writer.AggressorSide = AggressorSide;
+            writer.ExchangeTs = ExchangeTs;
+            writer.ExtractTs = ExtractTs;
+            writer.SecurityId = SecurityId;
+            writer.Event = Event;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public double TaiBuy
+        {
+            get;
+            set;
+        }
+
+        public double TaiSell
+        {
+            get;
+            set;
+        }
+
+        public double LaiBid
+        {
+            get;
+            set;
+        }
+
+        public double LaiAsk
+        {
+            get;
+            set;
+        }
+
+        public double Tai
+        {
+            get;
+            set;
+        }
+
+        public double Lai
+        {
+            get;
+            set;
+        }
+
+        public double Di
+        {
+            get;
+            set;
+        }
+
+        public double LsiBid
+        {
+            get;
+            set;
+        }
+
+        public double LsiAsk
+        {
+            get;
+            set;
+        }
+
+        public double Pli
+        {
+            get;
+            set;
+        }
+
+        public double CiBid
+        {
+            get;
+            set;
+        }
+
+        public double CiAsk
+        {
+            get;
+            set;
+        }
+
+        public double BestBid
+        {
+            get;
+            set;
+        }
+
+        public double BestAsk
+        {
+            get;
+            set;
+        }
+
+        public double Price
+        {
+            get;
+            set;
+        }
+
+        public int Qty
+        {
+            get;
+            set;
+        }
+
+        public int OrdQty
+        {
+            get;
+            set;
+        }
+
+        public CapnpGen.AggressorSideKind AggressorSide
+        {
+            get;
+            set;
+        }
+
+        public long ExchangeTs
+        {
+            get;
+            set;
+        }
+
+        public long ExtractTs
+        {
+            get;
+            set;
+        }
+
+        public int SecurityId
+        {
+            get;
+            set;
+        }
+
+        public CapnpGen.EventKind Event
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public double TaiBuy => ctx.ReadDataDouble(0UL, 0);
+            public double TaiSell => ctx.ReadDataDouble(64UL, 0);
+            public double LaiBid => ctx.ReadDataDouble(128UL, 0);
+            public double LaiAsk => ctx.ReadDataDouble(192UL, 0);
+            public double Tai => ctx.ReadDataDouble(256UL, 0);
+            public double Lai => ctx.ReadDataDouble(320UL, 0);
+            public double Di => ctx.ReadDataDouble(384UL, 0);
+            public double LsiBid => ctx.ReadDataDouble(448UL, 0);
+            public double LsiAsk => ctx.ReadDataDouble(512UL, 0);
+            public double Pli => ctx.ReadDataDouble(576UL, 0);
+            public double CiBid => ctx.ReadDataDouble(640UL, 0);
+            public double CiAsk => ctx.ReadDataDouble(704UL, 0);
+            public double BestBid => ctx.ReadDataDouble(768UL, 0);
+            public double BestAsk => ctx.ReadDataDouble(832UL, 0);
+            public double Price => ctx.ReadDataDouble(896UL, 0);
+            public int Qty => ctx.ReadDataInt(960UL, 0);
+            public int OrdQty => ctx.ReadDataInt(992UL, 0);
+            public CapnpGen.AggressorSideKind AggressorSide => (CapnpGen.AggressorSideKind)ctx.ReadDataUShort(1024UL, (ushort)0);
+            public long ExchangeTs => ctx.ReadDataLong(1088UL, 0L);
+            public long ExtractTs => ctx.ReadDataLong(1152UL, 0L);
+            public int SecurityId => ctx.ReadDataInt(1056UL, 0);
+            public CapnpGen.EventKind Event => (CapnpGen.EventKind)ctx.ReadDataUShort(1040UL, (ushort)0);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(19, 0);
+            }
+
+            public double TaiBuy
+            {
+                get => this.ReadDataDouble(0UL, 0);
+                set => this.WriteData(0UL, value, 0);
+            }
+
+            public double TaiSell
+            {
+                get => this.ReadDataDouble(64UL, 0);
+                set => this.WriteData(64UL, value, 0);
+            }
+
+            public double LaiBid
+            {
+                get => this.ReadDataDouble(128UL, 0);
+                set => this.WriteData(128UL, value, 0);
+            }
+
+            public double LaiAsk
+            {
+                get => this.ReadDataDouble(192UL, 0);
+                set => this.WriteData(192UL, value, 0);
+            }
+
+            public double Tai
+            {
+                get => this.ReadDataDouble(256UL, 0);
+                set => this.WriteData(256UL, value, 0);
+            }
+
+            public double Lai
+            {
+                get => this.ReadDataDouble(320UL, 0);
+                set => this.WriteData(320UL, value, 0);
+            }
+
+            public double Di
+            {
+                get => this.ReadDataDouble(384UL, 0);
+                set => this.WriteData(384UL, value, 0);
+            }
+
+            public double LsiBid
+            {
+                get => this.ReadDataDouble(448UL, 0);
+                set => this.WriteData(448UL, value, 0);
+            }
+
+            public double LsiAsk
+            {
+                get => this.ReadDataDouble(512UL, 0);
+                set => this.WriteData(512UL, value, 0);
+            }
+
+            public double Pli
+            {
+                get => this.ReadDataDouble(576UL, 0);
+                set => this.WriteData(576UL, value, 0);
+            }
+
+            public double CiBid
+            {
+                get => this.ReadDataDouble(640UL, 0);
+                set => this.WriteData(640UL, value, 0);
+            }
+
+            public double CiAsk
+            {
+                get => this.ReadDataDouble(704UL, 0);
+                set => this.WriteData(704UL, value, 0);
+            }
+
+            public double BestBid
+            {
+                get => this.ReadDataDouble(768UL, 0);
+                set => this.WriteData(768UL, value, 0);
+            }
+
+            public double BestAsk
+            {
+                get => this.ReadDataDouble(832UL, 0);
+                set => this.WriteData(832UL, value, 0);
+            }
+
+            public double Price
+            {
+                get => this.ReadDataDouble(896UL, 0);
+                set => this.WriteData(896UL, value, 0);
+            }
+
+            public int Qty
+            {
+                get => this.ReadDataInt(960UL, 0);
+                set => this.WriteData(960UL, value, 0);
+            }
+
+            public int OrdQty
+            {
+                get => this.ReadDataInt(992UL, 0);
+                set => this.WriteData(992UL, value, 0);
+            }
+
+            public CapnpGen.AggressorSideKind AggressorSide
+            {
+                get => (CapnpGen.AggressorSideKind)this.ReadDataUShort(1024UL, (ushort)0);
+                set => this.WriteData(1024UL, (ushort)value, (ushort)0);
+            }
+
+            public long ExchangeTs
+            {
+                get => this.ReadDataLong(1088UL, 0L);
+                set => this.WriteData(1088UL, value, 0L);
+            }
+
+            public long ExtractTs
+            {
+                get => this.ReadDataLong(1152UL, 0L);
+                set => this.WriteData(1152UL, value, 0L);
+            }
+
+            public int SecurityId
+            {
+                get => this.ReadDataInt(1056UL, 0);
+                set => this.WriteData(1056UL, value, 0);
+            }
+
+            public CapnpGen.EventKind Event
+            {
+                get => (CapnpGen.EventKind)this.ReadDataUShort(1040UL, (ushort)0);
+                set => this.WriteData(1040UL, (ushort)value, (ushort)0);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xa79d40f3c3364e3eUL)]
+    public class TradeEngineScorePod : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xa79d40f3c3364e3eUL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            Intent = reader.Intent;
+            Structure = reader.Structure;
+            Timestamp = reader.Timestamp;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.Intent = Intent;
+            writer.Structure = Structure;
+            writer.Timestamp = Timestamp;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public double Intent
+        {
+            get;
+            set;
+        }
+
+        public double Structure
+        {
+            get;
+            set;
+        }
+
+        public long Timestamp
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public double Intent => ctx.ReadDataDouble(0UL, 0);
+            public double Structure => ctx.ReadDataDouble(64UL, 0);
+            public long Timestamp => ctx.ReadDataLong(128UL, 0L);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(3, 0);
+            }
+
+            public double Intent
+            {
+                get => this.ReadDataDouble(0UL, 0);
+                set => this.WriteData(0UL, value, 0);
+            }
+
+            public double Structure
+            {
+                get => this.ReadDataDouble(64UL, 0);
+                set => this.WriteData(64UL, value, 0);
+            }
+
+            public long Timestamp
+            {
+                get => this.ReadDataLong(128UL, 0L);
+                set => this.WriteData(128UL, value, 0L);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0x8d491d0a481e6396UL)]
+    public class TradeEngineBarPod : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0x8d491d0a481e6396UL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            Open = reader.Open;
+            High = reader.High;
+            Low = reader.Low;
+            Close = reader.Close;
+            Volume = reader.Volume;
+            Timestamp = reader.Timestamp;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.Open = Open;
+            writer.High = High;
+            writer.Low = Low;
+            writer.Close = Close;
+            writer.Volume = Volume;
+            writer.Timestamp = Timestamp;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public double Open
+        {
+            get;
+            set;
+        }
+
+        public double High
+        {
+            get;
+            set;
+        }
+
+        public double Low
+        {
+            get;
+            set;
+        }
+
+        public double Close
+        {
+            get;
+            set;
+        }
+
+        public uint Volume
+        {
+            get;
+            set;
+        }
+
+        public long Timestamp
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public double Open => ctx.ReadDataDouble(0UL, 0);
+            public double High => ctx.ReadDataDouble(64UL, 0);
+            public double Low => ctx.ReadDataDouble(128UL, 0);
+            public double Close => ctx.ReadDataDouble(192UL, 0);
+            public uint Volume => ctx.ReadDataUInt(256UL, 0U);
+            public long Timestamp => ctx.ReadDataLong(320UL, 0L);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(6, 0);
+            }
+
+            public double Open
+            {
+                get => this.ReadDataDouble(0UL, 0);
+                set => this.WriteData(0UL, value, 0);
+            }
+
+            public double High
+            {
+                get => this.ReadDataDouble(64UL, 0);
+                set => this.WriteData(64UL, value, 0);
+            }
+
+            public double Low
+            {
+                get => this.ReadDataDouble(128UL, 0);
+                set => this.WriteData(128UL, value, 0);
+            }
+
+            public double Close
+            {
+                get => this.ReadDataDouble(192UL, 0);
+                set => this.WriteData(192UL, value, 0);
+            }
+
+            public uint Volume
+            {
+                get => this.ReadDataUInt(256UL, 0U);
+                set => this.WriteData(256UL, value, 0U);
+            }
+
+            public long Timestamp
+            {
+                get => this.ReadDataLong(320UL, 0L);
+                set => this.WriteData(320UL, value, 0L);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xbfb8c4193a2a4841UL)]
+    public class TradeEngineTrace : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xbfb8c4193a2a4841UL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            Message = reader.Message;
+            Timestamp = reader.Timestamp;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.Message = Message;
+            writer.Timestamp = Timestamp;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public string Message
+        {
+            get;
+            set;
+        }
+
+        public long Timestamp
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public string Message => ctx.ReadText(0, null);
+            public long Timestamp => ctx.ReadDataLong(0UL, 0L);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(1, 1);
+            }
+
+            public string Message
+            {
+                get => this.ReadText(0, null);
+                set => this.WriteText(0, value, null);
+            }
+
+            public long Timestamp
+            {
+                get => this.ReadDataLong(0UL, 0L);
+                set => this.WriteData(0UL, value, 0L);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xa28eae32bbda743aUL)]
+    public class TradeEngineError : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xa28eae32bbda743aUL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            Message = reader.Message;
+            Timestamp = reader.Timestamp;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.Message = Message;
+            writer.Timestamp = Timestamp;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public string Message
+        {
+            get;
+            set;
+        }
+
+        public long Timestamp
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public string Message => ctx.ReadText(0, null);
+            public long Timestamp => ctx.ReadDataLong(0UL, 0L);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(1, 1);
+            }
+
+            public string Message
+            {
+                get => this.ReadText(0, null);
+                set => this.WriteText(0, value, null);
+            }
+
+            public long Timestamp
+            {
+                get => this.ReadDataLong(0UL, 0L);
+                set => this.WriteData(0UL, value, 0L);
+            }
+        }
+    }
+}

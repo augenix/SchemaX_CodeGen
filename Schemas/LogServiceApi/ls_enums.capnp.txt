@@ -1,0 +1,632 @@
+using Capnp;
+using Capnp.Rpc;
+using System;
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace CapnpGen
+{
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xad6b423f2a0bc507UL)]
+    public enum ErrorCode : ushort
+    {
+        invalid,
+        test,
+        ioException,
+        invalidOperation,
+        indexOutOfRange,
+        invalidDataFormat,
+        userDefined1,
+        userDefined2
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xc44ebdc79b1ab691UL)]
+    public enum TraceCode : ushort
+    {
+        invalid,
+        test,
+        shutdown,
+        startup,
+        connected,
+        disconnected,
+        userDefined1,
+        userDefined2
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xdba78cb0bb6cd8f2UL)]
+    public enum OrderKind : ushort
+    {
+        invalid,
+        marketWithProtection,
+        limit,
+        stopWithProtection,
+        stopLimit,
+        marketWithLeftoverAsLimit
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xa576f3824286611fUL)]
+    public enum OrderTimeInForce : ushort
+    {
+        invalid,
+        day,
+        gtc,
+        gtd,
+        fak
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0x9f0e8ba39107406eUL)]
+    public enum OrderSide : ushort
+    {
+        invalid,
+        buy,
+        sell
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xc3d9e70feb747b99UL)]
+    public enum MassActionScopeKind : ushort
+    {
+        invalid,
+        instrument,
+        all,
+        marketSegment,
+        productGroup
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xe5f8e625f37846c8UL)]
+    public enum MassCancelRequestKind : ushort
+    {
+        invalid,
+        operatorId,
+        account,
+        all
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xc02949bfe28d185cUL)]
+    public enum OrderSelfMatchInst : ushort
+    {
+        invalid,
+        newest,
+        oldest
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0x8bd9f3f040da4763UL)]
+    public enum OrderPartyDetailsRole : ushort
+    {
+        invalid,
+        takeUpFirm,
+        takeUpAccount,
+        executingFirm,
+        @operator,
+        customerAccount,
+        internalOnlyIlinkId
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xcb438e84a692ba1cUL)]
+    public enum CmdKind : ushort
+    {
+        invalid,
+        noCommand,
+        shutdown,
+        run,
+        pause,
+        kill,
+        reqStatus
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xac89dd58225fa12eUL)]
+    public enum OrderMsgTypeKind : ushort
+    {
+        invalid,
+        newOrder,
+        orderCancelReplace,
+        orderCancel,
+        quoteCancel,
+        orderStatus,
+        massAction,
+        massStatus,
+        partyDetailsDef,
+        partyDetailsList,
+        sequence
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xfdbfa265384b6e2cUL)]
+    public enum CancelReason : ushort
+    {
+        invalid,
+        exchange,
+        cancelledNotBest,
+        cancelOnDisconnect,
+        restingSelfMatch,
+        cmeGlobexCreditControls,
+        cmeOne,
+        riskManagementAPI,
+        aggressingSelfMatch,
+        minQtyViolation,
+        cancelRFCOrder,
+        contractExpiration,
+        systemCancel
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xf5e7c85bca726b15UL)]
+    public enum ExecRptStatus : ushort
+    {
+        invalid,
+        @new,
+        partialFill,
+        completeFill,
+        cancelled,
+        replaced,
+        eliminated,
+        rejected,
+        undefined
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0x97ce61e1c15ac790UL)]
+    public enum OrderFillStatus : ushort
+    {
+        invalid,
+        completeFill,
+        partialFill
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xc5db13c3dc61640fUL)]
+    public enum OrderRejectionKind : ushort
+    {
+        invalid,
+        marketNotOpen,
+        priceBand,
+        invalidOrderParameter,
+        partyDetails,
+        other,
+        orderManagerState
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0x9fae825e8a5865d1UL)]
+    public enum AddendumKind : ushort
+    {
+        invalid,
+        cancel,
+        correction
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0x89732541da480657UL)]
+    public enum MassActionResponse : ushort
+    {
+        invalid,
+        rejected,
+        accepted
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xc2b1321f1c83c5e5UL)]
+    public enum RequestResult : ushort
+    {
+        invalid,
+        validRequest,
+        noMatchingData,
+        notAuthorized,
+        dataTempUnavailable
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xe3507c1b4625bfd9UL)]
+    public enum AtsConnectionState : ushort
+    {
+        disconnected,
+        connecting,
+        reconnecting,
+        connected,
+        disconnecting
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0x99b342f976981b03UL)]
+    public enum AtsOperatingState : ushort
+    {
+        invalid,
+        starting,
+        paused,
+        running,
+        error,
+        killed,
+        failed,
+        shutdown
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xd4096b87aff60347UL)]
+    public enum CmeOrderManagerEvent : ushort
+    {
+        invalid,
+        runRejectedOnIlinkDisconnect,
+        runRejectedOnRisk,
+        runRejectedOnOperatorId,
+        orderErrorPaused,
+        ilinkDisconnectPaused,
+        riskPaused,
+        orderChange,
+        accountStateChange,
+        fill,
+        orderCanceled,
+        cancelFailed,
+        ilinkFailed,
+        loginFailedUserName,
+        loginFailedConfigName
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xcae875f2e9729e29UL)]
+    public enum CmeOrderExecutionStatus : ushort
+    {
+        invalid,
+        newOrder,
+        filled,
+        partialFill,
+        cancelled,
+        exchange,
+        cancelledNotBest,
+        cancelOnDisconnect,
+        restingSelfMatch,
+        cmeGlobexCreditControls,
+        cmeOne,
+        riskManagementAPI,
+        aggressingSelfMatch,
+        minQtyViolation,
+        cancelRFCOrder,
+        contractExpiration,
+        replaced,
+        marketNotOpen,
+        priceBand,
+        invalidOrderParameter,
+        partyDetails,
+        other,
+        orderManagerState,
+        eliminated
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xdcc46cd12fe5376fUL)]
+    public enum CmeOrderExecutionType : ushort
+    {
+        invalid,
+        businessRejected,
+        newOrder,
+        modify,
+        cancel,
+        status,
+        tradeOutright,
+        tradeSpread,
+        tradeSpreadLeg,
+        reject,
+        cancelReject,
+        cancelModifyReject,
+        elimination,
+        massAction
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xa73abefe57cede57UL)]
+    public enum RiskAccountingState : ushort
+    {
+        invalid,
+        awaitingInit,
+        running,
+        riskPaused,
+        failed
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xb35912a78d77a6d2UL)]
+    public enum LoginResponse : ushort
+    {
+        invalid,
+        success,
+        failedUnknownUser,
+        failedBadPassword,
+        failedConfigName,
+        failedConfigPermissions,
+        failedPingInterval,
+        failedPriorLogin,
+        failedOther,
+        enumEnd
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xd4b48a9211045068UL)]
+    public enum EnvironmentKind : ushort
+    {
+        invalid,
+        production,
+        newRelease,
+        simulation,
+        simulationAccelerated,
+        enumEnd
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xa4ff524bd8e6846aUL)]
+    public enum Severity : ushort
+    {
+        none,
+        normal,
+        urgent,
+        critical,
+        fatal
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0x865e37a11fd51542UL)]
+    public class WorkingOrder : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0x865e37a11fd51542UL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            RequestId = reader.RequestId;
+            ClOrdId = reader.ClOrdId;
+            OrdId = reader.OrdId;
+            SecurityId = reader.SecurityId;
+            Side = reader.Side;
+            Quantity = reader.Quantity;
+            LimitPrice = reader.LimitPrice;
+            TimeInForce = reader.TimeInForce;
+            UnitContractCnt = reader.UnitContractCnt;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.RequestId = RequestId;
+            writer.ClOrdId = ClOrdId;
+            writer.OrdId = OrdId;
+            writer.SecurityId = SecurityId;
+            writer.Side = Side;
+            writer.Quantity = Quantity;
+            writer.LimitPrice = LimitPrice;
+            writer.TimeInForce = TimeInForce;
+            writer.UnitContractCnt = UnitContractCnt;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public ulong RequestId
+        {
+            get;
+            set;
+        }
+
+        public ulong ClOrdId
+        {
+            get;
+            set;
+        }
+
+        public ulong OrdId
+        {
+            get;
+            set;
+        }
+
+        public int SecurityId
+        {
+            get;
+            set;
+        }
+
+        public CapnpGen.OrderSide Side
+        {
+            get;
+            set;
+        }
+
+        public ulong Quantity
+        {
+            get;
+            set;
+        }
+
+        public double LimitPrice
+        {
+            get;
+            set;
+        }
+
+        public CapnpGen.OrderTimeInForce TimeInForce
+        {
+            get;
+            set;
+        }
+
+        public long UnitContractCnt
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public ulong RequestId => ctx.ReadDataULong(0UL, 0UL);
+            public ulong ClOrdId => ctx.ReadDataULong(64UL, 0UL);
+            public ulong OrdId => ctx.ReadDataULong(128UL, 0UL);
+            public int SecurityId => ctx.ReadDataInt(192UL, 0);
+            public CapnpGen.OrderSide Side => (CapnpGen.OrderSide)ctx.ReadDataUShort(224UL, (ushort)0);
+            public ulong Quantity => ctx.ReadDataULong(256UL, 0UL);
+            public double LimitPrice => ctx.ReadDataDouble(320UL, 0);
+            public CapnpGen.OrderTimeInForce TimeInForce => (CapnpGen.OrderTimeInForce)ctx.ReadDataUShort(240UL, (ushort)0);
+            public long UnitContractCnt => ctx.ReadDataLong(384UL, 0L);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(7, 0);
+            }
+
+            public ulong RequestId
+            {
+                get => this.ReadDataULong(0UL, 0UL);
+                set => this.WriteData(0UL, value, 0UL);
+            }
+
+            public ulong ClOrdId
+            {
+                get => this.ReadDataULong(64UL, 0UL);
+                set => this.WriteData(64UL, value, 0UL);
+            }
+
+            public ulong OrdId
+            {
+                get => this.ReadDataULong(128UL, 0UL);
+                set => this.WriteData(128UL, value, 0UL);
+            }
+
+            public int SecurityId
+            {
+                get => this.ReadDataInt(192UL, 0);
+                set => this.WriteData(192UL, value, 0);
+            }
+
+            public CapnpGen.OrderSide Side
+            {
+                get => (CapnpGen.OrderSide)this.ReadDataUShort(224UL, (ushort)0);
+                set => this.WriteData(224UL, (ushort)value, (ushort)0);
+            }
+
+            public ulong Quantity
+            {
+                get => this.ReadDataULong(256UL, 0UL);
+                set => this.WriteData(256UL, value, 0UL);
+            }
+
+            public double LimitPrice
+            {
+                get => this.ReadDataDouble(320UL, 0);
+                set => this.WriteData(320UL, value, 0);
+            }
+
+            public CapnpGen.OrderTimeInForce TimeInForce
+            {
+                get => (CapnpGen.OrderTimeInForce)this.ReadDataUShort(240UL, (ushort)0);
+                set => this.WriteData(240UL, (ushort)value, (ushort)0);
+            }
+
+            public long UnitContractCnt
+            {
+                get => this.ReadDataLong(384UL, 0L);
+                set => this.WriteData(384UL, value, 0L);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xc7a2b790297d486dUL)]
+    public class OutrightPosition : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xc7a2b790297d486dUL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            SecurityId = reader.SecurityId;
+            Side = reader.Side;
+            Quantity = reader.Quantity;
+            Price = reader.Price;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.SecurityId = SecurityId;
+            writer.Side = Side;
+            writer.Quantity = Quantity;
+            writer.Price = Price;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public int SecurityId
+        {
+            get;
+            set;
+        }
+
+        public CapnpGen.OrderSide Side
+        {
+            get;
+            set;
+        }
+
+        public ulong Quantity
+        {
+            get;
+            set;
+        }
+
+        public double Price
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public int SecurityId => ctx.ReadDataInt(0UL, 0);
+            public CapnpGen.OrderSide Side => (CapnpGen.OrderSide)ctx.ReadDataUShort(32UL, (ushort)0);
+            public ulong Quantity => ctx.ReadDataULong(64UL, 0UL);
+            public double Price => ctx.ReadDataDouble(128UL, 0);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(3, 0);
+            }
+
+            public int SecurityId
+            {
+                get => this.ReadDataInt(0UL, 0);
+                set => this.WriteData(0UL, value, 0);
+            }
+
+            public CapnpGen.OrderSide Side
+            {
+                get => (CapnpGen.OrderSide)this.ReadDataUShort(32UL, (ushort)0);
+                set => this.WriteData(32UL, (ushort)value, (ushort)0);
+            }
+
+            public ulong Quantity
+            {
+                get => this.ReadDataULong(64UL, 0UL);
+                set => this.WriteData(64UL, value, 0UL);
+            }
+
+            public double Price
+            {
+                get => this.ReadDataDouble(128UL, 0);
+                set => this.WriteData(128UL, value, 0);
+            }
+        }
+    }
+}

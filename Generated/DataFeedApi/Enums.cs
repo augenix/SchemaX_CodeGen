@@ -173,169 +173,6 @@ public enum BookStatus : ushort
 }
 
 
-public enum BookSideKind : ushort
-{
-    invalid,
-    unknown,
-    bid,
-    ask,
-}
-
-
-public enum BookSideOrdersKind : ushort
-{
-    invalid,
-    direct,
-    implied,
-    combined,
-    both,
-}
-
-
-public enum AggressorSideKind : ushort
-{
-    invalid,
-    none,
-    buy,
-    sell,
-}
-
-
-public enum CmeFeedManagerUpdateKind : ushort
-{
-    GroupStatus = 0,
-    InstStatus = 1,
-    IndicativeOpening = 2,
-    OpeningPrice = 3,
-    Settlement = 4,
-    Volume = 5,
-    HighLow = 6,
-    DailyStats = 7,
-    Trade = 8,
-    Side = 9,
-    LastMessageForEvent = 10,
-    FinishedAll = 11,
-    Firehose = 12,
-    Subscribe = 13,
-    SubscribeResp = 14,
-    InstState = 15,
-    DefinitionResp = 16,
-    DefinitionReq = 17,
-    SymbolAvailReq = 18,
-    SymbolAvailResp = 19,
-    FeedApiLogin = 20,
-    FeedApiLoginResp = 21,
-    FeedApiReject = 22,
-    FeedApiSetSymbolList = 23,
-    FeedApiSetSymbolListResp = 24,
-    FeedApiGetSymbolListContents = 25,
-    FeedApiGetSymbolListContentsResp = 26,
-    undefined = 65535,
-}
-
-
-public enum AvailabilityAction : ushort
-{
-    @add,
-    @remove,
-}
-
-
-public enum FirehoseAction : ushort
-{
-    unsubscribe,
-    subscribe,
-}
-
-
-public enum SubscriptionAction : ushort
-{
-    unsubscribe,
-    subscribe,
-    subscribeAndGetState,
-}
-
-
-public enum CmeFeedClientSubscribeKind : ushort
-{
-    SecurityIdList = 0,
-    InstList = 1,
-    undefined = 65535,
-}
-
-
-public enum CmeFeedClientSubscribeResult : ushort
-{
-    success,
-    failedOrdersKind,
-    failedBadSecurityId,
-    failedBadInstNum,
-    failedDepthValue,
-    invalid,
-}
-
-
-public enum CmeFeedClientSubscribeResponseKind : ushort
-{
-    BadSecurityIdList = 0,
-    BadInstList = 1,
-    undefined = 65535,
-}
-
-
-public enum CmeFuturesDefinitionRequestKind : ushort
-{
-    Specs = 0,
-    Symbols = 1,
-    undefined = 65535,
-}
-
-
-public enum CmeFeedRequestSymbolAvailabilityKind : ushort
-{
-    Symbol = 0,
-    SecurityId = 1,
-    undefined = 65535,
-}
-
-
-public enum FeedApiLoginResult : ushort
-{
-    success,
-    failedUnknownUser,
-    failedBadPassword,
-    invalid,
-}
-
-
-public enum FeedApiSetSymbolListResult : ushort
-{
-    success,
-    failedListNoPermission,
-    failedListNotFound,
-    failedAddListNoPermission,
-    failedInvalidListNameFormat,
-    invalid,
-}
-
-
-public enum FeedApiEnvironment : ushort
-{
-    invalid,
-    production,
-    newRelease,
-    simulation,
-    simulationAccelerated,
-}
-
-
-public enum FeedApiRejectReason : ushort
-{
-    notLoggedIn,
-    noSymbolListSet,
-}
-
-
 public enum CmeAssetEquivalenceKind : ushort
 {
     invalid,
@@ -587,6 +424,169 @@ public enum CmeMatchAlgorithm : ushort
     fifoWithTopAndLmm,
     thresholdProrataWithLmm,
     eurodollarOptions,
+}
+
+
+public enum BookSideKind : ushort
+{
+    invalid,
+    unknown,
+    bid,
+    ask,
+}
+
+
+public enum BookSideOrdersKind : ushort
+{
+    invalid,
+    direct,
+    implied,
+    combined,
+    both,
+}
+
+
+public enum AggressorSideKind : ushort
+{
+    invalid,
+    none,
+    buy,
+    sell,
+}
+
+
+public enum CmeFeedManagerUpdateKind : ushort
+{
+    GroupStatus = 0,
+    InstStatus = 1,
+    IndicativeOpening = 2,
+    OpeningPrice = 3,
+    Settlement = 4,
+    Volume = 5,
+    HighLow = 6,
+    DailyStats = 7,
+    Trade = 8,
+    Side = 9,
+    LastMessageForEvent = 10,
+    FinishedAll = 11,
+    Firehose = 12,
+    Subscribe = 13,
+    SubscribeResp = 14,
+    InstState = 15,
+    DefinitionResp = 16,
+    DefinitionReq = 17,
+    SymbolAvailReq = 18,
+    SymbolAvailResp = 19,
+    FeedApiLogin = 20,
+    FeedApiLoginResp = 21,
+    FeedApiReject = 22,
+    FeedApiSetSymbolList = 23,
+    FeedApiSetSymbolListResp = 24,
+    FeedApiGetSymbolListContents = 25,
+    FeedApiGetSymbolListContentsResp = 26,
+    undefined = 65535,
+}
+
+
+public enum AvailabilityAction : ushort
+{
+    @add,
+    @remove,
+}
+
+
+public enum FirehoseAction : ushort
+{
+    unsubscribe,
+    subscribe,
+}
+
+
+public enum SubscriptionAction : ushort
+{
+    unsubscribe,
+    subscribe,
+    subscribeAndGetState,
+}
+
+
+public enum CmeFeedClientSubscribeKind : ushort
+{
+    SecurityIdList = 0,
+    InstList = 1,
+    undefined = 65535,
+}
+
+
+public enum CmeFeedClientSubscribeResult : ushort
+{
+    success,
+    failedOrdersKind,
+    failedBadSecurityId,
+    failedBadInstNum,
+    failedDepthValue,
+    invalid,
+}
+
+
+public enum CmeFeedClientSubscribeResponseKind : ushort
+{
+    BadSecurityIdList = 0,
+    BadInstList = 1,
+    undefined = 65535,
+}
+
+
+public enum CmeFuturesDefinitionRequestKind : ushort
+{
+    Specs = 0,
+    Symbols = 1,
+    undefined = 65535,
+}
+
+
+public enum CmeFeedRequestSymbolAvailabilityKind : ushort
+{
+    Symbol = 0,
+    SecurityId = 1,
+    undefined = 65535,
+}
+
+
+public enum FeedApiLoginResult : ushort
+{
+    success,
+    failedUnknownUser,
+    failedBadPassword,
+    invalid,
+}
+
+
+public enum FeedApiSetSymbolListResult : ushort
+{
+    success,
+    failedListNoPermission,
+    failedListNotFound,
+    failedAddListNoPermission,
+    failedInvalidListNameFormat,
+    invalid,
+}
+
+
+public enum FeedApiEnvironment : ushort
+{
+    invalid,
+    production,
+    newRelease,
+    simulation,
+    simulationAccelerated,
+}
+
+
+public enum FeedApiRejectReason : ushort
+{
+    notLoggedIn,
+    noSymbolListSet,
 }
 
 

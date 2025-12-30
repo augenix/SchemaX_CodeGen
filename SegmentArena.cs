@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace SchemaX_CodeGen;
@@ -14,6 +15,11 @@ public sealed class SegmentArena : IDisposable
         handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
         meta = new(arenaSize);
         SegmentCount = meta.SegmentCount;
+    }
+    public unsafe byte* BasePtr
+    {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        get => (byte*)handle.AddrOfPinnedObject().ToPointer();
     }
     public ArenaMeta Meta => meta;
     public Span<ulong> GetArenaAsSpan => buffer.AsSpan();
@@ -34,6 +40,7 @@ public sealed class SegmentArena : IDisposable
     public void ResetWordCount()
     {
         meta.SetWordCount(0, meta.PrepopulateWords);
+        meta.TotalWords = meta.PrepopulateWords;
     }
     public int PrepopulateWords
     {
