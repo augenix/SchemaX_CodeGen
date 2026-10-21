@@ -1,0 +1,201 @@
+using Capnp;
+using Capnp.Rpc;
+using System;
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace CapnpGen
+{
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xfdbac411ca3d7cceUL)]
+    public enum GatewayCxnStatus : ushort
+    {
+        invalid,
+        connected,
+        disconnected
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xc3b1d49393dcbdc7UL)]
+    public enum GatewayOrderManagerStatus : ushort
+    {
+        invalid,
+        starting,
+        paused,
+        running,
+        shutdown
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xe10fbfee6528f607UL)]
+    public enum ApiOrderManagerCmdReq : ushort
+    {
+        invalid,
+        noCommand,
+        shutdown,
+        run,
+        pause,
+        kill,
+        reqStatus
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0x8adaa8961315732dUL)]
+    public enum AtsCommandCode : ushort
+    {
+        invalid,
+        connectDataGateway,
+        disconnectDataGateway,
+        setOperator,
+        startTradingEngine,
+        enableOrderEntry,
+        disableOrderEntry,
+        stopTradingEngine,
+        disconnectClient,
+        shutdownAts
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xf97c7eb9443c921aUL)]
+    public enum AtsCxnType : ushort
+    {
+        invalid,
+        ispDataReplay,
+        directDataReplay,
+        ispNewRelease,
+        directNewRelease,
+        ispSim,
+        directSim,
+        ispProduction,
+        directProduction,
+        ispLiveData,
+        directLiveData
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xae02d38a3924a10dUL)]
+    public enum GatewayCommandCode : ushort
+    {
+        invalid,
+        noCommand,
+        shutdown,
+        run,
+        pause,
+        kill,
+        reqStatus,
+        login
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0x867e6afed3171404UL)]
+    public enum AtsCmdReqStatus : ushort
+    {
+        invalid,
+        success,
+        failed
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xc0ec11f262b9da9eUL)]
+    public enum GatewayCmdReqStatus : ushort
+    {
+        invalid,
+        success,
+        failed
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0x998e561f504eb2e8UL)]
+    public enum ConnectionState : ushort
+    {
+        disconnected,
+        connecting,
+        reconnecting,
+        connected,
+        disconnecting
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xff4ad129587dda22UL)]
+    public enum OperatingState : ushort
+    {
+        invalid,
+        starting,
+        paused,
+        running,
+        error,
+        killed,
+        failed,
+        shutdown
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xd14f953f90d03b1aUL)]
+    public enum Severity : ushort
+    {
+        invalid,
+        normal,
+        urgent,
+        critical,
+        fatal
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xc0e1481a0e0fad53UL)]
+    public enum TIF : ushort
+    {
+        invalid,
+        gtc,
+        day,
+        gtd,
+        gfs,
+        fak,
+        fok
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xe7580039ceb1daabUL)]
+    public enum Side : ushort
+    {
+        invalid,
+        buy,
+        sell
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xbcafd9daa3045820UL)]
+    public enum ExecutionStatus : ushort
+    {
+        invalid,
+        @new,
+        filled,
+        partialFill,
+        cancelled,
+        exchange,
+        cancelledNotBest,
+        cancelOnDisconnect,
+        restingSelfMatch,
+        cmeGlobexCreditControls,
+        cmeOne,
+        riskManagementApi,
+        aggressingSelfMatch,
+        minQtyViolation,
+        cancelRfcOrder,
+        contractExpiration,
+        replaced,
+        marketNotOpen,
+        priceBand,
+        invalidOrderParameter,
+        partyDetails,
+        other,
+        orderManagerState,
+        eliminated
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xe04ac89a03b92d20UL)]
+    public enum ExecutionType : ushort
+    {
+        invalid,
+        businessRejected,
+        newOrder,
+        modify,
+        cancel,
+        status,
+        tradeOutright,
+        tradeSpread,
+        tradeSpreadLeg,
+        reject,
+        cancelReject,
+        cancelModifyReject,
+        elimination,
+        massAction
+    }
+}

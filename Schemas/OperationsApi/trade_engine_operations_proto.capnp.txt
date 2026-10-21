@@ -1,0 +1,1856 @@
+using Capnp;
+using Capnp.Rpc;
+using System;
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace CapnpGen
+{
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0x85e199d6e0f8bfe8UL)]
+    public enum EventKind : ushort
+    {
+        invalid,
+        workingOrder,
+        workingOrderFilled,
+        workingOrderModified,
+        workingOrderCancelled,
+        openPosition,
+        closedPosition,
+        sessionStats,
+        riskBreach
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xb8d2c56ed84c4916UL)]
+    public enum Side : ushort
+    {
+        invalid,
+        buy,
+        sell
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xe78c7c57cbbfc4f3UL)]
+    public enum Direction : ushort
+    {
+        invalid,
+        @long,
+        @short
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0x976051c7f47292caUL)]
+    public enum OrderPurpose : ushort
+    {
+        invalid,
+        entry,
+        exit
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xc3b6e1dda0b0152cUL)]
+    public enum ExitReason : ushort
+    {
+        invalid,
+        passiveExit,
+        stopLoss,
+        timeout,
+        operatorCancel,
+        riskBreach,
+        endOfSession
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xc527296627f3ee79UL)]
+    public enum RiskBreachKind : ushort
+    {
+        invalid,
+        dailyOrderCount,
+        contractsPerOrder,
+        workingOrderCount,
+        singleTradeLoss,
+        maxDrawdown,
+        lossPercentage,
+        successiveLosses,
+        timeCutoff
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xcc686cbbcd796b8dUL)]
+    public class TradeEngineOperationsEvent : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xcc686cbbcd796b8dUL;
+        public enum WHICH : ushort
+        {
+            Wo = 0,
+            Wof = 1,
+            Wom = 2,
+            Woc = 3,
+            Op = 4,
+            Cp = 5,
+            Ss = 6,
+            Rb = 7,
+            undefined = 65535
+        }
+
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            switch (reader.which)
+            {
+                case WHICH.Wo:
+                    Wo = CapnpSerializable.Create<CapnpGen.WorkingOrder>(reader.Wo);
+                    break;
+                case WHICH.Wof:
+                    Wof = CapnpSerializable.Create<CapnpGen.WorkingOrderFilled>(reader.Wof);
+                    break;
+                case WHICH.Wom:
+                    Wom = CapnpSerializable.Create<CapnpGen.WorkingOrderModified>(reader.Wom);
+                    break;
+                case WHICH.Woc:
+                    Woc = CapnpSerializable.Create<CapnpGen.WorkingOrderCancelled>(reader.Woc);
+                    break;
+                case WHICH.Op:
+                    Op = CapnpSerializable.Create<CapnpGen.OpenPosition>(reader.Op);
+                    break;
+                case WHICH.Cp:
+                    Cp = CapnpSerializable.Create<CapnpGen.ClosedPosition>(reader.Cp);
+                    break;
+                case WHICH.Ss:
+                    Ss = CapnpSerializable.Create<CapnpGen.SessionStats>(reader.Ss);
+                    break;
+                case WHICH.Rb:
+                    Rb = CapnpSerializable.Create<CapnpGen.RiskBreach>(reader.Rb);
+                    break;
+            }
+
+            applyDefaults();
+        }
+
+        private WHICH _which = WHICH.undefined;
+        private object _content;
+        public WHICH which
+        {
+            get => _which;
+            set
+            {
+                if (value == _which)
+                    return;
+                _which = value;
+                switch (value)
+                {
+                    case WHICH.Wo:
+                        _content = null;
+                        break;
+                    case WHICH.Wof:
+                        _content = null;
+                        break;
+                    case WHICH.Wom:
+                        _content = null;
+                        break;
+                    case WHICH.Woc:
+                        _content = null;
+                        break;
+                    case WHICH.Op:
+                        _content = null;
+                        break;
+                    case WHICH.Cp:
+                        _content = null;
+                        break;
+                    case WHICH.Ss:
+                        _content = null;
+                        break;
+                    case WHICH.Rb:
+                        _content = null;
+                        break;
+                }
+            }
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.which = which;
+            switch (which)
+            {
+                case WHICH.Wo:
+                    Wo?.serialize(writer.Wo);
+                    break;
+                case WHICH.Wof:
+                    Wof?.serialize(writer.Wof);
+                    break;
+                case WHICH.Wom:
+                    Wom?.serialize(writer.Wom);
+                    break;
+                case WHICH.Woc:
+                    Woc?.serialize(writer.Woc);
+                    break;
+                case WHICH.Op:
+                    Op?.serialize(writer.Op);
+                    break;
+                case WHICH.Cp:
+                    Cp?.serialize(writer.Cp);
+                    break;
+                case WHICH.Ss:
+                    Ss?.serialize(writer.Ss);
+                    break;
+                case WHICH.Rb:
+                    Rb?.serialize(writer.Rb);
+                    break;
+            }
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public CapnpGen.WorkingOrder Wo
+        {
+            get => _which == WHICH.Wo ? (CapnpGen.WorkingOrder)_content : null;
+            set
+            {
+                _which = WHICH.Wo;
+                _content = value;
+            }
+        }
+
+        public CapnpGen.WorkingOrderFilled Wof
+        {
+            get => _which == WHICH.Wof ? (CapnpGen.WorkingOrderFilled)_content : null;
+            set
+            {
+                _which = WHICH.Wof;
+                _content = value;
+            }
+        }
+
+        public CapnpGen.WorkingOrderModified Wom
+        {
+            get => _which == WHICH.Wom ? (CapnpGen.WorkingOrderModified)_content : null;
+            set
+            {
+                _which = WHICH.Wom;
+                _content = value;
+            }
+        }
+
+        public CapnpGen.WorkingOrderCancelled Woc
+        {
+            get => _which == WHICH.Woc ? (CapnpGen.WorkingOrderCancelled)_content : null;
+            set
+            {
+                _which = WHICH.Woc;
+                _content = value;
+            }
+        }
+
+        public CapnpGen.OpenPosition Op
+        {
+            get => _which == WHICH.Op ? (CapnpGen.OpenPosition)_content : null;
+            set
+            {
+                _which = WHICH.Op;
+                _content = value;
+            }
+        }
+
+        public CapnpGen.ClosedPosition Cp
+        {
+            get => _which == WHICH.Cp ? (CapnpGen.ClosedPosition)_content : null;
+            set
+            {
+                _which = WHICH.Cp;
+                _content = value;
+            }
+        }
+
+        public CapnpGen.SessionStats Ss
+        {
+            get => _which == WHICH.Ss ? (CapnpGen.SessionStats)_content : null;
+            set
+            {
+                _which = WHICH.Ss;
+                _content = value;
+            }
+        }
+
+        public CapnpGen.RiskBreach Rb
+        {
+            get => _which == WHICH.Rb ? (CapnpGen.RiskBreach)_content : null;
+            set
+            {
+                _which = WHICH.Rb;
+                _content = value;
+            }
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public WHICH which => (WHICH)ctx.ReadDataUShort(0U, (ushort)0);
+            public CapnpGen.WorkingOrder.READER Wo => which == WHICH.Wo ? ctx.ReadStruct(0, CapnpGen.WorkingOrder.READER.create) : default;
+            public CapnpGen.WorkingOrderFilled.READER Wof => which == WHICH.Wof ? ctx.ReadStruct(0, CapnpGen.WorkingOrderFilled.READER.create) : default;
+            public CapnpGen.WorkingOrderModified.READER Wom => which == WHICH.Wom ? ctx.ReadStruct(0, CapnpGen.WorkingOrderModified.READER.create) : default;
+            public CapnpGen.WorkingOrderCancelled.READER Woc => which == WHICH.Woc ? ctx.ReadStruct(0, CapnpGen.WorkingOrderCancelled.READER.create) : default;
+            public CapnpGen.OpenPosition.READER Op => which == WHICH.Op ? ctx.ReadStruct(0, CapnpGen.OpenPosition.READER.create) : default;
+            public CapnpGen.ClosedPosition.READER Cp => which == WHICH.Cp ? ctx.ReadStruct(0, CapnpGen.ClosedPosition.READER.create) : default;
+            public CapnpGen.SessionStats.READER Ss => which == WHICH.Ss ? ctx.ReadStruct(0, CapnpGen.SessionStats.READER.create) : default;
+            public CapnpGen.RiskBreach.READER Rb => which == WHICH.Rb ? ctx.ReadStruct(0, CapnpGen.RiskBreach.READER.create) : default;
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(1, 1);
+            }
+
+            public WHICH which
+            {
+                get => (WHICH)this.ReadDataUShort(0U, (ushort)0);
+                set => this.WriteData(0U, (ushort)value, (ushort)0);
+            }
+
+            public CapnpGen.WorkingOrder.WRITER Wo
+            {
+                get => which == WHICH.Wo ? BuildPointer<CapnpGen.WorkingOrder.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+
+            public CapnpGen.WorkingOrderFilled.WRITER Wof
+            {
+                get => which == WHICH.Wof ? BuildPointer<CapnpGen.WorkingOrderFilled.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+
+            public CapnpGen.WorkingOrderModified.WRITER Wom
+            {
+                get => which == WHICH.Wom ? BuildPointer<CapnpGen.WorkingOrderModified.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+
+            public CapnpGen.WorkingOrderCancelled.WRITER Woc
+            {
+                get => which == WHICH.Woc ? BuildPointer<CapnpGen.WorkingOrderCancelled.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+
+            public CapnpGen.OpenPosition.WRITER Op
+            {
+                get => which == WHICH.Op ? BuildPointer<CapnpGen.OpenPosition.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+
+            public CapnpGen.ClosedPosition.WRITER Cp
+            {
+                get => which == WHICH.Cp ? BuildPointer<CapnpGen.ClosedPosition.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+
+            public CapnpGen.SessionStats.WRITER Ss
+            {
+                get => which == WHICH.Ss ? BuildPointer<CapnpGen.SessionStats.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+
+            public CapnpGen.RiskBreach.WRITER Rb
+            {
+                get => which == WHICH.Rb ? BuildPointer<CapnpGen.RiskBreach.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xd0746749d24727acUL)]
+    public class WorkingOrder : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xd0746749d24727acUL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            SecurityId = reader.SecurityId;
+            ClOrdId = reader.ClOrdId;
+            Side = reader.Side;
+            Price = reader.Price;
+            OrderQty = reader.OrderQty;
+            Purpose = reader.Purpose;
+            Level = reader.Level;
+            Timestamp = reader.Timestamp;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.SecurityId = SecurityId;
+            writer.ClOrdId = ClOrdId;
+            writer.Side = Side;
+            writer.Price = Price;
+            writer.OrderQty = OrderQty;
+            writer.Purpose = Purpose;
+            writer.Level = Level;
+            writer.Timestamp = Timestamp;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public int SecurityId
+        {
+            get;
+            set;
+        }
+
+        public ulong ClOrdId
+        {
+            get;
+            set;
+        }
+
+        public CapnpGen.Side Side
+        {
+            get;
+            set;
+        }
+
+        public double Price
+        {
+            get;
+            set;
+        }
+
+        public uint OrderQty
+        {
+            get;
+            set;
+        }
+
+        public CapnpGen.OrderPurpose Purpose
+        {
+            get;
+            set;
+        }
+
+        public int Level
+        {
+            get;
+            set;
+        }
+
+        public long Timestamp
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public int SecurityId => ctx.ReadDataInt(0UL, 0);
+            public ulong ClOrdId => ctx.ReadDataULong(64UL, 0UL);
+            public CapnpGen.Side Side => (CapnpGen.Side)ctx.ReadDataUShort(32UL, (ushort)0);
+            public double Price => ctx.ReadDataDouble(128UL, 0);
+            public uint OrderQty => ctx.ReadDataUInt(192UL, 0U);
+            public CapnpGen.OrderPurpose Purpose => (CapnpGen.OrderPurpose)ctx.ReadDataUShort(48UL, (ushort)0);
+            public int Level => ctx.ReadDataInt(224UL, 0);
+            public long Timestamp => ctx.ReadDataLong(256UL, 0L);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(5, 0);
+            }
+
+            public int SecurityId
+            {
+                get => this.ReadDataInt(0UL, 0);
+                set => this.WriteData(0UL, value, 0);
+            }
+
+            public ulong ClOrdId
+            {
+                get => this.ReadDataULong(64UL, 0UL);
+                set => this.WriteData(64UL, value, 0UL);
+            }
+
+            public CapnpGen.Side Side
+            {
+                get => (CapnpGen.Side)this.ReadDataUShort(32UL, (ushort)0);
+                set => this.WriteData(32UL, (ushort)value, (ushort)0);
+            }
+
+            public double Price
+            {
+                get => this.ReadDataDouble(128UL, 0);
+                set => this.WriteData(128UL, value, 0);
+            }
+
+            public uint OrderQty
+            {
+                get => this.ReadDataUInt(192UL, 0U);
+                set => this.WriteData(192UL, value, 0U);
+            }
+
+            public CapnpGen.OrderPurpose Purpose
+            {
+                get => (CapnpGen.OrderPurpose)this.ReadDataUShort(48UL, (ushort)0);
+                set => this.WriteData(48UL, (ushort)value, (ushort)0);
+            }
+
+            public int Level
+            {
+                get => this.ReadDataInt(224UL, 0);
+                set => this.WriteData(224UL, value, 0);
+            }
+
+            public long Timestamp
+            {
+                get => this.ReadDataLong(256UL, 0L);
+                set => this.WriteData(256UL, value, 0L);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xdeed1626f7ebbe8dUL)]
+    public class WorkingOrderFilled : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xdeed1626f7ebbe8dUL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            SecurityId = reader.SecurityId;
+            ClOrdId = reader.ClOrdId;
+            Timestamp = reader.Timestamp;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.SecurityId = SecurityId;
+            writer.ClOrdId = ClOrdId;
+            writer.Timestamp = Timestamp;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public int SecurityId
+        {
+            get;
+            set;
+        }
+
+        public ulong ClOrdId
+        {
+            get;
+            set;
+        }
+
+        public long Timestamp
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public int SecurityId => ctx.ReadDataInt(0UL, 0);
+            public ulong ClOrdId => ctx.ReadDataULong(64UL, 0UL);
+            public long Timestamp => ctx.ReadDataLong(128UL, 0L);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(3, 0);
+            }
+
+            public int SecurityId
+            {
+                get => this.ReadDataInt(0UL, 0);
+                set => this.WriteData(0UL, value, 0);
+            }
+
+            public ulong ClOrdId
+            {
+                get => this.ReadDataULong(64UL, 0UL);
+                set => this.WriteData(64UL, value, 0UL);
+            }
+
+            public long Timestamp
+            {
+                get => this.ReadDataLong(128UL, 0L);
+                set => this.WriteData(128UL, value, 0L);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xa0445f99d3c55fe7UL)]
+    public class WorkingOrderModified : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xa0445f99d3c55fe7UL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            SecurityId = reader.SecurityId;
+            ClOrdId = reader.ClOrdId;
+            Side = reader.Side;
+            OldPrice = reader.OldPrice;
+            NewPrice = reader.NewPrice;
+            OrderQty = reader.OrderQty;
+            Timestamp = reader.Timestamp;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.SecurityId = SecurityId;
+            writer.ClOrdId = ClOrdId;
+            writer.Side = Side;
+            writer.OldPrice = OldPrice;
+            writer.NewPrice = NewPrice;
+            writer.OrderQty = OrderQty;
+            writer.Timestamp = Timestamp;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public int SecurityId
+        {
+            get;
+            set;
+        }
+
+        public ulong ClOrdId
+        {
+            get;
+            set;
+        }
+
+        public CapnpGen.Side Side
+        {
+            get;
+            set;
+        }
+
+        public double OldPrice
+        {
+            get;
+            set;
+        }
+
+        public double NewPrice
+        {
+            get;
+            set;
+        }
+
+        public uint OrderQty
+        {
+            get;
+            set;
+        }
+
+        public long Timestamp
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public int SecurityId => ctx.ReadDataInt(0UL, 0);
+            public ulong ClOrdId => ctx.ReadDataULong(64UL, 0UL);
+            public CapnpGen.Side Side => (CapnpGen.Side)ctx.ReadDataUShort(32UL, (ushort)0);
+            public double OldPrice => ctx.ReadDataDouble(128UL, 0);
+            public double NewPrice => ctx.ReadDataDouble(192UL, 0);
+            public uint OrderQty => ctx.ReadDataUInt(256UL, 0U);
+            public long Timestamp => ctx.ReadDataLong(320UL, 0L);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(6, 0);
+            }
+
+            public int SecurityId
+            {
+                get => this.ReadDataInt(0UL, 0);
+                set => this.WriteData(0UL, value, 0);
+            }
+
+            public ulong ClOrdId
+            {
+                get => this.ReadDataULong(64UL, 0UL);
+                set => this.WriteData(64UL, value, 0UL);
+            }
+
+            public CapnpGen.Side Side
+            {
+                get => (CapnpGen.Side)this.ReadDataUShort(32UL, (ushort)0);
+                set => this.WriteData(32UL, (ushort)value, (ushort)0);
+            }
+
+            public double OldPrice
+            {
+                get => this.ReadDataDouble(128UL, 0);
+                set => this.WriteData(128UL, value, 0);
+            }
+
+            public double NewPrice
+            {
+                get => this.ReadDataDouble(192UL, 0);
+                set => this.WriteData(192UL, value, 0);
+            }
+
+            public uint OrderQty
+            {
+                get => this.ReadDataUInt(256UL, 0U);
+                set => this.WriteData(256UL, value, 0U);
+            }
+
+            public long Timestamp
+            {
+                get => this.ReadDataLong(320UL, 0L);
+                set => this.WriteData(320UL, value, 0L);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xebac588acb935329UL)]
+    public class WorkingOrderCancelled : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xebac588acb935329UL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            SecurityId = reader.SecurityId;
+            ClOrdId = reader.ClOrdId;
+            Timestamp = reader.Timestamp;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.SecurityId = SecurityId;
+            writer.ClOrdId = ClOrdId;
+            writer.Timestamp = Timestamp;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public int SecurityId
+        {
+            get;
+            set;
+        }
+
+        public ulong ClOrdId
+        {
+            get;
+            set;
+        }
+
+        public long Timestamp
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public int SecurityId => ctx.ReadDataInt(0UL, 0);
+            public ulong ClOrdId => ctx.ReadDataULong(64UL, 0UL);
+            public long Timestamp => ctx.ReadDataLong(128UL, 0L);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(3, 0);
+            }
+
+            public int SecurityId
+            {
+                get => this.ReadDataInt(0UL, 0);
+                set => this.WriteData(0UL, value, 0);
+            }
+
+            public ulong ClOrdId
+            {
+                get => this.ReadDataULong(64UL, 0UL);
+                set => this.WriteData(64UL, value, 0UL);
+            }
+
+            public long Timestamp
+            {
+                get => this.ReadDataLong(128UL, 0L);
+                set => this.WriteData(128UL, value, 0L);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xf0fd3f91eea14d42UL)]
+    public class OpenPosition : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xf0fd3f91eea14d42UL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            SecurityId = reader.SecurityId;
+            Direction = reader.Direction;
+            PositionQty = reader.PositionQty;
+            AvgEntryPrice = reader.AvgEntryPrice;
+            UnrealizedPnl = reader.UnrealizedPnl;
+            NumEntryFills = reader.NumEntryFills;
+            EntryTimestamp = reader.EntryTimestamp;
+            Timestamp = reader.Timestamp;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.SecurityId = SecurityId;
+            writer.Direction = Direction;
+            writer.PositionQty = PositionQty;
+            writer.AvgEntryPrice = AvgEntryPrice;
+            writer.UnrealizedPnl = UnrealizedPnl;
+            writer.NumEntryFills = NumEntryFills;
+            writer.EntryTimestamp = EntryTimestamp;
+            writer.Timestamp = Timestamp;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public int SecurityId
+        {
+            get;
+            set;
+        }
+
+        public CapnpGen.Direction Direction
+        {
+            get;
+            set;
+        }
+
+        public uint PositionQty
+        {
+            get;
+            set;
+        }
+
+        public double AvgEntryPrice
+        {
+            get;
+            set;
+        }
+
+        public double UnrealizedPnl
+        {
+            get;
+            set;
+        }
+
+        public uint NumEntryFills
+        {
+            get;
+            set;
+        }
+
+        public long EntryTimestamp
+        {
+            get;
+            set;
+        }
+
+        public long Timestamp
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public int SecurityId => ctx.ReadDataInt(0UL, 0);
+            public CapnpGen.Direction Direction => (CapnpGen.Direction)ctx.ReadDataUShort(32UL, (ushort)0);
+            public uint PositionQty => ctx.ReadDataUInt(64UL, 0U);
+            public double AvgEntryPrice => ctx.ReadDataDouble(128UL, 0);
+            public double UnrealizedPnl => ctx.ReadDataDouble(192UL, 0);
+            public uint NumEntryFills => ctx.ReadDataUInt(96UL, 0U);
+            public long EntryTimestamp => ctx.ReadDataLong(256UL, 0L);
+            public long Timestamp => ctx.ReadDataLong(320UL, 0L);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(6, 0);
+            }
+
+            public int SecurityId
+            {
+                get => this.ReadDataInt(0UL, 0);
+                set => this.WriteData(0UL, value, 0);
+            }
+
+            public CapnpGen.Direction Direction
+            {
+                get => (CapnpGen.Direction)this.ReadDataUShort(32UL, (ushort)0);
+                set => this.WriteData(32UL, (ushort)value, (ushort)0);
+            }
+
+            public uint PositionQty
+            {
+                get => this.ReadDataUInt(64UL, 0U);
+                set => this.WriteData(64UL, value, 0U);
+            }
+
+            public double AvgEntryPrice
+            {
+                get => this.ReadDataDouble(128UL, 0);
+                set => this.WriteData(128UL, value, 0);
+            }
+
+            public double UnrealizedPnl
+            {
+                get => this.ReadDataDouble(192UL, 0);
+                set => this.WriteData(192UL, value, 0);
+            }
+
+            public uint NumEntryFills
+            {
+                get => this.ReadDataUInt(96UL, 0U);
+                set => this.WriteData(96UL, value, 0U);
+            }
+
+            public long EntryTimestamp
+            {
+                get => this.ReadDataLong(256UL, 0L);
+                set => this.WriteData(256UL, value, 0L);
+            }
+
+            public long Timestamp
+            {
+                get => this.ReadDataLong(320UL, 0L);
+                set => this.WriteData(320UL, value, 0L);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xdb445317ec62895dUL)]
+    public class ClosedPosition : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xdb445317ec62895dUL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            SecurityId = reader.SecurityId;
+            Direction = reader.Direction;
+            EntryQty = reader.EntryQty;
+            AvgEntryPrice = reader.AvgEntryPrice;
+            AvgExitPrice = reader.AvgExitPrice;
+            PositionPnl = reader.PositionPnl;
+            TotalPnl = reader.TotalPnl;
+            ExitReason = reader.ExitReason;
+            EntryTimestamp = reader.EntryTimestamp;
+            ExitTimestamp = reader.ExitTimestamp;
+            DurationNs = reader.DurationNs;
+            NumEntryFills = reader.NumEntryFills;
+            PositionNumber = reader.PositionNumber;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.SecurityId = SecurityId;
+            writer.Direction = Direction;
+            writer.EntryQty = EntryQty;
+            writer.AvgEntryPrice = AvgEntryPrice;
+            writer.AvgExitPrice = AvgExitPrice;
+            writer.PositionPnl = PositionPnl;
+            writer.TotalPnl = TotalPnl;
+            writer.ExitReason = ExitReason;
+            writer.EntryTimestamp = EntryTimestamp;
+            writer.ExitTimestamp = ExitTimestamp;
+            writer.DurationNs = DurationNs;
+            writer.NumEntryFills = NumEntryFills;
+            writer.PositionNumber = PositionNumber;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public int SecurityId
+        {
+            get;
+            set;
+        }
+
+        public CapnpGen.Direction Direction
+        {
+            get;
+            set;
+        }
+
+        public uint EntryQty
+        {
+            get;
+            set;
+        }
+
+        public double AvgEntryPrice
+        {
+            get;
+            set;
+        }
+
+        public double AvgExitPrice
+        {
+            get;
+            set;
+        }
+
+        public double PositionPnl
+        {
+            get;
+            set;
+        }
+
+        public double TotalPnl
+        {
+            get;
+            set;
+        }
+
+        public CapnpGen.ExitReason ExitReason
+        {
+            get;
+            set;
+        }
+
+        public long EntryTimestamp
+        {
+            get;
+            set;
+        }
+
+        public long ExitTimestamp
+        {
+            get;
+            set;
+        }
+
+        public long DurationNs
+        {
+            get;
+            set;
+        }
+
+        public uint NumEntryFills
+        {
+            get;
+            set;
+        }
+
+        public uint PositionNumber
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public int SecurityId => ctx.ReadDataInt(0UL, 0);
+            public CapnpGen.Direction Direction => (CapnpGen.Direction)ctx.ReadDataUShort(32UL, (ushort)0);
+            public uint EntryQty => ctx.ReadDataUInt(64UL, 0U);
+            public double AvgEntryPrice => ctx.ReadDataDouble(128UL, 0);
+            public double AvgExitPrice => ctx.ReadDataDouble(192UL, 0);
+            public double PositionPnl => ctx.ReadDataDouble(256UL, 0);
+            public double TotalPnl => ctx.ReadDataDouble(320UL, 0);
+            public CapnpGen.ExitReason ExitReason => (CapnpGen.ExitReason)ctx.ReadDataUShort(48UL, (ushort)0);
+            public long EntryTimestamp => ctx.ReadDataLong(384UL, 0L);
+            public long ExitTimestamp => ctx.ReadDataLong(448UL, 0L);
+            public long DurationNs => ctx.ReadDataLong(512UL, 0L);
+            public uint NumEntryFills => ctx.ReadDataUInt(96UL, 0U);
+            public uint PositionNumber => ctx.ReadDataUInt(576UL, 0U);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(10, 0);
+            }
+
+            public int SecurityId
+            {
+                get => this.ReadDataInt(0UL, 0);
+                set => this.WriteData(0UL, value, 0);
+            }
+
+            public CapnpGen.Direction Direction
+            {
+                get => (CapnpGen.Direction)this.ReadDataUShort(32UL, (ushort)0);
+                set => this.WriteData(32UL, (ushort)value, (ushort)0);
+            }
+
+            public uint EntryQty
+            {
+                get => this.ReadDataUInt(64UL, 0U);
+                set => this.WriteData(64UL, value, 0U);
+            }
+
+            public double AvgEntryPrice
+            {
+                get => this.ReadDataDouble(128UL, 0);
+                set => this.WriteData(128UL, value, 0);
+            }
+
+            public double AvgExitPrice
+            {
+                get => this.ReadDataDouble(192UL, 0);
+                set => this.WriteData(192UL, value, 0);
+            }
+
+            public double PositionPnl
+            {
+                get => this.ReadDataDouble(256UL, 0);
+                set => this.WriteData(256UL, value, 0);
+            }
+
+            public double TotalPnl
+            {
+                get => this.ReadDataDouble(320UL, 0);
+                set => this.WriteData(320UL, value, 0);
+            }
+
+            public CapnpGen.ExitReason ExitReason
+            {
+                get => (CapnpGen.ExitReason)this.ReadDataUShort(48UL, (ushort)0);
+                set => this.WriteData(48UL, (ushort)value, (ushort)0);
+            }
+
+            public long EntryTimestamp
+            {
+                get => this.ReadDataLong(384UL, 0L);
+                set => this.WriteData(384UL, value, 0L);
+            }
+
+            public long ExitTimestamp
+            {
+                get => this.ReadDataLong(448UL, 0L);
+                set => this.WriteData(448UL, value, 0L);
+            }
+
+            public long DurationNs
+            {
+                get => this.ReadDataLong(512UL, 0L);
+                set => this.WriteData(512UL, value, 0L);
+            }
+
+            public uint NumEntryFills
+            {
+                get => this.ReadDataUInt(96UL, 0U);
+                set => this.WriteData(96UL, value, 0U);
+            }
+
+            public uint PositionNumber
+            {
+                get => this.ReadDataUInt(576UL, 0U);
+                set => this.WriteData(576UL, value, 0U);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xf6604fbbb2c3c3edUL)]
+    public class SessionStats : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xf6604fbbb2c3c3edUL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            SecurityId = reader.SecurityId;
+            TotalPositions = reader.TotalPositions;
+            TotalWins = reader.TotalWins;
+            TotalLosses = reader.TotalLosses;
+            WinRate = reader.WinRate;
+            TotalPnl = reader.TotalPnl;
+            GrossWinPnl = reader.GrossWinPnl;
+            GrossLossPnl = reader.GrossLossPnl;
+            AvgWinPnl = reader.AvgWinPnl;
+            AvgLossPnl = reader.AvgLossPnl;
+            HighWaterPnl = reader.HighWaterPnl;
+            Drawdown = reader.Drawdown;
+            ConsecutiveWins = reader.ConsecutiveWins;
+            ConsecutiveLosses = reader.ConsecutiveLosses;
+            DailyOrderCount = reader.DailyOrderCount;
+            WorkingOrderCount = reader.WorkingOrderCount;
+            Timestamp = reader.Timestamp;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.SecurityId = SecurityId;
+            writer.TotalPositions = TotalPositions;
+            writer.TotalWins = TotalWins;
+            writer.TotalLosses = TotalLosses;
+            writer.WinRate = WinRate;
+            writer.TotalPnl = TotalPnl;
+            writer.GrossWinPnl = GrossWinPnl;
+            writer.GrossLossPnl = GrossLossPnl;
+            writer.AvgWinPnl = AvgWinPnl;
+            writer.AvgLossPnl = AvgLossPnl;
+            writer.HighWaterPnl = HighWaterPnl;
+            writer.Drawdown = Drawdown;
+            writer.ConsecutiveWins = ConsecutiveWins;
+            writer.ConsecutiveLosses = ConsecutiveLosses;
+            writer.DailyOrderCount = DailyOrderCount;
+            writer.WorkingOrderCount = WorkingOrderCount;
+            writer.Timestamp = Timestamp;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public int SecurityId
+        {
+            get;
+            set;
+        }
+
+        public uint TotalPositions
+        {
+            get;
+            set;
+        }
+
+        public uint TotalWins
+        {
+            get;
+            set;
+        }
+
+        public uint TotalLosses
+        {
+            get;
+            set;
+        }
+
+        public double WinRate
+        {
+            get;
+            set;
+        }
+
+        public double TotalPnl
+        {
+            get;
+            set;
+        }
+
+        public double GrossWinPnl
+        {
+            get;
+            set;
+        }
+
+        public double GrossLossPnl
+        {
+            get;
+            set;
+        }
+
+        public double AvgWinPnl
+        {
+            get;
+            set;
+        }
+
+        public double AvgLossPnl
+        {
+            get;
+            set;
+        }
+
+        public double HighWaterPnl
+        {
+            get;
+            set;
+        }
+
+        public double Drawdown
+        {
+            get;
+            set;
+        }
+
+        public uint ConsecutiveWins
+        {
+            get;
+            set;
+        }
+
+        public uint ConsecutiveLosses
+        {
+            get;
+            set;
+        }
+
+        public uint DailyOrderCount
+        {
+            get;
+            set;
+        }
+
+        public uint WorkingOrderCount
+        {
+            get;
+            set;
+        }
+
+        public long Timestamp
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public int SecurityId => ctx.ReadDataInt(0UL, 0);
+            public uint TotalPositions => ctx.ReadDataUInt(32UL, 0U);
+            public uint TotalWins => ctx.ReadDataUInt(64UL, 0U);
+            public uint TotalLosses => ctx.ReadDataUInt(96UL, 0U);
+            public double WinRate => ctx.ReadDataDouble(128UL, 0);
+            public double TotalPnl => ctx.ReadDataDouble(192UL, 0);
+            public double GrossWinPnl => ctx.ReadDataDouble(256UL, 0);
+            public double GrossLossPnl => ctx.ReadDataDouble(320UL, 0);
+            public double AvgWinPnl => ctx.ReadDataDouble(384UL, 0);
+            public double AvgLossPnl => ctx.ReadDataDouble(448UL, 0);
+            public double HighWaterPnl => ctx.ReadDataDouble(512UL, 0);
+            public double Drawdown => ctx.ReadDataDouble(576UL, 0);
+            public uint ConsecutiveWins => ctx.ReadDataUInt(640UL, 0U);
+            public uint ConsecutiveLosses => ctx.ReadDataUInt(672UL, 0U);
+            public uint DailyOrderCount => ctx.ReadDataUInt(704UL, 0U);
+            public uint WorkingOrderCount => ctx.ReadDataUInt(736UL, 0U);
+            public long Timestamp => ctx.ReadDataLong(768UL, 0L);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(13, 0);
+            }
+
+            public int SecurityId
+            {
+                get => this.ReadDataInt(0UL, 0);
+                set => this.WriteData(0UL, value, 0);
+            }
+
+            public uint TotalPositions
+            {
+                get => this.ReadDataUInt(32UL, 0U);
+                set => this.WriteData(32UL, value, 0U);
+            }
+
+            public uint TotalWins
+            {
+                get => this.ReadDataUInt(64UL, 0U);
+                set => this.WriteData(64UL, value, 0U);
+            }
+
+            public uint TotalLosses
+            {
+                get => this.ReadDataUInt(96UL, 0U);
+                set => this.WriteData(96UL, value, 0U);
+            }
+
+            public double WinRate
+            {
+                get => this.ReadDataDouble(128UL, 0);
+                set => this.WriteData(128UL, value, 0);
+            }
+
+            public double TotalPnl
+            {
+                get => this.ReadDataDouble(192UL, 0);
+                set => this.WriteData(192UL, value, 0);
+            }
+
+            public double GrossWinPnl
+            {
+                get => this.ReadDataDouble(256UL, 0);
+                set => this.WriteData(256UL, value, 0);
+            }
+
+            public double GrossLossPnl
+            {
+                get => this.ReadDataDouble(320UL, 0);
+                set => this.WriteData(320UL, value, 0);
+            }
+
+            public double AvgWinPnl
+            {
+                get => this.ReadDataDouble(384UL, 0);
+                set => this.WriteData(384UL, value, 0);
+            }
+
+            public double AvgLossPnl
+            {
+                get => this.ReadDataDouble(448UL, 0);
+                set => this.WriteData(448UL, value, 0);
+            }
+
+            public double HighWaterPnl
+            {
+                get => this.ReadDataDouble(512UL, 0);
+                set => this.WriteData(512UL, value, 0);
+            }
+
+            public double Drawdown
+            {
+                get => this.ReadDataDouble(576UL, 0);
+                set => this.WriteData(576UL, value, 0);
+            }
+
+            public uint ConsecutiveWins
+            {
+                get => this.ReadDataUInt(640UL, 0U);
+                set => this.WriteData(640UL, value, 0U);
+            }
+
+            public uint ConsecutiveLosses
+            {
+                get => this.ReadDataUInt(672UL, 0U);
+                set => this.WriteData(672UL, value, 0U);
+            }
+
+            public uint DailyOrderCount
+            {
+                get => this.ReadDataUInt(704UL, 0U);
+                set => this.WriteData(704UL, value, 0U);
+            }
+
+            public uint WorkingOrderCount
+            {
+                get => this.ReadDataUInt(736UL, 0U);
+                set => this.WriteData(736UL, value, 0U);
+            }
+
+            public long Timestamp
+            {
+                get => this.ReadDataLong(768UL, 0L);
+                set => this.WriteData(768UL, value, 0L);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xd21cd90312b2ffecUL)]
+    public class RiskBreach : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xd21cd90312b2ffecUL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            SecurityId = reader.SecurityId;
+            BreachKind = reader.BreachKind;
+            LimitValue = reader.LimitValue;
+            ActualValue = reader.ActualValue;
+            Timestamp = reader.Timestamp;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.SecurityId = SecurityId;
+            writer.BreachKind = BreachKind;
+            writer.LimitValue = LimitValue;
+            writer.ActualValue = ActualValue;
+            writer.Timestamp = Timestamp;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public int SecurityId
+        {
+            get;
+            set;
+        }
+
+        public CapnpGen.RiskBreachKind BreachKind
+        {
+            get;
+            set;
+        }
+
+        public double LimitValue
+        {
+            get;
+            set;
+        }
+
+        public double ActualValue
+        {
+            get;
+            set;
+        }
+
+        public long Timestamp
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public int SecurityId => ctx.ReadDataInt(0UL, 0);
+            public CapnpGen.RiskBreachKind BreachKind => (CapnpGen.RiskBreachKind)ctx.ReadDataUShort(32UL, (ushort)0);
+            public double LimitValue => ctx.ReadDataDouble(64UL, 0);
+            public double ActualValue => ctx.ReadDataDouble(128UL, 0);
+            public long Timestamp => ctx.ReadDataLong(192UL, 0L);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(4, 0);
+            }
+
+            public int SecurityId
+            {
+                get => this.ReadDataInt(0UL, 0);
+                set => this.WriteData(0UL, value, 0);
+            }
+
+            public CapnpGen.RiskBreachKind BreachKind
+            {
+                get => (CapnpGen.RiskBreachKind)this.ReadDataUShort(32UL, (ushort)0);
+                set => this.WriteData(32UL, (ushort)value, (ushort)0);
+            }
+
+            public double LimitValue
+            {
+                get => this.ReadDataDouble(64UL, 0);
+                set => this.WriteData(64UL, value, 0);
+            }
+
+            public double ActualValue
+            {
+                get => this.ReadDataDouble(128UL, 0);
+                set => this.WriteData(128UL, value, 0);
+            }
+
+            public long Timestamp
+            {
+                get => this.ReadDataLong(192UL, 0L);
+                set => this.WriteData(192UL, value, 0L);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xa935f2c41508799fUL)]
+    public class RiskLimits : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xa935f2c41508799fUL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            MaxDailyOrders = reader.MaxDailyOrders;
+            MaxContractsPerOrder = reader.MaxContractsPerOrder;
+            MaxWorkingOrders = reader.MaxWorkingOrders;
+            MaxSingleTradeLoss = reader.MaxSingleTradeLoss;
+            MaxDrawdown = reader.MaxDrawdown;
+            MaxLossPercentage = reader.MaxLossPercentage;
+            MaxSuccessiveLosses = reader.MaxSuccessiveLosses;
+            CutoffTimestampNs = reader.CutoffTimestampNs;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.MaxDailyOrders = MaxDailyOrders;
+            writer.MaxContractsPerOrder = MaxContractsPerOrder;
+            writer.MaxWorkingOrders = MaxWorkingOrders;
+            writer.MaxSingleTradeLoss = MaxSingleTradeLoss;
+            writer.MaxDrawdown = MaxDrawdown;
+            writer.MaxLossPercentage = MaxLossPercentage;
+            writer.MaxSuccessiveLosses = MaxSuccessiveLosses;
+            writer.CutoffTimestampNs = CutoffTimestampNs;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public uint MaxDailyOrders
+        {
+            get;
+            set;
+        }
+
+        public uint MaxContractsPerOrder
+        {
+            get;
+            set;
+        }
+
+        public uint MaxWorkingOrders
+        {
+            get;
+            set;
+        }
+
+        public double MaxSingleTradeLoss
+        {
+            get;
+            set;
+        }
+
+        public double MaxDrawdown
+        {
+            get;
+            set;
+        }
+
+        public double MaxLossPercentage
+        {
+            get;
+            set;
+        }
+
+        public uint MaxSuccessiveLosses
+        {
+            get;
+            set;
+        }
+
+        public long CutoffTimestampNs
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public uint MaxDailyOrders => ctx.ReadDataUInt(0UL, 0U);
+            public uint MaxContractsPerOrder => ctx.ReadDataUInt(32UL, 0U);
+            public uint MaxWorkingOrders => ctx.ReadDataUInt(64UL, 0U);
+            public double MaxSingleTradeLoss => ctx.ReadDataDouble(128UL, 0);
+            public double MaxDrawdown => ctx.ReadDataDouble(192UL, 0);
+            public double MaxLossPercentage => ctx.ReadDataDouble(256UL, 0);
+            public uint MaxSuccessiveLosses => ctx.ReadDataUInt(96UL, 0U);
+            public long CutoffTimestampNs => ctx.ReadDataLong(320UL, 0L);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(6, 0);
+            }
+
+            public uint MaxDailyOrders
+            {
+                get => this.ReadDataUInt(0UL, 0U);
+                set => this.WriteData(0UL, value, 0U);
+            }
+
+            public uint MaxContractsPerOrder
+            {
+                get => this.ReadDataUInt(32UL, 0U);
+                set => this.WriteData(32UL, value, 0U);
+            }
+
+            public uint MaxWorkingOrders
+            {
+                get => this.ReadDataUInt(64UL, 0U);
+                set => this.WriteData(64UL, value, 0U);
+            }
+
+            public double MaxSingleTradeLoss
+            {
+                get => this.ReadDataDouble(128UL, 0);
+                set => this.WriteData(128UL, value, 0);
+            }
+
+            public double MaxDrawdown
+            {
+                get => this.ReadDataDouble(192UL, 0);
+                set => this.WriteData(192UL, value, 0);
+            }
+
+            public double MaxLossPercentage
+            {
+                get => this.ReadDataDouble(256UL, 0);
+                set => this.WriteData(256UL, value, 0);
+            }
+
+            public uint MaxSuccessiveLosses
+            {
+                get => this.ReadDataUInt(96UL, 0U);
+                set => this.WriteData(96UL, value, 0U);
+            }
+
+            public long CutoffTimestampNs
+            {
+                get => this.ReadDataLong(320UL, 0L);
+                set => this.WriteData(320UL, value, 0L);
+            }
+        }
+    }
+}

@@ -1,0 +1,2956 @@
+using Capnp;
+using Capnp.Rpc;
+using System;
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace CapnpGen
+{
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xaa10eef90f420bbeUL)]
+    public class AtsRequest : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xaa10eef90f420bbeUL;
+        public enum WHICH : ushort
+        {
+            NewClient = 0,
+            GatewayCommand = 1,
+            AtsCommand = 2,
+            AckEvents = 3,
+            AtsStatus = 4,
+            Ping = 5,
+            undefined = 65535
+        }
+
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            switch (reader.which)
+            {
+                case WHICH.NewClient:
+                    NewClient = CapnpSerializable.Create<CapnpGen.NewClientRequest>(reader.NewClient);
+                    break;
+                case WHICH.GatewayCommand:
+                    GatewayCommand = CapnpSerializable.Create<CapnpGen.GatewayCommandRequest>(reader.GatewayCommand);
+                    break;
+                case WHICH.AtsCommand:
+                    AtsCommand = CapnpSerializable.Create<CapnpGen.AtsCommandRequest>(reader.AtsCommand);
+                    break;
+                case WHICH.AckEvents:
+                    AckEvents = CapnpSerializable.Create<CapnpGen.AtsAckEvents>(reader.AckEvents);
+                    break;
+                case WHICH.AtsStatus:
+                    AtsStatus = CapnpSerializable.Create<CapnpGen.AtsStatusRequest>(reader.AtsStatus);
+                    break;
+                case WHICH.Ping:
+                    Ping = CapnpSerializable.Create<CapnpGen.PingRequest>(reader.Ping);
+                    break;
+            }
+
+            applyDefaults();
+        }
+
+        private WHICH _which = WHICH.undefined;
+        private object _content;
+        public WHICH which
+        {
+            get => _which;
+            set
+            {
+                if (value == _which)
+                    return;
+                _which = value;
+                switch (value)
+                {
+                    case WHICH.NewClient:
+                        _content = null;
+                        break;
+                    case WHICH.GatewayCommand:
+                        _content = null;
+                        break;
+                    case WHICH.AtsCommand:
+                        _content = null;
+                        break;
+                    case WHICH.AckEvents:
+                        _content = null;
+                        break;
+                    case WHICH.AtsStatus:
+                        _content = null;
+                        break;
+                    case WHICH.Ping:
+                        _content = null;
+                        break;
+                }
+            }
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.which = which;
+            switch (which)
+            {
+                case WHICH.NewClient:
+                    NewClient?.serialize(writer.NewClient);
+                    break;
+                case WHICH.GatewayCommand:
+                    GatewayCommand?.serialize(writer.GatewayCommand);
+                    break;
+                case WHICH.AtsCommand:
+                    AtsCommand?.serialize(writer.AtsCommand);
+                    break;
+                case WHICH.AckEvents:
+                    AckEvents?.serialize(writer.AckEvents);
+                    break;
+                case WHICH.AtsStatus:
+                    AtsStatus?.serialize(writer.AtsStatus);
+                    break;
+                case WHICH.Ping:
+                    Ping?.serialize(writer.Ping);
+                    break;
+            }
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public CapnpGen.NewClientRequest NewClient
+        {
+            get => _which == WHICH.NewClient ? (CapnpGen.NewClientRequest)_content : null;
+            set
+            {
+                _which = WHICH.NewClient;
+                _content = value;
+            }
+        }
+
+        public CapnpGen.GatewayCommandRequest GatewayCommand
+        {
+            get => _which == WHICH.GatewayCommand ? (CapnpGen.GatewayCommandRequest)_content : null;
+            set
+            {
+                _which = WHICH.GatewayCommand;
+                _content = value;
+            }
+        }
+
+        public CapnpGen.AtsCommandRequest AtsCommand
+        {
+            get => _which == WHICH.AtsCommand ? (CapnpGen.AtsCommandRequest)_content : null;
+            set
+            {
+                _which = WHICH.AtsCommand;
+                _content = value;
+            }
+        }
+
+        public CapnpGen.AtsAckEvents AckEvents
+        {
+            get => _which == WHICH.AckEvents ? (CapnpGen.AtsAckEvents)_content : null;
+            set
+            {
+                _which = WHICH.AckEvents;
+                _content = value;
+            }
+        }
+
+        public CapnpGen.AtsStatusRequest AtsStatus
+        {
+            get => _which == WHICH.AtsStatus ? (CapnpGen.AtsStatusRequest)_content : null;
+            set
+            {
+                _which = WHICH.AtsStatus;
+                _content = value;
+            }
+        }
+
+        public CapnpGen.PingRequest Ping
+        {
+            get => _which == WHICH.Ping ? (CapnpGen.PingRequest)_content : null;
+            set
+            {
+                _which = WHICH.Ping;
+                _content = value;
+            }
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public WHICH which => (WHICH)ctx.ReadDataUShort(0U, (ushort)0);
+            public CapnpGen.NewClientRequest.READER NewClient => which == WHICH.NewClient ? ctx.ReadStruct(0, CapnpGen.NewClientRequest.READER.create) : default;
+            public CapnpGen.GatewayCommandRequest.READER GatewayCommand => which == WHICH.GatewayCommand ? ctx.ReadStruct(0, CapnpGen.GatewayCommandRequest.READER.create) : default;
+            public CapnpGen.AtsCommandRequest.READER AtsCommand => which == WHICH.AtsCommand ? ctx.ReadStruct(0, CapnpGen.AtsCommandRequest.READER.create) : default;
+            public CapnpGen.AtsAckEvents.READER AckEvents => which == WHICH.AckEvents ? ctx.ReadStruct(0, CapnpGen.AtsAckEvents.READER.create) : default;
+            public CapnpGen.AtsStatusRequest.READER AtsStatus => which == WHICH.AtsStatus ? ctx.ReadStruct(0, CapnpGen.AtsStatusRequest.READER.create) : default;
+            public CapnpGen.PingRequest.READER Ping => which == WHICH.Ping ? ctx.ReadStruct(0, CapnpGen.PingRequest.READER.create) : default;
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(1, 1);
+            }
+
+            public WHICH which
+            {
+                get => (WHICH)this.ReadDataUShort(0U, (ushort)0);
+                set => this.WriteData(0U, (ushort)value, (ushort)0);
+            }
+
+            public CapnpGen.NewClientRequest.WRITER NewClient
+            {
+                get => which == WHICH.NewClient ? BuildPointer<CapnpGen.NewClientRequest.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+
+            public CapnpGen.GatewayCommandRequest.WRITER GatewayCommand
+            {
+                get => which == WHICH.GatewayCommand ? BuildPointer<CapnpGen.GatewayCommandRequest.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+
+            public CapnpGen.AtsCommandRequest.WRITER AtsCommand
+            {
+                get => which == WHICH.AtsCommand ? BuildPointer<CapnpGen.AtsCommandRequest.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+
+            public CapnpGen.AtsAckEvents.WRITER AckEvents
+            {
+                get => which == WHICH.AckEvents ? BuildPointer<CapnpGen.AtsAckEvents.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+
+            public CapnpGen.AtsStatusRequest.WRITER AtsStatus
+            {
+                get => which == WHICH.AtsStatus ? BuildPointer<CapnpGen.AtsStatusRequest.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+
+            public CapnpGen.PingRequest.WRITER Ping
+            {
+                get => which == WHICH.Ping ? BuildPointer<CapnpGen.PingRequest.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xcd8fedec427ef28dUL)]
+    public class NewClientRequest : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xcd8fedec427ef28dUL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            SenderId = reader.SenderId;
+            RequestId = reader.RequestId;
+            UserName = reader.UserName;
+            SentTs = reader.SentTs;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.SenderId = SenderId;
+            writer.RequestId = RequestId;
+            writer.UserName = UserName;
+            writer.SentTs = SentTs;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public ulong SenderId
+        {
+            get;
+            set;
+        }
+
+        public uint RequestId
+        {
+            get;
+            set;
+        }
+
+        public string UserName
+        {
+            get;
+            set;
+        }
+
+        public long SentTs
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public ulong SenderId => ctx.ReadDataULong(0UL, 0UL);
+            public uint RequestId => ctx.ReadDataUInt(64UL, 0U);
+            public string UserName => ctx.ReadText(0, null);
+            public long SentTs => ctx.ReadDataLong(128UL, 0L);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(3, 1);
+            }
+
+            public ulong SenderId
+            {
+                get => this.ReadDataULong(0UL, 0UL);
+                set => this.WriteData(0UL, value, 0UL);
+            }
+
+            public uint RequestId
+            {
+                get => this.ReadDataUInt(64UL, 0U);
+                set => this.WriteData(64UL, value, 0U);
+            }
+
+            public string UserName
+            {
+                get => this.ReadText(0, null);
+                set => this.WriteText(0, value, null);
+            }
+
+            public long SentTs
+            {
+                get => this.ReadDataLong(128UL, 0L);
+                set => this.WriteData(128UL, value, 0L);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xe3dafc1a1fb0c471UL)]
+    public class GatewayCommandRequest : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xe3dafc1a1fb0c471UL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            SenderId = reader.SenderId;
+            RequestId = reader.RequestId;
+            SentTs = reader.SentTs;
+            GatewayCommand = reader.GatewayCommand;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.SenderId = SenderId;
+            writer.RequestId = RequestId;
+            writer.SentTs = SentTs;
+            writer.GatewayCommand = GatewayCommand;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public ulong SenderId
+        {
+            get;
+            set;
+        }
+
+        public uint RequestId
+        {
+            get;
+            set;
+        }
+
+        public long SentTs
+        {
+            get;
+            set;
+        }
+
+        public CapnpGen.GatewayCommandCode GatewayCommand
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public ulong SenderId => ctx.ReadDataULong(0UL, 0UL);
+            public uint RequestId => ctx.ReadDataUInt(64UL, 0U);
+            public long SentTs => ctx.ReadDataLong(128UL, 0L);
+            public CapnpGen.GatewayCommandCode GatewayCommand => (CapnpGen.GatewayCommandCode)ctx.ReadDataUShort(96UL, (ushort)0);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(3, 0);
+            }
+
+            public ulong SenderId
+            {
+                get => this.ReadDataULong(0UL, 0UL);
+                set => this.WriteData(0UL, value, 0UL);
+            }
+
+            public uint RequestId
+            {
+                get => this.ReadDataUInt(64UL, 0U);
+                set => this.WriteData(64UL, value, 0U);
+            }
+
+            public long SentTs
+            {
+                get => this.ReadDataLong(128UL, 0L);
+                set => this.WriteData(128UL, value, 0L);
+            }
+
+            public CapnpGen.GatewayCommandCode GatewayCommand
+            {
+                get => (CapnpGen.GatewayCommandCode)this.ReadDataUShort(96UL, (ushort)0);
+                set => this.WriteData(96UL, (ushort)value, (ushort)0);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0x89500fffe5f60747UL)]
+    public class AtsCommandRequest : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0x89500fffe5f60747UL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            SenderId = reader.SenderId;
+            RequestId = reader.RequestId;
+            SentTs = reader.SentTs;
+            AtsCommand = reader.AtsCommand;
+            AtsCxnType = reader.AtsCxnType;
+            AtsOperator = reader.AtsOperator;
+            CmdParams = reader.CmdParams;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.SenderId = SenderId;
+            writer.RequestId = RequestId;
+            writer.SentTs = SentTs;
+            writer.AtsCommand = AtsCommand;
+            writer.AtsCxnType = AtsCxnType;
+            writer.AtsOperator = AtsOperator;
+            writer.CmdParams = CmdParams;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public ulong SenderId
+        {
+            get;
+            set;
+        }
+
+        public uint RequestId
+        {
+            get;
+            set;
+        }
+
+        public long SentTs
+        {
+            get;
+            set;
+        }
+
+        public CapnpGen.AtsCommandCode AtsCommand
+        {
+            get;
+            set;
+        }
+
+        public CapnpGen.AtsCxnType AtsCxnType
+        {
+            get;
+            set;
+        }
+
+        public string AtsOperator
+        {
+            get;
+            set;
+        }
+
+        public uint CmdParams
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public ulong SenderId => ctx.ReadDataULong(0UL, 0UL);
+            public uint RequestId => ctx.ReadDataUInt(64UL, 0U);
+            public long SentTs => ctx.ReadDataLong(128UL, 0L);
+            public CapnpGen.AtsCommandCode AtsCommand => (CapnpGen.AtsCommandCode)ctx.ReadDataUShort(96UL, (ushort)0);
+            public CapnpGen.AtsCxnType AtsCxnType => (CapnpGen.AtsCxnType)ctx.ReadDataUShort(112UL, (ushort)0);
+            public string AtsOperator => ctx.ReadText(0, null);
+            public uint CmdParams => ctx.ReadDataUInt(192UL, 0U);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(4, 1);
+            }
+
+            public ulong SenderId
+            {
+                get => this.ReadDataULong(0UL, 0UL);
+                set => this.WriteData(0UL, value, 0UL);
+            }
+
+            public uint RequestId
+            {
+                get => this.ReadDataUInt(64UL, 0U);
+                set => this.WriteData(64UL, value, 0U);
+            }
+
+            public long SentTs
+            {
+                get => this.ReadDataLong(128UL, 0L);
+                set => this.WriteData(128UL, value, 0L);
+            }
+
+            public CapnpGen.AtsCommandCode AtsCommand
+            {
+                get => (CapnpGen.AtsCommandCode)this.ReadDataUShort(96UL, (ushort)0);
+                set => this.WriteData(96UL, (ushort)value, (ushort)0);
+            }
+
+            public CapnpGen.AtsCxnType AtsCxnType
+            {
+                get => (CapnpGen.AtsCxnType)this.ReadDataUShort(112UL, (ushort)0);
+                set => this.WriteData(112UL, (ushort)value, (ushort)0);
+            }
+
+            public string AtsOperator
+            {
+                get => this.ReadText(0, null);
+                set => this.WriteText(0, value, null);
+            }
+
+            public uint CmdParams
+            {
+                get => this.ReadDataUInt(192UL, 0U);
+                set => this.WriteData(192UL, value, 0U);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xa6d083e464914921UL)]
+    public class AtsAckEvents : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xa6d083e464914921UL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            SenderId = reader.SenderId;
+            SentTs = reader.SentTs;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.SenderId = SenderId;
+            writer.SentTs = SentTs;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public ulong SenderId
+        {
+            get;
+            set;
+        }
+
+        public long SentTs
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public ulong SenderId => ctx.ReadDataULong(0UL, 0UL);
+            public long SentTs => ctx.ReadDataLong(64UL, 0L);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(2, 0);
+            }
+
+            public ulong SenderId
+            {
+                get => this.ReadDataULong(0UL, 0UL);
+                set => this.WriteData(0UL, value, 0UL);
+            }
+
+            public long SentTs
+            {
+                get => this.ReadDataLong(64UL, 0L);
+                set => this.WriteData(64UL, value, 0L);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xf3074479a70d1a97UL)]
+    public class AtsStatusRequest : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xf3074479a70d1a97UL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            SenderId = reader.SenderId;
+            RequestId = reader.RequestId;
+            SentTs = reader.SentTs;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.SenderId = SenderId;
+            writer.RequestId = RequestId;
+            writer.SentTs = SentTs;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public ulong SenderId
+        {
+            get;
+            set;
+        }
+
+        public uint RequestId
+        {
+            get;
+            set;
+        }
+
+        public long SentTs
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public ulong SenderId => ctx.ReadDataULong(0UL, 0UL);
+            public uint RequestId => ctx.ReadDataUInt(64UL, 0U);
+            public long SentTs => ctx.ReadDataLong(128UL, 0L);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(3, 0);
+            }
+
+            public ulong SenderId
+            {
+                get => this.ReadDataULong(0UL, 0UL);
+                set => this.WriteData(0UL, value, 0UL);
+            }
+
+            public uint RequestId
+            {
+                get => this.ReadDataUInt(64UL, 0U);
+                set => this.WriteData(64UL, value, 0U);
+            }
+
+            public long SentTs
+            {
+                get => this.ReadDataLong(128UL, 0L);
+                set => this.WriteData(128UL, value, 0L);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xd6fae307d0d7685fUL)]
+    public class PingRequest : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xd6fae307d0d7685fUL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            SenderId = reader.SenderId;
+            SentTs = reader.SentTs;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.SenderId = SenderId;
+            writer.SentTs = SentTs;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public ulong SenderId
+        {
+            get;
+            set;
+        }
+
+        public long SentTs
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public ulong SenderId => ctx.ReadDataULong(0UL, 0UL);
+            public long SentTs => ctx.ReadDataLong(64UL, 0L);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(2, 0);
+            }
+
+            public ulong SenderId
+            {
+                get => this.ReadDataULong(0UL, 0UL);
+                set => this.WriteData(0UL, value, 0UL);
+            }
+
+            public long SentTs
+            {
+                get => this.ReadDataLong(64UL, 0L);
+                set => this.WriteData(64UL, value, 0L);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xbc7227dc2c58fb1fUL)]
+    public class AtsResponse : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xbc7227dc2c58fb1fUL;
+        public enum WHICH : ushort
+        {
+            NewClient = 0,
+            GatewayCommand = 1,
+            AtsCommand = 2,
+            ConfirmAckEvents = 3,
+            AtsStatus = 4,
+            AtsMonitor = 5,
+            AtsSystem = 6,
+            AtsExecution = 7,
+            AtsPosition = 8,
+            AtsWorkingOrder = 9,
+            Ping = 10,
+            undefined = 65535
+        }
+
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            switch (reader.which)
+            {
+                case WHICH.NewClient:
+                    NewClient = CapnpSerializable.Create<CapnpGen.NewClientResponse>(reader.NewClient);
+                    break;
+                case WHICH.GatewayCommand:
+                    GatewayCommand = CapnpSerializable.Create<CapnpGen.GatewayCommandResponse>(reader.GatewayCommand);
+                    break;
+                case WHICH.AtsCommand:
+                    AtsCommand = CapnpSerializable.Create<CapnpGen.AtsCommandResponse>(reader.AtsCommand);
+                    break;
+                case WHICH.ConfirmAckEvents:
+                    ConfirmAckEvents = CapnpSerializable.Create<CapnpGen.AtsConfirmAckEvents>(reader.ConfirmAckEvents);
+                    break;
+                case WHICH.AtsStatus:
+                    AtsStatus = CapnpSerializable.Create<CapnpGen.AtsStatusResponse>(reader.AtsStatus);
+                    break;
+                case WHICH.AtsMonitor:
+                    AtsMonitor = CapnpSerializable.Create<CapnpGen.AtsMonitorEvent>(reader.AtsMonitor);
+                    break;
+                case WHICH.AtsSystem:
+                    AtsSystem = CapnpSerializable.Create<CapnpGen.AtsSystemEvent>(reader.AtsSystem);
+                    break;
+                case WHICH.AtsExecution:
+                    AtsExecution = CapnpSerializable.Create<CapnpGen.AtsExecutionEvent>(reader.AtsExecution);
+                    break;
+                case WHICH.AtsPosition:
+                    AtsPosition = CapnpSerializable.Create<CapnpGen.AtsPositionEvent>(reader.AtsPosition);
+                    break;
+                case WHICH.AtsWorkingOrder:
+                    AtsWorkingOrder = CapnpSerializable.Create<CapnpGen.AtsWorkingOrderEvent>(reader.AtsWorkingOrder);
+                    break;
+                case WHICH.Ping:
+                    Ping = CapnpSerializable.Create<CapnpGen.PingResponse>(reader.Ping);
+                    break;
+            }
+
+            applyDefaults();
+        }
+
+        private WHICH _which = WHICH.undefined;
+        private object _content;
+        public WHICH which
+        {
+            get => _which;
+            set
+            {
+                if (value == _which)
+                    return;
+                _which = value;
+                switch (value)
+                {
+                    case WHICH.NewClient:
+                        _content = null;
+                        break;
+                    case WHICH.GatewayCommand:
+                        _content = null;
+                        break;
+                    case WHICH.AtsCommand:
+                        _content = null;
+                        break;
+                    case WHICH.ConfirmAckEvents:
+                        _content = null;
+                        break;
+                    case WHICH.AtsStatus:
+                        _content = null;
+                        break;
+                    case WHICH.AtsMonitor:
+                        _content = null;
+                        break;
+                    case WHICH.AtsSystem:
+                        _content = null;
+                        break;
+                    case WHICH.AtsExecution:
+                        _content = null;
+                        break;
+                    case WHICH.AtsPosition:
+                        _content = null;
+                        break;
+                    case WHICH.AtsWorkingOrder:
+                        _content = null;
+                        break;
+                    case WHICH.Ping:
+                        _content = null;
+                        break;
+                }
+            }
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.which = which;
+            switch (which)
+            {
+                case WHICH.NewClient:
+                    NewClient?.serialize(writer.NewClient);
+                    break;
+                case WHICH.GatewayCommand:
+                    GatewayCommand?.serialize(writer.GatewayCommand);
+                    break;
+                case WHICH.AtsCommand:
+                    AtsCommand?.serialize(writer.AtsCommand);
+                    break;
+                case WHICH.ConfirmAckEvents:
+                    ConfirmAckEvents?.serialize(writer.ConfirmAckEvents);
+                    break;
+                case WHICH.AtsStatus:
+                    AtsStatus?.serialize(writer.AtsStatus);
+                    break;
+                case WHICH.AtsMonitor:
+                    AtsMonitor?.serialize(writer.AtsMonitor);
+                    break;
+                case WHICH.AtsSystem:
+                    AtsSystem?.serialize(writer.AtsSystem);
+                    break;
+                case WHICH.AtsExecution:
+                    AtsExecution?.serialize(writer.AtsExecution);
+                    break;
+                case WHICH.AtsPosition:
+                    AtsPosition?.serialize(writer.AtsPosition);
+                    break;
+                case WHICH.AtsWorkingOrder:
+                    AtsWorkingOrder?.serialize(writer.AtsWorkingOrder);
+                    break;
+                case WHICH.Ping:
+                    Ping?.serialize(writer.Ping);
+                    break;
+            }
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public CapnpGen.NewClientResponse NewClient
+        {
+            get => _which == WHICH.NewClient ? (CapnpGen.NewClientResponse)_content : null;
+            set
+            {
+                _which = WHICH.NewClient;
+                _content = value;
+            }
+        }
+
+        public CapnpGen.GatewayCommandResponse GatewayCommand
+        {
+            get => _which == WHICH.GatewayCommand ? (CapnpGen.GatewayCommandResponse)_content : null;
+            set
+            {
+                _which = WHICH.GatewayCommand;
+                _content = value;
+            }
+        }
+
+        public CapnpGen.AtsCommandResponse AtsCommand
+        {
+            get => _which == WHICH.AtsCommand ? (CapnpGen.AtsCommandResponse)_content : null;
+            set
+            {
+                _which = WHICH.AtsCommand;
+                _content = value;
+            }
+        }
+
+        public CapnpGen.AtsConfirmAckEvents ConfirmAckEvents
+        {
+            get => _which == WHICH.ConfirmAckEvents ? (CapnpGen.AtsConfirmAckEvents)_content : null;
+            set
+            {
+                _which = WHICH.ConfirmAckEvents;
+                _content = value;
+            }
+        }
+
+        public CapnpGen.AtsStatusResponse AtsStatus
+        {
+            get => _which == WHICH.AtsStatus ? (CapnpGen.AtsStatusResponse)_content : null;
+            set
+            {
+                _which = WHICH.AtsStatus;
+                _content = value;
+            }
+        }
+
+        public CapnpGen.AtsMonitorEvent AtsMonitor
+        {
+            get => _which == WHICH.AtsMonitor ? (CapnpGen.AtsMonitorEvent)_content : null;
+            set
+            {
+                _which = WHICH.AtsMonitor;
+                _content = value;
+            }
+        }
+
+        public CapnpGen.AtsSystemEvent AtsSystem
+        {
+            get => _which == WHICH.AtsSystem ? (CapnpGen.AtsSystemEvent)_content : null;
+            set
+            {
+                _which = WHICH.AtsSystem;
+                _content = value;
+            }
+        }
+
+        public CapnpGen.AtsExecutionEvent AtsExecution
+        {
+            get => _which == WHICH.AtsExecution ? (CapnpGen.AtsExecutionEvent)_content : null;
+            set
+            {
+                _which = WHICH.AtsExecution;
+                _content = value;
+            }
+        }
+
+        public CapnpGen.AtsPositionEvent AtsPosition
+        {
+            get => _which == WHICH.AtsPosition ? (CapnpGen.AtsPositionEvent)_content : null;
+            set
+            {
+                _which = WHICH.AtsPosition;
+                _content = value;
+            }
+        }
+
+        public CapnpGen.AtsWorkingOrderEvent AtsWorkingOrder
+        {
+            get => _which == WHICH.AtsWorkingOrder ? (CapnpGen.AtsWorkingOrderEvent)_content : null;
+            set
+            {
+                _which = WHICH.AtsWorkingOrder;
+                _content = value;
+            }
+        }
+
+        public CapnpGen.PingResponse Ping
+        {
+            get => _which == WHICH.Ping ? (CapnpGen.PingResponse)_content : null;
+            set
+            {
+                _which = WHICH.Ping;
+                _content = value;
+            }
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public WHICH which => (WHICH)ctx.ReadDataUShort(0U, (ushort)0);
+            public CapnpGen.NewClientResponse.READER NewClient => which == WHICH.NewClient ? ctx.ReadStruct(0, CapnpGen.NewClientResponse.READER.create) : default;
+            public CapnpGen.GatewayCommandResponse.READER GatewayCommand => which == WHICH.GatewayCommand ? ctx.ReadStruct(0, CapnpGen.GatewayCommandResponse.READER.create) : default;
+            public CapnpGen.AtsCommandResponse.READER AtsCommand => which == WHICH.AtsCommand ? ctx.ReadStruct(0, CapnpGen.AtsCommandResponse.READER.create) : default;
+            public CapnpGen.AtsConfirmAckEvents.READER ConfirmAckEvents => which == WHICH.ConfirmAckEvents ? ctx.ReadStruct(0, CapnpGen.AtsConfirmAckEvents.READER.create) : default;
+            public CapnpGen.AtsStatusResponse.READER AtsStatus => which == WHICH.AtsStatus ? ctx.ReadStruct(0, CapnpGen.AtsStatusResponse.READER.create) : default;
+            public CapnpGen.AtsMonitorEvent.READER AtsMonitor => which == WHICH.AtsMonitor ? ctx.ReadStruct(0, CapnpGen.AtsMonitorEvent.READER.create) : default;
+            public CapnpGen.AtsSystemEvent.READER AtsSystem => which == WHICH.AtsSystem ? ctx.ReadStruct(0, CapnpGen.AtsSystemEvent.READER.create) : default;
+            public CapnpGen.AtsExecutionEvent.READER AtsExecution => which == WHICH.AtsExecution ? ctx.ReadStruct(0, CapnpGen.AtsExecutionEvent.READER.create) : default;
+            public CapnpGen.AtsPositionEvent.READER AtsPosition => which == WHICH.AtsPosition ? ctx.ReadStruct(0, CapnpGen.AtsPositionEvent.READER.create) : default;
+            public CapnpGen.AtsWorkingOrderEvent.READER AtsWorkingOrder => which == WHICH.AtsWorkingOrder ? ctx.ReadStruct(0, CapnpGen.AtsWorkingOrderEvent.READER.create) : default;
+            public CapnpGen.PingResponse.READER Ping => which == WHICH.Ping ? ctx.ReadStruct(0, CapnpGen.PingResponse.READER.create) : default;
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(1, 1);
+            }
+
+            public WHICH which
+            {
+                get => (WHICH)this.ReadDataUShort(0U, (ushort)0);
+                set => this.WriteData(0U, (ushort)value, (ushort)0);
+            }
+
+            public CapnpGen.NewClientResponse.WRITER NewClient
+            {
+                get => which == WHICH.NewClient ? BuildPointer<CapnpGen.NewClientResponse.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+
+            public CapnpGen.GatewayCommandResponse.WRITER GatewayCommand
+            {
+                get => which == WHICH.GatewayCommand ? BuildPointer<CapnpGen.GatewayCommandResponse.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+
+            public CapnpGen.AtsCommandResponse.WRITER AtsCommand
+            {
+                get => which == WHICH.AtsCommand ? BuildPointer<CapnpGen.AtsCommandResponse.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+
+            public CapnpGen.AtsConfirmAckEvents.WRITER ConfirmAckEvents
+            {
+                get => which == WHICH.ConfirmAckEvents ? BuildPointer<CapnpGen.AtsConfirmAckEvents.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+
+            public CapnpGen.AtsStatusResponse.WRITER AtsStatus
+            {
+                get => which == WHICH.AtsStatus ? BuildPointer<CapnpGen.AtsStatusResponse.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+
+            public CapnpGen.AtsMonitorEvent.WRITER AtsMonitor
+            {
+                get => which == WHICH.AtsMonitor ? BuildPointer<CapnpGen.AtsMonitorEvent.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+
+            public CapnpGen.AtsSystemEvent.WRITER AtsSystem
+            {
+                get => which == WHICH.AtsSystem ? BuildPointer<CapnpGen.AtsSystemEvent.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+
+            public CapnpGen.AtsExecutionEvent.WRITER AtsExecution
+            {
+                get => which == WHICH.AtsExecution ? BuildPointer<CapnpGen.AtsExecutionEvent.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+
+            public CapnpGen.AtsPositionEvent.WRITER AtsPosition
+            {
+                get => which == WHICH.AtsPosition ? BuildPointer<CapnpGen.AtsPositionEvent.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+
+            public CapnpGen.AtsWorkingOrderEvent.WRITER AtsWorkingOrder
+            {
+                get => which == WHICH.AtsWorkingOrder ? BuildPointer<CapnpGen.AtsWorkingOrderEvent.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+
+            public CapnpGen.PingResponse.WRITER Ping
+            {
+                get => which == WHICH.Ping ? BuildPointer<CapnpGen.PingResponse.WRITER>(0) : default;
+                set => Link(0, value);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xc0635dc1409059c9UL)]
+    public class NewClientResponse : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xc0635dc1409059c9UL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            SenderId = reader.SenderId;
+            SentTs = reader.SentTs;
+            RequestId = reader.RequestId;
+            CxnState = reader.CxnState;
+            OpxState = reader.OpxState;
+            ConfigName = reader.ConfigName;
+            System = reader.System;
+            UserName = reader.UserName;
+            OperatorName = reader.OperatorName;
+            Account = reader.Account;
+            DayPnl = reader.DayPnl;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.SenderId = SenderId;
+            writer.SentTs = SentTs;
+            writer.RequestId = RequestId;
+            writer.CxnState = CxnState;
+            writer.OpxState = OpxState;
+            writer.ConfigName = ConfigName;
+            writer.System = System;
+            writer.UserName = UserName;
+            writer.OperatorName = OperatorName;
+            writer.Account = Account;
+            writer.DayPnl = DayPnl;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public ulong SenderId
+        {
+            get;
+            set;
+        }
+
+        public long SentTs
+        {
+            get;
+            set;
+        }
+
+        public uint RequestId
+        {
+            get;
+            set;
+        }
+
+        public CapnpGen.ConnectionState CxnState
+        {
+            get;
+            set;
+        }
+
+        public CapnpGen.OperatingState OpxState
+        {
+            get;
+            set;
+        }
+
+        public string ConfigName
+        {
+            get;
+            set;
+        }
+
+        public string System
+        {
+            get;
+            set;
+        }
+
+        public string UserName
+        {
+            get;
+            set;
+        }
+
+        public string OperatorName
+        {
+            get;
+            set;
+        }
+
+        public string Account
+        {
+            get;
+            set;
+        }
+
+        public double DayPnl
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public ulong SenderId => ctx.ReadDataULong(0UL, 0UL);
+            public long SentTs => ctx.ReadDataLong(64UL, 0L);
+            public uint RequestId => ctx.ReadDataUInt(128UL, 0U);
+            public CapnpGen.ConnectionState CxnState => (CapnpGen.ConnectionState)ctx.ReadDataUShort(160UL, (ushort)0);
+            public CapnpGen.OperatingState OpxState => (CapnpGen.OperatingState)ctx.ReadDataUShort(176UL, (ushort)0);
+            public string ConfigName => ctx.ReadText(0, null);
+            public string System => ctx.ReadText(1, null);
+            public string UserName => ctx.ReadText(2, null);
+            public string OperatorName => ctx.ReadText(3, null);
+            public string Account => ctx.ReadText(4, null);
+            public double DayPnl => ctx.ReadDataDouble(192UL, 0);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(4, 5);
+            }
+
+            public ulong SenderId
+            {
+                get => this.ReadDataULong(0UL, 0UL);
+                set => this.WriteData(0UL, value, 0UL);
+            }
+
+            public long SentTs
+            {
+                get => this.ReadDataLong(64UL, 0L);
+                set => this.WriteData(64UL, value, 0L);
+            }
+
+            public uint RequestId
+            {
+                get => this.ReadDataUInt(128UL, 0U);
+                set => this.WriteData(128UL, value, 0U);
+            }
+
+            public CapnpGen.ConnectionState CxnState
+            {
+                get => (CapnpGen.ConnectionState)this.ReadDataUShort(160UL, (ushort)0);
+                set => this.WriteData(160UL, (ushort)value, (ushort)0);
+            }
+
+            public CapnpGen.OperatingState OpxState
+            {
+                get => (CapnpGen.OperatingState)this.ReadDataUShort(176UL, (ushort)0);
+                set => this.WriteData(176UL, (ushort)value, (ushort)0);
+            }
+
+            public string ConfigName
+            {
+                get => this.ReadText(0, null);
+                set => this.WriteText(0, value, null);
+            }
+
+            public string System
+            {
+                get => this.ReadText(1, null);
+                set => this.WriteText(1, value, null);
+            }
+
+            public string UserName
+            {
+                get => this.ReadText(2, null);
+                set => this.WriteText(2, value, null);
+            }
+
+            public string OperatorName
+            {
+                get => this.ReadText(3, null);
+                set => this.WriteText(3, value, null);
+            }
+
+            public string Account
+            {
+                get => this.ReadText(4, null);
+                set => this.WriteText(4, value, null);
+            }
+
+            public double DayPnl
+            {
+                get => this.ReadDataDouble(192UL, 0);
+                set => this.WriteData(192UL, value, 0);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xd0a3320d26a1d320UL)]
+    public class GatewayCommandResponse : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xd0a3320d26a1d320UL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            SenderId = reader.SenderId;
+            RequestId = reader.RequestId;
+            SentTs = reader.SentTs;
+            CmdReqStatus = reader.CmdReqStatus;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.SenderId = SenderId;
+            writer.RequestId = RequestId;
+            writer.SentTs = SentTs;
+            writer.CmdReqStatus = CmdReqStatus;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public ulong SenderId
+        {
+            get;
+            set;
+        }
+
+        public uint RequestId
+        {
+            get;
+            set;
+        }
+
+        public long SentTs
+        {
+            get;
+            set;
+        }
+
+        public CapnpGen.GatewayCmdReqStatus CmdReqStatus
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public ulong SenderId => ctx.ReadDataULong(0UL, 0UL);
+            public uint RequestId => ctx.ReadDataUInt(64UL, 0U);
+            public long SentTs => ctx.ReadDataLong(128UL, 0L);
+            public CapnpGen.GatewayCmdReqStatus CmdReqStatus => (CapnpGen.GatewayCmdReqStatus)ctx.ReadDataUShort(96UL, (ushort)0);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(3, 0);
+            }
+
+            public ulong SenderId
+            {
+                get => this.ReadDataULong(0UL, 0UL);
+                set => this.WriteData(0UL, value, 0UL);
+            }
+
+            public uint RequestId
+            {
+                get => this.ReadDataUInt(64UL, 0U);
+                set => this.WriteData(64UL, value, 0U);
+            }
+
+            public long SentTs
+            {
+                get => this.ReadDataLong(128UL, 0L);
+                set => this.WriteData(128UL, value, 0L);
+            }
+
+            public CapnpGen.GatewayCmdReqStatus CmdReqStatus
+            {
+                get => (CapnpGen.GatewayCmdReqStatus)this.ReadDataUShort(96UL, (ushort)0);
+                set => this.WriteData(96UL, (ushort)value, (ushort)0);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xd5ef888991d611c7UL)]
+    public class AtsCommandResponse : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xd5ef888991d611c7UL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            SenderId = reader.SenderId;
+            RequestId = reader.RequestId;
+            SentTs = reader.SentTs;
+            CmdReqStatus = reader.CmdReqStatus;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.SenderId = SenderId;
+            writer.RequestId = RequestId;
+            writer.SentTs = SentTs;
+            writer.CmdReqStatus = CmdReqStatus;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public ulong SenderId
+        {
+            get;
+            set;
+        }
+
+        public uint RequestId
+        {
+            get;
+            set;
+        }
+
+        public long SentTs
+        {
+            get;
+            set;
+        }
+
+        public CapnpGen.AtsCmdReqStatus CmdReqStatus
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public ulong SenderId => ctx.ReadDataULong(0UL, 0UL);
+            public uint RequestId => ctx.ReadDataUInt(64UL, 0U);
+            public long SentTs => ctx.ReadDataLong(128UL, 0L);
+            public CapnpGen.AtsCmdReqStatus CmdReqStatus => (CapnpGen.AtsCmdReqStatus)ctx.ReadDataUShort(96UL, (ushort)0);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(3, 0);
+            }
+
+            public ulong SenderId
+            {
+                get => this.ReadDataULong(0UL, 0UL);
+                set => this.WriteData(0UL, value, 0UL);
+            }
+
+            public uint RequestId
+            {
+                get => this.ReadDataUInt(64UL, 0U);
+                set => this.WriteData(64UL, value, 0U);
+            }
+
+            public long SentTs
+            {
+                get => this.ReadDataLong(128UL, 0L);
+                set => this.WriteData(128UL, value, 0L);
+            }
+
+            public CapnpGen.AtsCmdReqStatus CmdReqStatus
+            {
+                get => (CapnpGen.AtsCmdReqStatus)this.ReadDataUShort(96UL, (ushort)0);
+                set => this.WriteData(96UL, (ushort)value, (ushort)0);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0x936c591b497a6431UL)]
+    public class AtsConfirmAckEvents : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0x936c591b497a6431UL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            SenderId = reader.SenderId;
+            SentTs = reader.SentTs;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.SenderId = SenderId;
+            writer.SentTs = SentTs;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public ulong SenderId
+        {
+            get;
+            set;
+        }
+
+        public long SentTs
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public ulong SenderId => ctx.ReadDataULong(0UL, 0UL);
+            public long SentTs => ctx.ReadDataLong(64UL, 0L);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(2, 0);
+            }
+
+            public ulong SenderId
+            {
+                get => this.ReadDataULong(0UL, 0UL);
+                set => this.WriteData(0UL, value, 0UL);
+            }
+
+            public long SentTs
+            {
+                get => this.ReadDataLong(64UL, 0L);
+                set => this.WriteData(64UL, value, 0L);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xd59e04dfc6d21f51UL)]
+    public class AtsStatusResponse : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xd59e04dfc6d21f51UL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            SenderId = reader.SenderId;
+            RequestId = reader.RequestId;
+            SentTs = reader.SentTs;
+            CxnState = reader.CxnState;
+            OpxState = reader.OpxState;
+            ConfigName = reader.ConfigName;
+            UserName = reader.UserName;
+            OperatorName = reader.OperatorName;
+            System = reader.System;
+            Account = reader.Account;
+            DayPnl = reader.DayPnl;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.SenderId = SenderId;
+            writer.RequestId = RequestId;
+            writer.SentTs = SentTs;
+            writer.CxnState = CxnState;
+            writer.OpxState = OpxState;
+            writer.ConfigName = ConfigName;
+            writer.UserName = UserName;
+            writer.OperatorName = OperatorName;
+            writer.System = System;
+            writer.Account = Account;
+            writer.DayPnl = DayPnl;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public ulong SenderId
+        {
+            get;
+            set;
+        }
+
+        public uint RequestId
+        {
+            get;
+            set;
+        }
+
+        public long SentTs
+        {
+            get;
+            set;
+        }
+
+        public CapnpGen.ConnectionState CxnState
+        {
+            get;
+            set;
+        }
+
+        public CapnpGen.OperatingState OpxState
+        {
+            get;
+            set;
+        }
+
+        public string ConfigName
+        {
+            get;
+            set;
+        }
+
+        public string UserName
+        {
+            get;
+            set;
+        }
+
+        public string OperatorName
+        {
+            get;
+            set;
+        }
+
+        public string System
+        {
+            get;
+            set;
+        }
+
+        public string Account
+        {
+            get;
+            set;
+        }
+
+        public double DayPnl
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public ulong SenderId => ctx.ReadDataULong(0UL, 0UL);
+            public uint RequestId => ctx.ReadDataUInt(64UL, 0U);
+            public long SentTs => ctx.ReadDataLong(128UL, 0L);
+            public CapnpGen.ConnectionState CxnState => (CapnpGen.ConnectionState)ctx.ReadDataUShort(96UL, (ushort)0);
+            public CapnpGen.OperatingState OpxState => (CapnpGen.OperatingState)ctx.ReadDataUShort(112UL, (ushort)0);
+            public string ConfigName => ctx.ReadText(0, null);
+            public string UserName => ctx.ReadText(1, null);
+            public string OperatorName => ctx.ReadText(2, null);
+            public string System => ctx.ReadText(3, null);
+            public string Account => ctx.ReadText(4, null);
+            public double DayPnl => ctx.ReadDataDouble(192UL, 0);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(4, 5);
+            }
+
+            public ulong SenderId
+            {
+                get => this.ReadDataULong(0UL, 0UL);
+                set => this.WriteData(0UL, value, 0UL);
+            }
+
+            public uint RequestId
+            {
+                get => this.ReadDataUInt(64UL, 0U);
+                set => this.WriteData(64UL, value, 0U);
+            }
+
+            public long SentTs
+            {
+                get => this.ReadDataLong(128UL, 0L);
+                set => this.WriteData(128UL, value, 0L);
+            }
+
+            public CapnpGen.ConnectionState CxnState
+            {
+                get => (CapnpGen.ConnectionState)this.ReadDataUShort(96UL, (ushort)0);
+                set => this.WriteData(96UL, (ushort)value, (ushort)0);
+            }
+
+            public CapnpGen.OperatingState OpxState
+            {
+                get => (CapnpGen.OperatingState)this.ReadDataUShort(112UL, (ushort)0);
+                set => this.WriteData(112UL, (ushort)value, (ushort)0);
+            }
+
+            public string ConfigName
+            {
+                get => this.ReadText(0, null);
+                set => this.WriteText(0, value, null);
+            }
+
+            public string UserName
+            {
+                get => this.ReadText(1, null);
+                set => this.WriteText(1, value, null);
+            }
+
+            public string OperatorName
+            {
+                get => this.ReadText(2, null);
+                set => this.WriteText(2, value, null);
+            }
+
+            public string System
+            {
+                get => this.ReadText(3, null);
+                set => this.WriteText(3, value, null);
+            }
+
+            public string Account
+            {
+                get => this.ReadText(4, null);
+                set => this.WriteText(4, value, null);
+            }
+
+            public double DayPnl
+            {
+                get => this.ReadDataDouble(192UL, 0);
+                set => this.WriteData(192UL, value, 0);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xc95248d5f6885470UL)]
+    public class AtsMonitorEvent : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xc95248d5f6885470UL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            SenderId = reader.SenderId;
+            RequestId = reader.RequestId;
+            SentTs = reader.SentTs;
+            AtsConnectionState = reader.AtsConnectionState;
+            AtsOperatingState = reader.AtsOperatingState;
+            OperatorName = reader.OperatorName;
+            DayPnl = reader.DayPnl;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.SenderId = SenderId;
+            writer.RequestId = RequestId;
+            writer.SentTs = SentTs;
+            writer.AtsConnectionState = AtsConnectionState;
+            writer.AtsOperatingState = AtsOperatingState;
+            writer.OperatorName = OperatorName;
+            writer.DayPnl = DayPnl;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public ulong SenderId
+        {
+            get;
+            set;
+        }
+
+        public uint RequestId
+        {
+            get;
+            set;
+        }
+
+        public long SentTs
+        {
+            get;
+            set;
+        }
+
+        public CapnpGen.ConnectionState AtsConnectionState
+        {
+            get;
+            set;
+        }
+
+        public CapnpGen.OperatingState AtsOperatingState
+        {
+            get;
+            set;
+        }
+
+        public string OperatorName
+        {
+            get;
+            set;
+        }
+
+        public double DayPnl
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public ulong SenderId => ctx.ReadDataULong(0UL, 0UL);
+            public uint RequestId => ctx.ReadDataUInt(64UL, 0U);
+            public long SentTs => ctx.ReadDataLong(128UL, 0L);
+            public CapnpGen.ConnectionState AtsConnectionState => (CapnpGen.ConnectionState)ctx.ReadDataUShort(96UL, (ushort)0);
+            public CapnpGen.OperatingState AtsOperatingState => (CapnpGen.OperatingState)ctx.ReadDataUShort(112UL, (ushort)0);
+            public string OperatorName => ctx.ReadText(0, null);
+            public double DayPnl => ctx.ReadDataDouble(192UL, 0);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(4, 1);
+            }
+
+            public ulong SenderId
+            {
+                get => this.ReadDataULong(0UL, 0UL);
+                set => this.WriteData(0UL, value, 0UL);
+            }
+
+            public uint RequestId
+            {
+                get => this.ReadDataUInt(64UL, 0U);
+                set => this.WriteData(64UL, value, 0U);
+            }
+
+            public long SentTs
+            {
+                get => this.ReadDataLong(128UL, 0L);
+                set => this.WriteData(128UL, value, 0L);
+            }
+
+            public CapnpGen.ConnectionState AtsConnectionState
+            {
+                get => (CapnpGen.ConnectionState)this.ReadDataUShort(96UL, (ushort)0);
+                set => this.WriteData(96UL, (ushort)value, (ushort)0);
+            }
+
+            public CapnpGen.OperatingState AtsOperatingState
+            {
+                get => (CapnpGen.OperatingState)this.ReadDataUShort(112UL, (ushort)0);
+                set => this.WriteData(112UL, (ushort)value, (ushort)0);
+            }
+
+            public string OperatorName
+            {
+                get => this.ReadText(0, null);
+                set => this.WriteText(0, value, null);
+            }
+
+            public double DayPnl
+            {
+                get => this.ReadDataDouble(192UL, 0);
+                set => this.WriteData(192UL, value, 0);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xe8356fa77a36704aUL)]
+    public class AtsSystemEvent : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xe8356fa77a36704aUL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            SenderId = reader.SenderId;
+            RequestId = reader.RequestId;
+            SentTs = reader.SentTs;
+            EventTs = reader.EventTs;
+            Severity = reader.Severity;
+            System = reader.System;
+            Date = reader.Date;
+            Time = reader.Time;
+            Description = reader.Description;
+            Key = reader.Key;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.SenderId = SenderId;
+            writer.RequestId = RequestId;
+            writer.SentTs = SentTs;
+            writer.EventTs = EventTs;
+            writer.Severity = Severity;
+            writer.System = System;
+            writer.Date = Date;
+            writer.Time = Time;
+            writer.Description = Description;
+            writer.Key = Key;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public ulong SenderId
+        {
+            get;
+            set;
+        }
+
+        public uint RequestId
+        {
+            get;
+            set;
+        }
+
+        public long SentTs
+        {
+            get;
+            set;
+        }
+
+        public long EventTs
+        {
+            get;
+            set;
+        }
+
+        public CapnpGen.Severity Severity
+        {
+            get;
+            set;
+        }
+
+        public string System
+        {
+            get;
+            set;
+        }
+
+        public string Date
+        {
+            get;
+            set;
+        }
+
+        public string Time
+        {
+            get;
+            set;
+        }
+
+        public string Description
+        {
+            get;
+            set;
+        }
+
+        public int Key
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public ulong SenderId => ctx.ReadDataULong(0UL, 0UL);
+            public uint RequestId => ctx.ReadDataUInt(64UL, 0U);
+            public long SentTs => ctx.ReadDataLong(128UL, 0L);
+            public long EventTs => ctx.ReadDataLong(192UL, 0L);
+            public CapnpGen.Severity Severity => (CapnpGen.Severity)ctx.ReadDataUShort(96UL, (ushort)0);
+            public string System => ctx.ReadText(0, null);
+            public string Date => ctx.ReadText(1, null);
+            public string Time => ctx.ReadText(2, null);
+            public string Description => ctx.ReadText(3, null);
+            public int Key => ctx.ReadDataInt(256UL, 0);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(5, 4);
+            }
+
+            public ulong SenderId
+            {
+                get => this.ReadDataULong(0UL, 0UL);
+                set => this.WriteData(0UL, value, 0UL);
+            }
+
+            public uint RequestId
+            {
+                get => this.ReadDataUInt(64UL, 0U);
+                set => this.WriteData(64UL, value, 0U);
+            }
+
+            public long SentTs
+            {
+                get => this.ReadDataLong(128UL, 0L);
+                set => this.WriteData(128UL, value, 0L);
+            }
+
+            public long EventTs
+            {
+                get => this.ReadDataLong(192UL, 0L);
+                set => this.WriteData(192UL, value, 0L);
+            }
+
+            public CapnpGen.Severity Severity
+            {
+                get => (CapnpGen.Severity)this.ReadDataUShort(96UL, (ushort)0);
+                set => this.WriteData(96UL, (ushort)value, (ushort)0);
+            }
+
+            public string System
+            {
+                get => this.ReadText(0, null);
+                set => this.WriteText(0, value, null);
+            }
+
+            public string Date
+            {
+                get => this.ReadText(1, null);
+                set => this.WriteText(1, value, null);
+            }
+
+            public string Time
+            {
+                get => this.ReadText(2, null);
+                set => this.WriteText(2, value, null);
+            }
+
+            public string Description
+            {
+                get => this.ReadText(3, null);
+                set => this.WriteText(3, value, null);
+            }
+
+            public int Key
+            {
+                get => this.ReadDataInt(256UL, 0);
+                set => this.WriteData(256UL, value, 0);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xdcbcf8a2c217ddadUL)]
+    public class AtsExecutionEvent : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xdcbcf8a2c217ddadUL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            SenderId = reader.SenderId;
+            RequestId = reader.RequestId;
+            SentTs = reader.SentTs;
+            Contract = reader.Contract;
+            SecurityId = reader.SecurityId;
+            Quantity = reader.Quantity;
+            LimitPrice = reader.LimitPrice;
+            Side = reader.Side;
+            Type = reader.Type;
+            Status = reader.Status;
+            FillQty = reader.FillQty;
+            FullPrice = reader.FullPrice;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.SenderId = SenderId;
+            writer.RequestId = RequestId;
+            writer.SentTs = SentTs;
+            writer.Contract = Contract;
+            writer.SecurityId = SecurityId;
+            writer.Quantity = Quantity;
+            writer.LimitPrice = LimitPrice;
+            writer.Side = Side;
+            writer.Type = Type;
+            writer.Status = Status;
+            writer.FillQty = FillQty;
+            writer.FullPrice = FullPrice;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public ulong SenderId
+        {
+            get;
+            set;
+        }
+
+        public uint RequestId
+        {
+            get;
+            set;
+        }
+
+        public long SentTs
+        {
+            get;
+            set;
+        }
+
+        public string Contract
+        {
+            get;
+            set;
+        }
+
+        public int SecurityId
+        {
+            get;
+            set;
+        }
+
+        public uint Quantity
+        {
+            get;
+            set;
+        }
+
+        public double LimitPrice
+        {
+            get;
+            set;
+        }
+
+        public CapnpGen.Side Side
+        {
+            get;
+            set;
+        }
+
+        public CapnpGen.ExecutionType Type
+        {
+            get;
+            set;
+        }
+
+        public CapnpGen.ExecutionStatus Status
+        {
+            get;
+            set;
+        }
+
+        public uint FillQty
+        {
+            get;
+            set;
+        }
+
+        public double FullPrice
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public ulong SenderId => ctx.ReadDataULong(0UL, 0UL);
+            public uint RequestId => ctx.ReadDataUInt(64UL, 0U);
+            public long SentTs => ctx.ReadDataLong(128UL, 0L);
+            public string Contract => ctx.ReadText(0, null);
+            public int SecurityId => ctx.ReadDataInt(96UL, 0);
+            public uint Quantity => ctx.ReadDataUInt(192UL, 0U);
+            public double LimitPrice => ctx.ReadDataDouble(256UL, 0);
+            public CapnpGen.Side Side => (CapnpGen.Side)ctx.ReadDataUShort(224UL, (ushort)0);
+            public CapnpGen.ExecutionType Type => (CapnpGen.ExecutionType)ctx.ReadDataUShort(240UL, (ushort)0);
+            public CapnpGen.ExecutionStatus Status => (CapnpGen.ExecutionStatus)ctx.ReadDataUShort(320UL, (ushort)0);
+            public uint FillQty => ctx.ReadDataUInt(352UL, 0U);
+            public double FullPrice => ctx.ReadDataDouble(384UL, 0);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(7, 1);
+            }
+
+            public ulong SenderId
+            {
+                get => this.ReadDataULong(0UL, 0UL);
+                set => this.WriteData(0UL, value, 0UL);
+            }
+
+            public uint RequestId
+            {
+                get => this.ReadDataUInt(64UL, 0U);
+                set => this.WriteData(64UL, value, 0U);
+            }
+
+            public long SentTs
+            {
+                get => this.ReadDataLong(128UL, 0L);
+                set => this.WriteData(128UL, value, 0L);
+            }
+
+            public string Contract
+            {
+                get => this.ReadText(0, null);
+                set => this.WriteText(0, value, null);
+            }
+
+            public int SecurityId
+            {
+                get => this.ReadDataInt(96UL, 0);
+                set => this.WriteData(96UL, value, 0);
+            }
+
+            public uint Quantity
+            {
+                get => this.ReadDataUInt(192UL, 0U);
+                set => this.WriteData(192UL, value, 0U);
+            }
+
+            public double LimitPrice
+            {
+                get => this.ReadDataDouble(256UL, 0);
+                set => this.WriteData(256UL, value, 0);
+            }
+
+            public CapnpGen.Side Side
+            {
+                get => (CapnpGen.Side)this.ReadDataUShort(224UL, (ushort)0);
+                set => this.WriteData(224UL, (ushort)value, (ushort)0);
+            }
+
+            public CapnpGen.ExecutionType Type
+            {
+                get => (CapnpGen.ExecutionType)this.ReadDataUShort(240UL, (ushort)0);
+                set => this.WriteData(240UL, (ushort)value, (ushort)0);
+            }
+
+            public CapnpGen.ExecutionStatus Status
+            {
+                get => (CapnpGen.ExecutionStatus)this.ReadDataUShort(320UL, (ushort)0);
+                set => this.WriteData(320UL, (ushort)value, (ushort)0);
+            }
+
+            public uint FillQty
+            {
+                get => this.ReadDataUInt(352UL, 0U);
+                set => this.WriteData(352UL, value, 0U);
+            }
+
+            public double FullPrice
+            {
+                get => this.ReadDataDouble(384UL, 0);
+                set => this.WriteData(384UL, value, 0);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0x986bf5caa42adb7bUL)]
+    public class AtsPositionEvent : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0x986bf5caa42adb7bUL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            SenderId = reader.SenderId;
+            RequestId = reader.RequestId;
+            SentTs = reader.SentTs;
+            Contract = reader.Contract;
+            SecurityId = reader.SecurityId;
+            ClosedQty = reader.ClosedQty;
+            OpenQty = reader.OpenQty;
+            ClosedPnl = reader.ClosedPnl;
+            OpenPnl = reader.OpenPnl;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.SenderId = SenderId;
+            writer.RequestId = RequestId;
+            writer.SentTs = SentTs;
+            writer.Contract = Contract;
+            writer.SecurityId = SecurityId;
+            writer.ClosedQty = ClosedQty;
+            writer.OpenQty = OpenQty;
+            writer.ClosedPnl = ClosedPnl;
+            writer.OpenPnl = OpenPnl;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public ulong SenderId
+        {
+            get;
+            set;
+        }
+
+        public uint RequestId
+        {
+            get;
+            set;
+        }
+
+        public long SentTs
+        {
+            get;
+            set;
+        }
+
+        public string Contract
+        {
+            get;
+            set;
+        }
+
+        public int SecurityId
+        {
+            get;
+            set;
+        }
+
+        public uint ClosedQty
+        {
+            get;
+            set;
+        }
+
+        public uint OpenQty
+        {
+            get;
+            set;
+        }
+
+        public double ClosedPnl
+        {
+            get;
+            set;
+        }
+
+        public double OpenPnl
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public ulong SenderId => ctx.ReadDataULong(0UL, 0UL);
+            public uint RequestId => ctx.ReadDataUInt(64UL, 0U);
+            public long SentTs => ctx.ReadDataLong(128UL, 0L);
+            public string Contract => ctx.ReadText(0, null);
+            public int SecurityId => ctx.ReadDataInt(96UL, 0);
+            public uint ClosedQty => ctx.ReadDataUInt(192UL, 0U);
+            public uint OpenQty => ctx.ReadDataUInt(224UL, 0U);
+            public double ClosedPnl => ctx.ReadDataDouble(256UL, 0);
+            public double OpenPnl => ctx.ReadDataDouble(320UL, 0);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(6, 1);
+            }
+
+            public ulong SenderId
+            {
+                get => this.ReadDataULong(0UL, 0UL);
+                set => this.WriteData(0UL, value, 0UL);
+            }
+
+            public uint RequestId
+            {
+                get => this.ReadDataUInt(64UL, 0U);
+                set => this.WriteData(64UL, value, 0U);
+            }
+
+            public long SentTs
+            {
+                get => this.ReadDataLong(128UL, 0L);
+                set => this.WriteData(128UL, value, 0L);
+            }
+
+            public string Contract
+            {
+                get => this.ReadText(0, null);
+                set => this.WriteText(0, value, null);
+            }
+
+            public int SecurityId
+            {
+                get => this.ReadDataInt(96UL, 0);
+                set => this.WriteData(96UL, value, 0);
+            }
+
+            public uint ClosedQty
+            {
+                get => this.ReadDataUInt(192UL, 0U);
+                set => this.WriteData(192UL, value, 0U);
+            }
+
+            public uint OpenQty
+            {
+                get => this.ReadDataUInt(224UL, 0U);
+                set => this.WriteData(224UL, value, 0U);
+            }
+
+            public double ClosedPnl
+            {
+                get => this.ReadDataDouble(256UL, 0);
+                set => this.WriteData(256UL, value, 0);
+            }
+
+            public double OpenPnl
+            {
+                get => this.ReadDataDouble(320UL, 0);
+                set => this.WriteData(320UL, value, 0);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0xe228ecc8dd45b5c0UL)]
+    public class AtsWorkingOrderEvent : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0xe228ecc8dd45b5c0UL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            SenderId = reader.SenderId;
+            RequestId = reader.RequestId;
+            SentTs = reader.SentTs;
+            OrderId = reader.OrderId;
+            Side = reader.Side;
+            Tif = reader.Tif;
+            LimitPrice = reader.LimitPrice;
+            Quantity = reader.Quantity;
+            Contract = reader.Contract;
+            SecurityId = reader.SecurityId;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.SenderId = SenderId;
+            writer.RequestId = RequestId;
+            writer.SentTs = SentTs;
+            writer.OrderId = OrderId;
+            writer.Side = Side;
+            writer.Tif = Tif;
+            writer.LimitPrice = LimitPrice;
+            writer.Quantity = Quantity;
+            writer.Contract = Contract;
+            writer.SecurityId = SecurityId;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public ulong SenderId
+        {
+            get;
+            set;
+        }
+
+        public uint RequestId
+        {
+            get;
+            set;
+        }
+
+        public long SentTs
+        {
+            get;
+            set;
+        }
+
+        public uint OrderId
+        {
+            get;
+            set;
+        }
+
+        public CapnpGen.Side Side
+        {
+            get;
+            set;
+        }
+
+        public CapnpGen.TIF Tif
+        {
+            get;
+            set;
+        }
+
+        public double LimitPrice
+        {
+            get;
+            set;
+        }
+
+        public uint Quantity
+        {
+            get;
+            set;
+        }
+
+        public string Contract
+        {
+            get;
+            set;
+        }
+
+        public int SecurityId
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public ulong SenderId => ctx.ReadDataULong(0UL, 0UL);
+            public uint RequestId => ctx.ReadDataUInt(64UL, 0U);
+            public long SentTs => ctx.ReadDataLong(128UL, 0L);
+            public uint OrderId => ctx.ReadDataUInt(96UL, 0U);
+            public CapnpGen.Side Side => (CapnpGen.Side)ctx.ReadDataUShort(192UL, (ushort)0);
+            public CapnpGen.TIF Tif => (CapnpGen.TIF)ctx.ReadDataUShort(208UL, (ushort)0);
+            public double LimitPrice => ctx.ReadDataDouble(256UL, 0);
+            public uint Quantity => ctx.ReadDataUInt(224UL, 0U);
+            public string Contract => ctx.ReadText(0, null);
+            public int SecurityId => ctx.ReadDataInt(320UL, 0);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(6, 1);
+            }
+
+            public ulong SenderId
+            {
+                get => this.ReadDataULong(0UL, 0UL);
+                set => this.WriteData(0UL, value, 0UL);
+            }
+
+            public uint RequestId
+            {
+                get => this.ReadDataUInt(64UL, 0U);
+                set => this.WriteData(64UL, value, 0U);
+            }
+
+            public long SentTs
+            {
+                get => this.ReadDataLong(128UL, 0L);
+                set => this.WriteData(128UL, value, 0L);
+            }
+
+            public uint OrderId
+            {
+                get => this.ReadDataUInt(96UL, 0U);
+                set => this.WriteData(96UL, value, 0U);
+            }
+
+            public CapnpGen.Side Side
+            {
+                get => (CapnpGen.Side)this.ReadDataUShort(192UL, (ushort)0);
+                set => this.WriteData(192UL, (ushort)value, (ushort)0);
+            }
+
+            public CapnpGen.TIF Tif
+            {
+                get => (CapnpGen.TIF)this.ReadDataUShort(208UL, (ushort)0);
+                set => this.WriteData(208UL, (ushort)value, (ushort)0);
+            }
+
+            public double LimitPrice
+            {
+                get => this.ReadDataDouble(256UL, 0);
+                set => this.WriteData(256UL, value, 0);
+            }
+
+            public uint Quantity
+            {
+                get => this.ReadDataUInt(224UL, 0U);
+                set => this.WriteData(224UL, value, 0U);
+            }
+
+            public string Contract
+            {
+                get => this.ReadText(0, null);
+                set => this.WriteText(0, value, null);
+            }
+
+            public int SecurityId
+            {
+                get => this.ReadDataInt(320UL, 0);
+                set => this.WriteData(320UL, value, 0);
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("capnpc-csharp", "1.3.0.0"), TypeId(0x8a8f5af32586a0f3UL)]
+    public class PingResponse : ICapnpSerializable
+    {
+        public const UInt64 typeId = 0x8a8f5af32586a0f3UL;
+        void ICapnpSerializable.Deserialize(DeserializerState arg_)
+        {
+            var reader = READER.create(arg_);
+            SenderId = reader.SenderId;
+            SentTs = reader.SentTs;
+            applyDefaults();
+        }
+
+        public void serialize(WRITER writer)
+        {
+            writer.SenderId = SenderId;
+            writer.SentTs = SentTs;
+        }
+
+        void ICapnpSerializable.Serialize(SerializerState arg_)
+        {
+            serialize(arg_.Rewrap<WRITER>());
+        }
+
+        public void applyDefaults()
+        {
+        }
+
+        public ulong SenderId
+        {
+            get;
+            set;
+        }
+
+        public long SentTs
+        {
+            get;
+            set;
+        }
+
+        public struct READER
+        {
+            readonly DeserializerState ctx;
+            public READER(DeserializerState ctx)
+            {
+                this.ctx = ctx;
+            }
+
+            public static READER create(DeserializerState ctx) => new READER(ctx);
+            public static implicit operator DeserializerState(READER reader) => reader.ctx;
+            public static implicit operator READER(DeserializerState ctx) => new READER(ctx);
+            public ulong SenderId => ctx.ReadDataULong(0UL, 0UL);
+            public long SentTs => ctx.ReadDataLong(64UL, 0L);
+        }
+
+        public class WRITER : SerializerState
+        {
+            public WRITER()
+            {
+                this.SetStruct(2, 0);
+            }
+
+            public ulong SenderId
+            {
+                get => this.ReadDataULong(0UL, 0UL);
+                set => this.WriteData(0UL, value, 0UL);
+            }
+
+            public long SentTs
+            {
+                get => this.ReadDataLong(64UL, 0L);
+                set => this.WriteData(64UL, value, 0L);
+            }
+        }
+    }
+}
