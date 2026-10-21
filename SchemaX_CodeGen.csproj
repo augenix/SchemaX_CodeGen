@@ -11,7 +11,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Folder Include="Generated\AtsManager\" />
       <Folder Include="Generated\LogServiceApi\" />
+      <Folder Include="Generated\OperationsApi\" />
       <Folder Include="Generated\OrderManagerApi\" />
     </ItemGroup>
 
